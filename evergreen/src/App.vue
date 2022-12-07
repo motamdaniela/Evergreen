@@ -5,22 +5,28 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
   </header>
 
   <RouterView />
 </template>
 
 <style scoped>
+@font-face {
+        font-family: 'ABC-Regular';
+        src:  url('./assets/Quicksand-Regular.ttf') format('ttf'),
+              url('../media/font/ABCCameraPlain-Regular-Trial.woff') format('woff');
+
+        font-family: 'ABC-Medium';
+        src:  url('../media/font/ABCCameraPlain-Medium-Trial.woff2') format('woff2'),
+              url('../media/font/ABCCameraPlain-Medium-Trial.woff') format('woff');
+
+        font-family: 'ABC-Bold';
+        src:  url('../media/font/ABCCameraPlain-Bold-Trial.woff2') format('woff2'),
+              url('../media/font/ABCCameraPlain-Bold-Trial.woff') format('woff');
+
+      }
+
+
 header {
   line-height: 1.5;
   max-height: 100vh;

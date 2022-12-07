@@ -1,14 +1,15 @@
 <template>
     <v-layout>
       <v-app-bar
-        color="primary"
-        density="compact"
+        color="transparent"
       >
-        <template v-slot:prepend>
+        <!-- <template v-slot:prepend>
           <v-app-bar-nav-icon>=</v-app-bar-nav-icon>
-        </template>
+        </template> -->
 
-        <v-app-bar-title>Evergreen</v-app-bar-title>
+        <v-app-bar-title>
+          <img src="../assets/logored.svg" style="width: 15%; margin-top: 0.5%">
+        </v-app-bar-title>
 
         <RouterLink to="/home">Home</RouterLink>
         <RouterLink to="/login">Login</RouterLink>

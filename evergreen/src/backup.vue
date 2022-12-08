@@ -6,6 +6,7 @@ export default {
       drawer: false,
       group: null,
       collapse: false,
+      offsetTop: 0,
       items: [
         {
           title: 'Foo',
@@ -55,25 +56,19 @@ export default {
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/login">Login</RouterLink>
         </nav>
+
         
-        
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer">=</v-app-bar-nav-icon>
+        <v-app-bar-nav-icon id="ddmenu" variant="text" @click.stop="drawer = !drawer">=</v-app-bar-nav-icon>
       </v-app-bar>
       
       <v-navigation-drawer
-      class="bg-green"
-        v-model="drawer"
+      v-model="drawer"
       location="right"
-      temporary>
-      <v-list>
-        <v-list-item title="About" value="about">
-        </v-list-item>
-        <v-list-item title="login" value="login">
-        </v-list-item>
-        <v-list-item title="About" value="about">
-        </v-list-item>
-
-      </v-list>
+      temporary
+      >
+      <v-list 
+      :items="items"
+      ></v-list>
     </v-navigation-drawer>
 
     <v-main>

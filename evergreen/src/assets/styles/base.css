@@ -1,5 +1,22 @@
+/* paleta de cores:
+original:             +60brightness
+branco #FBF3F1        preto #0D1E11
+verde #62B273         preto #0D1E11
+vermelho #E9674D      preto #0D1E11
+lilas #C2AFEA         preto #0D1E11
+amarelo #E9A13B       preto #0D1E11
+rosa #EFC6CD          preto #0D1E11
+preto #0D1E11         preto #0D1E11
+
+bg #FBF3F1
+boxes #FDF9F9
+preto #050B06
+*/
+
 body{
     font-family: 'Quicksand', sans-serif;
+    color: black;
+    background-color: #FBF3F1;
 };
 
 a,
@@ -12,5 +29,11 @@ a,
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #ddmenu{
+    display: none;
   }
 }

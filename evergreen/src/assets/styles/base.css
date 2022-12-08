@@ -15,25 +15,62 @@ preto #050B06
 
 body{
     font-family: 'Quicksand', sans-serif;
-    color: black;
+    color: #050B06;
     background-color: #FBF3F1;
-};
+  };
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+  @media (hover: hover) {
+    a:hover {
+      font-weight: bold;
+    }
   }
+  
+  button,#login, #signup{
+    border: 1px solid #050B06;
+    border-radius: 30px;
+  }
+  
+nav a:hover{
+  font-weight: bold;
+} 
+nav a.router-link-exact-active {
+    color: #050B06;
+    font-weight: bold;
+    box-shadow: 0px -8px #E9674D inset;
+  }
+
+nav a, button {
+  font-size: 15px;
+  text-decoration: none;
+  color: #050B06;
+  display: inline-block;
+  margin: 0 1rem 0 1rem;
 }
 
-@media screen and (min-width: 600px) {
+button:last-of-type {
+  margin-right: 3rem;
+}
+
+#logo {
+  margin: 1rem 2rem 0 2rem;
+  display: inline-block;
+  width: 2 rem;
+  min-width: 100px;
+  max-width: 200px;
+}
+
+@media screen and (min-width: 800px) {
   #ddmenu{
     display: none;
   }
+}
+
+@media screen and (max-width: 800px) {
+  nav a {
+    font-size: 10px;
+  }
+}
+
+.hide, #hide{
+  display: none;
 }

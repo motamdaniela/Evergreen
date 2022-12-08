@@ -6,25 +6,15 @@ export default {
       drawer: false,
       group: null,
       collapse: false,
-      items: [
-        {
-          title: 'Foo',
-          value: 'foo',
-        },
-        {
-          title: 'Bar',
-          value: 'bar',
-        },
-        {
-          title: 'Fizz',
-          value: 'fizz',
-        },
-        {
-          title: 'Buzz',
-          value: 'buzz',
-        },
-      ],
+      tohide: '',
     }),
+
+    methods: {
+      ToHide() {
+        this.tohide = "hide"
+        alert(this.tohide)
+      }
+    },
 
     computed: {
       onScroll (e) {
@@ -40,24 +30,30 @@ export default {
   <template>
       <v-layout>
 
-        <v-app-bar
+        <v-app-bar 
         color="transparent"
         flat
         :collapse="collapse"
+        collapse-on-scroll="!collapse"
+        inverse-scroll
+        id = {{tohide}}
         >
         
         <v-app-bar-title>
-          <img src="./assets/logored.svg" style="width: 20%; margin-top: 0.5%">
+          <RouterLink to="/inicio"><img src="./assets/logored.svg" id="logo"></RouterLink>
         </v-app-bar-title>
         
-        <v-spacer></v-spacer>
         <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/inicio" >Início</RouterLink>
+          <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
+          <RouterLink to="/faq">Faq</RouterLink>
+          <button id="login"><RouterLink @click="ToHide" to="/login">Entrar</RouterLink></button>
+          <button id="signup"><RouterLink to="/signUp">Registar</RouterLink></button>
+
         </nav>
         
         
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer">=</v-app-bar-nav-icon>
+        <v-app-bar-nav-icon id="ddmenu" variant="text" @click.stop="drawer = !drawer">=</v-app-bar-nav-icon>
       </v-app-bar>
       
       <v-navigation-drawer
@@ -72,7 +68,6 @@ export default {
         </v-list-item>
         <v-list-item title="About" value="about">
         </v-list-item>
-
       </v-list>
     </v-navigation-drawer>
 
@@ -83,3 +78,20 @@ export default {
     </v-layout>
   <RouterView />
 </template>
+
+<style>
+
+#login{
+  background-color: #E6DFF6;
+  box-shadow: 3px 5px 0px #C2AFEA;
+}
+
+#signup{
+  background-color: #C0E0C7;
+  box-shadow: 3px 5px 0px #62B273;
+}
+
+.hide, #hide{
+  display: none;
+}
+</style>

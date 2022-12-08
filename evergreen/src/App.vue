@@ -43,11 +43,11 @@ export default {
           <RouterLink to="/inicio"><img src="./assets/logored.svg" id="logo"></RouterLink>
         </v-app-bar-title>
         
-        <nav>
+        <nav >
           <RouterLink to="/inicio" >Início</RouterLink>
           <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
           <RouterLink to="/faq">Faq</RouterLink>
-          <button id="login"><RouterLink @click="ToHide" to="/login">Entrar</RouterLink></button>
+          <button id="login"><RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink></button>
           <button id="signup"><RouterLink to="/signUp">Registar</RouterLink></button>
 
         </nav>

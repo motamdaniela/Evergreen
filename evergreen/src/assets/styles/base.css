@@ -25,14 +25,29 @@ body{
     }
   }
   
-  button,#login, #signup{
-    border: 1px solid #050B06;
-    border-radius: 30px;
-  }
-  
+button,#login, #signup{
+  border: 1px solid #050B06;
+  border-radius: 30px;
+}
+
 nav a:hover{
   font-weight: bold;
 } 
+
+button:hover, #login:hover, #signup:hover{
+  box-shadow: none;
+  position: relative;
+  left: 3px;
+  top: 5px;
+}
+
+#login:active{
+  background-color: #D4C7F0;
+}
+#signup:active{
+  background-color: #91C99D;
+}
+  
 nav a.router-link-exact-active {
     color: #050B06;
     font-weight: bold;
@@ -54,19 +69,24 @@ button:last-of-type {
 #logo {
   margin: 1rem 2rem 0 2rem;
   display: inline-block;
-  width: 2 rem;
-  min-width: 100px;
-  max-width: 200px;
+  width: 8rem;
+  /* min-width: 50px;
+  max-width: 200px; */
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 700px) {
   #ddmenu{
     display: none;
   }
 }
 
+@media screen and (max-width: 700px) {
+  nav{
+    display: none;
+  }
+}
 @media screen and (max-width: 800px) {
-  nav a {
+  nav a{
     font-size: 10px;
   }
 }

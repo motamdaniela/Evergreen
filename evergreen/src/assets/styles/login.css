@@ -1,0 +1,16 @@
+#background{
+    background-image: url("../images/entrar.png");
+    height: 865px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    width: 376px;
+    height: 54px;
+    border-radius: 33px;
+    border-color: black;
+    border-width: 2px;
+    background-color: #FDFAF9;
+}

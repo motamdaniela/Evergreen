@@ -53,17 +53,27 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.users.map((user) => {
-        if (
-          this.form.email == user.email &&
-          this.form.password == user.password
-        ) {
-          localStorage.setItem("isAuthenticated", true);
-          alert("slay");
-        } else {
-          alert("Wrong credentials!");
-        }
-      });
+      let idk = this.users.find(
+        (user) =>
+          user.email == this.form.email && user.password == this.form.password
+      );
+      if (idk) {
+        alert("slay");
+        localStorage.setItem("isAuthenticated", true);
+      } else {
+        alert("ui");
+      }
+      // this.users.map((user) => {
+      //   if (
+      //     this.form.email == user.email &&
+      //     this.form.password == user.password
+      //   ) {
+      //     localStorage.setItem("isAuthenticated", true);
+      //     alert("slay");
+      //   } else {
+      //     alert("Wrong credentials!");
+      //   }
+      // });
     },
   },
   // data: () => ({

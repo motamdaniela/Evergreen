@@ -5,6 +5,10 @@ export default {
   name: "App",
   data() {
     return {
+      drawer: false,
+      group: null,
+      collapse: false,
+      tohide: "",
       users: [
         {
           email: "user@gmail.com",
@@ -28,12 +32,12 @@ export default {
     if (!localStorage.getItem("users"))
       localStorage.setItem("users", JSON.stringify(this.users));
   },
-  data: () => ({
-    drawer: false,
-    group: null,
-    collapse: false,
-    tohide: "",
-  }),
+  // data: () => ({
+  //   drawer: false,
+  //   group: null,
+  //   collapse: false,
+  //   tohide: "",
+  // }),
 
   methods: {
     isLogged() {
@@ -87,7 +91,7 @@ export default {
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
-        <button id="signup" class="navbtn  btnG">
+        <button id="signup" class="navbtn btnG">
           <RouterLink to="/signUp">Registar</RouterLink>
         </button>
       </nav>
@@ -131,7 +135,7 @@ export default {
 
   <footer>
     <div>
-      <img src="./assets/logored.svg" style="width:8rem"/>
+      <img src="./assets/logored.svg" style="width: 8rem" />
     </div>
     <div>
       <a class="footerA" href="#">Beatriz Rodrigues</a>

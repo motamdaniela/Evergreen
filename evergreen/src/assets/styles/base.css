@@ -118,6 +118,11 @@ button:last-of-type {
   }
 }
 
+/* "underlines" */
+.underlinegreen{
+  box-shadow: 0px -8px #62B273 inset;
+}
+
 .hide, #hide{
   display: none;
 }

@@ -81,19 +81,4 @@ export default {
   <RouterView />
 </template>
 
-<style>
-#login {
-  background-color: #e6dff6;
-  box-shadow: 3px 5px 0px #c2afea;
-}
-
-#signup {
-  background-color: #c0e0c7;
-  box-shadow: 3px 5px 0px #62b273;
-}
-
-.hide,
-#hide {
-  display: none;
-}
-</style>
+<style></style>

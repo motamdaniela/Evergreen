@@ -42,10 +42,30 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 }
 
 .btn-page{
-  border: 1px solid #050B06;
+  border: 2px solid #050B06;
   width: 190px;
   height: 60px;
   font-weight: bold;
+}
+
+.semiTitle{
+  font-weight: 600;
+  font-size: 22px;
+}
+
+#login {
+  background-color: #e6dff6;
+  box-shadow: 3px 5px 0px #c2afea;
+}
+
+#signup {
+  background-color: #c0e0c7;
+  box-shadow: 3px 5px 0px #62b273;
+}
+
+.hide,
+#hide {
+  display: none;
 }
 
 #login:active{

@@ -1,9 +1,13 @@
 #background{
-    background-image: url("../images/entrar.png");
-    height: 865px;
+    /* background-image: url("../images/entrar.png");
+    height: 865px; */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#group{
+    display: flex;
 }
 
 .input{
@@ -13,6 +17,7 @@
     background-color: #FDFAF9;
     border: 2px solid rgb(0, 0, 0);
     margin-bottom: 30px;
+    padding: 20px;
 }
 
 .btn-page{
@@ -28,6 +33,10 @@
     font-size: 22px;
     text-decoration: none;
     color: black;
+}
+
+#signUpBtn{
+    font-weight: 500;
 }
 
 #btns{

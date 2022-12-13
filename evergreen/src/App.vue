@@ -54,7 +54,7 @@ export default {
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav>
+      <nav v-if="isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">Faq</RouterLink>
@@ -63,6 +63,18 @@ export default {
         </button>
         <button id="signup">
           <RouterLink to="/signUp">Registar</RouterLink>
+        </button>
+      </nav>
+      <nav v-else>
+        <RouterLink to="/Home">Página principal</RouterLink>
+        <RouterLink to="/Activities">Atividades</RouterLink>
+        <RouterLink to="/Ocorrence">Ocorrências</RouterLink>
+        <RouterLink to="/Form">Questionário</RouterLink>
+        <RouterLink to="/Missions">Missões</RouterLink>
+        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink to="/faq">Faq</RouterLink>
+        <button id="profile">
+          <RouterLink to="/Profile">Perfil</RouterLink>
         </button>
       </nav>
 

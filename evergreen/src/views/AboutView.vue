@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Sobre Eco-Escolas</h1>
 
     </div>
 </template>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Atividades</h1>
 
     </div>
 </template>

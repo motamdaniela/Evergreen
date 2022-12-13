@@ -2,6 +2,32 @@
 import { RouterLink, RouterView } from "vue-router";
 
 export default {
+  name: "App",
+  data() {
+    return {
+      users: [
+        {
+          email: "user@gmail.com",
+          name: "Nome",
+          password: "123",
+        },
+        {
+          email: "user1@gmail.com",
+          name: "Nome",
+          password: "123",
+        },
+        {
+          email: "user2@gmail.com",
+          name: "Nome",
+          password: "123",
+        },
+      ],
+    };
+  },
+  created() {
+    if (!localStorage.getItem("users"))
+      localStorage.setItem("users", JSON.stringify(this.users));
+  },
   data: () => ({
     drawer: false,
     group: null,
@@ -10,11 +36,11 @@ export default {
   }),
 
   methods: {
-    isLogged(){
-      let acc = sessionStorage.getItem("user")
-      if (acc){
+    isLogged() {
+      let acc = sessionStorage.getItem("user");
+      if (acc) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },

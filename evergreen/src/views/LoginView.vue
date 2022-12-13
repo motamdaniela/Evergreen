@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 export default {
   name: "Login",
   data() {
@@ -44,16 +45,25 @@ export default {
         email: "",
         password: "",
       },
+      users: [],
     };
+  },
+  created() {
+    this.users = JSON.parse(localStorage.getItem("users"));
   },
   methods: {
     onSubmit() {
-      if (this.form.email == "admin@gmail.com" && this.form.password == "123") {
-        localStorage.setItem("isAuthenticated", true);
-        alert("slay");
-      } else {
-        alert("Wrong credentials!");
-      }
+      this.users.map((user) => {
+        if (
+          this.form.email == user.email &&
+          this.form.password == user.password
+        ) {
+          localStorage.setItem("isAuthenticated", true);
+          alert("slay");
+        } else {
+          alert("Wrong credentials!");
+        }
+      });
     },
   },
   // data: () => ({

@@ -46,7 +46,7 @@ export default {
       id="{{tohide}}"
     >
       <v-app-bar-title>
-        <RouterLink v-if="isLogged" to="/"
+        <RouterLink v-if="!isLogged" to="/"
           ><img src="./assets/logored.svg" id="logo"
         /></RouterLink>
         <RouterLink v-else to="/Home"

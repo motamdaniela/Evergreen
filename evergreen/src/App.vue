@@ -102,6 +102,17 @@ export default {
     <v-main> </v-main>
   </v-layout>
   <RouterView />
+
+  <footer>
+    <div>
+      <img src="./assets/logored.svg" id="logo"/>
+    </div>
+    <div>
+      <a href="#">Beatriz Rodrigues</a>
+      <a href="#">Daniela Monteiro</a>
+      <a href="#">Daniela Moreira</a>
+    </div>
+  </footer>
 </template>
 
 <style></style>

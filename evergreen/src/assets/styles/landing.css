@@ -1,3 +1,18 @@
 body{
     text-align: center;
 }
+
+#div1{
+    background-color: #E6DFF6;
+    color: #774ED0;
+}
+
+#div2{
+    background-color: #F6C3B8;
+    color: #C23418;
+}
+
+#div3{
+    background-color: #C0E0C7;
+    color: #40814E;
+}

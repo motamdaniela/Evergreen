@@ -46,6 +46,7 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   width: 190px;
   height: 60px;
   font-weight: bold;
+  border-radius: 30px;
 }
 
 .semiTitle{
@@ -99,6 +100,17 @@ button:last-of-type {
   width: 8rem;
   /* min-width: 50px;
   max-width: 200px; */
+}
+
+footer{
+  background-color: #91C99D;
+}
+a{
+  text-decoration: none;
+  color: #FDF9F9;
+}
+a:hover{
+  color: #62B273;
 }
 
 @media screen and (min-width: 700px) {

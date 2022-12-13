@@ -84,10 +84,10 @@ export default {
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">Faq</RouterLink>
-        <button id="login">
+        <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
-        <button id="signup">
+        <button id="signup" class="navbtn  btnG">
           <RouterLink to="/signUp">Registar</RouterLink>
         </button>
       </nav>
@@ -131,12 +131,12 @@ export default {
 
   <footer>
     <div>
-      <img src="./assets/logored.svg" id="logo"/>
+      <img src="./assets/logored.svg" style="width:8rem"/>
     </div>
     <div>
-      <a href="#">Beatriz Rodrigues</a>
-      <a href="#">Daniela Monteiro</a>
-      <a href="#">Daniela Moreira</a>
+      <a class="footerA" href="#">Beatriz Rodrigues</a>
+      <a class="footerA" href="#">Daniela Monteiro</a>
+      <a class="footerA" href="#">Daniela Moreira</a>
     </div>
   </footer>
 </template>

@@ -5,11 +5,3 @@
 v-card{
     text-align: left;
 }
-
-.underlinePurple{
-    text-decoration: underline #C2AFEA;
-    text-decoration-thickness: 10px;
-    text-underline-offset: 0px;
-    
-
-}

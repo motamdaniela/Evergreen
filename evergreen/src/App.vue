@@ -10,6 +10,14 @@ export default {
   }),
 
   methods: {
+    isLogged(){
+      let acc = sessionStorage.getItem("user")
+      if (acc){
+        return true;
+      }else{
+        return false;
+      }
+    },
     ToHide() {
       this.tohide = "hide";
       alert(this.tohide);
@@ -38,7 +46,10 @@ export default {
       id="{{tohide}}"
     >
       <v-app-bar-title>
-        <RouterLink to="/"
+        <RouterLink v-if="isLogged" to="/"
+          ><img src="./assets/logored.svg" id="logo"
+        /></RouterLink>
+        <RouterLink v-else to="/Home"
           ><img src="./assets/logored.svg" id="logo"
         /></RouterLink>
       </v-app-bar-title>

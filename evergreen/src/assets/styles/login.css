@@ -10,7 +10,28 @@
     width: 376px;
     height: 54px;
     border-radius: 33px;
-    border-color: black;
-    border-width: 2px;
     background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 30px;
+}
+
+.btn-page{
+    background-color: #C0E0C7;
+    box-shadow: 3px 5px 0px #62B273;   
+}
+
+.btn-page:active{
+    background-color: #91C99D;
+  }
+
+.link{
+    font-size: 22px;
+    text-decoration: none;
+    color: black;
+}
+
+#btns{
+    width: 376px;
+    display: flex;
+    justify-content: space-between;
 }

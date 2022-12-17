@@ -1,6 +1,6 @@
 <template>
     <br>
-    <h1 class="underlinePurpl">Atividades Inscritas</h1>
+    <h1 class="gradientPurple padding"><span>Atividades Inscritas</span></h1>
     <br>
     <div id="activities">
 
@@ -91,7 +91,16 @@
     <button class="btn-page" id="btnP">Ver todas</button>
 
     <br><br>
-    <h1 class="underlinePink">Quadro de Líderes</h1>
+    <h1 class="gradientPink padding"><span>Quadro de Líderes</span></h1>
+
+    <div class="board">
+      <img src="../assets/images/joana.jpg" id="profilePic">
+      <p>Joana Gomes <br> Esmad</p>
+      <p>15 atividades</p>
+      <p>7 ocorrências</p>
+      <p>100 pontos</p>
+      <div class="place">1</div>
+    </div>
 
 </template>
 

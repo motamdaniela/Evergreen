@@ -1,9 +1,4 @@
-/* .underlinePurpl{
-    text-decoration: underline #C2AFEA;
-    text-decoration-thickness: 10px;
-    text-underline-offset: 0px;
-} */
-
+/* headers */
 h1.gradientPurple span {
     background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(194,175,234,1) 16%, rgba(194,175,234,1) 41%, rgba(255,0,255,0) 41%);
 }
@@ -18,26 +13,31 @@ h1.padding span {
     -webkit-box-decoration-break: clone;
 }
 
-#activities{
-    display:flex;
-}
-.cardText{
-    text-align: left;
-}
-
+/* buttons */
 .btn-card{
     border: 2px solid #050B06;
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
     border-radius: 30px;
-    height: 30px;
-    margin: 20px;
+    height: 30px; 
+    margin-bottom: 25px;
 }
 
 #btnP{
     background-color: #e6dff6;
     box-shadow: 3px 5px 0px #c2afea;
+}
+#btnP:hover{
+    box-shadow: none;
+}
+
+#btnPink{
+    background-color: #F4D8DD;
+    box-shadow: 3px 5px 0px #D26174;
+}
+#btnPink:hover{
+    box-shadow: none;
 }
 
 .btn-page{
@@ -49,15 +49,23 @@ font-weight: bold;
 border-radius: 30px;
 }
 
+/* atividades */
+#activities{
+    display:flex;
+}
+.cardText{
+    text-align: left;
+    font-weight: bold;
+}
+.alignCard{
+    display: flex;
+    justify-content: space-between;
+}
+
 #card{
     border: 2px solid #050B06;
     border-radius: 30px;
-    box-shadow: 10px 10px 0px #c2afea;
-    
-}
-
-#btnP:hover{
-    box-shadow: none;
+    box-shadow: 10px 10px 0px #c2afea; 
 }
 
 .image{
@@ -65,13 +73,15 @@ border-radius: 30px;
     border-radius: 30px;
 }
 
+/* ranking */
 .board{
     background-color: #FDF9F9;
     border: 2px solid #09140B;
     border-radius: 50px;
     box-shadow: 10px 10px 0px #EFC6CD;
     height: 90px;
-    margin: 60px;
+    margin: 30px 150px;
+    
 
     display: flex;
     align-items: center;
@@ -89,10 +99,34 @@ border-radius: 30px;
     box-shadow: 2px 2px 0px #09140B;
 }
 
-.place{
+.firstPlace{
     width: 50px;
     height: 50px;
     background-color: #F6D9B0;
+    border-radius: 50px;
+    border: 2px solid #09140B;
+    box-shadow: 2px 2px 0px #09140B;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.secondPlace{
+    width: 50px;
+    height: 50px;
+    background-color: #E6DFF6;
+    border-radius: 50px;
+    border: 2px solid #09140B;
+    box-shadow: 2px 2px 0px #09140B;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.thirdPlace{
+    width: 50px;
+    height: 50px;
+    background-color: #F6C3B8;
     border-radius: 50px;
     border: 2px solid #09140B;
     box-shadow: 2px 2px 0px #09140B;

@@ -16,17 +16,19 @@
 
           <div class="cardText">
             <v-card-title>
-            <b>Bancos de Jardim</b>
-          </v-card-title>
+              <b>Bancos de Jardim</b>
+            </v-card-title>
 
-          <v-card-subtitle>
-            <div><b>Maio e Junho</b></div>
-            <div><b>Campus 2</b></div>
-          </v-card-subtitle>
-
-          <button class="btn-card" id="btnP">
-            Ver mais
-          </button>
+            <div class="alignCard">
+              <v-card-subtitle >
+                <div><b>Maio e Junho <br> Campus 2</b></div>
+              </v-card-subtitle>
+              <button class="btn-card" id="btnP">
+                Ver mais
+              </button>
+            </div>
+            
+          
           </div>
        
         </v-card>
@@ -46,17 +48,16 @@
             <b>Bancos de Jardim</b>
           </v-card-title>
 
-          <v-card-subtitle>
-            <div><b>Maio e Junho</b></div>
-            <div><b>Campus 2</b></div>
-          </v-card-subtitle>
-
-          <button class="btn-card" id="btnP">
-            Ver mais
-          </button>
+          
+          <div class="alignCard">
+              <v-card-subtitle >
+                <div><b>Maio e Junho <br> Campus 2</b></div>
+              </v-card-subtitle>
+              <button class="btn-card" id="btnP">
+                Ver mais
+              </button>
+            </div>
           </div>
-          
-          
         
         </v-card>
 
@@ -75,14 +76,14 @@
             <b>Bancos de Jardim</b>
           </v-card-title>
 
-          <v-card-subtitle>
-            <div><b>Maio e Junho</b></div>
-            <div><b>Campus 2</b></div>
-          </v-card-subtitle>
-
-          <button class="btn-card" id="btnP">
-            Ver mais
-          </button>
+          <div class="alignCard">
+              <v-card-subtitle >
+                <div><b>Maio e Junho <br> Campus 2</b></div>
+              </v-card-subtitle>
+              <button class="btn-card" id="btnP">
+                Ver mais
+              </button>
+          </div>
           </div>
         </v-card>
         
@@ -99,9 +100,28 @@
       <p>15 atividades</p>
       <p>7 ocorrências</p>
       <p>100 pontos</p>
-      <div class="place">1</div>
+      <div class="firstPlace">1</div>
     </div>
 
+    <div class="board">
+      <img src="../assets/images/joana.jpg" id="profilePic">
+      <p>Clara Tavares <br> Esmad</p>
+      <p>11 atividades</p>
+      <p>15 ocorrências</p>
+      <p>60 pontos</p>
+      <div class="secondPlace">2</div>
+    </div>
+
+    <div class="board">
+      <img src="../assets/images/joana.jpg" id="profilePic">
+      <p>Martim Martins <br> Esmad</p>
+      <p>9 atividades</p>
+      <p>5 ocorrências</p>
+      <p>50 pontos</p>
+      <div class="thirdPlace">3</div>
+    </div>
+    <button class="btn-page" id="btnPink">Ver todos</button>
+    <!-- ^ this mf nao vai pro meio T-T  -->
 </template>
 
 <script>

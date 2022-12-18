@@ -1,11 +1,10 @@
 import {defineStore} from 'pinia'
-import {useLocalStorage, useStorage } from '@vueuse/core'
-// import { ref, computed } from "vue";
+import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
 
 export const useUsersStore = defineStore('user',{
   state: () => ({
     users:useStorage('users',[]),
-    logged:"",
+    logged:useSessionStorage('logged',""),
   }),
 
   getters: {
@@ -16,7 +15,6 @@ export const useUsersStore = defineStore('user',{
     getUsers(){
       return this.users;
     }
-
   },
 
   actions: {
@@ -41,7 +39,7 @@ export const useUsersStore = defineStore('user',{
       if(this.users.find(user=>user.email==email)){
         alert("Email já existe")
       }else{
-        // checks if password matches
+        // checks if passwords match
         if(password==passConf){
           let obj={
             type: 'user',
@@ -62,6 +60,4 @@ export const useUsersStore = defineStore('user',{
       }
     }
   },
-
-  
 });

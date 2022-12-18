@@ -1,7 +1,13 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import { useUsersStore } from "@/stores/User";
 
 export default {
+  setup() {
+    const userStore = useUsersStore();
+
+    return { userStore };
+  },
   name: "App",
   data() {
     return {
@@ -9,28 +15,7 @@ export default {
       group: null,
       collapse: false,
       tohide: "",
-      users: [
-        {
-          email: "user@gmail.com",
-          name: "Nome",
-          password: "123",
-        },
-        {
-          email: "user1@gmail.com",
-          name: "Nome",
-          password: "123",
-        },
-        {
-          email: "user2@gmail.com",
-          name: "Nome",
-          password: "123",
-        },
-      ],
     };
-  },
-  created() {
-    if (!localStorage.getItem("users"))
-      localStorage.setItem("users", JSON.stringify(this.users));
   },
   // data: () => ({
   //   drawer: false,
@@ -41,8 +26,10 @@ export default {
 
   methods: {
     isLogged() {
-      let acc = sessionStorage.getItem("user");
-      if (acc) {
+      let acc = this.userStore.getLogged();
+      console.log(acc);
+      // let acc = sessionStorage.getItem("user");
+      if (acc != "") {
         return true;
       } else {
         return false;

@@ -27,7 +27,7 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card" id="btnP">Ver mais</button>
+              <button class="btn-card">Ver mais</button>
             </div>
           </div>
         </v-card>

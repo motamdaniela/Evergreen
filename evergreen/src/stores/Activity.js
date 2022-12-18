@@ -1,17 +1,36 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import {defineStore} from 'pinia'
+import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
 
-Vue.use(Vuex);
+export const useActivityStore = defineStore('activity',{
+  state: () => ({
+    activities:useStorage('activities',[]),
+  }),
 
-export const store = new Vuex.Store({
-  state: {
-    id: 0,
-    date: "",
-    title: "",
-    description: "",
-    coordenator: "",
-    place: "",
-    users: [],
-    participated: [],
+  getters: {
+    getActivities(){
+      return this.activities;
+    }
+  },
+
+  actions: {
+    
+
+
   },
 });
+
+
+
+
+// export const store = new Vuex.Store({
+//   state: {
+//     id: 0,
+//     date: "",
+//     title: "",
+//     description: "",
+//     coordenator: "",
+//     place: "",
+//     users: [],
+//     participated: [],
+//   },
+// });

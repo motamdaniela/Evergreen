@@ -29,7 +29,7 @@ export default {
       let acc = this.userStore.getLogged();
       console.log(acc);
       // let acc = sessionStorage.getItem("user");
-      if (acc != "") {
+      if (acc) {
         return true;
       } else {
         return false;
@@ -71,7 +71,7 @@ export default {
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav v-if="isLogged">
+      <nav v-if="!isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">Faq</RouterLink>

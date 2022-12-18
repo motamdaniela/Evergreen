@@ -49,7 +49,7 @@ export const useUsersStore = defineStore('user',{
             school: school,
             course: course,
             data: 'data',
-            photo: '',
+            photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
             badges: [],
           }
@@ -61,3 +61,5 @@ export const useUsersStore = defineStore('user',{
     }
   },
 });
+
+

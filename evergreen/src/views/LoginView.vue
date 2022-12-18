@@ -6,14 +6,6 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
-      <!-- <v-text-field
-        class="input"
-        variant="plain"
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        required
-      ></v-text-field> -->
       <label for="email" class="semiTitle">E-mail</label>
       <br />
       <input class="input" id="email" v-model="form.email" type="email" />
@@ -26,17 +18,22 @@
         <RouterLink class="link" id="signUpBtn" to="/signUp"
           >Registar</RouterLink
         >
-        <button class="btn-page link" id="ok" type="submit">
-          Entrar
-          <!-- <RouterLink class="link" to="/login">Entrar</RouterLink> -->
-        </button>
+        <button class="btn-page link" id="ok" type="submit">Entrar</button>
       </div>
     </v-form>
   </div>
 </template>
 
 <script>
-import { RouterLink } from "vue-router";
+// import { onMounted } from "vue";
+// import { RouterLink } from "vue-router";
+import { useUsersStore } from "../stores/User";
+
+const userStore = useUsersStore;
+
+// onMounted(async () => {
+//   await user.getUser();
+// });
 export default {
   name: "Login",
   data() {
@@ -48,9 +45,9 @@ export default {
       users: [],
     };
   },
-  created() {
-    this.users = JSON.parse(localStorage.getItem("users"));
-  },
+  // created() {
+  //   this.users = JSON.parse(localStorage.getItem("users"));
+  // },
   methods: {
     onSubmit() {
       let idk = this.users.find(
@@ -59,53 +56,13 @@ export default {
       );
       if (idk) {
         alert("slay");
-        localStorage.setItem("isAuthenticated", true);
+        // localStorage.setItem("isAuthenticated", true);
+        userStore.login(this.form.email, this.form.password);
       } else {
         alert("ui");
       }
-      // this.users.map((user) => {
-      //   if (
-      //     this.form.email == user.email &&
-      //     this.form.password == user.password
-      //   ) {
-      //     localStorage.setItem("isAuthenticated", true);
-      //     alert("slay");
-      //   } else {
-      //     alert("Wrong credentials!");
-      //   }
-      // });
     },
   },
-  // data: () => ({
-  //   valid: true,
-  //   name: "",
-  //   nameRules: [
-  //     (v) => !!v || "Name is required",
-  //     (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-  //   ],
-  //   email: "",
-  //   emailRules: [
-  //     (v) => !!v || "E-mail is required",
-  //     (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-  //   ],
-  //   select: null,
-  //   items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-  //   checkbox: false,
-  // }),
-
-  // methods: {
-  //   async validate() {
-  //     const { valid } = await this.$refs.form.validate();
-
-  //     if (valid) alert("Form is valid");
-  //   },
-  //   reset() {
-  //     this.$refs.form.reset();
-  //   },
-  //   resetValidation() {
-  //     this.$refs.form.resetValidation();
-  //   },
-  // },
 };
 </script>
 

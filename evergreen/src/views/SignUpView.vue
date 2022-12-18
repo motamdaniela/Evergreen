@@ -45,10 +45,7 @@
         </div>
       </div>
       <div id="btns">
-        <button class="btn-page link" id="ok" type="submit">
-          Registar
-          <!-- <RouterLink class="link" to="/login">Entrar</RouterLink> -->
-        </button>
+        <button class="btn-page link" id="ok" type="submit">Registar</button>
         <RouterLink class="link" to="/login" id="signUpBtn">Entrar</RouterLink>
       </div>
     </v-form>
@@ -56,7 +53,15 @@
 </template>
 
 <script>
+import { useUsersStore } from "@/stores/User";
+
+// const userStore = useUsersStore;
 export default {
+  setup() {
+    const userStore = useUsersStore();
+    // userStore.signUp();
+    return { userStore };
+  },
   data() {
     return {
       form: {
@@ -70,26 +75,45 @@ export default {
       users: [],
     };
   },
-  created() {
-    this.users = JSON.parse(localStorage.getItem("users"));
-  },
   methods: {
     onSubmit() {
-      let idk = this.users.find((user) => user.email == this.form.email);
-      if (idk) {
-        alert("no");
-      } else if (idk == undefined) {
-        if (this.form.pass == this.passConf) {
-          alert("slay");
-          this.users.push(this.form);
-          localStorage.setItem("users", JSON.stringify(this.users));
-          localStorage.setItem("isAuthenticated", true);
-        } else {
-          alert("nono");
-        }
-      }
+      this.userStore.signUp(
+        this.form.email,
+        this.form.name,
+        this.form.password,
+        this.form.school,
+        this.form.course
+      );
     },
   },
+  // created() {
+  //   this.users = JSON.parse(localStorage.getItem("users"));
+  // },
+  // methods: {
+  //   onSubmit() {
+  //     // let idk = this.users.find((user) => user.email == this.form.email);
+  //     // if (idk) {
+  //     //   alert("no");
+  //     // } else if (idk == undefined) {
+  //     //   if (this.form.pass == this.passConf) {
+  //     //     alert("slay");
+  //     // this.users.push(this.form);
+  //     // localStorage.setItem("users", JSON.stringify(this.users));
+  //     // localStorage.setItem("isAuthenticated", true);
+  //     userStore.signUp(
+  //       this.form.email,
+  //       this.form.name,
+  //       this.form.password,
+  //       this.form.school,
+  //       this.form.course
+  //     );
+  //     // } else {
+  //     //   alert("nono");
+  //     //   console.log(this.users);
+  //     // }
+  //     // }
+  //   },
+  // },
 };
 </script>
 

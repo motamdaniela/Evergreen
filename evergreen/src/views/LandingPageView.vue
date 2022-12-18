@@ -17,7 +17,7 @@
     </div>
     <img src="../assets/images/atividades.svg" id="img1">
   </div>
-
+  
   <div class="midDiv" id="div2">
     <img src="../assets/images/ocorrencias.svg" id="img2">
     <div id="text2">

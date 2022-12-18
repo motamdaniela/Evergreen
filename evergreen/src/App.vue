@@ -74,7 +74,7 @@ export default {
       <nav v-if="isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">Faq</RouterLink>
+        <RouterLink to="/faq">F.A.Q</RouterLink>
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
@@ -89,7 +89,7 @@ export default {
         <RouterLink to="/Form">Questionário</RouterLink>
         <RouterLink to="/Missions">Missões</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">Faq</RouterLink>
+        <RouterLink to="/faq">F.A.Q</RouterLink>
         <button id="profile">
           <RouterLink to="/Profile">Perfil</RouterLink>
         </button>
@@ -122,8 +122,9 @@ export default {
 
   <footer>
     <div>
-      <img src="./assets/logored.svg" style="width: 8rem" />
+      <img src="./assets/logored.svg" style="width: 10rem" />
     </div>
+    <br>
     <div>
       <a class="footerA" href="#">Beatriz Rodrigues</a>
       <a class="footerA" href="#">Daniela Monteiro</a>

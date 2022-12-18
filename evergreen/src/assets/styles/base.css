@@ -118,6 +118,9 @@ nav a, .navbtn {
   display: inline-block;
   margin: 0 1rem 0 1rem;
 }
+nav a{
+  font-weight: 500;
+}
 
 button:last-of-type {
   margin-right: 3rem;
@@ -129,17 +132,24 @@ button:last-of-type {
 
 footer{
   background-color: #91C99D;
-  margin-top: 120px;
   width: 100%;
-  height: 15%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+
 }
 .footerA{
   text-decoration: none;
   color: #FDF9F9;
   margin: 10px;
+  font-size: 20px;
+  font-weight: 500;
 }
 .footerA:hover{
-  color: #62B273;
+  color: #244A2C;
 }
 
 @media screen and (min-width: 700px) {

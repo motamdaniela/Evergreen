@@ -8,11 +8,11 @@
     >
       <label for="email" class="semiTitle">E-mail</label>
       <br />
-      <input class="input" id="email" v-model="form.email" type="email" />
+      <input class="input" id="email" v-model="email" type="email" />
       <br />
       <label for="pass" class="semiTitle">Palavra-passe</label>
       <br />
-      <input class="input" id="pass" v-model="form.password" type="password" />
+      <input class="input" id="pass" v-model="password" type="password" />
       <br />
       <div id="btns">
         <RouterLink class="link" id="signUpBtn" to="/signUp"
@@ -25,42 +25,23 @@
 </template>
 
 <script>
-// import { onMounted } from "vue";
-// import { RouterLink } from "vue-router";
-import { useUsersStore } from "../stores/User";
+import { useUsersStore } from "@/stores/User";
 
-const userStore = useUsersStore;
-
-// onMounted(async () => {
-//   await user.getUser();
-// });
 export default {
-  name: "Login",
+  setup() {
+    const userStore = useUsersStore();
+
+    return { userStore };
+  },
   data() {
     return {
-      form: {
-        email: "",
-        password: "",
-      },
-      users: [],
+      email: "",
+      password: "",
     };
   },
-  // created() {
-  //   this.users = JSON.parse(localStorage.getItem("users"));
-  // },
   methods: {
     onSubmit() {
-      let idk = this.users.find(
-        (user) =>
-          user.email == this.form.email && user.password == this.form.password
-      );
-      if (idk) {
-        alert("slay");
-        // localStorage.setItem("isAuthenticated", true);
-        userStore.login(this.form.email, this.form.password);
-      } else {
-        alert("ui");
-      }
+      this.userStore.login(this.email, this.password);
     },
   },
 };

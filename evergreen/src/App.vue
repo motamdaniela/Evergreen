@@ -66,7 +66,7 @@ export default {
         <RouterLink v-if="!isLogged" to="/"
           ><img src="./assets/logored.svg" id="logo"
         /></RouterLink>
-        <RouterLink v-else to="/Home"
+        <RouterLink v-else to="/"
           ><img src="./assets/logored.svg" id="logo"
         /></RouterLink>
       </v-app-bar-title>

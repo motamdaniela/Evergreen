@@ -149,8 +149,15 @@ export default {
   },
   data() {
     return {
-      users: this.userStore.getTop3,
+      users: [],
     };
+  },
+  created() {
+    if (this.userStore.getTop3.length > 1) {
+      this.users = this.userStore.getTop3;
+    } else {
+      this.users.push(this.userStore.getTop3);
+    }
   },
 };
 </script>

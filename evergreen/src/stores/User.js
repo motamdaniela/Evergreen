@@ -17,16 +17,25 @@ export const useUsersStore = defineStore('user',{
     },
 
     getTop3(){
-      let users = this.users;
-      users.sort((a, b) => {
+      let usersU=[]
+      this.users.forEach(user => {
+        if(user.type == 'user'){
+          usersU.push(user)
+        }
+      });
+      usersU.sort((a, b) => {
         return b.points - a.points;
       });
       let top=[]
-      for (let i=0; i<3; i++){
-        if(users[i].type=="user"){
-          top.push(users[i])
-        }else{
-          i-=1
+      if(usersU.length==1){
+        top.push(usersU)
+      }else if(usersU.length==2){
+        for (let i=0; i<2; i++){
+          top.push(usersU[i])
+        }
+      }else if(usersU.length>=3){
+        for (let i=0; i<3; i++){
+            top.push(usersU[i])
         }
       }
       return top;

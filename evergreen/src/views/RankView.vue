@@ -25,11 +25,22 @@ export default {
   },
   data() {
     return {
-      users: this.userStore.getUsers,
+      users: [],
     };
   },
   created() {
-    // orders by points
+    let users2 = this.userStore.getUsers;
+    let list = [];
+    users2.forEach((user) => {
+      if (user.type == "user") {
+        list.push(user);
+      }
+    });
+    if (list.length > 1) {
+      this.users = list;
+    } else {
+      this.users.push(list);
+    }
     this.users.sort((a, b) => {
       return b.points - a.points;
     });

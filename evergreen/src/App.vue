@@ -22,6 +22,7 @@ export default {
       {
         type: "user",
         email: "user@gmail.com",
+        username: "user",
         name: "name",
         password: "Esmad_2233",
         school: "school",
@@ -31,19 +32,16 @@ export default {
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
         points: 0,
         badges: [],
+        state: "active",
       },
       {
         type: "admin",
         email: "admin@gmail.com",
-        name: "name",
+        username: "admin",
+        name: "admin",
         password: "Esmad_2233",
-        school: "school",
-        course: "course",
         data: "data",
-        photo:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-        points: 0,
-        badges: [],
+        state: "active",
       },
     ];
     let users = this.userStore.getUsers;

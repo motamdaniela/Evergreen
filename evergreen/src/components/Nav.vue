@@ -17,7 +17,7 @@
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav v-if="isLogged">
+      <nav v-if="!isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">F.A.Q</RouterLink>

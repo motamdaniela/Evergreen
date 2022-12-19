@@ -8,7 +8,7 @@
       ><RouterLink to="/Activities">Atividades</RouterLink></v-card
     >
     <v-card width="300" title="Ocorrências"
-      ><RouterLink to="/Ocorrence">Ocorrências</RouterLink></v-card
+      ><RouterLink to="/Occurrence">Ocorrências</RouterLink></v-card
     >
   </div>
 </template>

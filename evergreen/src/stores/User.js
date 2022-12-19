@@ -59,7 +59,7 @@ export const useUsersStore = defineStore('user',{
       this.users.push(obj)
     },
 
-    logOf(){
+    logOut(){
       this.logged=""
     },
 

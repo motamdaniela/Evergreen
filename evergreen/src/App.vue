@@ -17,12 +17,6 @@ export default {
       tohide: "",
     };
   },
-  // data: () => ({
-  //   drawer: false,
-  //   group: null,
-  //   collapse: false,
-  //   tohide: "",
-  // }),
   created() {
     let predefinedUsers = [
       {
@@ -65,9 +59,10 @@ export default {
   methods: {
     isLogged() {
       let acc = this.userStore.getLogged();
-      console.log(acc);
+      console.log(acc != "");
       // let acc = sessionStorage.getItem("user");
       if (acc) {
+        console.log(acc);
         return true;
       } else {
         return false;

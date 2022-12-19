@@ -14,6 +14,18 @@ export const useUsersStore = defineStore('user',{
     
     getUsers(){
       return this.users;
+    },
+
+    getTop3(){
+      let users = this.users;
+      users.sort((a, b) => {
+        return b.points - a.points;
+      });
+      let top=[]
+      for (let i=0; i<3; i++){
+        top.push(users[i])
+      }
+      return top;
     }
   },
 
@@ -29,6 +41,7 @@ export const useUsersStore = defineStore('user',{
       }
     },
 
+    // adds users
     add(obj){
       this.users.push(obj)
     },

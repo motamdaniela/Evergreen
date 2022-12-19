@@ -11,6 +11,7 @@ import Form from "../views/FormView.vue";
 import Missions from "../views/MissionsView.vue";
 import Profile from "../views/ProfileView.vue";
 import Admin from "../views/AdminView.vue";
+import Rank from "../views/RankView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,6 +75,11 @@ const router = createRouter({
       path: "/Admin",
       name: "Admin",
       component: Admin,
+    },
+    {
+      path: "/Rank",
+      name: "Rank",
+      component: Rank,
     },
   ],
 });

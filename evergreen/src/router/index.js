@@ -6,7 +6,7 @@ import Login from "../views/LoginView.vue";
 import SignUp from "../views/SignUpView.vue";
 import Home from "../views/HomePageView.vue";
 import Activities from "../views/ActivitiesView.vue";
-import Ocorrence from "../views/OcorrenceView.vue";
+import Occurrence from "../views/OccurrenceView.vue";
 import Form from "../views/FormView.vue";
 import Missions from "../views/MissionsView.vue";
 import Profile from "../views/ProfileView.vue";
@@ -53,9 +53,9 @@ const router = createRouter({
       component: Activities,
     },
     {
-      path: "/Ocorrence",
-      name: "Ocorrence",
-      component: Ocorrence,
+      path: "/Occurrence",
+      name: "Occurrence",
+      component: Occurrence,
     },
     {
       path: "/Form",

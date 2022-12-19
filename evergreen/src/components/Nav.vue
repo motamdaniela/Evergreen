@@ -31,7 +31,7 @@
       <nav v-else>
         <RouterLink to="/Home">Página principal</RouterLink>
         <RouterLink to="/Activities">Atividades</RouterLink>
-        <RouterLink to="/Ocorrence">Ocorrências</RouterLink>
+        <RouterLink to="/Occurrence">Ocorrências</RouterLink>
         <RouterLink to="/Form">Questionário</RouterLink>
         <RouterLink to="/Missions">Missões</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>

@@ -14,23 +14,9 @@ export const useActivityStore = defineStore('activity',{
 
   actions: {
     
-
+    add(obj){
+      this.activities.push(obj)
+    },
 
   },
 });
-
-
-
-
-// export const store = new Vuex.Store({
-//   state: {
-//     id: 0,
-//     date: "",
-//     title: "",
-//     description: "",
-//     coordenator: "",
-//     place: "",
-//     users: [],
-//     participated: [],
-//   },
-// });

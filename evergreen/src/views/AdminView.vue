@@ -5,10 +5,10 @@
       ><RouterLink to="/Users">Utilizadores</RouterLink></v-card
     >
     <v-card width="300" title="Atividades"
-      ><RouterLink to="/Rank">Atividades</RouterLink></v-card
+      ><RouterLink to="/Activities">Atividades</RouterLink></v-card
     >
     <v-card width="300" title="Ocorrências"
-      ><RouterLink to="/Rank">Ocorrências</RouterLink></v-card
+      ><RouterLink to="/Ocorrence">Ocorrências</RouterLink></v-card
     >
   </div>
 </template>

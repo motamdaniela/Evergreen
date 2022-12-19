@@ -29,6 +29,10 @@ export const useUsersStore = defineStore('user',{
       }
     },
 
+    add(obj){
+      this.users.push(obj)
+    },
+
     logOf(){
       this.logged=""
     },
@@ -54,6 +58,7 @@ export const useUsersStore = defineStore('user',{
             badges: [],
           }
           this.users.push(obj)
+          this.logged=obj.email
         }else{
           alert('Password errada')
         }

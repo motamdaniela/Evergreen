@@ -23,6 +23,44 @@ export default {
   //   collapse: false,
   //   tohide: "",
   // }),
+  created() {
+    let predefinedUsers = [
+      {
+        type: "user",
+        email: "user@gmail.com",
+        name: "name",
+        password: "Esmad_2233",
+        school: "school",
+        course: "course",
+        data: "data",
+        photo:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        points: 0,
+        badges: [],
+      },
+      {
+        type: "admin",
+        email: "admin@gmail.com",
+        name: "name",
+        password: "Esmad_2233",
+        school: "school",
+        course: "course",
+        data: "data",
+        photo:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        points: 0,
+        badges: [],
+      },
+    ];
+    let users = this.userStore.getUsers;
+    predefinedUsers.forEach((user) => {
+      if (users.find((u) => u.email == user.email)) {
+        console.log("users already have been added");
+      } else {
+        this.userStore.add(user);
+      }
+    });
+  },
 
   methods: {
     isLogged() {
@@ -71,7 +109,7 @@ export default {
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav v-if="!isLogged">
+      <nav v-if="isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">F.A.Q</RouterLink>
@@ -124,7 +162,7 @@ export default {
     <div>
       <img src="./assets/logored.svg" style="width: 10rem" />
     </div>
-    <br>
+    <br />
     <div>
       <a class="footerA" href="#">Beatriz Rodrigues</a>
       <a class="footerA" href="#">Daniela Monteiro</a>

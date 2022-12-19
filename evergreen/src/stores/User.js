@@ -23,7 +23,11 @@ export const useUsersStore = defineStore('user',{
       });
       let top=[]
       for (let i=0; i<3; i++){
-        top.push(users[i])
+        if(users[i].type=="user"){
+          top.push(users[i])
+        }else{
+          i-=1
+        }
       }
       return top;
     }

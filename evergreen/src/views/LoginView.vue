@@ -42,6 +42,13 @@ export default {
   methods: {
     onSubmit() {
       this.userStore.login(this.email, this.password);
+      let user = this.userStore.getLogged;
+      let users = this.userStore.getUsers;
+      if (users.find((u) => u.email == user && u.type == "user")) {
+        this.$router.push("/Home");
+      } else if (users.find((u) => u.email == user && u.type == "admin")) {
+        this.$router.push("/Admin");
+      }
     },
   },
 };

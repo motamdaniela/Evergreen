@@ -14,6 +14,22 @@ export const useUsersStore = defineStore('user',{
     
     getUsers(){
       return this.users;
+    },
+
+    getTop3(){
+      let users = this.users;
+      users.sort((a, b) => {
+        return b.points - a.points;
+      });
+      let top=[]
+      for (let i=0; i<3; i++){
+        if(users[i].type=="user"){
+          top.push(users[i])
+        }else{
+          i-=1
+        }
+      }
+      return top;
     }
   },
 
@@ -27,6 +43,11 @@ export const useUsersStore = defineStore('user',{
       }else{
         alert('Credenciais erradas')
       }
+    },
+
+    // adds users
+    add(obj){
+      this.users.push(obj)
     },
 
     logOf(){
@@ -54,6 +75,7 @@ export const useUsersStore = defineStore('user',{
             badges: [],
           }
           this.users.push(obj)
+          this.logged=obj.email
         }else{
           alert('Password errada')
         }

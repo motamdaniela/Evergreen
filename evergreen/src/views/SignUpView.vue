@@ -76,6 +76,11 @@ export default {
         this.course,
         this.passConf
       );
+      let user = this.userStore.getLogged;
+      let users = this.userStore.getUsers;
+      if (users.find((u) => u.email == user && u.type == "user")) {
+        this.$router.push("/Home");
+      }
     },
   },
 };

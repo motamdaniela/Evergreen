@@ -27,13 +27,11 @@ app.mount("#app");
 
 import { useUsersStore } from "@/stores/User";
 import { useActivityStore } from "@/stores/Activity";
-import { useThemeStore } from "@/stores/Theme";
 
 
  
 const userStore = useUsersStore();
 const activityStore = useActivityStore();
-const themeStore = useThemeStore();
 
 
 // mandatory users
@@ -171,12 +169,12 @@ activities.forEach((activity) => {
   }
 });
 
-let tms = themeStore.getThemes;
+let tms = activityStore.getThemes;
 themes.forEach((theme) => {
   if (tms.find((t) => t.id == theme.id)) {
     console.log("themes have already been added");
   } else {
-    themeStore.add(theme);
+    activityStore.addTheme(theme);
   }
 });
 

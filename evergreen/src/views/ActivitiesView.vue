@@ -27,7 +27,17 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card">Ver mais</button>
+              <button
+                class="btn-card"
+                @click="
+                  this.$router.push({
+                    path: '/Activity',
+                    params: { param1: activity.id },
+                  })
+                "
+              >
+                Ver mais
+              </button>
             </div>
           </div>
         </v-card>

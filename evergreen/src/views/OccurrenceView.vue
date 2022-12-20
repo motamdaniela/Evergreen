@@ -72,7 +72,7 @@ export default {
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       this.form.user = this.userStore.getLogged;
       this.form.state = "pending";
-      this.occurrenceStore.add(this.form);
+      this.occurrenceStore.addOccurrence(this.form);
       location.reload();
     },
   },

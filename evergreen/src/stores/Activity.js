@@ -4,7 +4,7 @@ import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
 export const useActivityStore = defineStore('activity',{
   state: () => ({
     activities:useStorage('activities',[]),
-    themes:useStorage('themesActivities',[]),
+    themes:useStorage('themes',[]),
   }),
 
   getters: {

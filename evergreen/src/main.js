@@ -150,6 +150,38 @@ let themes=[
   },
 ]
 
+// types of occurrences
+let types=[
+  {
+    id:0,
+    name:"Lâmpada fundida",
+  },
+  {
+    id:1,
+    name:"Torneira a pingar",
+  },
+  {
+    id:2,
+    name:"Luz ligada",
+  },
+  {
+    id:3,
+    name:"Objeto quebrado",
+  },
+  {
+    id:4,
+    name:"Malfuncionamento",
+  },
+  {
+    id:5,
+    name:"Lixo no chão",
+  },
+  {
+    id:6,
+    name:"Outro",
+  },
+]
+
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {

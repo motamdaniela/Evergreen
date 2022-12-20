@@ -27,16 +27,11 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button
-                class="btn-card"
-                @click="
-                  this.$router.push({
-                    path: '/Activity',
-                    params: { param1: activity.id },
-                  })
-                "
-              >
-                Ver mais
+              <button>
+                <RouterLink
+                  :to="{ name: 'Activity', params: { id: data.item.id } }"
+                  >Ver mais</RouterLink
+                >
               </button>
             </div>
           </div>

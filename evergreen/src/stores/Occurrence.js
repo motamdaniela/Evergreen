@@ -4,19 +4,27 @@ import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
 export const useOccurrenceStore = defineStore('occurrence',{
   state: () => ({
     occurrences:useStorage('occurrences',[]),
+    types:useStorage('types',[]),
   }),
 
   getters: {
     getOccurrences(){
       return this.occurrences;
-    }
+    },
+
+    getTypes(){
+      return this.types;
+    },
   },
 
   actions: {
-    add(obj){
+    addOccurrence(obj){
       this.occurrences.push(obj)
     },
 
+    addType(obj){
+      this.types.push(obj)
+    },
   },
 });
 

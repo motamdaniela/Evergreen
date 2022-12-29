@@ -3,7 +3,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Activity",
+  data() {
+    return {
+      key: value,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

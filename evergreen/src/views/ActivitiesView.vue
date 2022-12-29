@@ -1,9 +1,14 @@
 <template>
   <div>
     <h1>Atividades</h1>
-    <div class="list">
+    <!-- <div class="list">
       <div class="grid-item" v-for="activity in activities">
-        <v-card class="mx-auto" max-width="400" id="card">
+        <v-card
+          class="mx-auto"
+          max-width="400"
+          id="card"
+          :items="activitiesWithLink"
+        >
           <v-img
             class="image"
             src="https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg"
@@ -12,12 +17,12 @@
             cover
           >
           </v-img>
-
+  
           <div class="cardText">
             <v-card-title>
               <b>{{ activity.title }}</b>
             </v-card-title>
-
+  
             <div class="alignCard">
               <v-card-subtitle>
                 <div>
@@ -27,21 +32,29 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button>
-                <RouterLink
-                  :to="{ name: 'Activity', params: { id: data.item.id } }"
-                  >Ver mais</RouterLink
-                >
-              </button>
             </div>
           </div>
+          <template #cell(link)="data">
+            <RouterLink :to="{ name: 'Activity', params: { id: data.item.id } }"
+              >Ver mais</RouterLink
+            >
+          </template>
         </v-card>
       </div>
-    </div>
+    </div> -->
+
+    <v-table :items="activitiesWithLink">
+      <template #cell(link)="data">
+        <RouterLink :to="{ name: 'Activity', params: { id: data.item.id } }"
+          >LINK</RouterLink
+        >
+      </template>
+    </v-table>
   </div>
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
 
 export default {
@@ -50,12 +63,25 @@ export default {
 
     return { activityStore };
   },
+  name: "Activities",
   data() {
     return {
-      activities: this.activityStore.getActivities,
+      activities: [],
     };
   },
-  methods: {},
+  created() {
+    this.activities = this.activityStore.getActivities;
+  },
+  computed: {
+    activitiesWithLink() {
+      return this.activities.map((activity) => {
+        return {
+          ...activity,
+          link: "",
+        };
+      });
+    },
+  },
 };
 </script>
 

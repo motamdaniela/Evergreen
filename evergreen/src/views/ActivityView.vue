@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <h1>{{ activity.title }}</h1>
-    <h3>Diagnostico:</h3>
-    <p>{{ activity.desc1 }}</p>
-    <h3>Objetivos:</h3>
-    <p>{{ activity.desc2 }}</p>
-    <h3>Metas:</h3>
-    <p>{{ activity.desc3 }}</p>
-  </div>
+  <h1>{{ activity.title }}</h1>
+  <h3>Diagnostico:</h3>
+  <p>{{ activity.desc1 }}</p>
+  <h3>Objetivos:</h3>
+  <p>{{ activity.desc2 }}</p>
+  <h3>Metas:</h3>
+  <p>{{ activity.desc3 }}</p>
+  <input type="button" value="Inscrever" class="btn-page" id="actBtn" />
 </template>
 
 <script>

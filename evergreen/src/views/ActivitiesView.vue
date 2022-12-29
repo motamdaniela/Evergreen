@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Atividades</h1>
-    <!-- <div class="list">
+    <div class="list">
       <div class="grid-item" v-for="activity in activities">
         <v-card
           class="mx-auto"
@@ -17,12 +17,12 @@
             cover
           >
           </v-img>
-  
+
           <div class="cardText">
             <v-card-title>
               <b>{{ activity.title }}</b>
             </v-card-title>
-  
+
             <div class="alignCard">
               <v-card-subtitle>
                 <div>
@@ -32,24 +32,17 @@
                   >
                 </div>
               </v-card-subtitle>
+              <button class="btn-card" id="btnP">
+                <RouterLink
+                  :to="{ name: 'Activity', params: { id: activity.id } }"
+                  >Ver mais</RouterLink
+                >
+              </button>
             </div>
           </div>
-          <template #cell(link)="data">
-            <RouterLink :to="{ name: 'Activity', params: { id: data.item.id } }"
-              >Ver mais</RouterLink
-            >
-          </template>
         </v-card>
       </div>
-    </div> -->
-
-    <v-table :items="activitiesWithLink">
-      <template #cell(link)="data">
-        <RouterLink :to="{ name: 'Activity', params: { id: data.item.id } }"
-          >LINK</RouterLink
-        >
-      </template>
-    </v-table>
+    </div>
   </div>
 </template>
 
@@ -71,16 +64,6 @@ export default {
   },
   created() {
     this.activities = this.activityStore.getActivities;
-  },
-  computed: {
-    activitiesWithLink() {
-      return this.activities.map((activity) => {
-        return {
-          ...activity,
-          link: "",
-        };
-      });
-    },
   },
 };
 </script>

@@ -6,18 +6,35 @@
   <p>{{ activity.desc2 }}</p>
   <h3>Metas:</h3>
   <p>{{ activity.desc3 }}</p>
-  <input type="button" value="Inscrever" class="btn-page" id="actBtn" />
+  <input
+    v-if="!changeBtn"
+    type="button"
+    class="btn-page"
+    id="sub"
+    value="Inscrever"
+    @click="subscribe"
+  />
+  <input
+    v-else
+    type="button"
+    class="btn-page"
+    id="unsub"
+    value="Anular Inscrição"
+    @click="unsubscribe"
+  />
 </template>
 
 <script>
 import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
+import { useUsersStore } from "@/stores/User";
 
 export default {
   setup() {
     const activityStore = useActivityStore();
+    const userStore = useUsersStore();
 
-    return { activityStore };
+    return { activityStore, userStore };
   },
   name: "Activity",
   data() {
@@ -25,6 +42,7 @@ export default {
       activityId: this.$route.params.id,
       activities: [],
       activity: {},
+      user: this.userStore.getLogged,
     };
   },
   created() {
@@ -32,6 +50,24 @@ export default {
     this.activity = this.activities.find(
       (activity) => activity.id == this.activityId
     );
+  },
+  methods: {
+    subscribe() {
+      this.activityStore.updateUsers(this.user, this.activity.id);
+    },
+    unsubscribe() {
+      this.activity.users = this.activity.users.filter((e) => e != this.user);
+    },
+  },
+  computed: {
+    changeBtn() {
+      let u = this.activity.users.find((user) => user == this.user);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>

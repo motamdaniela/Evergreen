@@ -27,5 +27,13 @@ export const useActivityStore = defineStore('activity',{
       this.themes.push(obj)
     },
 
+    updateUsers(user,id){
+      this.activities.forEach(activity => {
+        if(activity.id == id){
+          activity.users.push(user)
+        }
+      });
+    }
+
   },
 });

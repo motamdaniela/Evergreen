@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 import { useUsersStore } from "@/stores/User";
 
 export default {
@@ -32,6 +33,7 @@ export default {
   methods: {
     logOut() {
       this.userStore.logOut();
+      this.$router.push("/");
     },
   },
 };

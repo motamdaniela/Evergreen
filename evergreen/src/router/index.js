@@ -89,7 +89,7 @@ const router = createRouter({
       component: Users,
     },
     {
-      path: "/Activity",
+      path: "/Activity/:id",
       name: "Activity",
       component: Activity,
     },

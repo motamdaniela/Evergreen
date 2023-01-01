@@ -3,7 +3,12 @@
     <h1>Atividades</h1>
     <div class="list">
       <div class="grid-item" v-for="activity in activities">
-        <v-card class="mx-auto" max-width="400" id="card">
+        <v-card
+          class="mx-auto"
+          max-width="400"
+          id="card"
+          :items="activitiesWithLink"
+        >
           <v-img
             class="image"
             src="https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg"
@@ -27,9 +32,9 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button>
+              <button class="btn-card" id="btnP">
                 <RouterLink
-                  :to="{ name: 'Activity', params: { id: data.item.id } }"
+                  :to="{ name: 'Activity', params: { id: activity.id } }"
                   >Ver mais</RouterLink
                 >
               </button>
@@ -42,6 +47,7 @@
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
 
 export default {
@@ -50,12 +56,15 @@ export default {
 
     return { activityStore };
   },
+  name: "Activities",
   data() {
     return {
-      activities: this.activityStore.getActivities,
+      activities: [],
     };
   },
-  methods: {},
+  created() {
+    this.activities = this.activityStore.getActivities;
+  },
 };
 </script>
 

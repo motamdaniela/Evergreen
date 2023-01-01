@@ -27,11 +27,15 @@ app.mount("#app");
 
 import { useUsersStore } from "@/stores/User";
 import { useActivityStore } from "@/stores/Activity";
+import { useOccurrenceStore } from "@/stores/Occurrence";
+import { useMissionStore } from "@/stores/Mission";
 
 
  
 const userStore = useUsersStore();
 const activityStore = useActivityStore();
+const occurrenceStore = useOccurrenceStore();
+const missionStore = useMissionStore();
 
 
 // mandatory users
@@ -182,11 +186,23 @@ let types=[
   },
 ]
 
+let missions=[
+  {
+    id: 0,
+    title: "Inscreve-te na tua primeira atividade",
+    description: "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+    reward: "assets/images/imagem.png",
+    users: [],
+    max:1,
+    redirect:"/Activities",
+  },
+]
+
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
   if (users.find((u) => u.email == user.email)) {
-    console.log("users have already been added");
+    console.log("user has already been added");
   } else {
     userStore.add(user);
   }
@@ -195,7 +211,7 @@ predefinedUsers.forEach((user) => {
 let act = activityStore.getActivities;
 activities.forEach((activity) => {
   if (act.find((a) => a.id == activity.id)) {
-    console.log("activities have already been added");
+    console.log("activity has already been added");
   } else {
     activityStore.add(activity);
   }
@@ -204,9 +220,27 @@ activities.forEach((activity) => {
 let tms = activityStore.getThemes;
 themes.forEach((theme) => {
   if (tms.find((t) => t.id == theme.id)) {
-    console.log("themes have already been added");
+    console.log("theme has already been added");
   } else {
     activityStore.addTheme(theme);
+  }
+});
+
+let tps = occurrenceStore.getTypes;
+types.forEach((type) => {
+  if (tps.find((t) => t.id == type.id)) {
+    console.log("type has already been added");
+  } else {
+    occurrenceStore.addType(type);
+  }
+});
+
+let mss = missionStore.getMissions;
+missions.forEach((mission) => {
+  if (mss.find((m) => m.id == mission.id)) {
+    console.log("mission has already been added");
+  } else {
+    missionStore.addMission(mission);
   }
 });
 

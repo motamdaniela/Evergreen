@@ -69,7 +69,13 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import { useUsersStore } from "@/stores/User";
 export default {
+  setup() {
+    const userStore = useUsersStore();
+
+    return { userStore };
+  },
   name: "App",
   data() {
     return {
@@ -79,9 +85,9 @@ export default {
       tohide: "",
     };
   },
-  methods: {
+  computed: {
     isLogged() {
-      let acc = this.userStore.getLogged();
+      let acc = this.userStore.getLogged;
       console.log(acc != "");
       // let acc = sessionStorage.getItem("user");
       if (acc) {
@@ -97,14 +103,14 @@ export default {
     },
   },
 
-  computed: {
-    onScroll(e) {
-      this.offsetTop = e.target.scrollTop;
-      if (this.offsetTop > 0) {
-        this.collapse = true;
-      }
-    },
-  },
+  // computed: {
+  //   onScroll(e) {
+  //     this.offsetTop = e.target.scrollTop;
+  //     if (this.offsetTop > 0) {
+  //       this.collapse = true;
+  //     }
+  //   },
+  // },
 };
 </script>
 

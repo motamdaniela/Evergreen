@@ -1,5 +1,5 @@
 <template>
-  <h1>Missoes</h1>
+  <h1>Missões</h1>
   <div v-for="mission in missions">
     <h3>{{ mission.title }}</h3>
     <p>{{ mission.description }}</p>

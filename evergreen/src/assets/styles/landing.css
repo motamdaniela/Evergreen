@@ -1,6 +1,8 @@
 @font-face {
-    font-family: gliker;
-    src: url('../assets/gliker/Gliker-Bold.ttf');
+    font-family: 'gliker';
+    src:url('../gliker/gliker-bold.woff2') format('woff2'),
+        url('../gliker/gliker-bold.woff') format('woff'),
+        url('../gliker/gliker-bold.ttf') format('truetype');
 }
 body{
     text-align: center;
@@ -12,7 +14,7 @@ body{
     height: 100vh;
 }
 .title{
-    font-family: gliker;
+    font-family: 'gliker';
 }
 
 /* first div */

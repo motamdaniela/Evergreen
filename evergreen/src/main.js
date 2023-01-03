@@ -228,7 +228,7 @@ let schools=[
   },
 ]
 
-let building=[
+let buildings=[
   {
     id:0,
     name:'B',
@@ -246,7 +246,7 @@ let building=[
   },
 ]
 
-let floor=[
+let floors=[
   {
     id:0,
     idBuildings:[0,1,2],
@@ -264,7 +264,7 @@ let floor=[
   },
 ]
 
-let classroom=[
+let classrooms=[
   {
     id:208,
     idSchools:[0,1,2],
@@ -314,14 +314,53 @@ missions.forEach((mission) => {
   if (mss.find((m) => m.id == mission.id)) {
     console.log("mission has already been added");
   } else {
-    missionStore.addMission(mission);
+    schoolStore.addMission(mission);
   }
 });
 
 let cmp = schoolStore.getCampus
+campus.forEach((camp) => {
+  if (cmp.find((c) => c.id == camp.id)) {
+    console.log("campus has already been added");
+  } else {
+    schoolStore.addCampus(camp);
+  }
+});
+
 let sch = schoolStore.getSchools
+schools.forEach((school) => {
+  if (sch.find((s) => s.id == school.id)) {
+    console.log("school has already been added");
+  } else {
+    schoolStore.addSchool(school);
+  }
+});
+
 let bld = schoolStore.getBuildings
+buildings.forEach((building) => {
+  if (bld.find((b) => b.id == building.id)) {
+    console.log("building has already been added");
+  } else {
+    schoolStore.addBuilding(building);
+  }
+});
+
 let flo = schoolStore.getFloors
+floors.forEach((floor) => {
+  if (flo.find((f) => f.id == floor.id)) {
+    console.log("floor has already been added");
+  } else {
+    schoolStore.addFloor(floor);
+  }
+});
+
 let cls = schoolStore.getClassrooms
+classrooms.forEach((classroom) => {
+  if (cls.find((c) => c.id == classroom.id)) {
+    console.log("classroom has already been added");
+  } else {
+    schoolStore.addClassroom(classroom);
+  }
+});
 
 

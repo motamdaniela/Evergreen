@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Questionario</h1>
+    <h1 class="title">Questionário</h1>
     <iframe
       src="https://docs.google.com/forms/d/e/1FAIpQLScbfUdEF9NvKkWi3wq2yZVx_C0LTDN6AfmkZLrHIxs_ELRWFQ/viewform?embedded=true"
       width="1000"

@@ -25,6 +25,13 @@ body{
     }
   }
   
+@font-face {
+  font-family: 'gliker';
+  src:url('../gliker/gliker-bold.woff2') format('woff2'),
+      url('../gliker/gliker-bold.woff') format('woff'),
+      url('../gliker/gliker-bold.ttf') format('truetype');
+}
+
 #profile,#login, #signup{
   border: 1px solid #050B06;
   border-radius: 30px;

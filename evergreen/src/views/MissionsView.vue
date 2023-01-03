@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       missions: this.missionStore.getMissions,
+      state: "",
     };
   },
   methods: {

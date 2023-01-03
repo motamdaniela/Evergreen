@@ -24,7 +24,7 @@ export const useMissionStore = defineStore('mission',{
           mission.users.push([email,0,'notStarted'])
         }
       })
-    }
+    },
 
   },
 });

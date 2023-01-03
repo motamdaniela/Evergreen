@@ -63,7 +63,7 @@ export default {
       name: "",
       email: "",
       school: "",
-      course: "",
+      username: "",
       password: "",
       passConf: "",
     };
@@ -71,11 +71,11 @@ export default {
   methods: {
     onSubmit() {
       this.userStore.signUp(
-        this.email,
         this.name,
+        this.email,
         this.username,
-        this.password,
         this.school,
+        this.password,
         this.passConf
       );
       let user = this.userStore.getLogged;

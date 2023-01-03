@@ -1,34 +1,53 @@
 <template>
   <div>
-    <v-card>
-    <v-tabs v-model="tab">
-      <v-tab value="place">Local</v-tab>
-      <v-tab value="type">Tipo</v-tab>
-      <v-tab value="description">Descrição</v-tab>
-      <v-tab value="photo">Foto</v-tab>
-    </v-tabs>
-
-    <v-card-text>
-      <v-window v-model="tab">
-        <v-window-item value="place">
-          One
-        </v-window-item>
-
-        <v-window-item value="type">
-          Two
-        </v-window-item>
-
-        <v-window-item value="description">
-          Three
-        </v-window-item>
-
-        <v-window-item value="photo">
-          Four
-        </v-window-item>
-      </v-window>
-    </v-card-text>
-  </v-card>
     <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+      @submit.prevent="onSubmit"
+    >
+      <v-card>
+      <v-tabs v-model="tab">
+        <v-tab value="place">Local</v-tab>
+        <v-tab value="type">Tipo</v-tab>
+        <v-tab value="description">Descrição</v-tab>
+        <v-tab value="photo">Foto</v-tab>
+      </v-tabs>
+
+      <v-card-text>
+        <v-window v-model="tab">
+          <v-window-item value="place">
+            Campus:
+            <input type="text" v-model="form.campus" />
+            
+            Escola:
+            <input type="text" v-model="form.school" />
+
+            Bloco:
+            <input type="text" v-model="form.building" />
+
+          </v-window-item>
+
+          <v-window-item value="type">
+            Tipo:
+            <input type="text" v-model="form.type" />
+          </v-window-item>
+
+          <v-window-item value="description">
+            Descrição:
+            <input type="text" v-model="form.description" />
+          </v-window-item>
+
+          <v-window-item value="photo">
+            Four
+          </v-window-item>
+        </v-window>
+      </v-card-text>
+    </v-card>
+
+  </v-form>  
+  
+  <!-- <v-form
       ref="form"
       v-model="valid"
       lazy-validation
@@ -50,7 +69,9 @@
       <input type="text" v-model="form.description" />
 
       <button type="submit" class="btn-page">Submeter</button>
-    </v-form>
+  </v-form> -->
+
+
   </div>
 </template>
 

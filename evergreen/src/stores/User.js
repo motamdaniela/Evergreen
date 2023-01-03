@@ -64,7 +64,7 @@ export const useUsersStore = defineStore('user',{
     },
 
     // sign up action
-    signUp(email,name,password,school,course,passConf){
+    signUp(email,name,password,school,username,passConf){
       // checks if email has already been used
       if(this.users.find(user=>user.email==email)){
         alert("Email já existe")
@@ -74,10 +74,10 @@ export const useUsersStore = defineStore('user',{
           let obj={
             type: 'user',
             email: email,
+            username: username,
             name: name,
             password: password,
             school: school,
-            course: course,
             data: 'data',
             photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,

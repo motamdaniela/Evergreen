@@ -14,9 +14,9 @@
       Bloco:
       <input type="text" v-model="form.building" />
       Piso:
-      <input type="text" v-model="form.classroom" />
-      Sala:
       <input type="text" v-model="form.floor" />
+      Sala:
+      <input type="text" v-model="form.classroom" />
       Tipo:
       <input type="text" v-model="form.type" />
       Descrição:

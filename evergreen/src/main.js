@@ -29,6 +29,7 @@ import { useUsersStore } from "@/stores/User";
 import { useActivityStore } from "@/stores/Activity";
 import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useMissionStore } from "@/stores/Mission";
+import { useSchoolStore } from "@/stores/School";
 
 
  
@@ -36,6 +37,7 @@ const userStore = useUsersStore();
 const activityStore = useActivityStore();
 const occurrenceStore = useOccurrenceStore();
 const missionStore = useMissionStore();
+const schoolStore = useSchoolStore();
 
 
 // mandatory users
@@ -47,7 +49,6 @@ let predefinedUsers = [
     name: "name",
     password: "Esmad_2223",
     school: "school",
-    course: "course",
     data: "data",
     photo:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
@@ -198,6 +199,79 @@ let missions=[
   },
 ]
 
+let campus=[
+  {
+    id:0,
+    name:'Campus 1',
+  },
+  {
+    id:1,
+    name:'Campus 2',
+  },
+]
+
+let schools=[
+  {
+    id:0,
+    name:"ESMAD", 
+    idCampus: 1,
+  },
+  {
+    id:1,
+    name:"ESHT", 
+    idCampus: 1,
+  },
+  {
+    id:2,
+    name:"ESS", 
+    idCampus: 0,
+  },
+]
+
+let building=[
+  {
+    id:0,
+    name:'B',
+    idSchools:[0]
+  },
+  {
+    id:1,
+    name:'D',
+    idSchools:[1]
+  },
+  {
+    id:2,
+    name:'5',
+    idSchools:[2]
+  },
+]
+
+let floor=[
+  {
+    id:0,
+    idBuildings:[0,1,2],
+    idSchools:[0,1,2]
+  },
+  {
+    id:1,
+    idBuildings:[0,1,2],
+    idSchools:[0,1,2]
+  },
+  {
+    id:2,
+    idBuildings:[0,1,2],
+    idSchools:[0,1]
+  },
+]
+
+let classroom=[
+  {
+    id:208,
+    idSchools:[0,1,2],
+    idBuildings:[0],
+    idFloor:2,
+  },
+]
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
@@ -243,4 +317,11 @@ missions.forEach((mission) => {
     missionStore.addMission(mission);
   }
 });
+
+let cmp = schoolStore.getCampus
+let sch = schoolStore.getSchools
+let bld = schoolStore.getBuildings
+let flo = schoolStore.getFloors
+let cls = schoolStore.getClassrooms
+
 

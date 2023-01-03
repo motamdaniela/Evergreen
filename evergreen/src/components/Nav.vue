@@ -99,7 +99,7 @@ export default {
     },
     ToHide() {
       this.tohide = "hide";
-      alert(this.tohide);
+      // alert(this.tohide);
     },
   },
 

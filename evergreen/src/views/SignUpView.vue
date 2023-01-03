@@ -16,14 +16,14 @@
           <br />
           <input class="input" id="email" v-model="email" type="email" />
           <br />
+          <label for="username" class="semiTitle">Nome de usuário</label>
+          <br />
+          <input class="input" id="username" v-model="username" />
+        </div>
+        <div>
           <label for="school" class="semiTitle">Escola</label>
           <br />
           <input class="input" id="school" v-model="school" />
-        </div>
-        <div>
-          <label for="course" class="semiTitle">Curso</label>
-          <br />
-          <input class="input" id="course" v-model="course" />
           <br />
           <label for="pass" class="semiTitle">Palavra-passe</label>
           <br />
@@ -73,9 +73,9 @@ export default {
       this.userStore.signUp(
         this.email,
         this.name,
+        this.username,
         this.password,
         this.school,
-        this.course,
         this.passConf
       );
       let user = this.userStore.getLogged;

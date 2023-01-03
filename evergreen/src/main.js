@@ -213,7 +213,7 @@ activities.forEach((activity) => {
   if (act.find((a) => a.id == activity.id)) {
     console.log("activity has already been added");
   } else {
-    activityStore.add(activity);
+    activityStore.addActivity(activity);
   }
 });
 

@@ -14,6 +14,7 @@ import Admin from "../views/AdminView.vue";
 import Rank from "../views/RankView.vue";
 import Users from "../views/UsersView.vue";
 import Activity from "../views/ActivityView.vue";
+import Suggestion from "../views/SuggestionView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -92,6 +93,11 @@ const router = createRouter({
       path: "/Activity/:id",
       name: "Activity",
       component: Activity,
+    },
+    {
+      path: "/Suggestion",
+      name: "Suggestion",
+      component: Suggestion,
     },
   ],
 });

@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Atividades</h1>
+    <button class="btn-page">
+      <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
+    </button>
     <div class="list">
       <div class="grid-item" v-for="activity in activities">
         <v-card

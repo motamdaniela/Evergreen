@@ -18,6 +18,14 @@ export const useMissionStore = defineStore('mission',{
       this.missions.push(obj)
     },
 
+    addUser(email){
+      this.missions.forEach(mission => {
+        if(!mission.users.find((m) => m[0] == email)){
+          mission.users.push([email,0,'notStarted'])
+        }
+      })
+    }
+
   },
 });
 

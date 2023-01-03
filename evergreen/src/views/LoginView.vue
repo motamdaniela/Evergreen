@@ -26,12 +26,14 @@
 
 <script>
 import { useUsersStore } from "@/stores/User";
+import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
     const userStore = useUsersStore();
+    const missionStore = useMissionStore();
 
-    return { userStore };
+    return { userStore, missionStore };
   },
   data() {
     return {
@@ -45,6 +47,7 @@ export default {
       let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
       if (users.find((u) => u.email == user && u.type == "user")) {
+        this.missionStore.addUser(this.email);
         this.$router.push("/Home");
       } else if (users.find((u) => u.email == user && u.type == "admin")) {
         this.$router.push("/Admin");

@@ -3,6 +3,7 @@
   <h1 class="gradientPurple padding"><span>Atividades Inscritas</span></h1>
   <br />
   <div id="activities">
+    <!-- usar groups > slides groups do vuetify -->
     <v-card class="mx-auto" max-width="400" id="card">
       <v-img
         class="image"

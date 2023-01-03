@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Atividades</h1>
+    <h1 class="title">Atividades</h1>
     <button class="btn-page">
       <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
     </button>

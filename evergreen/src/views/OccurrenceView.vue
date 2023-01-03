@@ -1,6 +1,33 @@
 <template>
   <div>
-    <h1>Ocorrências</h1>
+    <v-card>
+    <v-tabs v-model="tab">
+      <v-tab value="place">Local</v-tab>
+      <v-tab value="type">Tipo</v-tab>
+      <v-tab value="description">Descrição</v-tab>
+      <v-tab value="photo">Foto</v-tab>
+    </v-tabs>
+
+    <v-card-text>
+      <v-window v-model="tab">
+        <v-window-item value="place">
+          One
+        </v-window-item>
+
+        <v-window-item value="type">
+          Two
+        </v-window-item>
+
+        <v-window-item value="description">
+          Three
+        </v-window-item>
+
+        <v-window-item value="photo">
+          Four
+        </v-window-item>
+      </v-window>
+    </v-card-text>
+  </v-card>
     <v-form
       ref="form"
       v-model="valid"
@@ -39,6 +66,7 @@ export default {
 
     return { occurrenceStore, userStore };
   },
+  
   data() {
     return {
       form: {
@@ -56,6 +84,7 @@ export default {
         user: "",
         state: "",
       },
+      tab: null,
     };
   },
   methods: {

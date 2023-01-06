@@ -6,7 +6,7 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
-      <v-card>
+      
       <v-tabs v-model="tab">
         <v-tab value="place">Local</v-tab>
         <v-tab value="type">Tipo</v-tab>
@@ -14,7 +14,6 @@
         <v-tab value="photo">Foto</v-tab>
       </v-tabs>
 
-      <v-card-text>
         <v-window v-model="tab">
           <v-window-item value="place">
             Campus:
@@ -39,11 +38,10 @@
           </v-window-item>
 
           <v-window-item value="photo">
-            Four
+            <button type="submit" class="btn-page">Submeter</button>
           </v-window-item>
         </v-window>
-      </v-card-text>
-    </v-card>
+     
 
   </v-form>  
   

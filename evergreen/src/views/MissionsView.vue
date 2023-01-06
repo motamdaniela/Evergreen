@@ -3,7 +3,12 @@
   <div v-for="mission in missions">
     <h3>{{ mission.title }}</h3>
     <p>{{ mission.description }}</p>
-    <button @click="redirect(mission.redirect)" class="btn-page">go</button>
+    <input
+      @click="redirect(mission.redirect)"
+      class="btn-page"
+      value="go"
+      type="button"
+    />
   </div>
 </template>
 

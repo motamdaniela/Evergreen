@@ -14,45 +14,46 @@
         <v-tab value="photo">Foto</v-tab>
       </v-tabs>
 
-        <v-window v-model="tab">
-          <v-window-item value="place">
-            Campus:
-            <input type="text" v-model="form.campus" />
-            
-            Escola:
-            <input type="text" v-model="form.school" />
+        <v-card-text>
+          <v-window v-model="tab">
+            <v-window-item value="place">
+              Campus:
+              <input type="text" v-model="form.campus" />
 
-            Bloco:
-            <input type="text" v-model="form.building" />
+              Escola:
+              <input type="text" v-model="form.school" />
 
-          </v-window-item>
+              Bloco:
+              <input type="text" v-model="form.building" />
+            </v-window-item>
 
-          <v-window-item value="type">
-            Tipo:
-            <input type="text" v-model="form.type" />
-          </v-window-item>
+            <v-window-item value="type">
+              Tipo:
+              <input type="text" v-model="form.type" />
+            </v-window-item>
 
-          <v-window-item value="description">
-            Descrição:
-            <input type="text" v-model="form.description" />
-          </v-window-item>
+            <v-window-item value="description">
+              Descrição:
+              <input type="text" v-model="form.description" />
+            </v-window-item>
 
           <v-window-item value="photo">
             <button type="submit" class="btn-page">Submeter</button>
           </v-window-item>
         </v-window>
-     
-
-  </v-form>  
-  
-  <!-- <v-form
+        </v-card-text>
+    </v-form>
+    <!-- <v-form
       ref="form"
       v-model="valid"
       lazy-validation
       @submit.prevent="onSubmit"
     >
       Campus:
-      <input type="text" v-model="form.campus" />
+      <select v-model="form.campus">
+        <option value="" disabled selected>Escolhe uma opção</option>
+        <option v-for="camp in campus">{{ camp.name }}</option>
+      </select>
       Escola:
       <input type="text" v-model="form.school" />
       Bloco:
@@ -68,14 +69,13 @@
 
       <button type="submit" class="btn-page">Submeter</button>
   </v-form> -->
-
-
   </div>
 </template>
 
 <script>
 import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useUsersStore } from "@/stores/User";
+import { useSchoolStore } from "@/stores/School";
 
 export default {
   setup() {
@@ -83,9 +83,11 @@ export default {
 
     const userStore = useUsersStore();
 
-    return { occurrenceStore, userStore };
+    const schoolStore = useSchoolStore();
+
+    return { occurrenceStore, userStore, schoolStore };
   },
-  
+
   data() {
     return {
       form: {
@@ -104,6 +106,8 @@ export default {
         state: "",
       },
       tab: null,
+      campus: this.schoolStore.getCampus,
+      schools: this.schoolStore.getSchools,
     };
   },
   methods: {

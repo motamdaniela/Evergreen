@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="form">
     <v-form
       ref="form"
       v-model="valid"
@@ -7,14 +7,14 @@
       @submit.prevent="onSubmit"
     >
       
-      <v-tabs v-model="tab">
-        <v-tab value="place">Local</v-tab>
-        <v-tab value="type">Tipo</v-tab>
-        <v-tab value="description">Descrição</v-tab>
-        <v-tab value="photo">Foto</v-tab>
+      <v-tabs v-model="tab" align-tabs="center" height="100px" hide-slider="true" stacked="true" fixed-tabs="true">
+        <v-tab value="place" color="#E9A13B"><img src="../assets/images/icone_local.svg" class="img"><br><b>Local</b></v-tab>
+        <v-tab value="type" color="#E9674D"><img src="../assets/images/icone_tipo.svg" class="img"><br><b>Tipo</b></v-tab>
+        <v-tab value="description" color="#62B273"><img src="../assets/images/icone_descricao.svg" class="img"><br><b>Descrição</b></v-tab>
+        <v-tab value="photo" color="#C2AFEA"><img src="../assets/images/icone_foto.svg" class="img"><br><b>Foto</b></v-tab>
       </v-tabs>
 
-        <v-card-text>
+        <v-card-text class="text">
           <v-window v-model="tab">
             <v-window-item value="place">
               Campus:
@@ -69,6 +69,7 @@
 
       <button type="submit" class="btn-page">Submeter</button>
   </v-form> -->
+
   </div>
 </template>
 
@@ -131,4 +132,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/occurrence.css"</style>

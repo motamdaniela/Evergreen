@@ -5,7 +5,96 @@
     margin: 30px;
 }
 
+.tabs{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
 .img{
     width: 40px;
     height: 40px;
+}
+.tab{
+    font-weight: bold;
+}
+#lblY{
+    color: #E9A13B;
+}
+#lblR{
+    color: #E9674D;
+}
+#lblG{
+    color: #62B273;
+}
+#lblP{
+    color: #C2AFEA;
+}
+#prevBtn{
+    display: flex;
+    align-self: flex-end;
+    align-self: left;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+#nextBtn{
+    display: flex;
+    align-self: flex-end;
+    align-self: right;
+    margin-bottom: 10px;
+    margin-right: 50px;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.input{
+    width: 300px;
+    height: 20px;
+    border-radius: 33px;
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.typeLbl{
+    font-size: 25px;
+    margin-right: 50px;
+}
+.typeGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+.typeRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 50px;
+}
+.rb{
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+}
+#allRb{
+    margin-top: 6%;
+}
+#descriptionBox{
+    width: 500px;
+    height: 200px;
+    border-radius: 33px;
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 30px;
+    padding: 20px;
+    box-shadow: 10px 10px #62B273;
+}
+
+.semiTitle{
+    margin-right: 20px;
 }

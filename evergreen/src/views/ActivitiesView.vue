@@ -35,7 +35,7 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card" id="btnP">
+              <button class="btn-card btnP" >
                 <RouterLink
                   :to="{ name: 'Activity', params: { id: activity.id } }"
                   >Ver mais</RouterLink

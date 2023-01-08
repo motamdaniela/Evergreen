@@ -28,7 +28,7 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
@@ -57,7 +57,7 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
@@ -86,13 +86,13 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
   </div>
   <br />
-  <button class="btn-page" id="btnP">Ver todas</button>
+  <button class="btn-page btnP" >Ver todas</button>
 
   <br /><br />
   <h1 class="gradientPink padding"><span>Quadro de Líderes</span></h1>
@@ -133,7 +133,7 @@
     <p>50 pontos</p>
     <div class="thirdPlace">3</div>
   </div> -->
-  <button class="btn-page" id="btnPink">
+  <button class="btn-page btnPk">
     <RouterLink to="/Rank">Ver todos</RouterLink>
   </button>
   <!-- ^ this mf nao vai pro meio T-T  -->

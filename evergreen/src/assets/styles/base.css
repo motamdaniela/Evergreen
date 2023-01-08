@@ -74,11 +74,16 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   background-color: #F6D9B0;
   box-shadow: 3px 5px 0px #E9A13B;
 }
+.btnPk{
+  background-color: #F4D8DD;
+  box-shadow: 3px 5px 0px #D26174;
+}
 /* button hovers */
 
 
+
 /* underlines of different colors */
-.underlinePurple{
+/* .underlinePurple{
   text-decoration: underline #C2AFEA;
   text-decoration-thickness: 10px;
   text-underline-offset: 0px;
@@ -86,19 +91,40 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 .underlineGreen{
   text-decoration: underline #C2AFEA;
   text-decoration-thickness: 10px;
-  text-underline-offset: 0px;
+  text-underline-offset: 0px; 
+}*/
+
+/* headers underline */
+.gradientPurple span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(194,175,234,1) 16%, rgba(194,175,234,1) 41%, rgba(255,0,255,0) 41%);
 }
-.underlinePurple{
-  text-decoration: underline #C2AFEA;
-  text-decoration-thickness: 10px;
-  text-underline-offset: 0px;
+.gradientPink span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(239,198,205,1) 16%, rgba(239,198,205,1) 41%, rgba(255,0,255,0) 41%);
 }
+.gradientOrange span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(233,161,59,1) 16%, rgba(233,161,59,1) 41%, rgba(255,0,255,0) 41%);
+}
+.gradientGreen span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(98,178,115,1) 16%, rgba(98,178,115,1) 41%, rgba(255,0,255,0) 41%);
+}
+.gradientRed span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(233,103,77,1) 16%, rgba(233,103,77,1) 41%, rgba(255,0,255,0) 41%);
+}
+.gradientDarkPink span {
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(210,97,116,1) 16%, rgba(210,97,116,1) 41%, rgba(255,0,255,0) 41%);
+}
+
+.padding span {
+  padding: 0.3em 0.4em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 
 .semiTitle{
   font-weight: 600;
   font-size: 22px;
 }
-
 
 .hide,
 #hide {
@@ -174,11 +200,6 @@ footer{
     font-size: 10px;
   }
 }
-
-/* "underlines" */
-/* .underlinegreen{
-  box-shadow: 0px -8px #62B273 inset;
-} */
 
 .hide, #hide{
   display: none;

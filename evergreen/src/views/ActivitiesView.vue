@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1 class="title">Atividades</h1>
-    <button class="btn-page">
+    <h1 class="title"><img src="../assets/images/flowerP.svg">Plano de Atividades</h1>
+    <button class="btn-card btnP">Filtrar</button>
+    <button class="btn-card btnP">
       <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
     </button>
     <div class="list">
@@ -35,7 +36,7 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card" id="btnP">
+              <button class="btn-card btnP" >
                 <RouterLink
                   :to="{ name: 'Activity', params: { id: activity.id } }"
                   >Ver mais</RouterLink

@@ -1,0 +1,55 @@
+h1>img{
+    height: 30px;
+    width: 30px;
+    margin-right: 30px;
+}
+/* .title{
+    font-family: 'gliker';
+    display: flex;
+    align-items: flex-start;
+    margin-left: 50px; 
+} */
+.divLeft{
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10%;
+    align-items: center;
+}
+.divRight{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0px 10%;
+    align-items: center;
+}
+
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+
+.alldivs{
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding:40px;
+    margin:30px;    
+}
+
+.aboutimgsLeft{
+    width: 150px;
+    height:150px;
+    margin-right: -60px;
+    z-index: 1;
+}
+.aboutimgsRight{
+    width: 150px;
+    height:150px;
+    margin-left: -60px;
+    z-index: 1;
+}
+
+.ptext{
+    font-weight: 500;
+}

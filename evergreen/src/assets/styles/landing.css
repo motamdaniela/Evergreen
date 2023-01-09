@@ -38,9 +38,6 @@ body{
     box-shadow: none;
 }
 
-#text0 h1.gradientGreen span {
-    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(98,178,115,1) 16%, rgba(98,178,115,1) 41%, rgba(255,0,255,0) 41%);
-}
 #text0 h1.padding span {
     padding: 0 0.2em 0.2em;
     box-decoration-break: clone;

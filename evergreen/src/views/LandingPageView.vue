@@ -44,7 +44,8 @@
     <button class="btn-page" id="btn4">Começa já</button>
   </div>
   
+  
 </template>
-<style>
-@import "../assets/styles/landing.css";
+
+<style> @import "../assets/styles/landing.css";
 </style>

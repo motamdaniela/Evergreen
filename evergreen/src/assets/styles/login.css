@@ -1,13 +1,34 @@
-#background{
-    /* background-image: url("../images/entrar.png");
-    height: 865px; */
+#backgroundLogin{
+    background-image: url("../images/entrar.png");
+    background-size: 90%;
+    background-attachment: fixed;
+    background-position: right 90px;
+
+    /* height: 865px; */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 357px;
+}
+#backgroundSign{
+    background-image: url("../images/entrar.png");
+    background-size: 90%;
+    background-attachment: fixed;
+    background-position: right 90px;
+
+    /* height: 865px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 180px;
 }
 
 #group{
     display: flex;
+}
+
+#col1, #col2{
+    margin: 30px;
 }
 
 .input{

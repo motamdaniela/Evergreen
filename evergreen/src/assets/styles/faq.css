@@ -1,0 +1,30 @@
+.title{
+    font-family: gliker;
+}
+.faqRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 30px 50px;
+}
+
+.faqImgs{
+    width: 100px;
+    height: 100px;
+    margin-bottom:-70px;
+    z-index: 1;
+}
+.faqText{
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding:40px;
+    margin:30px; 
+    width: 400px;
+    height: 280px;
+    text-align: left;
+}
+
+.ptext{
+    font-weight: 500;
+}

@@ -1,96 +1,192 @@
 <template>
-  <div>
+  <div class="form">
     <v-form
       ref="form"
       v-model="valid"
       lazy-validation
       @submit.prevent="onSubmit"
     >
-      <v-card>
-        <v-tabs v-model="tab">
-          <v-tab value="place">Local</v-tab>
-          <v-tab value="type">Tipo</v-tab>
-          <v-tab value="description">Descrição</v-tab>
-          <v-tab value="photo">Foto</v-tab>
-        </v-tabs>
+      <v-window show-arrows>
+        <template v-slot:prev="{ props }">
+          <btn class="btn-page btnG" id="prevBtn" @click="props.onClick">
+            Anterior
+          </btn>
+        </template>
+        <template v-slot:next="{ props }">
+          <btn class="btn-page btnP" id="nextBtn" @click="props.onClick">
+            Próximo
+          </btn>
+        </template>
 
-        <v-card-text>
-          <v-window v-model="tab">
-            <v-window-item value="place">
-              Campus:
-              <select v-model="form.campus" id="campus">
-                <option value="" disabled selected>Escolhe uma opção</option>
-                <option v-for="camp in campus">{{ camp.name }}</option>
-              </select>
-              <br />
-              Escola:
-              <select v-model="form.school">
-                <option value="" disabled selected>Escolhe uma opção</option>
-                <option v-for="school in schools">{{ school.name }}</option>
-              </select>
-              <br />
-              Bloco:
-              <select v-model="form.building">
-                <option value="" disabled selected>Escolhe uma opção</option>
-                <option v-for="building in buildings">
-                  {{ building.name }}
-                </option>
-              </select>
-              <br />
-              Escola:
-              <select v-model="form.classroom">
-                <option value="" disabled selected>Escolhe uma opção</option>
-                <option v-for="classroom in classrooms">
-                  {{ classroom.id }}
-                </option>
-              </select>
-            </v-window-item>
+        <v-window-item :key="`card-${1}`">
+          <!-- local -->
+          <div class="tabs">
+            <div>
+              <img src="../assets/images/icone_local.svg" class="img" /><br />
+              <label class="tab" id="lblY">Local</label>
+            </div>
+            <div>
+              <img src="../assets/images/tipo_bw.svg" class="img" /><br />
+              <label class="tab">Tipo</label>
+            </div>
+            <div>
+              <img src="../assets/images/descricao_bw.svg" class="img" /><br />
+              <label class="tab">Descrição</label>
+            </div>
+            <div>
+              <img src="../assets/images/foto_bw.svg" class="img" /><br />
+              <label class="tab">Foto</label>
+            </div>
+          </div>
 
-            <v-window-item value="type">
-              Tipo:
-              <select v-model="form.type">
-                <option value="" disabled selected>Escolhe uma opção</option>
-                <option v-for="tp in types">{{ tp.name }}</option>
-              </select>
-            </v-window-item>
+          <div class="formContent">
+            <div>
+              <label class="semiTitle">Campus:</label><br />
+              <input class="input" type="text" v-model="form.campus" required />
+            </div>
 
-            <v-window-item value="description">
-              Descrição:
-              <input type="text" v-model="form.description" />
-            </v-window-item>
+            <div>
+              <label class="semiTitle">Escola:</label><br />
+              <input class="input" type="text" v-model="form.school" required />
+            </div>
 
-            <v-window-item value="photo"> Four </v-window-item>
-          </v-window>
-        </v-card-text>
-      </v-card>
+            <div>
+              <label class="semiTitle">Bloco:</label><br />
+              <input
+                class="input"
+                type="text"
+                v-model="form.building"
+                required
+              />
+            </div>
+          </div>
+        </v-window-item>
+        <v-window-item :key="`card-${2}`">
+          <!-- tipo -->
+          <div class="tabs">
+            <div>
+              <img src="../assets/images/local_bw.svg" class="img" /><br />
+              <label class="tab">Local</label>
+            </div>
+            <div>
+              <img src="../assets/images/icone_tipo.svg" class="img" /><br />
+              <label class="tab" id="lblR">Tipo</label>
+            </div>
+            <div>
+              <img src="../assets/images/descricao_bw.svg" class="img" /><br />
+              <label class="tab">Descrição</label>
+            </div>
+            <div>
+              <img src="../assets/images/foto_bw.svg" class="img" /><br />
+              <label class="tab">Foto</label>
+            </div>
+          </div>
+
+          <div id="allRb">
+            <div class="typeRow">
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Lâmpada fundida</label>
+
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Torneira a pingar</label>
+
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Luz ligada</label>
+            </div>
+
+            <div class="typeRow">
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Objeto quebrado</label>
+
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Malfuncionamento</label>
+
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Lixo no chão</label>
+            </div>
+
+            <div class="typeRow">
+              <input type="radio" v-model="form.type" class="rb" />
+              <label class="typeLbl">Outro:</label>
+              <input
+                class="input"
+                placeholder="Outro"
+                type="text"
+                v-model="form.type"
+                required
+              />
+            </div>
+          </div>
+        </v-window-item>
+        <v-window-item :key="`card-${3}`">
+          <!-- descricao -->
+          <div class="tabs">
+            <div>
+              <img src="../assets/images/local_bw.svg" class="img" /><br />
+              <label class="tab">Local</label>
+            </div>
+            <div>
+              <img src="../assets/images/tipo_bw.svg" class="img" /><br />
+              <label class="tab">Tipo</label>
+            </div>
+            <div>
+              <img
+                src="../assets/images/icone_descricao.svg"
+                class="img"
+              /><br />
+              <label class="tab" id="lblG">Descrição</label>
+            </div>
+            <div>
+              <img src="../assets/images/foto_bw.svg" class="img" /><br />
+              <label class="tab">Foto</label>
+            </div>
+          </div>
+
+          <label class="semiTitle">Adiciona uma descrição:</label><br /><br />
+          <textarea
+            id="descriptionBox"
+            rows="10"
+            placeholder="O problema encontra-se... "
+            type="text"
+            v-model="form.description"
+          ></textarea>
+        </v-window-item>
+        <v-window-item :key="`card-${4}`">
+          <!-- foto -->
+          <div class="tabs">
+            <div>
+              <img src="../assets/images/local_bw.svg" class="img" /><br />
+              <label class="tab">Local</label>
+            </div>
+            <div>
+              <img src="../assets/images/tipo_bw.svg" class="img" /><br />
+              <label class="tab">Tipo</label>
+            </div>
+            <div>
+              <img src="../assets/images/descricao_bw.svg" class="img" /><br />
+              <label class="tab">Descrição</label>
+            </div>
+            <div>
+              <img src="../assets/images/icone_foto.svg" class="img" /><br />
+              <label class="tab" id="lblP">Foto</label>
+            </div>
+          </div>
+
+          <label for="avatar" class="semiTitle">Adiciona uma foto:</label>
+          <br /><br />
+          <input
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/png, image/jpeg"
+          />
+
+          <br /><br />
+          <button type="submit" class="btn-page btnY">Submeter</button
+          ><br /><br />
+        </v-window-item>
+      </v-window>
     </v-form>
-
-    <!-- <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-      @submit.prevent="onSubmit"
-    >
-      Campus:
-      <select v-model="form.campus">
-        <option value="" disabled selected>Escolhe uma opção</option>
-        <option v-for="camp in campus">{{ camp.name }}</option>
-      </select>
-      Escola:
-      <input type="text" v-model="form.school" />
-      Bloco:
-      <input type="text" v-model="form.building" />
-      Piso:
-      <input type="text" v-model="form.floor" />
-      Sala:
-      <input type="text" v-model="form.classroom" />
-      Tipo:
-      <input type="text" v-model="form.type" />
-      Descrição:
-      <input type="text" v-model="form.description" />
-
-      <button type="submit" class="btn-page">Submeter</button>
-  </v-form> -->
   </div>
 </template>
 
@@ -159,4 +255,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+@import "../assets/styles/occurrence.css";
+</style>

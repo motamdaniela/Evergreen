@@ -1,4 +1,5 @@
 <template>
+  <h1 style="font-family:gliker; margin-top:30px">Quadro de Líderes</h1>
   <div v-for="user in users">
     <div class="board">
       <img src="../assets/images/joana.jpg" id="profilePic" />

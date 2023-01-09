@@ -1,6 +1,6 @@
 <template>
   <br />
-  <h1 class="gradientPurple padding"><span>Atividades Inscritas</span></h1>
+  <h1 class="gradientPurple padding title"><span>Atividades Inscritas</span></h1>
   <br />
   <div id="activities">
     <!-- usar groups > slides groups do vuetify -->
@@ -28,7 +28,7 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
@@ -57,7 +57,7 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
@@ -86,16 +86,16 @@
               >
             </div>
           </v-card-subtitle>
-          <button class="btn-card" id="btnP">Ver mais</button>
+          <button class="btn-card btnP" >Ver mais</button>
         </div>
       </div>
     </v-card>
   </div>
   <br />
-  <button class="btn-page" id="btnP">Ver todas</button>
+  <button class="btn-page btnP" >Ver todas</button>
 
   <br /><br />
-  <h1 class="gradientPink padding"><span>Quadro de Líderes</span></h1>
+  <h1 class="gradientPink padding title"><span>Quadro de Líderes</span></h1>
   <div v-for="user in users">
     <div class="board">
       <img src="../assets/images/joana.jpg" id="profilePic" />
@@ -133,7 +133,7 @@
     <p>50 pontos</p>
     <div class="thirdPlace">3</div>
   </div> -->
-  <button class="btn-page" id="btnPink">
+  <button class="btn-page btnPk">
     <RouterLink to="/Rank">Ver todos</RouterLink>
   </button>
   <!-- ^ this mf nao vai pro meio T-T  -->

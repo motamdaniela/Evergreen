@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="title">Questionário</h1>
+  <div class="questionario">
+    <h1 class="title"><img src="../assets/images/flowerG.svg">Questionário</h1>
     <iframe
       src="https://docs.google.com/forms/d/e/1FAIpQLScbfUdEF9NvKkWi3wq2yZVx_C0LTDN6AfmkZLrHIxs_ELRWFQ/viewform?embedded=true"
       width="1000"
@@ -17,4 +17,5 @@
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+@import "../assets/styles/form.css";</style>

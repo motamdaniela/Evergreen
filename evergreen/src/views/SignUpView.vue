@@ -1,5 +1,5 @@
 <template>
-  <div id="background">
+  <div id="backgroundSign">
     <v-form
       ref="form"
       v-model="valid"
@@ -7,7 +7,7 @@
       @submit.prevent="onSubmit"
     >
       <div id="group">
-        <div>
+        <div id="col1">
           <label for="name" class="semiTitle">Nome</label>
           <br />
           <input class="input" id="name" v-model="name" />
@@ -16,11 +16,11 @@
           <br />
           <input class="input" id="email" v-model="email" type="email" />
           <br />
-          <label for="username" class="semiTitle">Nome de usuário</label>
+          <label for="username" class="semiTitle">Nome de utilizador</label>
           <br />
           <input class="input" id="username" v-model="username" />
         </div>
-        <div>
+        <div id="col2">
           <label for="school" class="semiTitle">Escola</label>
           <br />
           <input class="input" id="school" v-model="school" />

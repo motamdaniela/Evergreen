@@ -1,5 +1,10 @@
 .form{
     margin-top: 30px;
+    padding-bottom: 100px;
+    background-image: url("../images/ocrBg.svg");
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: right 90px;
 }
 .text{
     margin: 30px;
@@ -34,14 +39,14 @@
     align-self: flex-end;
     align-self: left;
     margin-bottom: 10px;
-    margin-left: 50px;
+    margin-left: 120px;
 }
 #nextBtn{
     display: flex;
     align-self: flex-end;
     align-self: right;
     margin-bottom: 10px;
-    margin-right: 50px;
+    margin-right: 120px;
 }
 
 .formContent{
@@ -97,4 +102,15 @@
 
 .semiTitle{
     margin-right: 20px;
+}
+
+#avatar{
+    width: 400px;
+    height: 150px;
+    border-radius: 33px;
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 30px;
+    padding: 20px;
+    box-shadow: 10px 10px #C2AFEA;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="background">
+  <div id="backgroundSign">
     <v-form
       ref="form"
       v-model="valid"

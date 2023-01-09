@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>FAQ</h1>
+        <h1 class="title"><img src="../assets/images/flowerPd.svg">F.A.Q.</h1>
 
     </div>
 </template>
@@ -15,6 +15,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style>
+@import "../assets/styles/faq.css";
 </style>

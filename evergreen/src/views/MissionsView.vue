@@ -1,5 +1,5 @@
 <template>
-  <h1>Missões</h1>
+  <h1><img src="../assets/images/flowerO.svg">Missões</h1>
   <div v-for="mission in missions">
     <h3>{{ mission.title }}</h3>
     <p>{{ mission.description }}</p>

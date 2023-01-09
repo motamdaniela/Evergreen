@@ -159,7 +159,13 @@
         </div>
       </div>
 
-      <v-file-input label="File input"></v-file-input>
+      <label for="avatar" class="semiTitle">Adiciona uma foto:</label>
+      <br><br>
+      <input type="file"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg">
+
+      <br><br>
       <button type="submit" class="btn-page btnY">Submeter</button><br><br>
       
     </v-window-item>
@@ -231,4 +237,4 @@ export default {
 </script>
 
 <style>
-@import "../assets/styles/occurrence.css" </style>
+@import "../assets/styles/occurrence.css"; </style>

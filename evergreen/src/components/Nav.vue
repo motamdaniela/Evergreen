@@ -20,7 +20,7 @@
       <nav v-if="!isLogged">
         <RouterLink to="/">Início</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q</RouterLink>
+        <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
@@ -35,7 +35,7 @@
         <RouterLink to="/Form">Questionário</RouterLink>
         <RouterLink to="/Missions">Missões</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q</RouterLink>
+        <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button id="profile">
           <RouterLink to="/Profile">Perfil</RouterLink>
         </button>

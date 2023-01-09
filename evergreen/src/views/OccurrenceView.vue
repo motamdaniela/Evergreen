@@ -18,18 +18,40 @@
           <v-window v-model="tab">
             <v-window-item value="place">
               Campus:
-              <input type="text" v-model="form.campus" />
-
+              <select v-model="form.campus" id="campus">
+                <option value="" disabled selected>Escolhe uma opção</option>
+                <option v-for="camp in campus">{{ camp.name }}</option>
+              </select>
+              <br />
               Escola:
-              <input type="text" v-model="form.school" />
-
+              <select v-model="form.school">
+                <option value="" disabled selected>Escolhe uma opção</option>
+                <option v-for="school in schools">{{ school.name }}</option>
+              </select>
+              <br />
               Bloco:
-              <input type="text" v-model="form.building" />
+              <select v-model="form.building">
+                <option value="" disabled selected>Escolhe uma opção</option>
+                <option v-for="building in buildings">
+                  {{ building.name }}
+                </option>
+              </select>
+              <br />
+              Escola:
+              <select v-model="form.classroom">
+                <option value="" disabled selected>Escolhe uma opção</option>
+                <option v-for="classroom in classrooms">
+                  {{ classroom.id }}
+                </option>
+              </select>
             </v-window-item>
 
             <v-window-item value="type">
               Tipo:
-              <input type="text" v-model="form.type" />
+              <select v-model="form.type">
+                <option value="" disabled selected>Escolhe uma opção</option>
+                <option v-for="tp in types">{{ tp.name }}</option>
+              </select>
             </v-window-item>
 
             <v-window-item value="description">
@@ -106,8 +128,13 @@ export default {
         state: "",
       },
       tab: null,
+      first: null,
+      second: null,
       campus: this.schoolStore.getCampus,
       schools: this.schoolStore.getSchools,
+      buildings: this.schoolStore.getBuildings,
+      classrooms: this.schoolStore.getClassrooms,
+      types: this.occurrenceStore.getTypes,
     };
   },
   methods: {
@@ -128,6 +155,7 @@ export default {
       location.reload();
     },
   },
+  computed: {},
 };
 </script>
 

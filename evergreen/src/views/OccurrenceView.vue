@@ -42,22 +42,25 @@
           <div class="formContent">
             <div>
               <label class="semiTitle">Campus:</label><br />
-              <input class="input" type="text" v-model="form.campus" required />
+              <select v-model="form.campus" class="input">
+                <option v-for="camp in campus">{{ camp.name }}</option>
+              </select>
             </div>
 
             <div>
               <label class="semiTitle">Escola:</label><br />
-              <input class="input" type="text" v-model="form.school" required />
+              <select v-model="form.school" class="input">
+                <option v-for="school in schools">{{ school.name }}</option>
+              </select>
             </div>
 
             <div>
               <label class="semiTitle">Bloco:</label><br />
-              <input
-                class="input"
-                type="text"
-                v-model="form.building"
-                required
-              />
+              <select v-model="form.building" class="input">
+                <option v-for="building in buildings">
+                  {{ building.name }}
+                </option>
+              </select>
             </div>
           </div>
         </v-window-item>
@@ -83,18 +86,18 @@
           </div>
 
           <div id="allRb">
-            <div class="typeRow">
+            <div class="typeRow" v-for="tp in types">
               <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Lâmpada fundida</label>
+              <label class="typeLbl">{{ tp.name }}</label>
 
-              <input type="radio" v-model="form.type" class="rb" />
+              <!-- <input type="radio" v-model="form.type" class="rb" />
               <label class="typeLbl">Torneira a pingar</label>
 
               <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Luz ligada</label>
+              <label class="typeLbl">Luz ligada</label> -->
             </div>
 
-            <div class="typeRow">
+            <!-- <div class="typeRow">
               <input type="radio" v-model="form.type" class="rb" />
               <label class="typeLbl">Objeto quebrado</label>
 
@@ -115,7 +118,7 @@
                 v-model="form.type"
                 required
               />
-            </div>
+            </div> -->
           </div>
         </v-window-item>
         <v-window-item :key="`card-${3}`">

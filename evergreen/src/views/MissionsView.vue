@@ -1,21 +1,15 @@
 <template>
-  <h1 class="title"><img src="../assets/images/flowerO.svg">Missões</h1>
+  <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
     <h3>{{ mission.title }}</h3>
     <p>{{ mission.description }}</p>
     <!-- <button>{{ state(mission.users) }}</button>
     <button>{{ mission.users[0][2] }}</button> -->
     <input
-      v-if="!state"
       @click="redirect(mission.redirect)"
       class="btn-page"
       value="go"
       type="button"
-      {
-      state(
-      mission.users
-      )
-      }
     />
   </div>
 </template>

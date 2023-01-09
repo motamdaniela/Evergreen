@@ -3,12 +3,12 @@ h1>img{
     width: 30px;
     margin-right: 30px;
 }
-.title{
+/* .title{
     font-family: 'gliker';
-    /* display: flex;
+    display: flex;
     align-items: flex-start;
-    margin-left: 50px; */
-}
+    margin-left: 50px; 
+} */
 .divLeft{
     display: flex;
     flex-direction: row;
@@ -37,22 +37,6 @@ h1>img{
     margin:30px;    
 }
 
-#divG{
-    box-shadow: 7px 7px #62B273;
-}
-#divR{
-    box-shadow: 7px 7px #E9674D;
-}
-#divP{
-    box-shadow: 7px 7px #C2AFEA;
-}
-#divPd{
-    box-shadow: 7px 7px #D26174;
-}
-#divO{
-    box-shadow: 7px 7px #E9A13B;
-}
-
 .aboutimgsLeft{
     width: 150px;
     height:150px;
@@ -64,4 +48,8 @@ h1>img{
     height:150px;
     margin-left: -60px;
     z-index: 1;
+}
+
+.ptext{
+    font-weight: 500;
 }

@@ -20,7 +20,7 @@
     </template>
     
     <v-window-item :key="`card-${1}`">
-    
+    <!-- local -->
       <div class="tabs">
         <div>
           <img src="../assets/images/icone_local.svg" class="img"><br>
@@ -59,7 +59,7 @@
 
     </v-window-item>
     <v-window-item :key="`card-${2}`">
-      
+      <!-- tipo -->
       <div class="tabs">
         <div>
           <img src="../assets/images/local_bw.svg" class="img"><br>
@@ -112,7 +112,7 @@
 
     </v-window-item>
     <v-window-item :key="`card-${3}`">
-        
+      <!-- descricao -->
       <div class="tabs">
         <div>
           <img src="../assets/images/local_bw.svg" class="img"><br>
@@ -139,7 +139,7 @@
 
     </v-window-item>
     <v-window-item :key="`card-${4}`">
-        
+      <!-- foto -->
       <div class="tabs">
         <div>
           <img src="../assets/images/local_bw.svg" class="img"><br>
@@ -162,7 +162,7 @@
       <label for="avatar" class="semiTitle">Adiciona uma foto:</label>
       <br><br>
       <input type="file"
-       id="avatar" name="avatar"
+       id="picture" name="picture"
        accept="image/png, image/jpeg">
 
       <br><br>

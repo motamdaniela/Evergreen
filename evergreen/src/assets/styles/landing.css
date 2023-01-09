@@ -161,3 +161,42 @@ body{
 #btn4:hover{
     box-shadow: none;
 }
+
+#landingImg1{
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-right: -70px;
+    margin-bottom: -95px;
+}
+#landingImg2{
+    width: 220px;
+    height: 220px;
+    z-index: 1;
+    position: absolute;
+    bottom: -115%;
+    left: 0px;
+    margin-left: -90px;   
+}
+#landingImg3{
+    width: 230px;
+    height: 230px;
+    z-index: 1;
+    position: absolute;
+    bottom: -202%;
+    right: 0px;
+    margin-right: -70px;
+    margin-bottom: -95px;
+}
+#landingImg4{
+    width: 240px;
+    height: 240px;
+    z-index: 1;
+    position: absolute;
+    bottom: -316%;
+    left: 0px;
+    margin-left: -100px;  
+}

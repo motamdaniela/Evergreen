@@ -6,7 +6,7 @@
       :collapse="collapse"
       collapse-on-scroll="!collapse"
       inverse-scroll
-      id="{{tohide}}"
+      v-if="ToHide"
     >
       <v-app-bar-title>
         <RouterLink v-if="!isLogged" to="/"
@@ -98,8 +98,11 @@ export default {
       }
     },
     ToHide() {
-      this.tohide = "hide";
-      // alert(this.tohide);
+      if (!(this.$route.name == 'login' || this.$route.name == 'signUp')){
+        return true;
+      }else{
+        return false;
+      }
     },
   },
 

@@ -114,4 +114,6 @@ export default {
   <Footer />
 </template>
 
-<style></style>
+<style >
+@import "./assets/styles/base.css";
+</style>

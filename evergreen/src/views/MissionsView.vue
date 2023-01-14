@@ -1,16 +1,23 @@
 <template>
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
-    <h3>{{ mission.title }}</h3>
-    <p>{{ mission.description }}</p>
-    <!-- <button>{{ state(mission.users) }}</button>
-    <button>{{ mission.users[0][2] }}</button> -->
-    <input
-      @click="redirect(mission.redirect)"
-      class="btn-page"
-      value="go"
-      type="button"
-    />
+    <fieldset 
+    :class="MissionsState(mission.reward)"
+    >
+      <img class="badge cover" 
+      :class="BadgeState(mission.reward)"
+      :src="mission.reward">
+      <h3>{{ mission.title }}</h3>
+      <p>{{ mission.description }}</p>
+      <!-- <button>{{ state(mission.users) }}</button>
+      <button>{{ mission.users[0][2] }}</button> -->
+      <input
+        @click="addBadge(mission.reward)"
+        class="btn-page"
+        value="go"
+        type="button"
+      />
+    </fieldset>
   </div>
 </template>
 
@@ -30,9 +37,12 @@ export default {
   data() {
     return {
       missions: this.missionStore.getMissions,
-      state: "",
-      user: this.usersStore.getLogged,
+      thestate: "",
+      user:
+      (this.usersStore.getUsers.find(usersStor => usersStor.email == this.usersStore.getLogged)),
+      // this.usersStore.getLogged,
       users: "",
+      fdefault: 'fieldY',
     };
   },
   created() {},
@@ -40,7 +50,6 @@ export default {
     redirect(n) {
       this.$router.push(n);
     },
-    state() {},
   },
   computed: {
     state(users) {
@@ -54,10 +63,40 @@ export default {
       //     i++;
       //   }
       // });
-      console.log(u);
     },
+  },
+  methods: {
+    MissionsState(missionBadge){
+        if(this.user.badges == undefined){
+          // console.log('none');
+          return 'fieldR'
+        }else if( this.user.badges.find((badge) => badge == missionBadge)){
+          // console.log('slay');
+          return 'fieldG'
+        }else{
+          // console.log('else');
+          return 'fieldY'
+        }
+    },
+    BadgeState(missionBadge){
+        if(this.user.badges == undefined){
+          // console.log('none');
+          return 'badgeR'
+        }else if( this.user.badges.find((badge) => badge == missionBadge)){
+          // console.log('slay');
+          return 'badgeG'
+        }else{
+          // console.log('else');
+          return 'badgeY'
+        }
+    },
+    addBadge(missionReward){
+      this.user.badges.push(missionReward)
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/missions.css";
+</style>

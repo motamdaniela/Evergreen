@@ -1,11 +1,11 @@
 /* paleta de cores:
 original:             +60brightness
-branco #FBF3F1        preto #0D1E11
-verde #62B273         preto #0D1E11
-vermelho #E9674D      preto #0D1E11
-lilas #C2AFEA         preto #0D1E11
-amarelo #E9A13B       preto #0D1E11
-rosa #EFC6CD          preto #0D1E11
+branco #FBF3F1        branco #0D1E11
+verde #62B273         verde #0D1E11
+vermelho #E9674D      vermelho #0D1E11
+lilas #C2AFEA         lilas #0D1E11
+amarelo #E9A13B       amarelo #0D1E11
+rosa #EFC6CD          rosa #0D1E11
 preto #0D1E11         preto #0D1E11
 
 bg #FBF3F1
@@ -80,6 +80,54 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 }
 /* button hovers */
 
+/* fieldsets */
+.fieldP{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #c2afea;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 30px;
+  margin: 40px;
+  text-align: left;
+}
+.fieldG{
+    background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #62b273;
+    border: 2px solid #050B06;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 40px;
+    text-align: left;
+}
+.fieldR{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #E9674D;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 30px;
+  margin: 40px;
+  text-align: left;
+}
+.fieldY{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #E9A13B;
+  border: 2px solid #050B06;
+  padding: 20px;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  border-radius: 30px;
+  margin: 40px;
+  text-align: left;
+}
+.fieldPk{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #D26174;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 30px;
+  margin: 40px;
+  text-align: left;
+}
 
 
 /* headers underline */

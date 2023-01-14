@@ -1,0 +1,20 @@
+fieldset{
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+}
+.badge{
+    width: 6rem;
+    border: 2px solid #050B06;
+    border-radius: 1000px;
+}
+
+.badgeG{
+    box-shadow: 3px 5px 0px #62b273;
+    background: #62b273;
+}
+.badgeY{
+    box-shadow: 3px 5px 0px #E9A13B;
+}
+.badgeR{
+    box-shadow: 3px 5px 0px #E9674D;
+}

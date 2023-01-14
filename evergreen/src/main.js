@@ -192,7 +192,25 @@ let missions=[
     id: 0,
     title: "Inscreve-te na tua primeira atividade",
     description: "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
-    reward: "assets/images/imagem.png",
+    reward: "/src/assets/images/joana.jpg",
+    users: [],
+    max:1,
+    redirect:"/Activities",
+  },
+  {
+    id: 1,
+    title: "Participa na tua primeira atividade",
+    description: "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+    reward: "/src/assets/images/joana.jpg",
+    users: [],
+    max:1,
+    redirect:"/Activities",
+  },
+  {
+    id: 2,
+    title: "Recebe 10 pontos",
+    description: "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
+    reward: "/src/assets/images/joana.jpg",
     users: [],
     max:1,
     redirect:"/Activities",
@@ -314,7 +332,7 @@ missions.forEach((mission) => {
   if (mss.find((m) => m.id == mission.id)) {
     console.log("mission has already been added");
   } else {
-    schoolStore.addMission(mission);
+    missionStore.addMission(mission);
   }
 });
 

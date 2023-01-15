@@ -1,6 +1,7 @@
 <template>
   <v-layout>
     <v-app-bar
+    class="appBar"
       color="transparent"
       flat
       :collapse="collapse"
@@ -10,10 +11,10 @@
     >
       <v-app-bar-title>
         <RouterLink v-if="!isLogged" to="/"
-          ><img src="../assets/logored.svg" id="logo"
+          ><img src="src/assets/logored.svg" id="logo"
         /></RouterLink>
         <RouterLink v-else to="/"
-          ><img src="../assets/logored.svg" id="logo"
+          ><img src="src/assets/logored.svg" id="logo"
         /></RouterLink>
       </v-app-bar-title>
 
@@ -36,9 +37,12 @@
         <RouterLink to="/Missions">Missões</RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">F.A.Q.</RouterLink>
-        <button id="profile">
-          <RouterLink to="/Profile">Perfil</RouterLink>
-        </button>
+          <button v-if="this.$route.name == 'Profile'" @click="logOut">
+            Sair
+          </button>
+          <RouterLink v-else to="/Profile">
+            <img :src="this.user.photo" id="profilePhoto" />
+          </RouterLink>
       </nav>
 
       <v-app-bar-nav-icon
@@ -72,13 +76,14 @@ import { RouterLink, RouterView } from "vue-router";
 import { useUsersStore } from "@/stores/User";
 export default {
   setup() {
-    const userStore = useUsersStore();
+    const usersStore = useUsersStore();
 
-    return { userStore };
+    return { usersStore };
   },
   name: "App",
   data() {
     return {
+      user: (this.usersStore.getUsers.find(usersStor => usersStor.email == this.usersStore.getLogged )),
       drawer: false,
       group: null,
       collapse: false,
@@ -87,8 +92,7 @@ export default {
   },
   computed: {
     isLogged() {
-      let acc = this.userStore.getLogged;
-      console.log(acc != "");
+      let acc = this.usersStore.getLogged ;
       // let acc = sessionStorage.getItem("user");
       if (acc) {
         console.log(acc);
@@ -103,6 +107,12 @@ export default {
       }else{
         return false;
       }
+    },
+  },
+  methods: {
+    logOut() {
+      this.usersStore.logOut();
+      this.$router.push("/");
     },
   },
 

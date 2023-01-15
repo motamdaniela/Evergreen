@@ -48,6 +48,14 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   top: 5px;
 }
 
+#profilePhoto{
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #050B06;
+  border-radius: 100px;
+  box-shadow: 3px 3px 0px #050B06;
+}
+
 .btn-page{
   border: 2px solid #050B06;
   padding: 10px;
@@ -221,8 +229,15 @@ button:last-of-type {
   margin-right: 3rem;
 }
 
+/* .appBar{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+} */
+
 #logo {
   width: 8rem;
+  margin-left: -3rem;
 }
 
 footer{
@@ -257,11 +272,18 @@ footer{
     display: none;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 950px) {
   nav a{
     font-size: 10px;
   }
 }
+@media screen and (max-width: 1000px) {
+  #logo{
+    content: url("src/assets/images/flowerR.svg");
+    height: 3rem;
+  }
+}
+
 
 .hide, #hide{
   display: none;

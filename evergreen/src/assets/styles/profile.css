@@ -1,0 +1,24 @@
+#ProfilePic{
+    width: 15%;
+    height: auto;
+    border: 2px solid #050B06;
+    border-radius: 1000px;
+    box-shadow: 5px 5px 0px #C2AFEA;
+}
+
+.Name{
+    font-size: 45px;
+}
+
+.badgesDiv{
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.badge{
+    width: 20%;
+    box-shadow: 3px 3px 0px #050B06;
+    border: 2px solid #050B06;
+    border-radius: 100px;
+    margin: 10px;
+}

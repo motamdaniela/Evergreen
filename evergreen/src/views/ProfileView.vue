@@ -1,10 +1,22 @@
 <template>
   <div>
-    <h1>Perfil</h1>
-    <button @click="logOut">sair</button>
-    <p>{{ user.name }}</p>
-    <p>{{ user.school }}</p>
+    <img id="ProfilePic" :src="user.photo"/>
+    <p class="Name"><b>{{ user.name }}</b></p>
+    <p><b>{{ user.school }}</b></p>
     <p>{{ user.email }}</p>
+  </div>
+  <div>
+    <button v-on:click="givemetheanswer">Atividades Inscritas</button>
+    <button>Atividades Participadas</button>
+    <button>Ocorrências Feitas</button>
+    <button>Ocorrências Pendentes</button>
+    <button>Verificar presenças(alunos resp.)</button>
+  </div>
+  <div>
+    <h2>Crachás</h2>
+    <div class="badgesDiv">
+      <img class="badge" v-for="badge in this.badges" :src="badge" />
+    </div>
   </div>
 </template>
 
@@ -21,22 +33,28 @@ export default {
   data() {
     return {
       user: "",
+      badges: "",
     };
   },
   created() {
     let user = this.userStore.getLogged;
     let users = this.userStore.getUsers;
     users.forEach((u) => {
-      if (u.email == user) this.user = u;
+      if (u.email == user){
+        this.user = u;
+        this.badges = this.user.badges;
+      }
     });
+
   },
   methods: {
-    logOut() {
-      this.userStore.logOut();
-      this.$router.push("/");
-    },
+    givemetheanswer(){
+      console.log(this.user.badges);
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/profile.css";
+</style>

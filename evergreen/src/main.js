@@ -31,14 +31,11 @@ import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useMissionStore } from "@/stores/Mission";
 import { useSchoolStore } from "@/stores/School";
 
-
- 
 const userStore = useUsersStore();
 const activityStore = useActivityStore();
 const occurrenceStore = useOccurrenceStore();
 const missionStore = useMissionStore();
 const schoolStore = useSchoolStore();
-
 
 // mandatory users
 let predefinedUsers = [
@@ -54,6 +51,7 @@ let predefinedUsers = [
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     points: 0,
     badges: [],
+    missions: [],
     state: "active",
   },
   {
@@ -117,179 +115,182 @@ let activities = [
 ];
 
 // themes for the activities
-let themes=[
+let themes = [
   {
-    id:0,
-    name:"Água",
-    color:"#C2AFEA",
+    id: 0,
+    name: "Água",
+    color: "#C2AFEA",
   },
   {
-    id:1,
-    name:"Resíduos",
-    color:"#E9674D",
+    id: 1,
+    name: "Resíduos",
+    color: "#E9674D",
   },
   {
-    id:2,
-    name:"Energia",
-    color:"#62B273",
+    id: 2,
+    name: "Energia",
+    color: "#62B273",
   },
   {
-    id:3,
-    name:"Espaços exteriores",
-    color:"#3F824F",
+    id: 3,
+    name: "Espaços exteriores",
+    color: "#3F824F",
   },
   {
-    id:4,
-    name:"Mar",
-    color:"#774ED0",
+    id: 4,
+    name: "Mar",
+    color: "#774ED0",
   },
   {
-    id:5,
-    name:"Mobilidade",
-    color:"#EFC6CD",
+    id: 5,
+    name: "Mobilidade",
+    color: "#EFC6CD",
   },
   {
-    id:6,
-    name:"Outros",
-    color:"#E9A13B",
+    id: 6,
+    name: "Outros",
+    color: "#E9A13B",
   },
-]
+];
 
 // types of occurrences
-let types=[
+let types = [
   {
-    id:0,
-    name:"Lâmpada fundida",
+    id: 0,
+    name: "Lâmpada fundida",
   },
   {
-    id:1,
-    name:"Torneira a pingar",
+    id: 1,
+    name: "Torneira a pingar",
   },
   {
-    id:2,
-    name:"Luz ligada",
+    id: 2,
+    name: "Luz ligada",
   },
   {
-    id:3,
-    name:"Objeto quebrado",
+    id: 3,
+    name: "Objeto quebrado",
   },
   {
-    id:4,
-    name:"Malfuncionamento",
+    id: 4,
+    name: "Malfuncionamento",
   },
   {
-    id:5,
-    name:"Lixo no chão",
+    id: 5,
+    name: "Lixo no chão",
   },
   {
-    id:6,
-    name:"Outro",
+    id: 6,
+    name: "Outro",
   },
-]
+];
 
-let missions=[
+let missions = [
   {
     id: 0,
     title: "Inscreve-te na tua primeira atividade",
-    description: "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
-    reward: "/src/assets/images/joana.jpg",
+    description:
+      "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+    reward: "/src/assets/images/faqRed.svg",
     users: [],
-    max:1,
-    redirect:"/Activities",
+    max: 1,
+    redirect: "/Activities",
   },
   {
     id: 1,
     title: "Participa na tua primeira atividade",
-    description: "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
-    reward: "/src/assets/images/joana.jpg",
+    description:
+      "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+    reward: "/src/assets/images/landingPink.svg",
     users: [],
-    max:1,
-    redirect:"/Activities",
+    max: 1,
+    redirect: "/Activities",
   },
   {
     id: 2,
     title: "Recebe 10 pontos",
-    description: "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
+    description:
+      "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
     reward: "/src/assets/images/joana.jpg",
     users: [],
-    max:1,
-    redirect:"/Activities",
+    max: 1,
+    redirect: "/Activities",
   },
-]
+];
 
-let campus=[
+let campus = [
   {
-    id:0,
-    name:'Campus 1',
+    id: 0,
+    name: "Campus 1",
   },
   {
-    id:1,
-    name:'Campus 2',
+    id: 1,
+    name: "Campus 2",
   },
-]
+];
 
-let schools=[
+let schools = [
   {
-    id:0,
-    name:"ESMAD", 
+    id: 0,
+    name: "ESMAD",
     idCampus: 1,
   },
   {
-    id:1,
-    name:"ESHT", 
+    id: 1,
+    name: "ESHT",
     idCampus: 1,
   },
   {
-    id:2,
-    name:"ESS", 
+    id: 2,
+    name: "ESS",
     idCampus: 0,
   },
-]
+];
 
-let buildings=[
+let buildings = [
   {
-    id:0,
-    name:'B',
-    idSchools:[0]
+    id: 0,
+    name: "B",
+    idSchools: [0],
   },
   {
-    id:1,
-    name:'D',
-    idSchools:[1]
+    id: 1,
+    name: "D",
+    idSchools: [1],
   },
   {
-    id:2,
-    name:'5',
-    idSchools:[2]
+    id: 2,
+    name: "5",
+    idSchools: [2],
   },
-]
+];
 
-let floors=[
+let floors = [
   {
-    id:0,
-    idBuildings:[0,1,2],
-    idSchools:[0,1,2]
+    id: 0,
+    idBuildings: [0, 1, 2],
+    idSchools: [0, 1, 2],
   },
   {
-    id:1,
-    idBuildings:[0,1,2],
-    idSchools:[0,1,2]
+    id: 1,
+    idBuildings: [0, 1, 2],
+    idSchools: [0, 1, 2],
   },
   {
-    id:2,
-    idBuildings:[0,1,2],
-    idSchools:[0,1]
+    id: 2,
+    idBuildings: [0, 1, 2],
+    idSchools: [0, 1],
   },
-]
+];
 
-let classrooms=[
+let classrooms = [
   {
-    id:208,
-    idSchools:[0,1,2],
-    idBuildings:[0],
-    idFloor:2,
+    id: 208,
+    idSchools: [0, 1, 2],
+    idBuildings: [0],
+    idFloor: 2,
   },
-]
+];
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
@@ -336,7 +337,7 @@ missions.forEach((mission) => {
   }
 });
 
-let cmp = schoolStore.getCampus
+let cmp = schoolStore.getCampus;
 campus.forEach((camp) => {
   if (cmp.find((c) => c.id == camp.id)) {
     console.log("campus has already been added");
@@ -345,7 +346,7 @@ campus.forEach((camp) => {
   }
 });
 
-let sch = schoolStore.getSchools
+let sch = schoolStore.getSchools;
 schools.forEach((school) => {
   if (sch.find((s) => s.id == school.id)) {
     console.log("school has already been added");
@@ -354,7 +355,7 @@ schools.forEach((school) => {
   }
 });
 
-let bld = schoolStore.getBuildings
+let bld = schoolStore.getBuildings;
 buildings.forEach((building) => {
   if (bld.find((b) => b.id == building.id)) {
     console.log("building has already been added");
@@ -363,7 +364,7 @@ buildings.forEach((building) => {
   }
 });
 
-let flo = schoolStore.getFloors
+let flo = schoolStore.getFloors;
 floors.forEach((floor) => {
   if (flo.find((f) => f.id == floor.id)) {
     console.log("floor has already been added");
@@ -372,7 +373,7 @@ floors.forEach((floor) => {
   }
 });
 
-let cls = schoolStore.getClassrooms
+let cls = schoolStore.getClassrooms;
 classrooms.forEach((classroom) => {
   if (cls.find((c) => c.id == classroom.id)) {
     console.log("classroom has already been added");
@@ -380,5 +381,3 @@ classrooms.forEach((classroom) => {
     schoolStore.addClassroom(classroom);
   }
 });
-
-

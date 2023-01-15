@@ -3,18 +3,36 @@ fieldset{
     /* flex-wrap: nowrap; */
 }
 .badge{
-    width: 6rem;
+    height: 6.2rem;
+    width: 6.2rem;
+    border-radius: 1000px;
     border: 2px solid #050B06;
+}
+.badgebg{
+    height: 6rem;
+    width: 6rem;
     border-radius: 1000px;
 }
 
 .badgeG{
     box-shadow: 3px 5px 0px #62b273;
-    background: #62b273;
 }
 .badgeY{
+    background: #E9A13B;
     box-shadow: 3px 5px 0px #E9A13B;
+    opacity: 0.4;
 }
 .badgeR{
+    background-color: #E9674D;
     box-shadow: 3px 5px 0px #E9674D;
+}
+
+.bgG{
+    opacity: 1;
+}
+.bgY{
+    opacity: 0.4;
+}
+.bgR{
+    opacity: 0;
 }

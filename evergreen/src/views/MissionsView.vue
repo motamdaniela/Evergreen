@@ -2,11 +2,13 @@
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
     <fieldset 
-    :class="MissionsState(mission.reward)"
+    :class="MissionsState(mission.reward, mission.id)"
     >
-      <img class="badge cover" 
-      :class="BadgeState(mission.reward)"
-      :src="mission.reward">
+    <div class="badge" :class="BadgeState(mission.reward, mission.id)">
+    <img class="badgebg"
+    :class="BgState(mission.reward, mission.id)"
+    :src="mission.reward">
+    </div>
       <h3>{{ mission.title }}</h3>
       <p>{{ mission.description }}</p>
       <!-- <button>{{ state(mission.users) }}</button>
@@ -67,27 +69,39 @@ export default {
   },
   methods: {
     MissionsState(missionBadge){
-        if(this.user.badges == undefined){
+        if( this.user.badges.find((badge) => badge == missionBadge)){
           // console.log('none');
-          return 'fieldR'
-        }else if( this.user.badges.find((badge) => badge == missionBadge)){
-          // console.log('slay');
           return 'fieldG'
+        }else if( this.user.missions.find((mission) => mission == missionId) && !(this.user.badges.find((badge) => badge == missionBadge))){
+          // console.log('slay');
+          return 'fieldY'
         }else{
           // console.log('else');
-          return 'fieldY'
+          return 'fieldR'
         }
     },
-    BadgeState(missionBadge){
-        if(this.user.badges == undefined){
+    BadgeState(missionBadge, missionId){
+        if( this.user.badges.find((badge) => badge == missionBadge)){
           // console.log('none');
-          return 'badgeR'
-        }else if( this.user.badges.find((badge) => badge == missionBadge)){
-          // console.log('slay');
           return 'badgeG'
+        }else if( this.user.missions.find((mission) => mission == missionId) && !(this.user.badges.find((badge) => badge == missionBadge))){
+          // console.log('slay');
+          return 'badgeY'
         }else{
           // console.log('else');
-          return 'badgeY'
+          return 'badgeR'
+        }
+    },
+    BgState(missionBadge, missionId){
+        if( this.user.badges.find((badge) => badge == missionBadge)){
+          // console.log('none');
+          return 'bgG'
+        }else if( this.user.missions.find((mission) => mission == missionId) && !(this.user.badges.find((badge) => badge == missionBadge))){
+          // console.log('slay');
+          return 'bgY'
+        }else{
+          // console.log('else');
+          return 'bgR'
         }
     },
     addBadge(missionReward){

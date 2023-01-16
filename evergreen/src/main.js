@@ -16,6 +16,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import json from "/data.json";
 
 const vuetify = createVuetify({
   components,
@@ -37,260 +38,25 @@ const occurrenceStore = useOccurrenceStore();
 const missionStore = useMissionStore();
 const schoolStore = useSchoolStore();
 
-// mandatory users
-let predefinedUsers = [
-  {
-    type: "user",
-    email: "user@gmail.com",
-    username: "user",
-    name: "name",
-    password: "Esmad_2223",
-    school: "school",
-    data: "data",
-    photo:
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    points: 0,
-    badges: [],
-    missions: [],
-    state: "active",
-  },
-  {
-    type: "admin",
-    email: "admin@gmail.com",
-    username: "admin",
-    name: "admin",
-    password: "Esmad_2223",
-    data: "data",
-    state: "active",
-  },
-];
+let predefinedUsers = json.predefinedUsers
 
-// all of the activities
-let activities = [
-  {
-    id: 0,
-    photo: "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
-    theme: "Água",
-    date: "Maio",
-    desc1: "Excesso de água dispendida em tarefas domésticas",
-    desc2:
-      "Sensibilizar a comunidade escolar para a necessidade de poupar água",
-    desc3:
-      "Divulgação, nas redes sociais, de informação de sensibilização para a poupança de água",
-    title: "Sensibilização para poupança de água",
-    coordinator: "admin@gmail.com",
-    place: "Redes Sociais",
-    users: [],
-    participated: [],
-  },
-  {
-    id: 1,
-    photo: "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
-    theme: "Água",
-    date: "Maio",
-    desc1: "necessidade de regar árvores",
-    desc2: "criar sistema de rega para as árvores",
-    desc3: "Cada árvore dispor de um dispensador de água",
-    title: "Dispensadores de água para árvores",
-    coordinator: "admin@gmail.com",
-    place: "Campus 2",
-    users: [],
-    participated: [],
-  },
-  {
-    id: 2,
-    photo: "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
-    theme: "Resíduos",
-    date: "Maio",
-    desc1: "Falta de local para colocação de pilhas para reciclagem",
-    desc2:
-      "Contribuir para a reciclagem de resíduos particularmente agressivos para o ambiente; Estimular estudantes e docentes a colocar as suas pilhas e baterias no recipiente próprio.",
-    desc3: "Colocação de pilhão na escola",
-    title: "Pilhão",
-    coordinator: "admin@gmail.com",
-    place: "Campus 2",
-    users: [],
-    participated: [],
-  },
-];
+let activities=json.activities
 
-// themes for the activities
-let themes = [
-  {
-    id: 0,
-    name: "Água",
-    color: "#C2AFEA",
-  },
-  {
-    id: 1,
-    name: "Resíduos",
-    color: "#E9674D",
-  },
-  {
-    id: 2,
-    name: "Energia",
-    color: "#62B273",
-  },
-  {
-    id: 3,
-    name: "Espaços exteriores",
-    color: "#3F824F",
-  },
-  {
-    id: 4,
-    name: "Mar",
-    color: "#774ED0",
-  },
-  {
-    id: 5,
-    name: "Mobilidade",
-    color: "#EFC6CD",
-  },
-  {
-    id: 6,
-    name: "Outros",
-    color: "#E9A13B",
-  },
-];
+let themes=json.themes
 
-// types of occurrences
-let types = [
-  {
-    id: 0,
-    name: "Lâmpada fundida",
-  },
-  {
-    id: 1,
-    name: "Torneira a pingar",
-  },
-  {
-    id: 2,
-    name: "Luz ligada",
-  },
-  {
-    id: 3,
-    name: "Objeto quebrado",
-  },
-  {
-    id: 4,
-    name: "Malfuncionamento",
-  },
-  {
-    id: 5,
-    name: "Lixo no chão",
-  },
-  {
-    id: 6,
-    name: "Outro",
-  },
-];
+let types=json.types
 
-let missions = [
-  {
-    id: 0,
-    title: "Inscreve-te na tua primeira atividade",
-    description:
-      "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
-    reward: "/src/assets/images/faqRed.svg",
-    users: [],
-    max: 1,
-    redirect: "/Activities",
-  },
-  {
-    id: 1,
-    title: "Participa na tua primeira atividade",
-    description:
-      "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
-    reward: "/src/assets/images/landingPink.svg",
-    users: [],
-    max: 1,
-    redirect: "/Activities",
-  },
-  {
-    id: 2,
-    title: "Recebe 10 pontos",
-    description:
-      "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
-    reward: "/src/assets/images/joana.jpg",
-    users: [],
-    max: 1,
-    redirect: "/Activities",
-  },
-];
+let missions = json.missions
 
-let campus = [
-  {
-    id: 0,
-    name: "Campus 1",
-  },
-  {
-    id: 1,
-    name: "Campus 2",
-  },
-];
+let campus=json.campus
 
-let schools = [
-  {
-    id: 0,
-    name: "ESMAD",
-    idCampus: 1,
-  },
-  {
-    id: 1,
-    name: "ESHT",
-    idCampus: 1,
-  },
-  {
-    id: 2,
-    name: "ESS",
-    idCampus: 0,
-  },
-];
+let schools=json.schools
 
-let buildings = [
-  {
-    id: 0,
-    name: "B",
-    idSchools: [0],
-  },
-  {
-    id: 1,
-    name: "D",
-    idSchools: [1],
-  },
-  {
-    id: 2,
-    name: "5",
-    idSchools: [2],
-  },
-];
+let buildings=json.buildings
 
-let floors = [
-  {
-    id: 0,
-    idBuildings: [0, 1, 2],
-    idSchools: [0, 1, 2],
-  },
-  {
-    id: 1,
-    idBuildings: [0, 1, 2],
-    idSchools: [0, 1, 2],
-  },
-  {
-    id: 2,
-    idBuildings: [0, 1, 2],
-    idSchools: [0, 1],
-  },
-];
+let floors=json.floors
 
-let classrooms = [
-  {
-    id: 208,
-    idSchools: [0, 1, 2],
-    idBuildings: [0],
-    idFloor: 2,
-  },
-];
+let classrooms=json.classrooms
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
@@ -300,7 +66,6 @@ predefinedUsers.forEach((user) => {
     userStore.add(user);
   }
 });
-
 let act = activityStore.getActivities;
 activities.forEach((activity) => {
   if (act.find((a) => a.id == activity.id)) {

@@ -63,9 +63,22 @@ export const useUsersStore = defineStore('user',{
       this.logged=""
     },
 
+    edit(obj){
+      obj = JSON.parse(obj)
+      if(this.users.find(user=>user.email== obj.email)){
+        this.user = obj;
+      }
+    },
+
+    delete(obj){
+      obj = JSON.parse(obj)
+      if(this.users.find(user=>user.email== obj.email)){
+        this.users.pop(this.user)
+      }
+    },
+
     // sign up action
     signUp(name,email,username,school,password,passConf){
-      console.log(name,email,username,school,password,passConf)
       // checks if email has already been used
       if(this.users.find(user=>user.email==email)){
         alert("Email já existe")
@@ -84,6 +97,7 @@ export const useUsersStore = defineStore('user',{
             points: 0,
             badges: [],
             missions: [],
+            state: 'active',
           }
           this.users.push(obj)
           this.logged=obj.email

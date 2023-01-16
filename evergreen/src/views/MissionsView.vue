@@ -11,10 +11,17 @@
       </div>
       <h3>{{ mission.title }}</h3>
       <p>{{ mission.description }}</p>
+      <p></p>
       <!-- <button>{{ state(mission.users) }}</button>
       <button>{{ mission.users[0][2] }}</button> -->
-      <input
+      <!-- <input
         @click="addBadge(mission.reward)"
+        class="btn-page"
+        value="go"
+        type="button"
+      /> -->
+      <input
+        @click="redirect(mission.redirect)"
         class="btn-page"
         value="go"
         type="button"
@@ -48,14 +55,10 @@ export default {
       fdefault: "fieldY",
     };
   },
-  created() {},
   methods: {
     redirect(n) {
       this.$router.push(n);
     },
-  },
-  computed: {},
-  methods: {
     MissionsState(missionBadge) {
       if (this.user.badges.find((badge) => badge == missionBadge)) {
         // console.log('none');

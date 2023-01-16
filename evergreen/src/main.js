@@ -58,6 +58,8 @@ let floors=json.floors
 
 let classrooms=json.classrooms
 
+let typeM=json.typeM
+
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
   if (users.find((u) => u.email == user.email)) {
@@ -99,6 +101,15 @@ missions.forEach((mission) => {
     console.log("mission has already been added");
   } else {
     missionStore.addMission(mission);
+  }
+});
+
+let tpm = missionStore.getTypes;
+typeM.forEach((type) => {
+  if (tpm.find((t) => t.id == type.id)) {
+    console.log("type has already been added");
+  } else {
+    missionStore.addType(type);
   }
 });
 
@@ -146,3 +157,5 @@ classrooms.forEach((classroom) => {
     schoolStore.addClassroom(classroom);
   }
 });
+
+missionStore.completeMission(userStore.getLogged, 0);

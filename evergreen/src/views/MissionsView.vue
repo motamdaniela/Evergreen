@@ -10,8 +10,12 @@
         />
       </div>
       <h3>{{ mission.title }}</h3>
+      <p class="idk">{{ complete(mission.users, mission.id) }}</p>
       <p>{{ mission.description }}</p>
-      <p></p>
+      <p v-if="state[mission.id][0] == mission.id">
+        {{ state[mission.id][1] }}
+      </p>
+      <!-- <p>{{ slay(mission) }}</p> -->
       <!-- <button>{{ state(mission.users) }}</button>
       <button>{{ mission.users[0][2] }}</button> -->
       <!-- <input
@@ -23,8 +27,10 @@
       <input
         @click="redirect(mission.redirect)"
         class="btn-page"
-        value="go"
         type="button"
+        :id="mission.id"
+        :class="complete(mission.users)"
+        value="go"
       />
     </fieldset>
   </div>
@@ -53,9 +59,19 @@ export default {
       // this.usersStore.getLogged,
       users: "",
       fdefault: "fieldY",
+      state: [],
     };
   },
+  computed: {},
   methods: {
+    complete(users, id) {
+      users.forEach((user) => {
+        if (user[0] == this.usersStore.getLogged && id != undefined) {
+          console.log(id);
+          this.state.push([id, user[2]]);
+        }
+      });
+    },
     redirect(n) {
       this.$router.push(n);
     },

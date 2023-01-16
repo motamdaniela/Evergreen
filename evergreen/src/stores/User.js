@@ -106,7 +106,32 @@ export const useUsersStore = defineStore('user',{
           alert('Password errada')
         }
       }
+    },
+
+    newAdmin(name,email,username,password,passConf){
+      // checks if email has already been used
+      if(this.users.find(user=>user.email==email)){
+        alert("Email já existe")
+      }else{
+        // checks if passwords match
+        if(password==passConf){
+          let obj={
+            type: 'admin',
+            email: email,
+            username: username,
+            name: name,
+            password: password,
+            data: 'data',
+            photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+          }
+          this.users.push(obj)
+          alert('henlo')
+        }else{
+          alert('Password errada')
+        }
+      }
     }
+
   },
 });
 

@@ -1,7 +1,8 @@
 <template>
+
 <div>
     <v-dialog v-model="dialog">
-      <div class="fieldPklight">
+      <div class="fieldPklight modal">
       <v-card v-if="this.action != 'edit'" >
         <v-card-title>Aviso!</v-card-title>
         <v-card-text>
@@ -49,9 +50,12 @@
         </h1>
     </div>
 
-  <button class="btn-page">Adicionar Admin</button>
-  <button class="btn-page">Adicionar Utilizador</button>
-  <div v-for="user in users">
+  <div class="searchbar">
+      <input class="inputSmall" v-model="search" type="text" :v-bind="search ? isFilter = true : isFilter = false"/>
+      <button @click="isFilter ? isFilter = false : isFilter = true" >search</button>
+  </div>
+
+  <div v-for="user in filteredUsers">
     <div v-if="user.type != 'admin'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
       <p>{{ user.name }}</p>
@@ -65,13 +69,14 @@
     </div>
   </div>
 
-  <div v-for="user in users" >
-    <div v-if="user.type == 'admin'" class="board">
+  <div v-for="user in filteredUsers" >
+    <div v-if="user.type == 'admin'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
       <p>{{ user.name }}</p>
-      <button class="btn-page" v-on:click="AlertEdit(user)">Editar</button>
-      <button class="btn-page">Bloquear</button>
-      <button class="btn-page">Eliminar</button>
+      <div>
+        <button class="btn-page btnPklight" @click="dialog = true; this.action = 'edit'; this.user = user">Editar</button>
+        <button class="btn-page btnR" @click="dialog = true; this.action = 'delete'; this.user = user">Eliminar</button>
+      </div>
     </div>
   </div>
 </template>
@@ -92,6 +97,8 @@ export default {
       action: '',
       user: '',
       newPassword: '',
+      search: '',
+      isFilter: false,
     };
   },
   methods: {
@@ -113,9 +120,22 @@ export default {
     Delete() {
       this.dialog = false;
       this.userStore.delete(JSON.stringify(this.user))
-    }
+    },
+  },
+  computed: {
+    filteredUsers() {
+            if(this.isFilter) {
+                return this.users.filter(user => user.name.startsWith(this.search))
+            }else if(this.search == ''){
+              return this.users
+            }else {
+                return this.users
+            }
+          }
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/admin.css";
+</style>

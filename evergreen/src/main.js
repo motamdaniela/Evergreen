@@ -58,6 +58,8 @@ let floors=json.floors
 
 let classrooms=json.classrooms
 
+let occurrences=json.occurrences
+
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
   if (users.find((u) => u.email == user.email)) {
@@ -146,3 +148,12 @@ classrooms.forEach((classroom) => {
     schoolStore.addClassroom(classroom);
   }
 });
+
+// let ocs = occurrenceStore.getOccurrences;
+// occurrences.forEach((occurrence) => {
+//   if (ocs.find((oc) => oc.id == occurrence.id)) {
+//     console.log("occurrence has already been added");
+//   } else {
+//     occurrenceStore.addOccurrence(occurrence);
+//   }
+// });

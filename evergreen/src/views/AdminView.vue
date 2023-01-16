@@ -1,14 +1,14 @@
 <template>
   <h2>Admin</h2>
   <div class="d-flex justify-center flex-row">
-    <v-card width="300" title="Utilizadores"
+    <v-card  title="Utilizadores"
       ><RouterLink to="/Users">Utilizadores</RouterLink></v-card
     >
-    <v-card width="300" title="Atividades"
+    <v-card  title="Atividades"
       ><RouterLink to="/Activities">Atividades</RouterLink></v-card
     >
-    <v-card width="300" title="Ocorrências"
-      ><RouterLink to="/Occurrence">Ocorrências</RouterLink></v-card
+    <v-card  title="Ocorrências"
+      ><RouterLink to="/Occurences">Ocorrências</RouterLink></v-card
     >
   </div>
 </template>
@@ -17,4 +17,6 @@
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/admin.css";
+</style>

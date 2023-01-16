@@ -1,4 +1,51 @@
 <template>
+<div>
+    <v-dialog v-model="dialogAdd">
+      <div class="fieldPklight modal">      
+      <v-card>
+        <v-card-title>Novo Admin</v-card-title>
+        <v-form
+      ref="form"
+      lazy-validation
+      @submit.prevent="onSubmit"
+    >
+    <v-row>
+    <v-col style=" width: 50% ">
+      <label for="name" class="semiTitle">Nome</label>
+      <br />
+      <input class="inputSmall" id="name" v-model="this.newAdmin.name" />
+      <br />
+      <label for="email" class="semiTitle">E-mail</label>
+      <br />
+      <input class="inputSmall" id="email" v-model="this.newAdmin.email" type="email" />
+      <br />
+      <label for="username" class="semiTitle">Nome de utilizador</label>
+      <br />
+      <input class="inputSmall" id="username" v-model="this.newAdmin.username" />
+    </v-col>
+    <v-col>
+      <label for="pass" class="semiTitle">Palavra-passe</label>
+      <br />
+      <input class="inputSmall" id="pass" v-model="this.newAdmin.password" type="password" />
+      <br />
+      <label for="confirm" class="semiTitle">Confirmar palavra-passe</label>
+      <br />
+      <input class="inputSmall" id="confirm" v-model="this.newAdmin.passConf" type="password"/>
+    </v-col>
+  </v-row>
+</v-form>
+  <v-card-actions>
+    <button class="btn-page btnPk" @click="onSubmit" >Criar</button>
+    <button class="btn-page btnPklight" @click="dialogAdd = false">Cancelar</button>
+  </v-card-actions>
+      </v-card>
+    </div>
+      
+    </v-dialog>
+  </div>
+
+
+
   <v-layout>
     <v-app-bar
       class="appBar"
@@ -29,7 +76,7 @@
           <RouterLink to="/signUp">Registar</RouterLink>
         </button>
       </nav>
-      <nav v-else>
+      <nav v-if="isLogged && this.user.type != 'admin'">
         <RouterLink to="/Home">Página principal</RouterLink>
         <RouterLink to="/Activities">Atividades</RouterLink>
         <RouterLink to="/Occurrence">Ocorrências</RouterLink>
@@ -43,6 +90,14 @@
         <RouterLink v-else to="/Profile">
           <img :src="this.user.photo" id="profilePhoto" />
         </RouterLink>
+      </nav>
+      <nav v-if="isLogged && this.user.type == 'admin'">
+        <button  @click="dialogAdd = true" >
+          <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
+        </button>
+        <button @click="logOut">
+          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+        </button>
       </nav>
 
       <v-app-bar-nav-icon
@@ -90,6 +145,16 @@ export default {
       group: null,
       collapse: false,
       tohide: "",
+
+      newAdmin: {
+        name: "",
+        email: "",
+        school: "",
+        username: "",
+        password: "",
+        passConf: "",
+      },
+      dialogAdd: false,
     };
   },
   computed: {
@@ -116,6 +181,10 @@ export default {
       this.usersStore.logOut();
       this.$router.push("/");
     },
+    onSubmit() {
+      this.dialogAdd = false;
+      this.usersStore.newAdmin(this.newAdmin.name,this.newAdmin.email,this.newAdmin.username,this.newAdmin.password,this.newAdmin.passConf);
+    },
   },
 
   // computed: {
@@ -129,4 +198,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import "../assets/styles/admin.css";
+</style>

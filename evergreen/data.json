@@ -420,6 +420,55 @@
       "idBuildings": [0],
       "idFloor": 2
     }
+  ],
+
+  "buildings" : [
+    {
+      "id": 0,
+      "name": "B",
+      "idSchools": [0]
+    },
+    {
+      "id": 1,
+      "name": "D",
+      "idSchools": [1]
+    },
+    {
+      "id": 2,
+      "name": "5",
+      "idSchools": [2]
+    }
+  ],
+
+  "ocurrences": [
+    {
+      "id": 0,
+      "date": "16.01",
+      "hour": "10.51",
+      "campus": "Campus 1",
+      "building": "B",
+      "floor": "2",
+      "classroom": "208",
+      "type": "Lâmpada fundida",
+      "description": "Encontrei uma lampada fundida",
+      "photo": "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
+      "user": "user@gmail.com",
+      "state": "pendent"
+    },
+    {
+      "id": 0,
+      "date": "16.01",
+      "hour": "10.51",
+      "campus": "Campus 1",
+      "building": "B",
+      "floor": "2",
+      "classroom": "208",
+      "type": "outra lâmpada fundida",
+      "description": "É so disto aqui",
+      "photo": "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
+      "user": "user@gmail.com",
+      "state": "pendent"
+    }
   ]
 }
 

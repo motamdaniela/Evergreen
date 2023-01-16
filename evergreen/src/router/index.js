@@ -10,11 +10,12 @@ import Occurrence from "../views/OccurrenceView.vue";
 import Form from "../views/FormView.vue";
 import Missions from "../views/MissionsView.vue";
 import Profile from "../views/ProfileView.vue";
-import Admin from "../views/AdminView.vue";
 import Rank from "../views/RankView.vue";
-import Users from "../views/UsersView.vue";
 import Activity from "../views/ActivityView.vue";
 import Suggestion from "../views/SuggestionView.vue";
+import Admin from "../views/AdminView.vue";
+import Users from "../views/ListofUsersView.vue";
+import ListOc from "../views/ListofOccurencesView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,11 +86,6 @@ const router = createRouter({
       component: Rank,
     },
     {
-      path: "/Users",
-      name: "Users",
-      component: Users,
-    },
-    {
       path: "/Activity/:id",
       name: "Activity",
       component: Activity,
@@ -98,6 +94,16 @@ const router = createRouter({
       path: "/Suggestion",
       name: "Suggestion",
       component: Suggestion,
+    },
+    {
+      path: "/Users",
+      name: "Users",
+      component: Users,
+    },
+    {
+      path: "/Occurences",
+      name: "Occurences",
+      component: ListOc,
     },
   ],
 });

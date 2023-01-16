@@ -62,6 +62,24 @@
                 </option>
               </select>
             </div>
+
+            <div>
+              <label class="semiTitle">Piso:</label><br />
+              <select v-model="form.floor" class="input">
+                <option v-for="floor in floors">
+                  {{ floor.id }}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label class="semiTitle">Sala:</label><br />
+              <select v-model="form.classroom" class="input">
+                <option v-for="classroom in classrooms">
+                  {{ classroom.id }}
+                </option>
+              </select>
+            </div>
           </div>
         </v-window-item>
         <v-window-item :key="`card-${2}`">
@@ -87,38 +105,28 @@
 
           <div id="allRb">
             <div class="typeRow" v-for="tp in types">
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">{{ tp.name }}</label>
-
-              <!-- <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Torneira a pingar</label>
-
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Luz ligada</label> -->
-            </div>
-
-            <!-- <div class="typeRow">
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Objeto quebrado</label>
-
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Malfuncionamento</label>
-
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Lixo no chão</label>
-            </div>
-
-            <div class="typeRow">
-              <input type="radio" v-model="form.type" class="rb" />
-              <label class="typeLbl">Outro:</label>
               <input
-                class="input"
-                placeholder="Outro"
-                type="text"
-                v-model="form.type"
-                required
+                type="radio"
+                v-model="form.idType"
+                class="rb"
+                name="type"
+                @:click="
+                  {
+                    {
+                      id(tp.id);
+                    }
+                  }
+                "
               />
-            </div> -->
+              <label class="typeLbl">{{ tp.name }}</label>
+            </div>
+            <input
+              class="input"
+              placeholder="Outro"
+              type="text"
+              v-model="form.other"
+              required
+            />
           </div>
         </v-window-item>
         <v-window-item :key="`card-${3}`">
@@ -178,10 +186,12 @@
           <label for="avatar" class="semiTitle">Adiciona uma foto:</label>
           <br /><br />
           <input
+            @change="previewFiles"
             type="file"
             id="picture"
             name="picture"
             accept="image/png, image/jpeg"
+            ref="myFiles"
           />
 
           <br /><br />
@@ -220,11 +230,13 @@ export default {
         building: "",
         floor: "",
         classroom: "",
-        type: "",
+        idType: 0,
         description: "",
         photo: "",
         user: "",
         state: "",
+        photo: "",
+        other: "",
       },
       tab: null,
       first: null,
@@ -232,6 +244,7 @@ export default {
       campus: this.schoolStore.getCampus,
       schools: this.schoolStore.getSchools,
       buildings: this.schoolStore.getBuildings,
+      floors: this.schoolStore.getFloors,
       classrooms: this.schoolStore.getClassrooms,
       types: this.occurrenceStore.getTypes,
     };
@@ -239,6 +252,9 @@ export default {
   methods: {
     onSubmit() {
       this.form.id = this.occurrenceStore.getOccurrences.length;
+      this.form.idType = document.querySelector(
+        'input[name="type"]:checked'
+      ).id;
       let today = new Date();
       this.form.date =
         today.getFullYear() +
@@ -253,8 +269,21 @@ export default {
       this.occurrenceStore.addOccurrence(this.form);
       location.reload();
     },
+    id(id) {
+      let select = document.querySelector('input[name="type"]:checked');
+      select.id = id;
+    },
+    // idk if this works
+    previewFiles(e) {
+      const files = e.target.files;
+      if (!files.length) return;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = () => (this.form.photo = reader.result);
+      console.log(this.form.photo);
+    },
   },
-  computed: {},
 };
 </script>
 

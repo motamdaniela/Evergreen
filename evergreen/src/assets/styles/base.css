@@ -48,6 +48,10 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   top: 5px;
 }
 
+.backbtn:hover{
+  content: url("src/assets/icons/iconesthicc/back.svg")
+}
+
 #profilePhoto{
   width: 2rem;
   height: 2rem;
@@ -85,6 +89,14 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 .btnPk{
   background-color: #F4D8DD;
   box-shadow: 3px 5px 0px #D26174;
+}
+.btnPklight{
+  background-color: #F9E9EB;
+  box-shadow: 3px 5px 0px #EFC6CD;
+}
+.btnB{
+  background-color: #FDF9F9;
+  box-shadow: 3px 5px 0px #050B06;
 }
 /* button hovers */
 
@@ -130,6 +142,16 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 .fieldPk{
   background-color: #FDF9F9;
   box-shadow: 5px 5px 0px #D26174;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 30px;
+  margin: 40px;
+  text-align: left;
+}
+
+.fieldPklight{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #EFC6CD;
   border: 2px solid #050B06;
   padding: 20px;
   border-radius: 30px;
@@ -284,6 +306,53 @@ footer{
   }
 }
 
+.boardP{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #c2afea;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 100px;
+  margin: 40px;
+  text-align: left;
+}
+.boardG{
+    background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #62b273;
+    border: 2px solid #050B06;
+    padding: 20px;
+    border-radius: 100px;
+    margin: 40px;
+    text-align: left;
+}
+.boardR{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #E9674D;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 100px;
+  margin: 40px;
+  text-align: left;
+}
+.boardY{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #E9A13B;
+  border: 2px solid #050B06;
+  padding: 20px;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  border-radius: 100px;
+  margin: 40px;
+  text-align: left;
+}
+.boardPk{
+  background-color: #FDF9F9;
+  box-shadow: 5px 5px 0px #D26174;
+  border: 2px solid #050B06;
+  padding: 20px;
+  border-radius: 100px;
+  margin: 40px;
+  text-align: left;
+}
 
 .hide, #hide{
   display: none;

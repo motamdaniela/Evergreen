@@ -58,7 +58,7 @@ let floors=json.floors
 
 let classrooms=json.classrooms
 
-let occurrences=json.occurrences
+let typeM=json.typeM
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
@@ -101,6 +101,15 @@ missions.forEach((mission) => {
     console.log("mission has already been added");
   } else {
     missionStore.addMission(mission);
+  }
+});
+
+let tpm = missionStore.getTypes;
+typeM.forEach((type) => {
+  if (tpm.find((t) => t.id == type.id)) {
+    console.log("type has already been added");
+  } else {
+    missionStore.addType(type);
   }
 });
 
@@ -149,11 +158,4 @@ classrooms.forEach((classroom) => {
   }
 });
 
-// let ocs = occurrenceStore.getOccurrences;
-// occurrences.forEach((occurrence) => {
-//   if (ocs.find((oc) => oc.id == occurrence.id)) {
-//     console.log("occurrence has already been added");
-//   } else {
-//     occurrenceStore.addOccurrence(occurrence);
-//   }
-// });
+missionStore.completeMission(userStore.getLogged, 0);

@@ -23,7 +23,9 @@
         <div id="col2">
           <label for="school" class="semiTitle">Escola</label>
           <br />
-          <input class="input" id="school" v-model="school" />
+          <select v-model="school" id="school" class="input">
+            <option v-for="school in schools">{{ school.name }}</option>
+          </select>
           <br />
           <label for="pass" class="semiTitle">Palavra-passe</label>
           <br />
@@ -50,13 +52,17 @@
 <script>
 import { useUsersStore } from "@/stores/User";
 import { useMissionStore } from "@/stores/Mission";
+import { useSchoolStore } from "@/stores/School";
 
 export default {
   setup() {
     const userStore = useUsersStore();
+
     const missionStore = useMissionStore();
 
-    return { userStore, missionStore };
+    const schoolStore = useSchoolStore();
+
+    return { userStore, missionStore, schoolStore };
   },
   data() {
     return {
@@ -66,6 +72,7 @@ export default {
       username: "",
       password: "",
       passConf: "",
+      schools: this.schoolStore.getSchools,
     };
   },
   methods: {

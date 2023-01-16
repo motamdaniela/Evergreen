@@ -28,13 +28,15 @@
 import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
 import { useUsersStore } from "@/stores/User";
+import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
     const activityStore = useActivityStore();
     const userStore = useUsersStore();
+    const missionStore = useMissionStore();
 
-    return { activityStore, userStore };
+    return { activityStore, userStore, missionStore };
   },
   name: "Activity",
   data() {
@@ -54,6 +56,7 @@ export default {
   methods: {
     subscribe() {
       this.activityStore.updateUsers(this.user, this.activity.id);
+      this.missionStore.completeMission(this.user, 0);
     },
     unsubscribe() {
       this.activity.users = this.activity.users.filter((e) => e != this.user);

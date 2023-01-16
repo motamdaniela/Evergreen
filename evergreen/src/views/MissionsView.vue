@@ -10,14 +10,27 @@
         />
       </div>
       <h3>{{ mission.title }}</h3>
+      <p class="idk">{{ complete(mission.users, mission.id) }}</p>
       <p>{{ mission.description }}</p>
+      <p v-if="state[mission.id][0] == mission.id">
+        {{ state[mission.id][1] }}
+      </p>
+      <!-- <p>{{ slay(mission) }}</p> -->
       <!-- <button>{{ state(mission.users) }}</button>
       <button>{{ mission.users[0][2] }}</button> -->
-      <input
+      <!-- <input
         @click="addBadge(mission.reward)"
         class="btn-page"
         value="go"
         type="button"
+      /> -->
+      <input
+        @click="redirect(mission.redirect)"
+        class="btn-page"
+        type="button"
+        :id="mission.id"
+        :class="complete(mission.users)"
+        value="go"
       />
     </fieldset>
   </div>
@@ -46,29 +59,22 @@ export default {
       // this.usersStore.getLogged,
       users: "",
       fdefault: "fieldY",
+      state: [],
     };
   },
-  created() {},
+  computed: {},
   methods: {
+    complete(users, id) {
+      users.forEach((user) => {
+        if (user[0] == this.usersStore.getLogged && id != undefined) {
+          console.log(id);
+          this.state.push([id, user[2]]);
+        }
+      });
+    },
     redirect(n) {
       this.$router.push(n);
     },
-  },
-  computed: {
-    state(users) {
-      let u = "";
-      let i = 0;
-      u = users.find((element) => element.find((e) => e == this.user));
-      // users.forEach((user) => {
-      //   if (user[i][0] == this.user) {
-      //     u = user[i];
-      //   } else {
-      //     i++;
-      //   }
-      // });
-    },
-  },
-  methods: {
     MissionsState(missionBadge) {
       if (this.user.badges.find((badge) => badge == missionBadge)) {
         // console.log('none');

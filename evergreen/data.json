@@ -329,7 +329,8 @@
       "reward": "/src/assets/images/faqRed.svg",
       "users": [],
       "max": 1,
-      "redirect": "/Activities"
+      "redirect": "/Activities",
+      "type": 0
     },
     {
       "id": 1,
@@ -339,7 +340,8 @@
       "reward": "/src/assets/images/landingPink.svg",
       "users": [],
       "max": 1,
-      "redirect": "/Activities"
+      "redirect": "/Activities",
+      "type": 1
     },
     {
       "id": 2,
@@ -348,8 +350,62 @@
         "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
       "reward": "/src/assets/images/joana.jpg",
       "users": [],
-      "max": 1,
-      "redirect": "/Activities"
+      "max": 10,
+      "redirect": "/Activities",
+      "type": 3
+    },
+    {
+      "id": 3,
+      "title": "Inscreve-te em 5 atividades",
+      "description":
+        "Escolhe cinco atividade que gostavas de participar do plano de atividades e inscreve-te!",
+      "reward": "/src/assets/images/faqRed.svg",
+      "users": [],
+      "max": 5,
+      "redirect": "/Activities",
+      "type": 0
+    }
+  ],
+  "typeM" : [
+    {
+      "id": 0,
+      "name": "inscrever atividades"
+    },
+    {
+      "id": 1,
+      "name": "participar atividades"
+    },
+    {
+      "id": 2,
+      "name": "fazer ocorrências"
+    },
+    {
+      "id": 3,
+      "name": "chegar a x pontos"
+    },
+    {
+      "id": 4,
+      "name": "inscrever no conselho"
+    },
+    {
+      "id": 5,
+      "name": "preencher questionário"
+    },
+    {
+      "id": 6,
+      "name": "login todos os dias"
+    },
+    {
+      "id": 7,
+      "name": "editar perfil"
+    },
+    {
+      "id": 8,
+      "name": "chegar a top x"
+    },
+    {
+      "id": 9,
+      "name": "completar tudo"
     }
   ],
   "campus" : [

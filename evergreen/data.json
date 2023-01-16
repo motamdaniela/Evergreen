@@ -348,7 +348,7 @@
         "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
       "reward": "/src/assets/images/joana.jpg",
       "users": [],
-      "max": 1,
+      "max": 10,
       "redirect": "/Activities"
     }
   ],

@@ -54,20 +54,7 @@ export default {
       this.$router.push(n);
     },
   },
-  computed: {
-    state(users) {
-      let u = "";
-      let i = 0;
-      u = users.find((element) => element.find((e) => e == this.user));
-      // users.forEach((user) => {
-      //   if (user[i][0] == this.user) {
-      //     u = user[i];
-      //   } else {
-      //     i++;
-      //   }
-      // });
-    },
-  },
+  computed: {},
   methods: {
     MissionsState(missionBadge) {
       if (this.user.badges.find((badge) => badge == missionBadge)) {

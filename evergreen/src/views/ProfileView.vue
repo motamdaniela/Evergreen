@@ -41,16 +41,12 @@ export default {
   created() {
     let user = this.userStore.getLogged;
     let users = this.userStore.getUsers;
-    let rew=this.missionStore.getRewards
     users.forEach((u) => {
       if (u.email == user){
         this.user = u;
-        u.idRewards.forEach((r) => {
-          rew.forEach((rr) => {
-            if(r==rr.id){
-              this.badges.push(rr.path)
-            }
-          })
+        u.rewards.forEach((r) => {
+              this.badges.push(r)
+
         })
       }
     });

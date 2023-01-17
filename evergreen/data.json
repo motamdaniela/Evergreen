@@ -11,7 +11,7 @@
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "points": 0,
-    "idRewards": [],
+    "rewards": [],
     "state": "active"
   },
   {
@@ -325,7 +325,7 @@
       "title": "Inscreve-te na tua primeira atividade",
       "description":
         "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
-      "idReward": 3,
+      "reward": "/src/assets/images/faqRed.svg",
       "users": [],
       "max": 1,
       "redirect": "/Activities",
@@ -336,7 +336,7 @@
       "title": "Participa na tua primeira atividade",
       "description":
         "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
-      "idReward": 1,
+      "reward": "/src/assets/images/landingPink.svg",
       "users": [],
       "max": 1,
       "redirect": "/Activities",
@@ -347,7 +347,7 @@
       "title": "Recebe 10 pontos",
       "description":
         "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
-      "idReward": 2,
+      "reward": "/src/assets/images/joana.jpg",
       "users": [],
       "max": 10,
       "redirect": "/Activities",
@@ -358,7 +358,7 @@
       "title": "Inscreve-te em 5 atividades",
       "description":
         "Escolhe cinco atividade que gostavas de participar do plano de atividades e inscreve-te!",
-      "idReward": 1,
+      "reward": "/src/assets/images/joana.jpg",
       "users": [],
       "max": 5,
       "redirect": "/Activities",
@@ -405,20 +405,6 @@
     {
       "id": 9,
       "name": "completar tudo"
-    }
-  ],
-  "rewards" : [
-    {
-      "id": 3,
-      "path": "/src/assets/images/faqRed.svg"
-    },
-    {
-      "id": 1,
-      "path": "/src/assets/images/landingPink.svg"
-    },
-    {
-      "id": 2,
-      "path": "/src/assets/images/joana.jpg"
     }
   ],
   "campus" : [

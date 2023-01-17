@@ -1,12 +1,12 @@
 <template>
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
-    <fieldset :class="MissionsState(mission.idReward,mission)">
-      <div class="badge" :class="BadgeState(mission.idReward,mission)">
+    <fieldset :class="MissionsState(mission.reward,mission)">
+      <div class="badge" :class="BadgeState(mission.reward,mission)">
         <img
           class="badgebg"
-          :class="BgState(mission.idReward,mission)"
-          :src="imgBdg(mission.idReward)"
+          :class="BgState(mission.reward,mission)"
+          :src="mission.reward"
         />
       </div>
       <h3>{{ mission.title }}</h3>
@@ -26,7 +26,7 @@
       />
       <input
         v-else
-        @click="addBadge(mission.idReward)"
+        @click="addBadge(mission.reward)"
         class="btn-page"
         type="button"
         :id="mission.id"
@@ -56,18 +56,9 @@ export default {
       ),
       users: "",
       state: [],
-      badges: this.missionStore.getRewards,
     };
   },
   methods: {
-    imgBdg(id){
-      this.badges.forEach(badge=>{
-        if(badge.id == id){
-          console.log(badge.path)
-          return badge.path
-        }
-      })
-    },
     complete(users, id,mission) {
       users.forEach((user) => {
         if (user[0] == this.usersStore.getLogged && id != undefined) {
@@ -79,7 +70,7 @@ export default {
       this.$router.push(n);
     },
     MissionsState(missionReward,mission) {
-        if (this.user.idRewards.find((reward) => reward == missionReward)) {
+        if (this.user.rewards.find((reward) => reward == missionReward)) {
           return "fieldG";
         } else if (
           mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
@@ -94,7 +85,7 @@ export default {
         }
     },
     BadgeState(missionReward,mission) {
-      if (this.user.idRewards.find((reward) => reward == missionReward)) {
+      if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
       } else if (
         mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
@@ -109,7 +100,7 @@ export default {
         }
     },
     BgState(missionReward,mission) {
-      if (this.user.idRewards.find((reward) => reward == missionReward)) {
+      if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
       } else if (
         mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
@@ -125,10 +116,10 @@ export default {
     },
     addBadge(missionReward) {
       console.log(missionReward)
-      console.log(this.user.idRewards)
-      if(!this.user.idRewards.find(id=>id==missionReward)){
+      console.log(this.user.rewards)
+      if(!this.user.rewards.find(reward=>reward==missionReward)){
         console.log('aaaa')
-        this.user.idRewards.push(missionReward);
+        this.user.rewards.push(missionReward);
       }
     },
   },

@@ -6,7 +6,6 @@ export const useMissionStore = defineStore('mission',{
   state: () => ({
     missions:useStorage('missions',[]),
     type:useStorage('type',[]),
-    rewards:useStorage('rewards',[]),
   }),
 
   getters: {
@@ -18,9 +17,6 @@ export const useMissionStore = defineStore('mission',{
       return this.type;
     },
 
-    getRewards(){
-      return this.rewards;
-    },
 
   },
 
@@ -31,10 +27,6 @@ export const useMissionStore = defineStore('mission',{
 
     addType(obj){
       this.type.push(obj)
-    },
-
-    addReward(obj){
-      this.rewards.push(obj)
     },
 
     addUser(email){

@@ -60,7 +60,7 @@ let classrooms=json.classrooms
 
 let typeM=json.typeM
 
-let rewards=json.rewards
+
 
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
@@ -115,14 +115,6 @@ typeM.forEach((type) => {
   }
 });
 
-let rwd = missionStore.getRewards;
-rewards.forEach((reward) => {
-  if (rwd.find((r) => r.id == reward.id)) {
-    console.log("type has already been added");
-  } else {
-    missionStore.addReward(reward);
-  }
-});
 
 let cmp = schoolStore.getCampus;
 campus.forEach((camp) => {

@@ -72,42 +72,36 @@ export default {
     MissionsState(missionReward,mission) {
         if (this.user.rewards.find((reward) => reward == missionReward)) {
           return "fieldG";
-        } else if (
-          mission.users.find((user) => user[2] == "Em progresso") || 
-          !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída") )
+        } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged ) || 
+         !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged) )
          {
           return "fieldY";
-        } else if(
-          mission.users.find((user) => user[2] == "Não começou")) {
+        } else if(mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
           return "fieldR";
         }
     },
     BadgeState(missionReward,mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
-      } else if (
-        mission.users.find((user) => user[2] == "Em progresso")|| 
-          !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída"))
+      } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged)|| !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged))
        {
         return "badgeY";
       } else if(
-          mission.users.find((user) => user[2] == "Não começou")) {
+        mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
           return "badgeR";
         }
     },
     BgState(missionReward,mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
-      } else if (
-        mission.users.find((user) => user[2] == "Em progresso")|| 
-          !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída"))
+      } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged)|| !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged))
        {
         return "bgY";
       } else if(
-          mission.users.find((user) => user[2] == "Não começou")) {
+        mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
           return "bgR";
         }
     },

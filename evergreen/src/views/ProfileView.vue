@@ -23,33 +23,42 @@
 <script>
 import { RouterLink } from "vue-router";
 import { useUsersStore } from "@/stores/User";
+import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
     const userStore = useUsersStore();
+    const missionStore = useMissionStore();
 
-    return { userStore };
+    return { userStore,missionStore };
   },
   data() {
     return {
       user: "",
-      badges: "",
+      badges: [],
     };
   },
   created() {
     let user = this.userStore.getLogged;
     let users = this.userStore.getUsers;
+    let rew=this.missionStore.getRewards
     users.forEach((u) => {
       if (u.email == user){
         this.user = u;
-        this.badges = this.user.badges;
+        u.idRewards.forEach((r) => {
+          rew.forEach((rr) => {
+            if(r==rr.id){
+              this.badges.push(rr.path)
+            }
+          })
+        })
       }
     });
 
   },
   methods: {
     givemetheanswer(){
-      console.log(this.user.badges);
+      console.log(this.user.idRewards);
     }
   },
 };

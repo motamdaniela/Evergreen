@@ -1,36 +1,36 @@
 <template>
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
-    <fieldset :class="MissionsState(mission.reward, mission.id)">
-      <div class="badge" :class="BadgeState(mission.reward, mission.id)">
+    <fieldset :class="MissionsState(mission.idReward,mission)">
+      <div class="badge" :class="BadgeState(mission.idReward,mission)">
         <img
           class="badgebg"
-          :class="BgState(mission.reward, mission.id)"
-          :src="mission.reward"
+          :class="BgState(mission.idReward,mission)"
+          :src="imgBdg(mission.idReward)"
         />
       </div>
       <h3>{{ mission.title }}</h3>
-      <p class="idk">{{ complete(mission.users, mission.id) }}</p>
+      <p class="idk">{{ complete(mission.users, mission.id,mission) }}</p>
       <p>{{ mission.description }}</p>
       <p v-if="state[mission.id][0] == mission.id">
         {{ state[mission.id][1] }}
       </p>
-      <!-- <p>{{ slay(mission) }}</p> -->
-      <!-- <button>{{ state(mission.users) }}</button>
-      <button>{{ mission.users[0][2] }}</button> -->
-      <!-- <input
-        @click="addBadge(mission.reward)"
-        class="btn-page"
-        value="go"
-        type="button"
-      /> -->
+      <p v-else></p>
       <input
+        v-if="state[mission.id][1] != 'Concluída'"
         @click="redirect(mission.redirect)"
         class="btn-page"
         type="button"
         :id="mission.id"
-        :class="complete(mission.users)"
         value="go"
+      />
+      <input
+        v-else
+        @click="addBadge(mission.idReward)"
+        class="btn-page"
+        type="button"
+        :id="mission.id"
+        value="receber"
       />
     </fieldset>
   </div>
@@ -39,8 +39,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import { useMissionStore } from "@/stores/Mission";
-import { useUsersStore } from "@/stores/User";
-import { isProxy, toRaw } from "vue";
+import { useUsersStore } from "@/stores/User"
 export default {
   setup() {
     const missionStore = useMissionStore();
@@ -52,76 +51,85 @@ export default {
   data() {
     return {
       missions: this.missionStore.getMissions,
-      thestate: "",
       user: this.usersStore.getUsers.find(
         (usersStor) => usersStor.email == this.usersStore.getLogged
       ),
-      // this.usersStore.getLogged,
       users: "",
-      fdefault: "fieldY",
       state: [],
+      badges: this.missionStore.getRewards,
     };
   },
-  computed: {},
   methods: {
-    complete(users, id) {
+    imgBdg(id){
+      this.badges.forEach(badge=>{
+        if(badge.id == id){
+          console.log(badge.path)
+          return badge.path
+        }
+      })
+    },
+    complete(users, id,mission) {
       users.forEach((user) => {
         if (user[0] == this.usersStore.getLogged && id != undefined) {
-          console.log(id);
           this.state.push([id, user[2]]);
         }
-      });
+      })
     },
     redirect(n) {
       this.$router.push(n);
     },
-    MissionsState(missionBadge) {
-      if (this.user.badges.find((badge) => badge == missionBadge)) {
-        // console.log('none');
-        return "fieldG";
-      } else if (
-        this.user.missions.find((mission) => mission == missionId) &&
-        !this.user.badges.find((badge) => badge == missionBadge)
-      ) {
-        // console.log('slay');
-        return "fieldY";
-      } else {
-        // console.log('else');
-        return "fieldR";
-      }
+    MissionsState(missionReward,mission) {
+        if (this.user.idRewards.find((reward) => reward == missionReward)) {
+          return "fieldG";
+        } else if (
+          mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+          mission.users.find((user) => user[2] == "Em progresso"))
+         {
+          return "fieldY";
+        } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+          mission.users.find((user) => user[2] == "Não começou")) {
+          return "fieldR";
+        }else{
+          return "fieldY";
+        }
     },
-    BadgeState(missionBadge, missionId) {
-      if (this.user.badges.find((badge) => badge == missionBadge)) {
-        // console.log('none');
+    BadgeState(missionReward,mission) {
+      if (this.user.idRewards.find((reward) => reward == missionReward)) {
         return "badgeG";
       } else if (
-        this.user.missions.find((mission) => mission == missionId) &&
-        !this.user.badges.find((badge) => badge == missionBadge)
-      ) {
-        // console.log('slay');
+        mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+        mission.users.find((user) => user[2] == "Em progresso"))
+       {
         return "badgeY";
-      } else {
-        // console.log('else');
-        return "badgeR";
-      }
+      } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+          mission.users.find((user) => user[2] == "Não começou")) {
+          return "badgeR";
+        }else{
+          return "badgeY";
+        }
     },
-    BgState(missionBadge, missionId) {
-      if (this.user.badges.find((badge) => badge == missionBadge)) {
-        // console.log('none');
+    BgState(missionReward,mission) {
+      if (this.user.idRewards.find((reward) => reward == missionReward)) {
         return "bgG";
       } else if (
-        this.user.missions.find((mission) => mission == missionId) &&
-        !this.user.badges.find((badge) => badge == missionBadge)
-      ) {
-        // console.log('slay');
+        mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+        mission.users.find((user) => user[2] == "Em progresso"))
+       {
         return "bgY";
-      } else {
-        // console.log('else');
-        return "bgR";
-      }
+      } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+          mission.users.find((user) => user[2] == "Não começou")) {
+          return "bgR";
+        }else{
+          return "bgY";
+        }
     },
     addBadge(missionReward) {
-      this.user.badges.push(missionReward);
+      console.log(missionReward)
+      console.log(this.user.idRewards)
+      if(!this.user.idRewards.find(id=>id==missionReward)){
+        console.log('aaaa')
+        this.user.idRewards.push(missionReward);
+      }
     },
   },
 };

@@ -60,6 +60,8 @@ let classrooms=json.classrooms
 
 let typeM=json.typeM
 
+let rewards=json.rewards
+
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
   if (users.find((u) => u.email == user.email)) {
@@ -110,6 +112,15 @@ typeM.forEach((type) => {
     console.log("type has already been added");
   } else {
     missionStore.addType(type);
+  }
+});
+
+let rwd = missionStore.getRewards;
+rewards.forEach((reward) => {
+  if (rwd.find((r) => r.id == reward.id)) {
+    console.log("type has already been added");
+  } else {
+    missionStore.addReward(reward);
   }
 });
 

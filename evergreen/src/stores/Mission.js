@@ -6,6 +6,7 @@ export const useMissionStore = defineStore('mission',{
   state: () => ({
     missions:useStorage('missions',[]),
     type:useStorage('type',[]),
+    rewards:useStorage('rewards',[]),
   }),
 
   getters: {
@@ -17,6 +18,10 @@ export const useMissionStore = defineStore('mission',{
       return this.type;
     },
 
+    getRewards(){
+      return this.rewards;
+    },
+
   },
 
   actions: {
@@ -26,6 +31,10 @@ export const useMissionStore = defineStore('mission',{
 
     addType(obj){
       this.type.push(obj)
+    },
+
+    addReward(obj){
+      this.rewards.push(obj)
     },
 
     addUser(email){
@@ -56,8 +65,6 @@ export const useMissionStore = defineStore('mission',{
           if(mission.type==type){
             mission.users.forEach((user) => {
               if(user[0]==logged && user[1]<mission.max){
-                console.log(user[1])
-                console.log(mission.max)
                 if(user[1]<mission.max){
                   user[1]=actList.length 
                 }

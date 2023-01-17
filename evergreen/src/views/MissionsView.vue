@@ -10,7 +10,7 @@
         />
       </div>
       <h3>{{ mission.title }}</h3>
-      <p class="idk">{{ complete(mission.users, mission.id,mission) }}</p>
+      <p class="idk">{{ complete(mission.users, mission.id) }}</p>
       <p>{{ mission.description }}</p>
       <p v-if="state[mission.id][0] == mission.id">
         {{ state[mission.id][1] }}
@@ -59,7 +59,7 @@ export default {
     };
   },
   methods: {
-    complete(users, id,mission) {
+    complete(users, id) {
       users.forEach((user) => {
         if (user[0] == this.usersStore.getLogged && id != undefined) {
           this.state.push([id, user[2]]);
@@ -73,52 +73,46 @@ export default {
         if (this.user.rewards.find((reward) => reward == missionReward)) {
           return "fieldG";
         } else if (
-          mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
-          mission.users.find((user) => user[2] == "Em progresso"))
+          mission.users.find((user) => user[2] == "Em progresso") || 
+          !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída") )
          {
           return "fieldY";
-        } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+        } else if(
           mission.users.find((user) => user[2] == "Não começou")) {
           return "fieldR";
-        }else{
-          return "fieldY";
         }
     },
     BadgeState(missionReward,mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
       } else if (
-        mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
-        mission.users.find((user) => user[2] == "Em progresso"))
+        mission.users.find((user) => user[2] == "Em progresso")|| 
+          !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída"))
        {
         return "badgeY";
-      } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+      } else if(
           mission.users.find((user) => user[2] == "Não começou")) {
           return "badgeR";
-        }else{
-          return "badgeY";
         }
     },
     BgState(missionReward,mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
       } else if (
-        mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
-        mission.users.find((user) => user[2] == "Em progresso"))
+        mission.users.find((user) => user[2] == "Em progresso")|| 
+          !this.user.rewards.find((reward) => reward == missionReward) && 
+          mission.users.find((user) => user[2] == "Concluída"))
        {
         return "bgY";
-      } else if(mission.users.find((user) => user[0] == this.usersStore.getLogged) &&
+      } else if(
           mission.users.find((user) => user[2] == "Não começou")) {
           return "bgR";
-        }else{
-          return "bgY";
         }
     },
     addBadge(missionReward) {
-      console.log(missionReward)
-      console.log(this.user.rewards)
       if(!this.user.rewards.find(reward=>reward==missionReward)){
-        console.log('aaaa')
         this.user.rewards.push(missionReward);
       }
     },

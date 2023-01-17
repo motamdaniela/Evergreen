@@ -16,6 +16,16 @@ export const useUsersStore = defineStore('user',{
       return this.users;
     },
 
+    getUsersUser(){
+      let u=[]
+      this.users.forEach(user =>{
+        if(user.type=="user"){
+          u.push(user)
+        }
+      })
+      return u;
+    },
+
     getTop3(){
       let usersU=[]
       this.users.forEach(user => {
@@ -46,8 +56,8 @@ export const useUsersStore = defineStore('user',{
     // login action
     login(email,password){
       // checks if email and password exist in the users list
-      if(this.users.find(user=>user.email==email && user.password==password)){
-        let logged = this.users.find(user=>user.email==email)
+      if(this.users.find(user=>user.email==email && user.password==password || user.username==email && user.password==password)){
+        let logged = this.users.find(user=>user.email==email || user.username==email)
         this.logged=logged.email
       }else{
         alert('Credenciais erradas')
@@ -56,6 +66,7 @@ export const useUsersStore = defineStore('user',{
 
     // adds users
     add(obj){
+      obj.rank=this.getUsersUser.length+1
       this.users.push(obj)
     },
 
@@ -97,7 +108,9 @@ export const useUsersStore = defineStore('user',{
             points: 0,
             rewards: [],
             state: 'active',
+            rank: 0,
           }
+          obj.rank=this.getUsersUser.length+1
           this.users.push(obj)
           this.logged=obj.email
           alert('henlo')

@@ -6,7 +6,7 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
-      <label for="email" class="semiTitle">E-mail</label>
+      <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
       <br />
       <input class="input" id="email" v-model="email" type="email" />
       <br />

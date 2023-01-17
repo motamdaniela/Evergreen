@@ -23,14 +23,12 @@
 <script>
 import { RouterLink } from "vue-router";
 import { useUsersStore } from "@/stores/User";
-import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
     const userStore = useUsersStore();
-    const missionStore = useMissionStore();
 
-    return { userStore,missionStore };
+    return { userStore };
   },
   data() {
     return {

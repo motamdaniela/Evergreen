@@ -80,18 +80,19 @@
       },
       methods: {
         Resolve() {
-          this.oc.state = 'blocked';
+          this.oc.state = 'resolved';
           this.dialog = false;
-          this.userStore.edit(JSON.stringify(this.user))
+          this.ocStore.edit(JSON.stringify(this.oc))
         },
-        Unblock() {
-          this.user.state = 'active';
+        Repeat() {
+          this.oc.state = 'repeat';
           this.dialog = false;
-          this.userStore.edit(JSON.stringify(this.user))
+          this.ocStore.edit(JSON.stringify(this.oc))
         },
-        Delete() {
+        Invalid() {
+          this.oc.state = 'invalid';
           this.dialog = false;
-          this.userStore.delete(JSON.stringify(this.user))
+          this.ocStore.edit(JSON.stringify(this.oc))
         },
       },
       computed: {

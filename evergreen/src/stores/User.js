@@ -11,6 +11,11 @@ export const useUsersStore = defineStore('user',{
     getLogged(){
       return this.logged;
     },
+
+    getLoggedObj(){
+      let user = this.users.find((user) => user.email == this.getLogged)
+      return JSON.stringify(user);
+    },
     
     getUsers(){
       return this.users;

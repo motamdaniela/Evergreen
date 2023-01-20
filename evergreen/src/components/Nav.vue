@@ -132,15 +132,15 @@ import { useUsersStore } from "@/stores/User";
 export default {
   setup() {
     const usersStore = useUsersStore();
+    const Logged = usersStore.getLoggedObj
 
-    return { usersStore };
+    return { usersStore,Logged };
   },
   name: "App",
   data() {
     return {
-      user: this.usersStore.getUsers.find(
-        (usersStor) => usersStor.email == this.usersStore.getLogged
-      ),
+      users: this.usersStore.getUsers,
+      user: JSON.parse(this.Logged),
       drawer: false,
       group: null,
       collapse: false,
@@ -159,10 +159,7 @@ export default {
   },
   computed: {
     isLogged() {
-      let acc = this.usersStore.getLogged;
-      // let acc = sessionStorage.getItem("user");
-      if (acc) {
-        console.log(acc);
+      if (this.usersStore.getLogged) {
         return true;
       } else {
         return false;

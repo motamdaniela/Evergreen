@@ -101,6 +101,9 @@ export default {
       isFilter: false,
     };
   },
+  created () {
+    alert(this.users);
+  },
   methods: {
     Edit() {
       this.user.password = this.newPassword;

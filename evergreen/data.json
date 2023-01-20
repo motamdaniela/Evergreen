@@ -4,16 +4,16 @@
     "type": "user",
     "email": "user@gmail.com",
     "username": "user",
-    "name": "name",
+    "name": "user",
     "password": "Esmad_2223",
-    "school": "school",
+    "school": "ESMAD",
     "data": "data",
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "points": 0,
-    "badges": [],
-    "missions": [],
-    "state": "active"
+    "rewards": [],
+    "state": "active",
+    "rank":0
   },
   {
     "type": "admin",
@@ -359,7 +359,7 @@
       "title": "Inscreve-te em 5 atividades",
       "description":
         "Escolhe cinco atividade que gostavas de participar do plano de atividades e inscreve-te!",
-      "reward": "/src/assets/images/faqRed.svg",
+      "reward": "/src/assets/images/joana.jpg",
       "users": [],
       "max": 5,
       "redirect": "/Activities",
@@ -433,23 +433,6 @@
       "id": 2,
       "name": "ESS",
       "idCampus": 0
-    }
-  ],
-  "buildings" : [
-    {
-      "id": 0,
-      "name": "B",
-      "idSchools": [0]
-    },
-    {
-      "id": 1,
-      "name": "D",
-      "idSchools": [1]
-    },
-    {
-      "id": 2,
-      "name": "5",
-      "idSchools": [2]
     }
   ],
   "floors" : [

@@ -17,6 +17,7 @@ export const useMissionStore = defineStore('mission',{
       return this.type;
     },
 
+
   },
 
   actions: {
@@ -56,8 +57,6 @@ export const useMissionStore = defineStore('mission',{
           if(mission.type==type){
             mission.users.forEach((user) => {
               if(user[0]==logged && user[1]<mission.max){
-                console.log(user[1])
-                console.log(mission.max)
                 if(user[1]<mission.max){
                   user[1]=actList.length 
                 }

@@ -60,6 +60,8 @@ let classrooms=json.classrooms
 
 let typeM=json.typeM
 
+
+
 let users = userStore.getUsers;
 predefinedUsers.forEach((user) => {
   if (users.find((u) => u.email == user.email)) {
@@ -112,6 +114,7 @@ typeM.forEach((type) => {
     missionStore.addType(type);
   }
 });
+
 
 let cmp = schoolStore.getCampus;
 campus.forEach((camp) => {

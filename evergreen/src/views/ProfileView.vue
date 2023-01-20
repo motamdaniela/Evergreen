@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       user: "",
-      badges: "",
+      badges: [],
     };
   },
   created() {
@@ -42,14 +42,17 @@ export default {
     users.forEach((u) => {
       if (u.email == user){
         this.user = u;
-        this.badges = this.user.badges;
+        u.rewards.forEach((r) => {
+              this.badges.push(r)
+
+        })
       }
     });
 
   },
   methods: {
     givemetheanswer(){
-      console.log(this.user.badges);
+      console.log(this.user.idRewards);
     }
   },
 };

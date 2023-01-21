@@ -40,7 +40,8 @@
     </div>
       
     </v-dialog>
-  <div class="list">
+    <div class="list">
+    <v-row>
     <div class="grid-item" v-for="activity in activitiesSub">
       <v-card
         class="mx-auto"
@@ -75,6 +76,7 @@
         </div>
       </v-card>
     </div>
+  </v-row>
   </div>
   <button class="btn-page btnP">Ver todas</button>
 
@@ -157,8 +159,15 @@
   </div>
 
   <br /><br />
-  <h1 class="padding title"><span>Inscreve-te já no conselho Eco-Escolas!</span></h1>
-  <button class="btn-page btnP">Inscrever-me</button>
+  <div v-if="this.user.type == 'council'">
+    <h1 class="padding title"><span>Já és membro do conselho!</span></h1>
+    <button class="btn-page btnP" @click="SubConselho" >Desistir</button>
+  </div>
+  <div v-else>
+    <h1 class="padding title"><span>Inscreve-te já no conselho Eco-Escolas!</span></h1>
+    <button class="btn-page btnP" @click="SubConselho" >Inscrever-me</button>
+  </div>
+
 
 </div>
 </template>
@@ -183,7 +192,7 @@ export default {
       users: this.userStore.getTop3,
       logged: this.userStore.getLogged,
       activitiesSub: [],
-      user: this.userStore.getLogged,
+      user: this.userStore.getUsers.find((user)=> user.email == this.logged),
       userObj: this.userStore.getLoggedObj,
       open: false,
       loginReward: false, 
@@ -191,6 +200,7 @@ export default {
     };
   },
   created () {
+    this.user = this.userStore.getUsers.find((user)=> user.email == this.logged)
     this.themes = this.activityStore.getThemes;
     let today = new Date();
     let yesterday= new Date(today)
@@ -249,13 +259,22 @@ export default {
       // this.activitiesSub
     },
     changeBtn(activity) {
-      let u = activity.users.find((user) => user == this.user);
+      let u = activity.users.find((user) => user == this.logged);
       if (u) {
         return true;
       } else {
         return false;
       }
     },
+    SubConselho(){
+      this.user = this.userStore.getUsers.find((user)=> user.email == this.logged)
+      if(this.user.type != 'council'){
+        this.user.type = 'council'
+      }else{
+        this.user.type = 'user'
+      }
+      this.userStore.edit(JSON.stringify(this.user))
+    }
   },
   computed: {
     activitiesSuggest() {

@@ -104,3 +104,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.list{
+    margin-right: auto;
+    margin-left: auto;
+}

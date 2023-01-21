@@ -16,6 +16,7 @@ import Suggestion from "../views/SuggestionView.vue";
 import Admin from "../views/AdminView.vue";
 import Users from "../views/ListofUsersView.vue";
 import ListOc from "../views/ListofOccurencesView.vue";
+import ListofActivities from "../views/ListofActivitiesView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -104,6 +105,11 @@ const router = createRouter({
       path: "/Occurences",
       name: "Occurences",
       component: ListOc,
+    },
+    {
+      path: "/ActivitiesList",
+      name: "ActivitiesList",
+      component: ListofActivities,
     },
   ],
 });

@@ -5,7 +5,7 @@
       ><RouterLink to="/Users">Utilizadores</RouterLink></v-card
     >
     <v-card  title="Atividades"
-      ><RouterLink to="/Activities">Atividades</RouterLink></v-card
+      ><RouterLink to="/ActivitiesList">Atividades</RouterLink></v-card
     >
     <v-card  title="Ocorrências"
       ><RouterLink to="/Occurences">Ocorrências</RouterLink></v-card

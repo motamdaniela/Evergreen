@@ -2,7 +2,7 @@
   <h1 style="font-family:gliker; margin-top:30px">Quadro de Líderes</h1>
   <div v-for="user in users">
     <div class="board">
-      <img src="../assets/images/joana.jpg" id="profilePic" />
+      <img :src=user.photo id="profilePic" />
       <p>
         {{ user.name }} <br />
         {{ user.school }}
@@ -37,11 +37,8 @@ export default {
         list.push(user);
       }
     });
-    if (list.length > 1) {
-      this.users = list;
-    } else {
-      this.users.push(list);
-    }
+      this.users=list;
+    
     this.users.sort((a, b) => {
       return b.points - a.points;
     });

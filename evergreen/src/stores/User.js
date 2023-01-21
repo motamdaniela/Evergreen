@@ -42,10 +42,8 @@ export const useUsersStore = defineStore('user',{
         return b.points - a.points;
       });
       let top=[]
-      if(usersU.length==1){
-        top.push(usersU)
-      }else if(usersU.length==2){
-        for (let i=0; i<2; i++){
+      if(usersU.length<3){
+        for (let i=0; i<usersU.length; i++){
           top.push(usersU[i])
         }
       }else if(usersU.length>=3){
@@ -74,11 +72,15 @@ export const useUsersStore = defineStore('user',{
         // checks when was the last time the user logged in
         if(logged.previousLoginDate==yesterdayDate){
           logged.streak+=1
+          logged.points+=logged.streak
+          alert('recebeu'+logged.streak+'pontos')
           if(logged.streak==7){
             logged.streak=0
           }
         }else if(logged.previousLoginDate<logged.loginDate){
           logged.streak=1
+          logged.points+=1
+          alert('recebeu 1 ponto')
         }
         
       }else{

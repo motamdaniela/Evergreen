@@ -1,5 +1,35 @@
 <template>
   <div>
+    <v-dialog v-model="open">
+      <div class="fieldPklight modal">
+        <button class="btn-page btnPklight" @click="open = false">x</button>
+        <img :src="this.activity.photo" width="200">
+        <h1>{{ this.activity.title }}</h1>
+        <h3>Diagnostico:</h3>
+        <p>{{ this.activity.desc1 }}</p>
+        <h3>Objetivos:</h3>
+        <p>{{ this.activity.desc2 }}</p>
+        <h3>Metas:</h3>
+        <p>{{ this.activity.desc3 }}</p>
+        <input
+          v-if="!changeBtn(this.activity)"
+          type="button"
+          class="btn-page"
+          id="sub"
+          value="Inscrever"
+          @click="subscribe(this.activity),changeBtn(this.activity)"
+        />
+        <input
+          v-else
+          type="button"
+          class="btn-page"
+          id="unsub"
+          value="Anular Inscrição"
+          @click="unsubscribe(this.activity),changeBtn(this.activity)"
+        />
+    </div>
+      
+    </v-dialog>
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" />Plano de Atividades
     </h1>
@@ -13,7 +43,6 @@
           class="mx-auto"
           max-width="400"
           id="card"
-          :items="activitiesWithLink"
         >
           <v-img
             class="image"
@@ -38,12 +67,7 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card btnP">
-                <RouterLink
-                  :to="{ name: 'Activity', params: { id: activity.id } }"
-                  >Ver mais</RouterLink
-                >
-              </button>
+              <button class="btn-card btnP" @click="open = true; this.activity = activity">Ver mais</button>
             </div>
           </div>
         </v-card>
@@ -55,21 +79,45 @@
 <script>
 import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
+import { useUsersStore } from "@/stores/User";
+import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
     const activityStore = useActivityStore();
+    const userStore = useUsersStore();
+    const missionStore = useMissionStore();
 
-    return { activityStore };
+    return { activityStore, userStore, missionStore };
   },
   name: "Activities",
   data() {
     return {
-      activities: [],
+      activities:  this.activityStore.getActivities,
+      open: false,
+      user: this.userStore.getLogged,
     };
   },
-  created() {
-    this.activities = this.activityStore.getActivities;
+  methods: {
+    subscribe(activity) {
+      console.log(activity.id)
+      this.activityStore.updateUsers(this.user, activity.id);
+      this.missionStore.completeMission(this.user, 0);
+    },
+    unsubscribe(activity) {
+      activity.users = activity.users.filter((e) => e != this.user);
+    },
+    changeBtn(activity) {
+      
+      let u = activity.users.find((user) => user == this.user);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  computed: {
   },
 };
 </script>

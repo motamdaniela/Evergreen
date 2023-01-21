@@ -47,6 +47,7 @@
 
 
   <v-layout>
+    {{ getUser }}
     <v-app-bar
       class="appBar"
       color="transparent"
@@ -175,6 +176,10 @@ export default {
       } else {
         return false;
       }
+    },
+    getUser(){
+      this.users = this.usersStore.getUsers ,
+      this.user = this.usersStore.getUsers.find((user)=> user.email == this.usersStore.getLogged)
     },
   },
   methods: {

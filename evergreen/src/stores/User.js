@@ -61,26 +61,25 @@ export const useUsersStore = defineStore('user',{
       // checks if email and password exist in the users list
       if(this.users.find(user=>user.email==email && user.password==password || user.username==email && user.password==password)){
         let logged = this.users.find(user=>user.email==email || user.username==email)
+        this.logged=logged.email
         // changes the login date
         let today = new Date();
         logged.previousLoginDate=logged.loginDate
         logged.loginDate=today.getFullYear()+""+((today.getMonth()+1).toString().length < 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length < 2 ? "0" + today.getDate() : today.getDate())
-        this.logged=logged.email
         let yesterday= new Date(today)
         yesterday.setDate(yesterday.getDate() - 1)
         let yesterdayDate =yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate())
         // checks when was the last time the user logged in
         if(logged.previousLoginDate==yesterdayDate){
-          logged.streak+=1
-          logged.points+=logged.streak
-          alert('recebeu'+logged.streak+'pontos')
-          if(logged.streak==7){
-            logged.streak=0
-          }
+          // logged.streak+=1
+          // logged.points+=logged.streak
+          // if(logged.streak==7){
+          //   logged.streak=0
+          // }
+
         }else if(logged.previousLoginDate<logged.loginDate){
-          logged.streak=1
-          logged.points+=1
-          alert('recebeu 1 ponto')
+          // logged.streak=1
+          // logged.points+=1
         }
         
       }else{

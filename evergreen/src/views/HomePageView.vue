@@ -5,6 +5,11 @@
     <span>Atividades Inscritas</span>
   </h1>
   <br />
+  <v-dialog v-model="loginReward">
+    <div class="fieldPklight modal">
+        <p>ola</p>
+    </div>
+  </v-dialog>
   <v-dialog v-model="open">
       <div class="fieldPklight modal">
         <button class="btn-page btnPklight" @click="open = false">x</button>
@@ -114,7 +119,36 @@ export default {
       logged: this.userStore.getLogged,
       activitiesSub: [],
       user: this.userStore.getLogged,
+      userObj: this.userStore.getLoggedObj,
       open: false,
+      loginReward: false, 
+      loginPoints:0,
+    };
+  },
+  created () {
+    let today = new Date();
+    let yesterday= new Date(today)
+    yesterday.setDate(yesterday.getDate() - 1)
+    let yesterdayDate =yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate())
+    if(this.userObj.previousLoginDate==yesterdayDate && this.userObj.streak==7){
+      this.loginPoints=7
+      this.loginReward=true
+      this.userObj.streak=0
+    }else if(this.userObj.previousLoginDate==yesterdayDate){
+      this.loginPoints=this.userObj.streak
+      this.loginReward=true
+      this.userObj.streak+=1
+      // logged.streak+=1
+      // logged.points+=logged.streak
+      // if(logged.streak==7){
+      //   logged.streak=0
+      // }
+
+    }else if(this.userObj.previousLoginDate<this.userObj.loginDate){
+      this.loginPoints=1
+      this.loginReward=true
+      this.userObj.streak=1
+      // logged.points+=1
     };
   },
   updated () {

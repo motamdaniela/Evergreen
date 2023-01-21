@@ -6,6 +6,14 @@
     box-shadow: 5px 5px 0px #C2AFEA;
 }
 
+#editIcon{
+    width: 30px;
+}
+
+#editIcon:hover{
+    content: url("src/assets/icons/iconesthicc/editProfile.svg")
+}
+
 .Name{
     font-size: 45px;
 }

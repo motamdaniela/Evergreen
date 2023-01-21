@@ -56,16 +56,42 @@
         />
       </div>
     </v-dialog>
+
+
+
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" />Plano de Atividades
     </h1>
-    <button class="btn-card btnP">Filtrar</button>
+    <button class="btn-card btnP" @click="pleeekkkkk">Filtrar</button>
+    <v-checkbox
+      label="red"
+      color="red"
+      value="red"
+      hide-details
+    ></v-checkbox>
+
+    <v-select
+    v-model="themesPicked"
+    :items="themeNames"
+    label="Select"
+    multiple
+  >
+      <v-list-item
+          value="title"
+          disabled
+        ></v-list-item>
+</v-select>
+
+
+
+
+    
     <button class="btn-card btnP" @click="suggestion = true">Sugerir Atividades</button>
     <!-- <button class="btn-card btnP">
       <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
     </button> -->
     <div class="list">
-      <div class="grid-item" v-for="activity in activities">
+      <div class="grid-item" v-for="activity in FilterThemes">
         <v-card
           class="mx-auto"
           max-width="400"
@@ -119,6 +145,10 @@ export default {
 
     return { activityStore, missionStore, userStore, suggestionStore};
   },
+  created () {
+    this.themes.forEach((theme) => 
+    this.themeNames.push(theme.name))
+  },
   name: "Activities",
   data() {
     return {
@@ -126,6 +156,7 @@ export default {
       user: this.userStore.getLogged,
       open: false,
       suggestion: false,
+      isFilter: true,
       form: {
         id: 0,
         theme: "",
@@ -136,6 +167,8 @@ export default {
         user: "",
       },
       themes: this.activityStore.getThemes,
+      themeNames: [],
+      themesPicked: [],
     };
   },
   methods: {
@@ -162,6 +195,35 @@ export default {
       this.suggestionStore.addSuggestions(this.form);
       location.reload();
     },
+    pleeekkkkk(){
+      console.log('themesPicked:', this.themesPicked, 'Energia in themesPicked:', 'Energia' in this.themesPicked)
+    }
+  },
+  computed: {
+    FilterThemes() {
+      if(this.themesPicked.length <= 0){
+        return this.activities
+      }else if(this.isFilter){
+        let filteredList = [];
+        let filteredIds =[];
+        this.themes.forEach((theme)=>{
+          if(theme.name in this.themesPicked){
+            filteredIds.push(theme.id);
+          }
+        })
+
+        this.activities.forEach((activity) => {
+          if(activity.idTheme in filteredIds){
+            filteredList.push(activity)
+          }
+        })
+
+        console.log("Energia" in this.themesPicked)
+        return filteredList
+      }else{
+        return this.activities
+      }
+    }
   },
 };
 </script>

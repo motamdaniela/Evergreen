@@ -63,7 +63,24 @@ export const useUsersStore = defineStore('user',{
       // checks if email and password exist in the users list
       if(this.users.find(user=>user.email==email && user.password==password || user.username==email && user.password==password)){
         let logged = this.users.find(user=>user.email==email || user.username==email)
+        // changes the login date
+        let today = new Date();
+        logged.previousLoginDate=logged.loginDate
+        logged.loginDate=today.getFullYear()+""+((today.getMonth()+1).toString().length < 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length < 2 ? "0" + today.getDate() : today.getDate())
         this.logged=logged.email
+        let yesterday= new Date(today)
+        yesterday.setDate(yesterday.getDate() - 1)
+        let yesterdayDate =yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate())
+        // checks when was the last time the user logged in
+        if(logged.previousLoginDate==yesterdayDate){
+          logged.streak+=1
+          if(logged.streak==7){
+            logged.streak=0
+          }
+        }else if(logged.previousLoginDate<logged.loginDate){
+          logged.streak=1
+        }
+        
       }else{
         alert('Credenciais erradas')
       }
@@ -99,6 +116,7 @@ export const useUsersStore = defineStore('user',{
       if(this.users.find(user=>user.email==email)){
         alert("Email já existe")
       }else{
+        let today = new Date();
         // checks if passwords match
         if(password==passConf){
           let obj={
@@ -108,7 +126,9 @@ export const useUsersStore = defineStore('user',{
             name: name,
             password: password,
             school: school,
-            data: 'data',
+            previousLoginDate:0,
+            streak: 0,
+            loginDate: today.getFullYear()+""+((today.getMonth()+1).toString().length != 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length != 2 ?"0" + today.getDate() : today.getDate()),
             photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
             rewards: [],

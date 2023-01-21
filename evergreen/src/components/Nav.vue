@@ -47,6 +47,7 @@
 
 
   <v-layout>
+    {{ getUser }}
     <v-app-bar
       class="appBar"
       color="transparent"
@@ -136,11 +137,15 @@ export default {
 
     return { usersStore,Logged };
   },
+  created () {
+    this.users = this.usersStore.getUsers;
+    // this.user = this.users.find((user)=> user.email == this.usersStore.getLogged)
+  },
   name: "App",
   data() {
     return {
-      users: this.usersStore.getUsers,
-      user: JSON.parse(this.Logged),
+      users: this.usersStore.getUsers ,
+      user: this.usersStore.getUsers.find((user)=> user.email == this.usersStore.getLogged),
       drawer: false,
       group: null,
       collapse: false,
@@ -171,6 +176,10 @@ export default {
       } else {
         return false;
       }
+    },
+    getUser(){
+      this.users = this.usersStore.getUsers ,
+      this.user = this.usersStore.getUsers.find((user)=> user.email == this.usersStore.getLogged)
     },
   },
   methods: {

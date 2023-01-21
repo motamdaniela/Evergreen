@@ -85,17 +85,17 @@ import { useMissionStore } from "@/stores/Mission";
 export default {
   setup() {
     const activityStore = useActivityStore();
-    const userStore = useUsersStore();
     const missionStore = useMissionStore();
+    const userStore = useUsersStore();
 
-    return { activityStore, userStore, missionStore };
+    return { activityStore, missionStore, userStore};
   },
   name: "Activities",
   data() {
     return {
-      activities:  this.activityStore.getActivities,
-      open: false,
+      activities: this.activityStore.getActivities,
       user: this.userStore.getLogged,
+      open: false,
     };
   },
   methods: {

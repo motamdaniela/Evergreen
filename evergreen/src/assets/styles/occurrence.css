@@ -57,12 +57,12 @@
 
 .input{
     width: 300px;
-    height: 20px;
+    height: 40px;
     border-radius: 33px;
     background-color: #FDFAF9;
     border: 2px solid rgb(0, 0, 0);
     margin-bottom: 30px;
-    padding: 20px;
+    padding-left: 10px;
 }
 
 .typeLbl{

@@ -33,12 +33,12 @@
 
 .input{
     width: 376px;
-    height: 54px;
+    height: 44px;
     border-radius: 33px;
     background-color: #FDFAF9;
     border: 2px solid rgb(0, 0, 0);
     margin-bottom: 30px;
-    padding: 20px;
+    padding-left: 10px;
 }
 
 .btn-page{

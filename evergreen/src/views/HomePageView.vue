@@ -142,7 +142,7 @@
   <h1 class="gradientPink padding title"><span>Quadro de Líderes</span></h1>
   <div v-for="user in users">
     <div class="board">
-      <img src="../assets/images/joana.jpg" id="profilePic" />
+      <img :src=user.photo id="profilePic" />
       <p>
         {{ user.name }} <br />
         {{ user.school }}
@@ -172,18 +172,13 @@ export default {
   },
   data() {
     return {
-      users: [],
+      users: this.userStore.getTop3,
       logged: this.userStore.getLogged,
       activitiesSub: [],
     };
   },
   created() {
-    if (this.userStore.getTop3.length > 1) {
-      this.users = this.userStore.getTop3;
-    } else {
-      this.users.push(this.userStore.getTop3);
-    }
-
+    // this.users.push(this.userStore.getTop3);
     let activities = this.activityStore.getActivities;
     activities.forEach((activity) => {
       activity.users.forEach((user) => {
@@ -192,6 +187,7 @@ export default {
         }
       });
     });
+    console.log(this.users)
   },
 };
 </script>

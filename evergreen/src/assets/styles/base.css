@@ -141,11 +141,12 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   box-shadow: 5px 5px 0px #E9A13B;
   border: 2px solid #050B06;
   padding: 20px;
-  /* padding-left: 20px;
-  padding-right: 20px; */
   border-radius: 30px;
   margin: 40px;
   text-align: left;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .fieldPk{
   background-color: #FDF9F9;

@@ -27,10 +27,19 @@
     border-radius: 30px;
     box-shadow: 10px 10px 0px #c2afea; 
 }
+#cardR{
+    border: 2px solid #050B06;
+    border-radius: 30px;
+    box-shadow: 10px 10px 0px #E9674D; 
+}
 
 .image{
     margin: 10px;
     border-radius: 30px;
+}
+
+#imgQstn{
+    width: 100%;
 }
 
 /* ranking */

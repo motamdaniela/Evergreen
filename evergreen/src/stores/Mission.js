@@ -1,121 +1,152 @@
-import {defineStore} from 'pinia'
-import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
-import { useActivityStore } from './activity'
-import { useUsersStore } from './user'
+import { defineStore } from "pinia";
+import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
+import { useActivityStore } from "./activity";
+import { useUsersStore } from "./user";
+import { useOccurrenceStore } from "./occurrence";
 
-export const useMissionStore = defineStore('mission',{
+export const useMissionStore = defineStore("mission", {
   state: () => ({
-    missions:useStorage('missions',[]),
-    type:useStorage('type',[]),
+    missions: useStorage("missions", []),
+    type: useStorage("type", []),
   }),
 
   getters: {
-    getMissions(){
+    getMissions() {
       return this.missions;
     },
 
-    getTypes(){
+    getTypes() {
       return this.type;
     },
-
-
   },
 
   actions: {
-    addMission(obj){
-      this.missions.push(obj)
+    addMission(obj) {
+      this.missions.push(obj);
     },
 
-    addType(obj){
-      this.type.push(obj)
+    addType(obj) {
+      this.type.push(obj);
     },
 
-    addUser(email){
-      const userStore=useUsersStore()
-      let user=userStore.getLogged
-      this.missions.forEach(mission => {
-        if(!mission.users.find((m) => m[0] == user)){
-          mission.users.push([user,0,'Não começou'])
+    addUser(email) {
+      const userStore = useUsersStore();
+      let user = userStore.getLogged;
+      this.missions.forEach((mission) => {
+        if (!mission.users.find((m) => m[0] == user)) {
+          mission.users.push([user, 0, "Não começou"]);
         }
-      })
+      });
     },
 
-    completeMission(logged,type){
+    completeMission(logged, type) {
       // for missions type subscribe activity
-      if(type==0){
-        const activityStore=useActivityStore()
-  
-        let actList=[]
-        
-        let activities=activityStore.getActivities
+      if (type == 0) {
+        const activityStore = useActivityStore();
+
+        let actList = [];
+
+        let activities = activityStore.getActivities;
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
             if (user == logged) {
-              actList.push(activity)
+              actList.push(activity);
             }
           });
         });
-  
+
         this.missions.forEach((mission) => {
-          if(mission.type==type){
+          if (mission.type == type) {
             mission.users.forEach((user) => {
-              if(user[0]==logged && user[1]<mission.max){
-                if(user[1]<mission.max){
-                  user[1]=actList.length 
+              if (user[0] == logged && user[1] < mission.max) {
+                if (user[1] < mission.max) {
+                  user[1] = actList.length;
                 }
-                if(user[1]==0){
-                  user[2]="Não começou"
-                }else if(user[1]==mission.max){
-                  user[2]="Concluída"
-                }else{
-                  user[2]="Em progresso"
+                if (user[1] == 0) {
+                  user[2] = "Não começou";
+                } else if (user[1] == mission.max) {
+                  user[2] = "Concluída";
+                } else {
+                  user[2] = "Em progresso";
                 }
               }
-            })
+            });
           }
-        })
-      }else if(type==1){
-        const activityStore=useActivityStore()
-  
-        let actList=[]
-        
-        let activities=activityStore.getActivities
+        });
+      } else if (type == 1) {
+        const activityStore = useActivityStore();
+
+        let actList = [];
+
+        let activities = activityStore.getActivities;
         activities.forEach((activity) => {
           activity.participated.forEach((user) => {
             if (user == logged) {
-              actList.push(activity)
+              actList.push(activity);
             }
           });
         });
-  
+
         this.missions.forEach((mission) => {
-          if(mission.type==type){
+          if (mission.type == type) {
             mission.users.forEach((user) => {
-              if(user[0]==logged && user[1]<mission.max){
-                console.log(user[1])
-                console.log(mission.max)
-                if(user[1]<mission.max){
-                  user[1]=actList.length 
+              if (user[0] == logged && user[1] < mission.max) {
+                if (user[1] < mission.max) {
+                  user[1] = actList.length;
                 }
-                if(user[1]==0){
-                  user[2]="Não começou"
-                }else if(user[1]==mission.max){
-                  user[2]="Concluída"
-                }else{
-                  user[2]="Em progresso"
+                if (user[1] == 0) {
+                  user[2] = "Não começou";
+                } else if (user[1] == mission.max) {
+                  user[2] = "Concluída";
+                } else {
+                  user[2] = "Em progresso";
                 }
               }
-            })
+            });
           }
-        })
+        });
+      } else if (type == 2) {
+        const occurrenceStore = useOccurrenceStore();
+        console.log(logged);
+        console.log(occurrenceStore.getOccurrences);
+        if (
+          occurrenceStore.getOccurrences.find(
+            (occurrence) => occurrence.user == logged
+          )
+        ) {
+          console.log(1);
+          this.missions.forEach((mission) => {
+            if (mission.type == type) {
+              console.log(2);
+              mission.users.forEach((user) => {
+                if (user[0] == logged && user[1] < mission.max) {
+                  user[1] = mission.max;
+                  user[2] = "Concluída";
+                  console.log(3);
+                }
+              });
+            }
+          });
+        }
+        // this.missions.forEach((mission) => {
+        //   if (mission.type == type) {
+        //     mission.users.forEach((user) => {
+        //       if (user[0] == logged && user[1] < mission.max) {
+        //         if (user[1] == 0) {
+        //           user[2] = "Não começou";
+        //         } else if (user[1] == mission.max) {
+        //           user[2] = "Concluída";
+        //         } else {
+        //           user[2] = "Em progresso";
+        //         }
+        //       }
+        //     });
+        //   }
+        // });
       }
-    }
-    
-
+    },
   },
 });
-
-
 
 // import Vue from "vue";
 // import Vuex from "vuex";

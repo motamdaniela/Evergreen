@@ -64,8 +64,8 @@ export const useUsersStore = defineStore('user',{
         this.logged=logged.email
         // changes the login date
         let today = new Date();
-        logged.previousLoginDate=logged.loginDate
-        logged.loginDate=today.getFullYear()+""+((today.getMonth()+1).toString().length < 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length < 2 ? "0" + today.getDate() : today.getDate())
+        logged.previousLoginDate= +logged.loginDate
+        logged.loginDate= +today.getFullYear()+""+((today.getMonth()+1).toString().length < 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length < 2 ? "0" + today.getDate() : today.getDate())
         let yesterday= new Date(today)
         yesterday.setDate(yesterday.getDate() - 1)
         let yesterdayDate =yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate())
@@ -129,7 +129,7 @@ export const useUsersStore = defineStore('user',{
             school: school,
             previousLoginDate:0,
             streak: 0,
-            loginDate: today.getFullYear()+""+((today.getMonth()+1).toString().length != 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length != 2 ?"0" + today.getDate() : today.getDate()),
+            loginDate: +today.getFullYear()+""+((today.getMonth()+1).toString().length != 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length != 2 ?"0" + today.getDate() : today.getDate()),
             photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
             rewards: [],

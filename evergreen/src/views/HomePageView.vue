@@ -7,7 +7,17 @@
   <br />
   <v-dialog v-model="loginReward">
     <div class="fieldPklight modal">
-        <p>ola</p>
+      <div class="days">
+        Dia 1<div id="day1"></div>
+        Dia 2<div id="day2"></div>
+        Dia 3<div id="day3"></div>
+        Dia 4<div id="day4"></div>
+        Dia 5<div id="day5"></div>
+        Dia 6<div id="day6"></div>
+        Dia 7<div id="day7"></div>
+      </div>
+        <p>{{ loginPoints }}</p>
+        <button class="btn-page btnPk">Receber</button>
     </div>
   </v-dialog>
   <v-dialog v-model="open">
@@ -200,6 +210,7 @@ export default {
     };
   },
   created () {
+    console.log(this.users)
     this.user = this.userStore.getUsers.find((user)=> user.email == this.logged)
     this.themes = this.activityStore.getThemes;
     let today = new Date();
@@ -225,7 +236,9 @@ export default {
       this.loginReward=true
       this.userObj.streak=1
       // logged.points+=1
-    };
+    }else{
+      this.loginReward=true
+    }
   },
   updated () {
     console.log('updated')
@@ -255,7 +268,7 @@ export default {
       this.missionStore.completeMission(this.user, 0);
     },
     unsubscribe(activity) {
-      activity.users = activity.users.filter((e) => e != this.user);
+      activity.users = activity.users.filter((e) => e != this.logged);
       // this.activitiesSub
     },
     changeBtn(activity) {

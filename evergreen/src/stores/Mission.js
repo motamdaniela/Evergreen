@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia'
 import {useLocalStorage, useSessionStorage ,useStorage } from '@vueuse/core'
 import { useActivityStore } from './activity'
+import { useUsersStore } from './user'
 
 export const useMissionStore = defineStore('mission',{
   state: () => ({
@@ -30,9 +31,11 @@ export const useMissionStore = defineStore('mission',{
     },
 
     addUser(email){
+      const userStore=useUsersStore()
+      let user=userStore.getLogged
       this.missions.forEach(mission => {
-        if(!mission.users.find((m) => m[0] == email)){
-          mission.users.push([email,0,'Não começou'])
+        if(!mission.users.find((m) => m[0] == user)){
+          mission.users.push([user,0,'Não começou'])
         }
       })
     },

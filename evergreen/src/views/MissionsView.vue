@@ -58,13 +58,19 @@ export default {
       state: [],
     };
   },
+  created () {
+    console.log(this.state);
+  },
   methods: {
     complete(users, id) {
+      console.log(id)
       users.forEach((user) => {
         if (user[0] == this.usersStore.getLogged && id != undefined) {
+          console.log(1)
           this.state.push([id, user[2]]);
         }
       })
+      console.log(this.state);
     },
     redirect(n) {
       this.$router.push(n);

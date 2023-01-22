@@ -72,14 +72,10 @@ export const useUsersStore = defineStore('user',{
         // checks when was the last time the user logged in
         if(logged.previousLoginDate==yesterdayDate){
           logged.streak+=1
-          // logged.points+=logged.streak
-          // if(logged.streak==7){
-          //   logged.streak=0
-          // }
-
+          logged.received=false
         }else if(logged.previousLoginDate<logged.loginDate){
           logged.streak=1
-          // logged.points+=1
+          logged.received=false
         }
         
       }else{
@@ -129,12 +125,12 @@ export const useUsersStore = defineStore('user',{
             school: school,
             previousLoginDate:0,
             streak: 0,
+            received:false,
             loginDate: +today.getFullYear()+""+((today.getMonth()+1).toString().length != 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length != 2 ?"0" + today.getDate() : today.getDate()),
             photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
             rewards: [],
             state: 'active',
-            rank: 0,
             council: false
           }
           obj.rank=this.getUsersUser.length+1

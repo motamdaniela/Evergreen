@@ -17,7 +17,7 @@
         Dia 7<div id="day7"></div>
       </div>
         <p>{{ loginPoints }}</p>
-        <button class="btn-page btnPk">Receber</button>
+        <button class="btn-page btnPk" @click="receive">Receber</button>
     </div>
   </v-dialog>
   <v-dialog v-model="open">
@@ -50,6 +50,7 @@
     </div>
       
     </v-dialog>
+    <div v-if="activitiesSub.length > 0">
     <div class="list">
     <v-row>
     <div class="grid-item" v-for="activity in activitiesSub">
@@ -87,8 +88,14 @@
       </v-card>
     </div>
   </v-row>
-  </div>
-  <button class="btn-page btnP">Ver todas</button>
+</div>
+<button class="btn-page btnP">Ver todas</button>
+</div>
+<div v-else>
+<p>Não estás inscrito em nenhuma atividade!</p>
+<p>Vê o que o eco-escolas tem para te oferecer no</p>
+<RouterLink to="/Activities">plano de atividades</RouterLink>
+</div>
 
   <br /><br />
   <h1 class="gradientPink padding title"><span>Quadro de Líderes</span></h1>
@@ -113,7 +120,7 @@
   <br /><br />
   <h1 class="gradientRed padding title"><span>Sugestões de atividades</span></h1>
   <div class="list">
-    <div class="grid-item" v-for="activity in activitiesSuggest">
+    <div class="grid-item" v-for="activity in activitiesSug">
       <v-card
         class="mx-auto"
         max-width="400"
@@ -193,7 +200,7 @@ export default {
     const activityStore = useActivityStore();
     const missionStore = useMissionStore();
 
-    return { userStore, activityStore, missionStore };
+    return { userStore, activityStore, missionStore};
   },
   data() {
     return {
@@ -202,6 +209,7 @@ export default {
       users: this.userStore.getTop3,
       logged: this.userStore.getLogged,
       activitiesSub: [],
+      activitiesSug: [],
       user: this.userStore.getUsers.find((user)=> user.email == this.logged),
       userObj: this.userStore.getLoggedObj,
       open: false,
@@ -216,19 +224,22 @@ export default {
     let yesterday= new Date(today)
     yesterday.setDate(yesterday.getDate() - 1)
     let yesterdayDate =+(yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate()))
-    if(this.user.previousLoginDate==yesterdayDate){
-      this.loginPoints=this.user.streak
-      this.loginReward=true
-      if(this.user.streak==7){
-        this.user.streak=0
-      }
-      // this.user.streak+=1
-    }else if(this.user.previousLoginDate<this.user.loginDate){
-      this.loginPoints=1
-      this.loginReward=true
-      // this.user.streak=1
-      // logged.points+=1
-    }
+    if(this.user.received==false){
+
+      if(this.user.previousLoginDate==yesterdayDate){
+          this.loginPoints=this.user.streak
+          this.loginReward=true
+          if(this.user.streak==7){
+            this.user.streak=0
+          }
+          // this.user.streak+=1
+        }else if(this.user.previousLoginDate<this.user.loginDate){
+          this.loginPoints=1
+          this.loginReward=true
+          // this.user.streak=1
+          // logged.points+=1
+        }
+    } 
   },
   updated () {
     let activities = this.activityStore.getActivities;
@@ -250,6 +261,11 @@ export default {
     })
   },
   methods: {
+    receive(){
+      this.user.points+=this.loginPoints
+      this.loginReward= false
+      this.user.received=true
+    },
     subscribe(activity) {
       console.log(activity.id)
       this.activityStore.updateUsers(this.user, activity.id);
@@ -277,44 +293,49 @@ export default {
       this.userStore.edit(JSON.stringify(this.user))
     }
   },
-  computed: {
-    activitiesSuggest() {
-      let ListSuggest = [];
-      let newList = this.activities;
-      let newSuggest = '';
-      if(this.activitiesSub.length <= 0){
-        while(ListSuggest.length < 3){
-          newSuggest = this.activities[Math.floor(Math.random()*this.activities.length)]
-          ListSuggest.push(newSuggest);
-          if(newSuggest.length > 0){
-            newList.splice(newList.indexOf.find(newSuggest), 1)
-          }
-        }
-        return ListSuggest
-      }else{
-        let themesList = [];
-        this.activitiesSub.forEach(activity =>{
-          themesList.push(activity.idTheme)
-        })
-        newList = this.activities.filter(activity => activity.idTheme in themesList);
-        newList = newList.filter((activity) => !(activity.users.find(user => user == logged)))
+  // computed: {
+  //   activitiesSuggest() {
+  //     let ListSuggest = [];
+  //     let newList = this.activities;
+  //     let newSuggest = '';
+  //     if(this.activitiesSub.length <= 0){
+  //       while(ListSuggest.length < 3){
+  //         newSuggest = this.activities[Math.floor(Math.random()*this.activities.length)]
+  //         ListSuggest.push(newSuggest);
+  //         if(newSuggest.length > 0){
+  //           newList.splice(newList.indexOf.find(newSuggest), 1)
+  //         }
+  //       }
+  //       return ListSuggest
+  //     }else{
+  //       let themesList = [];
+  //       this.activitiesSub.forEach(activity =>{
+  //         themesList.push(activity.idTheme)
+  //       })
+  //       let newListThemes = this.activities.filter(activity => activity.idTheme in themesList);
+  //       newListThemes.forEach(activity =>{
+  //         if(!(this.activitiesSub.find((item) => item == activity))){
+  //           newList.push(activity);
+  //         }
+  //       })
 
-        while(ListSuggest.length < 3){
-          newSuggest = newList[Math.floor(Math.random()*newList.length)];
-          while(ListSuggest.find((activity) => activity == newSuggest)
-          ){
-            newSuggest = newList[Math.floor(Math.random()*newList.length)];
-          }
-          ListSuggest.push(newSuggest)
-          if(newList.length == 0){
-            return ListSuggest
-          }
-        }
-        return ListSuggest
+  //       while(ListSuggest.length < 3){
+  //         newSuggest = newList[Math.floor(Math.random()*newList.length)];
+  //         newList.splice(newList.indexOf(newList.find((item) => item == newSuggest)), 1)
+  //         while(ListSuggest.find(sug => sug == newSuggest)){
+  //           newSuggest = newList[Math.floor(Math.random()*newList.length)];
+  //         }
+  //         ListSuggest.push(newSuggest)
+  //         // if(newList.length == 0){
+  //         //   this.activitiesSug = ListSuggest
+  //         // }
+  //       }
+  //       this.activitiesSug = ListSuggest
 
-      }
-    }
-  },
+  //     }
+  //   }
+//   },
+
 };
 </script>
 

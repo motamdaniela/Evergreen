@@ -135,6 +135,7 @@ export const useUsersStore = defineStore('user',{
             rewards: [],
             state: 'active',
             rank: 0,
+            council: false
           }
           obj.rank=this.getUsersUser.length+1
           this.users.push(obj)

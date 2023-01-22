@@ -15,7 +15,8 @@
     "points": 0,
     "rewards": [],
     "state": "active",
-    "rank":0
+    "rank":0,
+    "council": false
   },
   {
     "type": "admin",

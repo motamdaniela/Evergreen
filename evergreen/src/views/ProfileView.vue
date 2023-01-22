@@ -22,8 +22,34 @@
         </v-card-actions>
       </v-card>
     </div>
+</v-dialog>
+
+
+
+<v-dialog v-model="dialogLists">
+      <div class="fieldPklight modal">
       
-    </v-dialog>
+      <v-card>
+        <v-card-actions>
+                <button class="btnRound btnPk" @click="dialog = false">
+                    <img style=" width: 15px " src="../assets/icons/icones/close.svg"/>
+                </button>
+            </v-card-actions>
+        <v-card-text>
+          <label for="username" class="semiTitle">Novo username</label>
+          <br />
+          <input class="input" id="username" v-model="newUsername" type="password" />
+          <br />
+          <label for="pass" class="semiTitle">Nova palavra-passe</label>
+          <br />
+          <input class="input" id="pass" v-model="newPassword" type="password" />
+        </v-card-text>
+        <v-card-actions>
+          <button class="btn-page btnG" @click="Edit" >Guardar</button>
+        </v-card-actions>
+      </v-card>
+    </div>
+</v-dialog>
 
 
 
@@ -37,14 +63,14 @@
     <p>{{ user.email }}</p>
   </div>
   <div>
-    <button v-on:click="givemetheanswer">Atividades Inscritas</button>
-    <button>Atividades Participadas</button>
-    <button>Ocorrências Feitas</button>
-    <button>Ocorrências Pendentes</button>
-    <button>Verificar presenças(alunos resp.)</button>
+    <button class="btn-page btnP">Atividades Inscritas</button>
+    <!-- <button class="btn-page btnP">Atividades Participadas</button> -->
+    <button class="btn-page btnPk">Ocorrências Feitas</button>
+    <button class="btn-page btnY">Ocorrências Pendentes</button>
   </div>
+  <button v-if="this.user.type == 'council'" class="btn-page btnR">Verificar presenças</button>
   <div>
-    <h2>Crachás</h2>
+    <h2 class="gradientGreen"> <span>Crachás</span></h2>
     <div class="badgesDiv">
       <img class="badge" v-for="badge in this.badges" :src="badge" />
     </div>
@@ -66,6 +92,7 @@ export default {
       user: "",
       badges: [],
       dialog: false,
+      dialogLists: false,
       newPassword: '',
       newUsername: '',
       newColor: '',

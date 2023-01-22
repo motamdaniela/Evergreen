@@ -124,6 +124,31 @@ export const useMissionStore = defineStore("mission", {
           });
         }
       } else if (type == 3) {
+        let pts;
+        const userStore = useUsersStore();
+        userStore.getUsers.forEach((user) => {
+          if (user.email == logged) {
+            pts = user.points;
+            this.missions.forEach((mission) => {
+              if (mission.type == type) {
+                mission.users.forEach((u) => {
+                  if (u[0] == logged && u[1] < mission.max) {
+                    if (u[1] < mission.max) {
+                      u[1] = pts;
+                    }
+                    if (u[1] == 0) {
+                      u[2] = "Não começou";
+                    } else if (u[1] == mission.max) {
+                      u[2] = "Concluída";
+                    } else {
+                      u[2] = "Em progresso";
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
       } else if (type == 4) {
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
@@ -147,25 +172,20 @@ export const useMissionStore = defineStore("mission", {
         userStore.getUsers.forEach((user) => {
           if (user.email == logged) {
             num = user.streak;
-            console.log(num);
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
                   if (u[0] == logged && u[1] < mission.max) {
+                    u[1] == points;
                     if (u[1] < mission.max) {
                       u[1] = num;
-                      console.log(num);
                     }
-                    console.log(num);
                     if (u[1] == 0) {
                       u[2] = "Não começou";
-                      console.log(num);
-                    } else if (u[1] == mission.max) {
+                    } else if (u[1] >= mission.max) {
                       u[2] = "Concluída";
-                      console.log("");
                     } else {
                       u[2] = "Em progresso";
-                      console.log(num);
                     }
                   }
                 });
@@ -185,6 +205,30 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 8) {
+        const userStore = useUsersStore();
+        let top3 = userStore.getTop3;
+        let index;
+        userStore.getUsers.forEach((user) => {
+          top3.forEach((top) => {
+            if (top.email == user.email && user.email == logged) {
+              index = top3.indexOf(top) + 1;
+              this.missions.forEach((mission) => {
+                if (mission.type == type) {
+                  mission.users.forEach((u) => {
+                    if (u[0] == logged) {
+                      u[1] = index;
+                      if (index > mission.max) {
+                        u[2] = "Em progresso";
+                      } else if (index == mission.max) {
+                        u[2] = "Concluída";
+                      }
+                    }
+                  });
+                }
+              });
+            }
+          });
+        });
       } else if (type == 9) {
         let num = 0;
         this.missions.forEach((mission) => {

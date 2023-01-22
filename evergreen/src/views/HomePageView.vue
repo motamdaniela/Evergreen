@@ -309,6 +309,9 @@ export default {
         this.activitiesSub.splice(index, 1);
       }
     });
+    this.missionStore.completeMission(this.logged, 1);
+    this.missionStore.completeMission(this.logged, 3);
+    this.missionStore.completeMission(this.logged, 8);
   },
   methods: {
     receive() {
@@ -316,6 +319,7 @@ export default {
       this.loginReward = false;
       this.user.received = true;
       this.missionStore.completeMission(this.logged, 6);
+
       if (this.user.streak == 7) {
         this.user.streak = 0;
       }

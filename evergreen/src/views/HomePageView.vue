@@ -210,39 +210,27 @@ export default {
     };
   },
   created () {
-    console.log(this.users)
     this.user = this.userStore.getUsers.find((user)=> user.email == this.logged)
     this.themes = this.activityStore.getThemes;
     let today = new Date();
     let yesterday= new Date(today)
     yesterday.setDate(yesterday.getDate() - 1)
-    let yesterdayDate =yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate())
-    if(this.userObj.previousLoginDate==yesterdayDate && this.userObj.streak==7){
-      this.loginPoints=7
+    let yesterdayDate =+(yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate()))
+    if(this.user.previousLoginDate==yesterdayDate){
+      this.loginPoints=this.user.streak
       this.loginReward=true
-      this.userObj.streak=0
-    }else if(this.userObj.previousLoginDate==yesterdayDate){
-      this.loginPoints=this.userObj.streak
-      this.loginReward=true
-      this.userObj.streak+=1
-      // logged.streak+=1
-      // logged.points+=logged.streak
-      // if(logged.streak==7){
-      //   logged.streak=0
-      // }
-
-    }else if(this.userObj.previousLoginDate<this.userObj.loginDate){
+      if(this.user.streak==7){
+        this.user.streak=0
+      }
+      // this.user.streak+=1
+    }else if(this.user.previousLoginDate<this.user.loginDate){
       this.loginPoints=1
       this.loginReward=true
-      this.userObj.streak=1
+      // this.user.streak=1
       // logged.points+=1
-    }else{
-      this.loginReward=true
     }
   },
   updated () {
-    console.log('updated')
-    console.log(this.activitiesSub)
     let activities = this.activityStore.getActivities;
     activities.forEach((activity) => {
       activity.users.forEach((user) => {

@@ -462,9 +462,9 @@
       "id": 13,
       "title": "Faz login todos os dias durante uma semana",
       "description": "Faz login todos os dias durante uma semana",
-      "reward": "/src/assets/images/faqRed.svg",
+      "reward": "/src/assets/images/day1color.svg",
       "users": [],
-      "max": 1,
+      "max": 7,
       "redirect": "/Home",
       "type": 6
     },

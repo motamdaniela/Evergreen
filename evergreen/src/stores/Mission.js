@@ -107,42 +107,112 @@ export const useMissionStore = defineStore("mission", {
         });
       } else if (type == 2) {
         const occurrenceStore = useOccurrenceStore();
-        console.log(logged);
-        console.log(occurrenceStore.getOccurrences);
         if (
           occurrenceStore.getOccurrences.find(
             (occurrence) => occurrence.user == logged
           )
         ) {
-          console.log(1);
           this.missions.forEach((mission) => {
             if (mission.type == type) {
-              console.log(2);
               mission.users.forEach((user) => {
                 if (user[0] == logged && user[1] < mission.max) {
                   user[1] = mission.max;
                   user[2] = "Concluída";
-                  console.log(3);
                 }
               });
             }
           });
         }
-        // this.missions.forEach((mission) => {
-        //   if (mission.type == type) {
-        //     mission.users.forEach((user) => {
-        //       if (user[0] == logged && user[1] < mission.max) {
-        //         if (user[1] == 0) {
-        //           user[2] = "Não começou";
-        //         } else if (user[1] == mission.max) {
-        //           user[2] = "Concluída";
-        //         } else {
-        //           user[2] = "Em progresso";
-        //         }
-        //       }
-        //     });
-        //   }
-        // });
+      } else if (type == 3) {
+      } else if (type == 4) {
+        const userStore = useUsersStore();
+        userStore.getUsers.forEach((user) => {
+          if (user.email == logged && user.council == true) {
+            this.missions.forEach((mission) => {
+              if (mission.type == type) {
+                mission.users.forEach((u) => {
+                  if (u[0] == logged && u[1] < mission.max) {
+                    u[1] = mission.max;
+                    u[2] = "Concluída";
+                  }
+                });
+              }
+            });
+          }
+        });
+      } else if (type == 5) {
+      } else if (type == 6) {
+        let num = 0;
+        const userStore = useUsersStore();
+        userStore.getUsers.forEach((user) => {
+          if (user.email == logged) {
+            num = user.streak;
+            console.log(num);
+            this.missions.forEach((mission) => {
+              if (mission.type == type) {
+                mission.users.forEach((u) => {
+                  if (u[0] == logged && u[1] < mission.max) {
+                    if (u[1] < mission.max) {
+                      u[1] = num;
+                      console.log(num);
+                    }
+                    console.log(num);
+                    if (u[1] == 0) {
+                      u[2] = "Não começou";
+                      console.log(num);
+                    } else if (u[1] == mission.max) {
+                      u[2] = "Concluída";
+                      console.log("");
+                    } else {
+                      u[2] = "Em progresso";
+                      console.log(num);
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
+      } else if (type == 7) {
+        this.missions.forEach((mission) => {
+          if (mission.type == type) {
+            mission.users.forEach((user) => {
+              if (user[0] == logged && user[1] < mission.max) {
+                user[1] = mission.max;
+                user[2] = "Concluída";
+              }
+            });
+          }
+        });
+      } else if (type == 8) {
+      } else if (type == 9) {
+        let num = 0;
+        this.missions.forEach((mission) => {
+          mission.users.forEach((user) => {
+            if (user[0] == logged && user[1] == mission.max) {
+              num += 1;
+            }
+          });
+        });
+
+        this.missions.forEach((mission) => {
+          if (mission.type == type) {
+            mission.users.forEach((user) => {
+              if (user[0] == logged && user[1] < mission.max) {
+                if (user[1] < mission.max) {
+                  user[1] = num;
+                }
+                if (user[1] == 0) {
+                  user[2] = "Não começou";
+                } else if (user[1] == mission.max) {
+                  user[2] = "Concluída";
+                } else {
+                  user[2] = "Em progresso";
+                }
+              }
+            });
+          }
+        });
       }
     },
   },

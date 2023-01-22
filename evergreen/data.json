@@ -358,7 +358,7 @@
       "title": "Participa na tua primeira atividade",
       "description":
         "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
-      "reward": "/src/assets/images/landingPink.svg",
+      "reward": "/src/assets/images/participar_1.png",
       "users": [],
       "max": 1,
       "redirect": "/Activities",
@@ -369,7 +369,7 @@
       "title": "Recebe 10 pontos",
       "description":
         "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
-      "reward": "/src/assets/images/joana.jpg",
+      "reward": "/src/assets/images/10_pontos.png",
       "users": [],
       "max": 10,
       "redirect": "/Activities",

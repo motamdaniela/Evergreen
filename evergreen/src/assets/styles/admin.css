@@ -75,3 +75,62 @@
 .searchbar{
     width: 40%;
 }
+
+.cardY{
+  background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #E9A13B;
+    border: 2px solid #050B06;
+    border-radius: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.cardP{
+  background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #c2afea;
+    border: 2px solid #050B06;
+    border-radius: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.cardR{
+  background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #E9674D;
+    border: 2px solid #050B06;
+    border-radius: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+}
+.cardG{
+  background-color: #FDF9F9;
+    box-shadow: 5px 5px 0px #62b273;
+    border: 2px solid #050B06;
+    border-radius: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.carddiv{
+  margin: 20px;
+  width: 25%;
+}
+
+.carddivTables{
+  margin: 20px;
+  width: 30%;
+}
+
+.icon{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: -40px;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -38,13 +38,12 @@ export const useUsersStore = defineStore("user", {
           usersU.push(user);
         }
       });
-      usersU.sort((a, b) => {
-        return b.points - a.points;
-      });
-      let top = [];
-      if (usersU.length < 3) {
-        for (let i = 0; i < usersU.length; i++) {
-          top.push(usersU[i]);
+      usersU.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
+      
+      let top=[]
+      if(usersU.length<3){
+        for (let i=0; i<usersU.length; i++){
+          top.push(usersU[i])
         }
       } else if (usersU.length >= 3) {
         for (let i = 0; i < 3; i++) {
@@ -181,6 +180,8 @@ export const useUsersStore = defineStore("user", {
             photo:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
             points: 0,
+            activities: 0,
+            occurences: 0,
             rewards: [],
             state: "active",
             council: false,

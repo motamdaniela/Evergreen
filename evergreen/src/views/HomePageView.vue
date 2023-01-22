@@ -255,6 +255,7 @@ export default {
           // this.user.streak+=1
         }else if(this.user.previousLoginDate<this.user.loginDate){
           this.loginPoints=1
+          this.user.streak=1
           this.loginClass="login"+this.user.streak
           this.loginReward=true
           // this.user.streak=1

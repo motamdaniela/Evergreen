@@ -115,6 +115,8 @@ export const useUsersStore = defineStore('user',{
       // checks if email has already been used
       if(this.users.find(user=>user.email==email)){
         alert("Email já existe")
+      }else if(this.users.find(user=>user.username==username)){
+        alert("Nome de utilizador já existe")
       }else{
         let today = new Date();
         // checks if passwords match

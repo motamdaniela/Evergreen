@@ -1,78 +1,72 @@
 {
-"predefinedUsers" : [
-  {
-    "type": "user",
-    "email": "user@gmail.com",
-    "username": "user",
-    "name": "user",
-    "password": "Esmad_2223",
-    "school": "ESMAD",
-    "previousLoginDate":0,
-    "loginDate": 0,
-    "streak": 0,
-    "received":false,
-    "photo":
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    "points": 0,
-    "rewards": [],
-    "state": "active",
-    "council": false
-  },
-  {
-    "type": "user",
-    "email": "user2@gmail.com",
-    "username": "user2",
-    "name": "user",
-    "password": "123",
-    "school": "ESMAD",
-    "previousLoginDate":"20230121",
-    "loginDate": "20230121",
-    "streak": 6,
-    "received":false,
-    "photo":
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    "points": 0,
-    "rewards": [],
-    "state": "active",
-    "council": false
-  },
-  {
-    "type": "admin",
-    "email": "admin@gmail.com",
-    "username": "admin",
-    "name": "admin",
-    "password": "Esmad_2223",
-    "data": "data",
-    "state": "active"
-  }
-],
-"activities" : [
+  "predefinedUsers": [
     {
-        "id": 0,
-        "photo": "https://cdn.pixabay.com/photo/2018/11/17/22/15/trees-3822149_960_720.jpg",
-        "idTheme": 3,
-        "date": "Fevereiro",
-        "desc1": "Falta de zonas de sombra",
-        "desc2":
-          "Criação de zonas de sombra",
-        "desc3":
-          "Plantação de 30 árvores no Campus2",
-        "title": "Plantação de árvores no Campus2",
-        "coordinator": "admin@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
-      },
+      "type": "user",
+      "email": "user@gmail.com",
+      "username": "user",
+      "name": "user",
+      "password": "Esmad_2223",
+      "school": "ESMAD",
+      "previousLoginDate": 0,
+      "loginDate": 0,
+      "streak": 0,
+      "received": false,
+      "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      "points": 0,
+      "rewards": [],
+      "state": "active",
+      "council": false
+    },
+    {
+      "type": "user",
+      "email": "user2@gmail.com",
+      "username": "user2",
+      "name": "user",
+      "password": "123",
+      "school": "ESMAD",
+      "previousLoginDate": "20230121",
+      "loginDate": "20230121",
+      "streak": 6,
+      "received": false,
+      "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      "points": 0,
+      "rewards": [],
+      "state": "active",
+      "council": false
+    },
+    {
+      "type": "admin",
+      "email": "admin@gmail.com",
+      "username": "admin",
+      "name": "admin",
+      "password": "Esmad_2223",
+      "data": "data",
+      "state": "active"
+    }
+  ],
+  "activities": [
+    {
+      "id": 0,
+      "photo": "https://cdn.pixabay.com/photo/2018/11/17/22/15/trees-3822149_960_720.jpg",
+      "idTheme": 3,
+      "date": "Fevereiro",
+      "desc1": "Falta de zonas de sombra",
+      "desc2": "Criação de zonas de sombra",
+      "desc3": "Plantação de 30 árvores no Campus2",
+      "title": "Plantação de árvores no Campus2",
+      "coordinator": "admin@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
+    },
     {
       "id": 1,
       "photo": "https://cdn.pixabay.com/photo/2015/05/31/11/24/tap-791172_960_720.jpg",
       "idTheme": 0,
       "date": "Maio",
       "desc1": "Excesso de água dispendida em tarefas domésticas",
-      "desc2":
-        "Sensibilizar a comunidade escolar para a necessidade de poupar água",
-      "desc3":
-        "Divulgação, nas redes sociais, de informação de sensibilização para a poupança de água",
+      "desc2": "Sensibilizar a comunidade escolar para a necessidade de poupar água",
+      "desc3": "Divulgação, nas redes sociais, de informação de sensibilização para a poupança de água",
       "title": "Sensibilização para poupança de água",
       "coordinator": "admin@gmail.com",
       "place": "Redes Sociais",
@@ -99,8 +93,7 @@
       "idTheme": 1,
       "date": "Maio",
       "desc1": "Falta de local para colocação de pilhas para reciclagem",
-      "desc2":
-        "Contribuir para a reciclagem de resíduos particularmente agressivos para o ambiente; Estimular estudantes e docentes a colocar as suas pilhas e baterias no recipiente próprio.",
+      "desc2": "Contribuir para a reciclagem de resíduos particularmente agressivos para o ambiente; Estimular estudantes e docentes a colocar as suas pilhas e baterias no recipiente próprio.",
       "desc3": "Colocação de pilhão na escola",
       "title": "Pilhão",
       "coordinator": "admin1@gmail.com",
@@ -109,172 +102,161 @@
       "participated": []
     },
     {
-        "id": 4,
-        "photo": "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-        "idTheme": 1,
-        "date": "Maio",
-        "desc1": "Ausência de ponto de reciclagem de papel junto à Assoc. de Estudantes",
-        "desc2":
-            "Promover a reciclagem de papel",
-        "desc3": "Colocação de ecoponto de papel junto à AEESMAD",
-        "title": "Ecoponto",
-        "coordinator": "admin1@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 4,
+      "photo": "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "idTheme": 1,
+      "date": "Maio",
+      "desc1": "Ausência de ponto de reciclagem de papel junto à Assoc. de Estudantes",
+      "desc2": "Promover a reciclagem de papel",
+      "desc3": "Colocação de ecoponto de papel junto à AEESMAD",
+      "title": "Ecoponto",
+      "coordinator": "admin1@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 5,
-        "photo": "https://cdn.pixabay.com/photo/2017/08/20/20/20/lamp-2663053_960_720.jpg",
-        "idTheme": 2,
-        "date": "Maio",
-        "desc1": "Zonas da escola com lâmpadas de consumo elevado de energia",
-        "desc2":
-            "Redução do consumo elétrico da ESMAD",
-        "desc3": "Substituição lâmpadas por LED",
-        "title": "Substituição lâmpadas por LED",
-        "coordinator": "admin2@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 5,
+      "photo": "https://cdn.pixabay.com/photo/2017/08/20/20/20/lamp-2663053_960_720.jpg",
+      "idTheme": 2,
+      "date": "Maio",
+      "desc1": "Zonas da escola com lâmpadas de consumo elevado de energia",
+      "desc2": "Redução do consumo elétrico da ESMAD",
+      "desc3": "Substituição lâmpadas por LED",
+      "title": "Substituição lâmpadas por LED",
+      "coordinator": "admin2@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 6,
-        "photo": "https://cdn.pixabay.com/photo/2019/03/30/01/41/garbage-4090382_960_720.jpg",
-        "idTheme": 3,
-        "date": "Maio",
-        "desc1": "Falta de local para colocação de lixo nas zonas ajardinadas",
-        "desc2":
-            "Contribuir para a limpeza dos espaços exteriores e estimular a utilização das zonas ajardinadas",
-        "desc3": "Colocação de 10 caixotes do lixo nas zonas relvadas da ESMAD",
-        "title": "Colocação de caixotes do lixo",
-        "coordinator": "admin@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 6,
+      "photo": "https://cdn.pixabay.com/photo/2019/03/30/01/41/garbage-4090382_960_720.jpg",
+      "idTheme": 3,
+      "date": "Maio",
+      "desc1": "Falta de local para colocação de lixo nas zonas ajardinadas",
+      "desc2": "Contribuir para a limpeza dos espaços exteriores e estimular a utilização das zonas ajardinadas",
+      "desc3": "Colocação de 10 caixotes do lixo nas zonas relvadas da ESMAD",
+      "title": "Colocação de caixotes do lixo",
+      "coordinator": "admin@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 7,
-        "photo": "https://cdn.pixabay.com/photo/2015/11/01/21/19/sea-1017596_960_720.jpg",
-        "idTheme": 4,
-        "date": "26/05/2022",
-        "desc1": "Falta de consciência que o lixo que é atirado para o chão, vai parar ao mar",
-        "desc2":
-            "Consciencializar a comunidade para a importância de não atirar lixo para o chão",
-        "desc3": "Pintura de sargetas na zona exterior da ESMAD",
-        "title": "O mar começa aqui",
-        "coordinator": "admin@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 7,
+      "photo": "https://cdn.pixabay.com/photo/2015/11/01/21/19/sea-1017596_960_720.jpg",
+      "idTheme": 4,
+      "date": "26/05/2022",
+      "desc1": "Falta de consciência que o lixo que é atirado para o chão, vai parar ao mar",
+      "desc2": "Consciencializar a comunidade para a importância de não atirar lixo para o chão",
+      "desc3": "Pintura de sargetas na zona exterior da ESMAD",
+      "title": "O mar começa aqui",
+      "coordinator": "admin@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 8,
-        "photo": "https://cdn.pixabay.com/photo/2016/11/03/15/27/socket-1794616_960_720.jpg",
-        "idTheme": 2,
-        "date": "Maio e Junho",
-        "desc1": "Equip. eletrónicos colocados em stand-by",
-        "desc2":
-            "Desligar equipamentos eletrónicos",
-        "desc3": "Divulgação, nas redes sociais, de informação de sensibilização para a poupança de energia",
-        "title": "Sensibilização para poupança de energia em casa",
-        "coordinator": "admin2@gmail.com",
-        "place": "Redes Sociais",
-        "users": [],
-        "participated": []
+      "id": 8,
+      "photo": "https://cdn.pixabay.com/photo/2016/11/03/15/27/socket-1794616_960_720.jpg",
+      "idTheme": 2,
+      "date": "Maio e Junho",
+      "desc1": "Equip. eletrónicos colocados em stand-by",
+      "desc2": "Desligar equipamentos eletrónicos",
+      "desc3": "Divulgação, nas redes sociais, de informação de sensibilização para a poupança de energia",
+      "title": "Sensibilização para poupança de energia em casa",
+      "coordinator": "admin2@gmail.com",
+      "place": "Redes Sociais",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 9,
-        "photo": "https://images.unsplash.com/photo-1613759007428-9d918fe2d36f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
-        "idTheme": 6,
-        "date": "Maio e Junho",
-        "desc1": "Necessidade de posters de divulgação e sensibilização",
-        "desc2":
-            "Criar posters de divulgação e sensibilização",
-        "desc3": "Posters de divulgação e sensibilização",
-        "title": "Concurso Eco-cartazes 2022",
-        "coordinator": "admin1@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 9,
+      "photo": "https://images.unsplash.com/photo-1613759007428-9d918fe2d36f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+      "idTheme": 6,
+      "date": "Maio e Junho",
+      "desc1": "Necessidade de posters de divulgação e sensibilização",
+      "desc2": "Criar posters de divulgação e sensibilização",
+      "desc3": "Posters de divulgação e sensibilização",
+      "title": "Concurso Eco-cartazes 2022",
+      "coordinator": "admin1@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 10,
-        "photo": "https://cdn.pixabay.com/photo/2014/05/21/15/17/bicycles-349788_960_720.jpg",
-        "idTheme": 5,
-        "date": "Junho",
-        "desc1": "Insuficiência de parques de estacionamento de bicicletas no exterior",
-        "desc2":
-            "Estimular a utilização de veículos não poluentes para aceder ao recinto escolar",
-        "desc3": "Colocação de mais 20 lugares de estacionamento de bicicletas no exterior",
-        "title": "BiciPark Outdoor",
-        "coordinator": "admin@gmail.com",
-        "place": "Câmara Municipal",
-        "users": [],
-        "participated": []
+      "id": 10,
+      "photo": "https://cdn.pixabay.com/photo/2014/05/21/15/17/bicycles-349788_960_720.jpg",
+      "idTheme": 5,
+      "date": "Junho",
+      "desc1": "Insuficiência de parques de estacionamento de bicicletas no exterior",
+      "desc2": "Estimular a utilização de veículos não poluentes para aceder ao recinto escolar",
+      "desc3": "Colocação de mais 20 lugares de estacionamento de bicicletas no exterior",
+      "title": "BiciPark Outdoor",
+      "coordinator": "admin@gmail.com",
+      "place": "Câmara Municipal",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 11,
-        "photo": "https://cdn.pixabay.com/photo/2021/11/21/14/50/bicycles-6814379_960_720.jpg",
-        "idTheme": 5,
-        "date": "Junho",
-        "desc1": "Ausência de espaços cobertos para estacionar bicicletas.",
-        "desc2":
-            "Estimular a utilização de veículos não poluentes para aceder ao recinto escolar",
-        "desc3": "Colocação de parque para 10 a 15 bicicletas na garagem coberta",
-        "title": "BiciPark Indoor",
-        "coordinator": "admin2@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 11,
+      "photo": "https://cdn.pixabay.com/photo/2021/11/21/14/50/bicycles-6814379_960_720.jpg",
+      "idTheme": 5,
+      "date": "Junho",
+      "desc1": "Ausência de espaços cobertos para estacionar bicicletas.",
+      "desc2": "Estimular a utilização de veículos não poluentes para aceder ao recinto escolar",
+      "desc3": "Colocação de parque para 10 a 15 bicicletas na garagem coberta",
+      "title": "BiciPark Indoor",
+      "coordinator": "admin2@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 12,
-        "photo": "https://cdn.pixabay.com/photo/2018/05/12/02/05/wooden-bench-3392273_960_720.jpg",
-        "idTheme": 3,
-        "date": "Junho e Julho",
-        "desc1": "Falta de bancos",
-        "desc2":
-            "Reutilização de paletes para criar bancos de jardim",
-        "desc3": "Criação de bancos",
-        "title": "Bancos de Jardim",
-        "coordinator": "admin2@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 12,
+      "photo": "https://cdn.pixabay.com/photo/2018/05/12/02/05/wooden-bench-3392273_960_720.jpg",
+      "idTheme": 3,
+      "date": "Junho e Julho",
+      "desc1": "Falta de bancos",
+      "desc2": "Reutilização de paletes para criar bancos de jardim",
+      "desc3": "Criação de bancos",
+      "title": "Bancos de Jardim",
+      "coordinator": "admin2@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 13,
-        "photo": "https://cdn.pixabay.com/photo/2014/07/30/22/53/notebook-405755_960_720.jpg",
-        "idTheme": 6,
-        "date": "Julho",
-        "desc1": "Necessidade de divulgar o projecto e incentivar os alunos a participar",
-        "desc2":
-            "Sensibilizar a comunidade escolar para o projecto Eco-Escolas",
-        "desc3": "Divulgar o projecto",
-        "title": "Divulgação do projecto",
-        "coordinator": "admin1@gmail.com",
-        "place": "Campus 2",
-        "users": [],
-        "participated": []
+      "id": 13,
+      "photo": "https://cdn.pixabay.com/photo/2014/07/30/22/53/notebook-405755_960_720.jpg",
+      "idTheme": 6,
+      "date": "Julho",
+      "desc1": "Necessidade de divulgar o projecto e incentivar os alunos a participar",
+      "desc2": "Sensibilizar a comunidade escolar para o projecto Eco-Escolas",
+      "desc3": "Divulgar o projecto",
+      "title": "Divulgação do projecto",
+      "coordinator": "admin1@gmail.com",
+      "place": "Campus 2",
+      "users": [],
+      "participated": []
     },
     {
-        "id": 14,
-        "photo": "https://cdn.pixabay.com/photo/2020/03/09/04/25/beach-4914403_960_720.jpg",
-        "idTheme": 4,
-        "date": "18/07/2022",
-        "desc1": "Lixo nas praias",
-        "desc2":
-            "Limpeza",
-        "desc3": "deixar a praia limpa",
-        "title": "Limpeza praia + separação resíduos",
-        "coordinator": "admin@gmail.com",
-        "place": "Praia",
-        "users": [],
-        "participated": []
+      "id": 14,
+      "photo": "https://cdn.pixabay.com/photo/2020/03/09/04/25/beach-4914403_960_720.jpg",
+      "idTheme": 4,
+      "date": "18/07/2022",
+      "desc1": "Lixo nas praias",
+      "desc2": "Limpeza",
+      "desc3": "deixar a praia limpa",
+      "title": "Limpeza praia + separação resíduos",
+      "coordinator": "admin@gmail.com",
+      "place": "Praia",
+      "users": [],
+      "participated": []
     }
   ],
-  "themes" : [
+  "themes": [
     {
       "id": 0,
       "name": "Água",
@@ -311,7 +293,7 @@
       "color": "#E9A13B"
     }
   ],
-  "types" : [
+  "types": [
     {
       "id": 0,
       "name": "Lâmpada fundida"
@@ -341,12 +323,11 @@
       "name": "Outro"
     }
   ],
-  "missions" : [
+  "missions": [
     {
       "id": 0,
       "title": "Inscreve-te na tua primeira atividade",
-      "description":
-        "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+      "description": "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
       "reward": "/src/assets/images/faqRed.svg",
       "users": [],
       "max": 1,
@@ -355,9 +336,38 @@
     },
     {
       "id": 1,
+      "title": "Inscreve-te em 5 atividade",
+      "description": "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+      "reward": "/src/assets/images/faqRed.svg",
+      "users": [],
+      "max": 5,
+      "redirect": "/Activities",
+      "type": 0
+    },
+    {
+      "id": 2,
+      "title": "Inscreve-te em 10 atividade",
+      "description": "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+      "reward": "/src/assets/images/faqRed.svg",
+      "users": [],
+      "max": 10,
+      "redirect": "/Activities",
+      "type": 0
+    },
+    {
+      "id": 3,
+      "title": "Inscreve-te em todas as atividade",
+      "description": "Escolhe uma atividade que gostavas de participar do plano de atividades e inscreve-te!",
+      "reward": "/src/assets/images/faqRed.svg",
+      "users": [],
+      "max": 15,
+      "redirect": "/Activities",
+      "type": 0
+    },
+    {
+      "id": 4,
       "title": "Participa na tua primeira atividade",
-      "description":
-        "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+      "description": "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
       "reward": "/src/assets/images/participar_1.png",
       "users": [],
       "max": 1,
@@ -365,10 +375,49 @@
       "type": 1
     },
     {
-      "id": 2,
+      "id": 5,
+      "title": "Participa em 5 atividades",
+      "description": "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+      "reward": "/src/assets/images/participar_5.png",
+      "users": [],
+      "max": 5,
+      "redirect": "/Activities",
+      "type": 1
+    },
+    {
+      "id": 6,
+      "title": "Participa em 10 atividades",
+      "description": "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+      "reward": "/src/assets/images/participar_10.png",
+      "users": [],
+      "max": 10,
+      "redirect": "/Activities",
+      "type": 1
+    },
+    {
+      "id": 7,
+      "title": "Participa em todas as atividades",
+      "description": "Depois de te insceveres numa atividade é sempre boa prática estares presente e participares na data!",
+      "reward": "/src/assets/images/participar_15.png",
+      "users": [],
+      "max": 15,
+      "redirect": "/Activities",
+      "type": 1
+    },
+    {
+      "id": 8,
+      "title": "Faz a tua primeira ocorrência",
+      "description": "Verifica se há algo de errado na tua escola e faz uma ocorrência!",
+      "reward": "/src/assets/images/registar_ocorrencia.png",
+      "users": [],
+      "max": 1,
+      "redirect": "/Occurrence",
+      "type": 2
+    },
+    {
+      "id": 9,
       "title": "Recebe 10 pontos",
-      "description":
-        "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
+      "description": "Ganha pelo menos 10 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
       "reward": "/src/assets/images/10_pontos.png",
       "users": [],
       "max": 10,
@@ -376,18 +425,97 @@
       "type": 3
     },
     {
-      "id": 3,
-      "title": "Inscreve-te em 5 atividades",
-      "description":
-        "Escolhe cinco atividade que gostavas de participar do plano de atividades e inscreve-te!",
-      "reward": "/src/assets/images/joana.jpg",
+      "id": 10,
+      "title": "Recebe 20 pontos",
+      "description": "Ganha pelo menos 20 pontos fazendo ocorrências, participando em atividades, entrando na conta cada dia ou completando missoes!",
+      "reward": "/src/assets/images/20_pontos.png",
       "users": [],
-      "max": 5,
+      "max": 20,
       "redirect": "/Activities",
-      "type": 0
+      "type": 3
+    },
+    {
+      "id": 11,
+      "title": "Inscreve-te no conselho Eco-escolas",
+      "description": "Inscreve-te no conselho Eco-escolas",
+      "reward": "/src/assets/images/inscrever_conselho.png",
+      "users": [],
+      "max": 1,
+      "redirect": "/Home",
+      "type": 4
+    },
+    {
+      "id": 12,
+      "title": "Preenche o questionario do Eco-escolas",
+      "description": "Preenche o questionario do Eco-escolas",
+      "reward": "/src/assets/images/preencher_questionario.png",
+      "users": [],
+      "max": 1,
+      "redirect": "/Form",
+      "type": 5
+    },
+    {
+      "id": 13,
+      "title": "Faz login todos os dias durante uma semana",
+      "description": "Faz login todos os dias durante uma semana",
+      "reward": "/src/assets/images/faqRed.svg",
+      "users": [],
+      "max": 1,
+      "redirect": "/Home",
+      "type": 6
+    },
+    {
+      "id": 14,
+      "title": "Edita o teu perfil",
+      "description": "Edita o teu perfil",
+      "reward": "/src/assets/images/editar_perfil.png",
+      "users": [],
+      "max": 1,
+      "redirect": "/Profile",
+      "type": 7
+    },
+    {
+      "id": 15,
+      "title": "Chega ao top 3 do quadro de líderes",
+      "description": "Chega ao top 3 do quadro de líderes",
+      "reward": "/src/assets/images/3rd_place.png",
+      "users": [],
+      "max": 3,
+      "redirect": "/Home",
+      "type": 8
+    },
+    {
+      "id": 16,
+      "title": "Chega ao top 2 do quadro de líderes",
+      "description": "Chega ao top 2 do quadro de líderes",
+      "reward": "/src/assets/images/2nd_place.png",
+      "users": [],
+      "max": 2,
+      "redirect": "/Home",
+      "type": 8
+    },
+    {
+      "id": 17,
+      "title": "Chega ao top 1 do quadro de líderes",
+      "description": "Chega ao top 1 do quadro de líderes",
+      "reward": "/src/assets/images/1st_place.png",
+      "users": [],
+      "max": 1,
+      "redirect": "/Home",
+      "type": 8
+    },
+    {
+      "id": 18,
+      "title": "Completa todas as missões",
+      "description": "Completa todas as missões",
+      "reward": "/src/assets/images/completar_tudo.png",
+      "users": [],
+      "max": 18,
+      "redirect": "/Missions",
+      "type": 9
     }
   ],
-  "typeM" : [
+  "typeM": [
     {
       "id": 0,
       "name": "inscrever atividades"
@@ -429,7 +557,7 @@
       "name": "completar tudo"
     }
   ],
-  "campus" : [
+  "campus": [
     {
       "id": 0,
       "name": "Campus 1"
@@ -439,7 +567,7 @@
       "name": "Campus 2"
     }
   ],
-  "schools" : [
+  "schools": [
     {
       "id": 0,
       "name": "ESMAD",
@@ -456,7 +584,7 @@
       "idCampus": 0
     }
   ],
-  "floors" : [
+  "floors": [
     {
       "id": 0,
       "idBuildings": [0, 1, 2],
@@ -473,7 +601,7 @@
       "idSchools": [0, 1]
     }
   ],
-  "classrooms" : [
+  "classrooms": [
     {
       "id": 208,
       "idSchools": [0, 1, 2],
@@ -482,7 +610,7 @@
     }
   ],
 
-  "buildings" : [
+  "buildings": [
     {
       "id": 0,
       "name": "B",
@@ -531,5 +659,3 @@
     }
   ]
 }
-
-

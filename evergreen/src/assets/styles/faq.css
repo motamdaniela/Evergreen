@@ -6,6 +6,7 @@
     flex-direction: row;
     justify-content: space-around;
     margin: 30px 50px;
+    
 }
 /* .asFAQs{
     width: 95%;
@@ -22,7 +23,7 @@
     margin-bottom:-70px;
     z-index: 1;
     margin-right: 50%;
-    margin-left: 45%;
+    margin-left: 40%;
 }
 .faqText{
     background-color: #FDFAF9;
@@ -30,10 +31,8 @@
     border-radius: 15px;
     padding:40px;
     margin:30px; 
-    width: 480px;
-
-    /* width: 100%; */
-
+    /* width: 400px; */
+    width: 27vw;
     height: 280px;
     text-align: left;
 }

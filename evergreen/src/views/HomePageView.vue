@@ -102,10 +102,10 @@
       </div>
       <button class="btn-page btnP">Ver todas</button>
     </div>
-    <div v-else>
+    <div v-else id="noActivities">
       <p>Não estás inscrito em nenhuma atividade!</p>
       <p>Vê o que o eco-escolas tem para te oferecer no</p>
-      <RouterLink to="/Activities">plano de atividades</RouterLink>
+      <RouterLink to="/Activities">Plano de Atividades</RouterLink>
     </div>
 
     <br /><br />
@@ -177,7 +177,7 @@
     <h1 class="gradientOrange padding title">
       <span>Preenche o questionário deste ano</span>
     </h1>
-    <div class="fieldY">
+    <div class="fieldY" id="qstnField">
       <v-row>
         <v-col>
           <img
@@ -187,7 +187,7 @@
           />
         </v-col>
         <v-col>
-          <p>
+          <p id="qstnText">
             Este questionário servirá para compreender melhor os hábitos e as
             opiniões dos alunos desta escola, em aspectos relacionados com o
             ambiente.As tuas respostas são muito importantes!Só juntos poderemos
@@ -196,7 +196,7 @@
             Eco-Escola agradece a tua colaboração.
           </p>
           <RouterLink to="/Form">
-            <button class="btn-page btnY">Preencher</button>
+            <button class="btn-page btnY" id="qstnBtn">Preencher</button>
           </RouterLink>
         </v-col>
       </v-row>

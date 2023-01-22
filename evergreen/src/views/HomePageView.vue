@@ -297,17 +297,17 @@ export default {
           themesList.push(activity.idTheme)
         })
         newList = this.activities.filter(activity => activity.idTheme in themesList);
-        
-        newSuggest = newList[Math.floor(Math.random()*newList.length)];
+        newList = newList.filter((activity) => !(activity.users.find(user => user == logged)))
 
         while(ListSuggest.length < 3){
-          if(!(newSuggest.users.find((user)=> user == this.logged))){
-            if(ListSuggest.length > 0 && newList.length == 0){
-            newSuggest = this.activities[Math.floor(Math.random()*this.activities.length)]
-            }
-            ListSuggest.push(newSuggest);
-            let item = newList.find((item) => item == newSuggest)
-            newList.splice(newList.indexOf(item), 1)
+          newSuggest = newList[Math.floor(Math.random()*newList.length)];
+          while(ListSuggest.find((activity) => activity == newSuggest)
+          ){
+            newSuggest = newList[Math.floor(Math.random()*newList.length)];
+          }
+          ListSuggest.push(newSuggest)
+          if(newList.length == 0){
+            return ListSuggest
           }
         }
         return ListSuggest

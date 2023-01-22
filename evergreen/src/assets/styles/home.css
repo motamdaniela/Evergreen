@@ -1,249 +1,253 @@
 /* buttons */
-.btn-card{
-    border: 2px solid #050B06;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-weight: bold;
-    border-radius: 30px;
-    height: 30px; 
-    margin-bottom: 25px;
+.btn-card {
+  border: 2px solid #050b06;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: bold;
+  border-radius: 30px;
+  height: 30px;
+  margin-bottom: 25px;
 }
 
 /* atividades */
-#activities{
-    display:flex;
+#activities {
+  display: flex;
 }
-.cardText{
-    text-align: left;
-    font-weight: bold;
+.cardText {
+  text-align: left;
+  font-weight: bold;
 }
-.alignCard{
-    display: flex;
-    justify-content: space-between;
+.alignCard {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* modal login bonus colors */
 
-.login1>#day1{
-    content: url("../images/day1color.svg");
+.login1 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login2>#day1{
-    content: url("../images/day1color.svg");
+.login2 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login2>#day2{
-    content: url("../images/day2color.svg");
+.login2 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login3>#day1{
-    content: url("../images/day1color.svg");
+.login3 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login3>#day2{
-    content: url("../images/day2color.svg");
+.login3 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login3>#day3{
-    content: url("../images/day3color.svg");
+.login3 > #day3 {
+  content: url("../images/day3color.svg");
 }
 
-.login4>#day1{
-    content: url("../images/day1color.svg");
+.login4 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login4>#day2{
-    content: url("../images/day2color.svg");
+.login4 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login4>#day3{
-    content: url("../images/day3color.svg");
+.login4 > #day3 {
+  content: url("../images/day3color.svg");
 }
 
-.login4>#day4{
-    content: url("../images/day4color.svg");
+.login4 > #day4 {
+  content: url("../images/day4color.svg");
 }
 
-.login5>#day1{
-    content: url("../images/day1color.svg");
+.login5 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login5>#day2{
-    content: url("../images/day2color.svg");
+.login5 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login5>#day3{
-    content: url("../images/day3color.svg");
+.login5 > #day3 {
+  content: url("../images/day3color.svg");
 }
 
-.login5>#day4{
-    content: url("../images/day4color.svg");
+.login5 > #day4 {
+  content: url("../images/day4color.svg");
 }
 
-.login5>#day5{
-    content: url("../images/day5color.svg");
+.login5 > #day5 {
+  content: url("../images/day5color.svg");
 }
 
-.login6>#day1{
-    content: url("../images/day1color.svg");
+.login6 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login6>#day2{
-    content: url("../images/day2color.svg");
+.login6 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login6>#day3{
-    content: url("../images/day3color.svg");
+.login6 > #day3 {
+  content: url("../images/day3color.svg");
 }
 
-.login6>#day4{
-    content: url("../images/day4color.svg");
+.login6 > #day4 {
+  content: url("../images/day4color.svg");
 }
 
-.login6>#day5{
-    content: url("../images/day5color.svg");
+.login6 > #day5 {
+  content: url("../images/day5color.svg");
 }
 
-.login6>#day6{
-    content: url("../images/day6color.svg");
+.login6 > #day6 {
+  content: url("../images/day6color.svg");
 }
 
-.login7>#day1{
-    content: url("../images/day1color.svg");
+.login7 > #day1 {
+  content: url("../images/day1color.svg");
 }
 
-.login7>#day2{
-    content: url("../images/day2color.svg");
+.login7 > #day2 {
+  content: url("../images/day2color.svg");
 }
 
-.login7>#day3{
-    content: url("../images/day3color.svg");
+.login7 > #day3 {
+  content: url("../images/day3color.svg");
 }
 
-.login7>#day4{
-    content: url("../images/day4color.svg");
+.login7 > #day4 {
+  content: url("../images/day4color.svg");
 }
 
-.login7>#day5{
-    content: url("../images/day5color.svg");
+.login7 > #day5 {
+  content: url("../images/day5color.svg");
 }
 
-.login7>#day6{
-    content: url("../images/day6color.svg");
+.login7 > #day6 {
+  content: url("../images/day6color.svg");
 }
 
-.login7>#day7{
-    content: url("../images/day7color.svg");
+.login7 > #day7 {
+  content: url("../images/day7color.svg");
 }
 
 /* end of modal login bonus colors */
 
-#noActivities{
-    font-weight: 500;
+#noActivities {
+  font-weight: 500;
 }
 
-#card{
-    border: 2px solid #050B06;
-    border-radius: 30px;
-    box-shadow: 10px 10px 0px #c2afea; 
-}
-#cardR{
-    border: 2px solid #050B06;
-    border-radius: 30px;
-    box-shadow: 10px 10px 0px #E9674D; 
+.group {
+  display: flex;
+  justify-content: space-around;
 }
 
-.image{
-    margin: 10px;
-    border-radius: 30px;
+#card {
+  border: 2px solid #050b06;
+  border-radius: 30px;
+  box-shadow: 10px 10px 0px #c2afea;
+}
+#cardR {
+  border: 2px solid #050b06;
+  border-radius: 30px;
+  box-shadow: 10px 10px 0px #e9674d;
 }
 
-#imgQstn{
-    width: 100%;
+.image {
+  margin: 10px;
+  border-radius: 30px;
+}
+
+#imgQstn {
+  width: 100%;
 }
 
 /* ranking */
-.board{
-    background-color: #FDF9F9;
-    border: 2px solid #09140B;
-    border-radius: 50px;
-    box-shadow: 10px 10px 0px #EFC6CD;
-    height: 90px;
-    margin: 30px 150px;
-    
+.board {
+  background-color: #fdf9f9;
+  border: 2px solid #09140b;
+  border-radius: 50px;
+  box-shadow: 10px 10px 0px #efc6cd;
+  height: 90px;
+  margin: 30px 150px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px;
-    font-weight: bold;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  font-weight: bold;
+  text-align: left;
 }
 
-#profilePic{
-    height: 50px;
-    width: 50px;
-    border-radius: 50px;
-    border: 2px solid #09140B;
-    box-shadow: 2px 2px 0px #09140B;
+#profilePic {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px solid #09140b;
+  box-shadow: 2px 2px 0px #09140b;
 }
 
-.firstPlace{
-    width: 50px;
-    height: 50px;
-    background-color: #F6D9B0;
-    border-radius: 50px;
-    border: 2px solid #09140B;
-    box-shadow: 2px 2px 0px #09140B;
+.firstPlace {
+  width: 50px;
+  height: 50px;
+  background-color: #f6d9b0;
+  border-radius: 50px;
+  border: 2px solid #09140b;
+  box-shadow: 2px 2px 0px #09140b;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.secondPlace{
-    width: 50px;
-    height: 50px;
-    background-color: #E6DFF6;
-    border-radius: 50px;
-    border: 2px solid #09140B;
-    box-shadow: 2px 2px 0px #09140B;
+.secondPlace {
+  width: 50px;
+  height: 50px;
+  background-color: #e6dff6;
+  border-radius: 50px;
+  border: 2px solid #09140b;
+  box-shadow: 2px 2px 0px #09140b;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.thirdPlace{
-    width: 50px;
-    height: 50px;
-    background-color: #F6C3B8;
-    border-radius: 50px;
-    border: 2px solid #09140B;
-    box-shadow: 2px 2px 0px #09140B;
+.thirdPlace {
+  width: 50px;
+  height: 50px;
+  background-color: #f6c3b8;
+  border-radius: 50px;
+  border: 2px solid #09140b;
+  box-shadow: 2px 2px 0px #09140b;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.list{
-    /* margin-right: auto;
+.list {
+  /* margin-right: auto;
     margin-left: auto; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-#qstnText{
-    font-weight: 500;
-    margin: 35px 15px;
+#qstnText {
+  font-weight: 500;
+  margin: 35px 15px;
 }
 
-#qstnField{
-    margin: 40px 10vw;
+#qstnField {
+  margin: 40px 10vw;
 }
 
-#qstnBtn{
-    margin: 40px 15px;
+#qstnBtn {
+  margin: 40px 15px;
 }

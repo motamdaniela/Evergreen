@@ -58,9 +58,10 @@
     </v-dialog>
 
     <div v-if="activitiesSub.length > 0">
-      <div class="list">
-          <div class="grid-item" v-for="activity in activitiesSub">
-            <v-card class="mx-auto" max-width="400" id="card">
+      <v-sheet class="mx-auto" max-width="1500">
+        <v-slide-group class="group" show-arrows>
+          <v-slide-group-item v-for="activity in activitiesSub" class="element">
+            <v-card class="mx-auto card" max-width="400" id="card">
               <v-img
                 class="image"
                 :src="activity.photo"
@@ -96,9 +97,52 @@
                 </div>
               </div>
             </v-card>
-          </div>
-      </div>
-      <button class="btn-page btnP"><RouterLink to="/Activities">Ver todas</RouterLink></button>
+          </v-slide-group-item>
+        </v-slide-group>
+      </v-sheet>
+      <!-- <div class="list">
+        <div class="grid-item" v-for="activity in activitiesSub">
+          <v-card class="mx-auto" max-width="400" id="card">
+            <v-img
+              class="image"
+              :src="activity.photo"
+              height="219"
+              width="380"
+              cover
+            >
+            </v-img>
+
+            <div class="cardText">
+              <v-card-title>
+                <b>{{ activity.title }}</b>
+              </v-card-title>
+
+              <div class="alignCard">
+                <v-card-subtitle>
+                  <div>
+                    <b
+                      >{{ activity.date }} <br />
+                      {{ activity.place }}</b
+                    >
+                  </div>
+                </v-card-subtitle>
+                <button
+                  class="btn-card btnP"
+                  @click="
+                    open = true;
+                    this.activity = activity;
+                  "
+                >
+                  Ver mais
+                </button>
+              </div>
+            </div>
+          </v-card>
+        </div>
+      </div> -->
+      <button class="btn-page btnP">
+        <RouterLink to="/Activities">Ver todas</RouterLink>
+      </button>
     </div>
     <div v-else id="noActivities">
       <p>Não estás inscrito em nenhuma atividade!</p>
@@ -130,6 +174,7 @@
     <h1 class="gradientRed padding title">
       <span>Sugestões de atividades</span>
     </h1>
+
     <div class="list">
       <div class="grid-item" v-for="activity in activitiesSug">
         <v-card class="mx-auto" max-width="400" id="cardR">

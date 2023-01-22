@@ -184,17 +184,6 @@ export const useUsersStore = defineStore("user", {
             activities: 0,
             occurences: 0,
             rewards: [],
-<<<<<<< HEAD
-            state: 'active',
-            council: false
-          }
-          obj.rank=this.getUsersUser.length+1
-          this.users.push(obj)
-          this.logged=obj.email
-          // alert('henlo')
-        }else{
-          alert('Password errada')
-=======
             state: "active",
             council: false,
           };
@@ -203,7 +192,6 @@ export const useUsersStore = defineStore("user", {
           alert("henlo");
         } else {
           alert("Password errada");
->>>>>>> a6b55a065274a83f9fe5564a91a99a03f1d58afa
         }
       }
     },

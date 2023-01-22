@@ -13,7 +13,9 @@
     "received":false,
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    "points": 0,
+    "points": 5,
+    "activities": 2,
+    "occurences": 3,
     "rewards": [],
     "state": "active",
     "council": false
@@ -31,7 +33,9 @@
     "received":false,
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    "points": 0,
+    "points": 5,
+    "activities": 4,
+    "occurences": 1,
     "rewards": [],
     "state": "active",
     "council": false

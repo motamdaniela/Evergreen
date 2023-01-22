@@ -7,8 +7,8 @@
         {{ user.name }} <br />
         {{ user.school }}
       </p>
-      <p>15 atividades</p>
-      <p>7 ocorrências</p>
+      <p>{{ user.activities }} atividades</p>
+      <p>{{ user.occurences }} ocorrências</p>
       <p>{{ user.points }} pontos</p>
       <div class="firstPlace">{{ users.indexOf(user) + 1 }}</div>
     </div>
@@ -39,9 +39,12 @@ export default {
     });
       this.users=list;
     
-    this.users.sort((a, b) => {
-      return b.points - a.points;
-    });
+    // this.users.sort((a, b) => {
+    //   return b.points - a.points;
+    // });
+
+    this.users.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
+    
   },
   methods: {},
 };

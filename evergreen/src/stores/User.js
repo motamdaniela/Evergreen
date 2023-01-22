@@ -38,9 +38,8 @@ export const useUsersStore = defineStore('user',{
           usersU.push(user)
         }
       });
-      usersU.sort((a, b) => {
-        return b.points - a.points;
-      });
+      usersU.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
+      
       let top=[]
       if(usersU.length<3){
         for (let i=0; i<usersU.length; i++){
@@ -129,6 +128,8 @@ export const useUsersStore = defineStore('user',{
             loginDate: +today.getFullYear()+""+((today.getMonth()+1).toString().length != 2 ? "0" + (today.getMonth() + 1) : (today.getMonth()+1))+""+(today.getDate().toString().length != 2 ?"0" + today.getDate() : today.getDate()),
             photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
+            activities: 0,
+            occurences: 0,
             rewards: [],
             state: 'active',
             council: false
@@ -136,7 +137,7 @@ export const useUsersStore = defineStore('user',{
           obj.rank=this.getUsersUser.length+1
           this.users.push(obj)
           this.logged=obj.email
-          alert('henlo')
+          // alert('henlo')
         }else{
           alert('Password errada')
         }

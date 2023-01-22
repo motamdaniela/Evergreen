@@ -122,10 +122,11 @@
             </div>
             <input
               class="input"
+              id="outro"
               placeholder="Outro"
               type="text"
               v-model="form.other"
-              required
+              required disabled
             />
           </div>
         </v-window-item>
@@ -272,6 +273,13 @@ export default {
     id(id) {
       let select = document.querySelector('input[name="type"]:checked');
       select.id = id;
+      
+      const text = document.querySelector('#outro')
+      if(select.id == 6){
+        text.removeAttribute('disabled', '');
+      } else {
+        text.setAttribute('disabled','');
+      }
     },
     // idk if this works
     previewFiles(e) {

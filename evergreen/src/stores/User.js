@@ -138,7 +138,6 @@ export const useUsersStore = defineStore('user',{
             state: 'active',
             council: false
           }
-          obj.rank=this.getUsersUser.length+1
           this.users.push(obj)
           this.logged=obj.email
           alert('henlo')

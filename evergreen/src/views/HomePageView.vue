@@ -58,21 +58,18 @@
     </v-dialog>
 
     <div v-if="activitiesSub.length > 0">
-    <div class="list">
-    <div class="grid-item" v-for="activity in activitiesSub">
-      <v-card
-        class="mx-auto"
-        max-width="400"
-        id="card"
-      >
-        <v-img
-          class="image"
-          :src="activity.photo"
-          height="219"
-          width="380"
-          cover
-        >
-        </v-img>
+      <div class="list">
+        <v-row>
+          <div class="grid-item" v-for="activity in activitiesSub">
+            <v-card class="mx-auto" max-width="400" id="card">
+              <v-img
+                class="image"
+                :src="activity.photo"
+                height="219"
+                width="380"
+                cover
+              >
+              </v-img>
 
               <div class="cardText">
                 <v-card-title>
@@ -101,75 +98,82 @@
               </div>
             </v-card>
           </div>
+        </v-row>
       </div>
-      <button class="btn-page btnP"><RouterLink to="/Activities">Ver todas</RouterLink></button>
+      <button class="btn-page btnP">Ver todas</button>
+    </div>
+    <div v-else>
+      <p>Não estás inscrito em nenhuma atividade!</p>
+      <p>Vê o que o eco-escolas tem para te oferecer no</p>
+      <RouterLink to="/Activities">plano de atividades</RouterLink>
+    </div>
+
+    <br /><br />
+    <h1 class="gradientPink padding title"><span>Quadro de Líderes</span></h1>
+    <div v-for="user in users">
+      <div class="board">
+        <img :src="user.photo" id="profilePic" />
+        <p>
+          {{ user.name }} <br />
+          {{ user.school }}
+        </p>
+        <p>{{ user.activities }} atividades</p>
+        <p>{{ user.occurences }} ocorrências</p>
+        <p>{{ user.points }} pontos</p>
+        <div class="firstPlace">{{ users.indexOf(user) + 1 }}</div>
       </div>
-
-  <div v-else id="noActivities">
-    <p>Não estás inscrito em nenhuma atividade!</p>
-    <p>Vê o que o eco-escolas tem para te oferecer no</p>
-    <RouterLink to="/Activities">Plano de Atividades</RouterLink>
-  </div>
-
-</div>
-  <br /><br />
-  <h1 class="gradientPink padding title"><span>Quadro de Líderes</span></h1>
-  <div v-for="user in users">
-    <div class="board">
-      <img :src=user.photo id="profilePic" />
-      <p>
-        {{ user.name }} <br />
-        {{ user.school }}
-      </p>
-      <p>{{ user.activities }} atividades</p>
-      <p>{{ user.occurences }} ocorrências</p>
-      <p>{{ user.points }} pontos</p>
-      <div class="firstPlace">{{ users.indexOf(user) + 1 }}</div>
     </div>
     <button class="btn-page btnPk">
       <RouterLink to="/Rank">Ver todos</RouterLink>
     </button>
+    <!-- ^ this mf nao vai pro meio T-T  -->
 
-  <br /><br />
-  <h1 class="gradientRed padding title"><span>Sugestões de atividades</span></h1>
-  <div class="list">
-    <div class="grid-item" v-for="activity in activitiesSug">
-      <v-card
-        class="mx-auto"
-        max-width="400"
-        id="cardR"
-      >
-        <v-img
-          class="image"
-          :src="activity.photo"
-          height="219"
-          width="380"
-          cover
-        >
-        </v-img>
-
-        <div class="cardText">
-          <v-card-title>
-            <b>{{ activity.title }}</b>
-          </v-card-title>
-
-          <div class="alignCard">
-            <v-card-subtitle>
-              <div>
-                <b
-                  >{{ activity.date }} <br />
-                  {{ activity.place }}</b
-                >
-              </div>
-            </v-card-subtitle>
-            <button class="btn-card btnR" @click="open = true; this.activity = activity">Ver mais</button>
-          </div>
-        </div>
-      </v-card>
-    </div>
-  </div>
     <br /><br />
+    <h1 class="gradientRed padding title">
+      <span>Sugestões de atividades</span>
+    </h1>
+    <div class="list">
+      <div class="grid-item" v-for="activity in activitiesSug">
+        <v-card class="mx-auto" max-width="400" id="cardR">
+          <v-img
+            class="image"
+            :src="activity.photo"
+            height="219"
+            width="380"
+            cover
+          >
+          </v-img>
 
+          <div class="cardText">
+            <v-card-title>
+              <b>{{ activity.title }}</b>
+            </v-card-title>
+
+            <div class="alignCard">
+              <v-card-subtitle>
+                <div>
+                  <b
+                    >{{ activity.date }} <br />
+                    {{ activity.place }}</b
+                  >
+                </div>
+              </v-card-subtitle>
+              <button
+                class="btn-card btnR"
+                @click="
+                  open = true;
+                  this.activity = activity;
+                "
+              >
+                Ver mais
+              </button>
+            </div>
+          </div>
+        </v-card>
+      </div>
+    </div>
+
+    <br /><br />
     <h1 class="gradientOrange padding title">
       <span>Preenche o questionário deste ano</span>
     </h1>
@@ -216,13 +220,11 @@
 import { useUsersStore } from "@/stores/User";
 import { useActivityStore } from "@/stores/Activity";
 import { useMissionStore } from "@/stores/Mission";
-
 export default {
   setup() {
     const userStore = useUsersStore();
     const activityStore = useActivityStore();
     const missionStore = useMissionStore();
-
     return { userStore, activityStore, missionStore };
   },
   data() {
@@ -279,7 +281,6 @@ export default {
         }
         this.loginClass = "login" + this.user.streak;
         this.loginReward = true;
-
         // this.user.streak+=1
       } else if (this.user.previousLoginDate < this.user.loginDate) {
         this.loginPoints = 1;
@@ -302,7 +303,6 @@ export default {
         }
       });
     });
-
     this.activitiesSub.forEach((act) => {
       if (!act.users.find((user) => user == this.logged)) {
         let index = this.activitiesSub.indexOf(act);
@@ -319,7 +319,6 @@ export default {
       this.loginReward = false;
       this.user.received = true;
       this.missionStore.completeMission(this.logged, 6);
-
       if (this.user.streak == 7) {
         this.user.streak = 0;
       }
@@ -379,7 +378,6 @@ export default {
   //           newList.push(activity);
   //         }
   //       })
-
   //       while(ListSuggest.length < 3){
   //         newSuggest = newList[Math.floor(Math.random()*newList.length)];
   //         newList.splice(newList.indexOf(newList.find((item) => item == newSuggest)), 1)
@@ -387,12 +385,11 @@ export default {
   //           newSuggest = newList[Math.floor(Math.random()*newList.length)];
   //         }
   //         ListSuggest.push(newSuggest)
-  //         if(newList.length == 0){
-  //           this.activitiesSug = ListSuggest
-  //         }
+  //         // if(newList.length == 0){
+  //         //   this.activitiesSug = ListSuggest
+  //         // }
   //       }
   //       this.activitiesSug = ListSuggest
-
   //     }
   //   }
   //   },

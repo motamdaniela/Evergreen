@@ -138,6 +138,10 @@
 
 /* end of modal login bonus colors */
 
+#noActivities{
+    font-weight: 500;
+}
+
 #card{
     border: 2px solid #050B06;
     border-radius: 30px;
@@ -222,6 +226,24 @@
 }
 
 .list{
-    margin-right: auto;
-    margin-left: auto;
+    /* margin-right: auto;
+    margin-left: auto; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#qstnText{
+    font-weight: 500;
+    margin: 35px 15px;
+}
+
+#qstnField{
+    margin: 40px 10vw;
+}
+
+#qstnBtn{
+    margin: 40px 15px;
 }

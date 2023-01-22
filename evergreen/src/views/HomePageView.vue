@@ -60,7 +60,7 @@
     
     <div v-if="activitiesSub.length > 0">
     <div class="list">
-    <v-row>
+    <!-- <v-row> -->
     <div class="grid-item" v-for="activity in activitiesSub">
       <v-card
         class="mx-auto"
@@ -95,14 +95,14 @@
         </div>
       </v-card>
     </div>
-  </v-row>
+  <!-- </v-row> -->
 </div>
-<button class="btn-page btnP">Ver todas</button>
+<button class="btn-page btnP"><RouterLink to="/Activities">Ver todas</RouterLink></button>
 </div>
-<div v-else>
+<div v-else id="noActivities">
 <p>Não estás inscrito em nenhuma atividade!</p>
 <p>Vê o que o eco-escolas tem para te oferecer no</p>
-<RouterLink to="/Activities">plano de atividades</RouterLink>
+<RouterLink to="/Activities">Plano de Atividades</RouterLink>
 </div>
 
   <br /><br />
@@ -166,18 +166,19 @@
 
   <br /><br />
   <h1 class="gradientOrange padding title"><span>Preenche o questionário deste ano</span></h1>
-  <div class="fieldY">
+  <div class="fieldY" id="qstnField">
     <v-row>
       <v-col>
         <img id="imgQstn" class="image" src="https://cdn.pixabay.com/photo/2018/03/23/22/06/question-mark-3255118_960_720.jpg"/>
       </v-col>
       <v-col>
-        <p>
-          Este questionário servirá para compreender melhor os hábitos e as opiniões dos alunos desta escola, em aspectos relacionados com o ambiente.As tuas respostas são muito importantes!Só juntos poderemos detectar os principais problemas e contribuir para que a nossa escola se transforme num local ainda mais agradável.O Conselho Eco-Escola agradece a tua colaboração.
+        <p id="qstnText">
+          Este questionário servirá para compreender melhor os hábitos e as opiniões dos alunos desta escola, em aspectos relacionados com o ambiente. As tuas respostas são muito importantes!
+          <br>Só juntos poderemos detectar os principais problemas e contribuir para que a nossa escola se transforme num local ainda mais agradável. O Conselho Eco-Escola agradece a tua colaboração.
         </p>
         <RouterLink to="/Form">
 
-          <button class="btn-page btnY">Preencher</button>
+          <button class="btn-page btnY" id="qstnBtn">Preencher</button>
         </RouterLink>
       </v-col>
     </v-row>
@@ -353,15 +354,15 @@ export default {
   //           newSuggest = newList[Math.floor(Math.random()*newList.length)];
   //         }
   //         ListSuggest.push(newSuggest)
-  //         // if(newList.length == 0){
-  //         //   this.activitiesSug = ListSuggest
-  //         // }
+  //         if(newList.length == 0){
+  //           this.activitiesSug = ListSuggest
+  //         }
   //       }
   //       this.activitiesSug = ListSuggest
 
   //     }
   //   }
-//   },
+  // },
 
 };
 </script>

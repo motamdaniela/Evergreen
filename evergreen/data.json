@@ -19,6 +19,23 @@
     "council": false
   },
   {
+    "type": "user",
+    "email": "user2@gmail.com",
+    "username": "user2",
+    "name": "user",
+    "password": "123",
+    "school": "ESMAD",
+    "previousLoginDate":"20230121",
+    "loginDate": "20230121",
+    "streak": 0,
+    "photo":
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    "points": 0,
+    "rewards": [],
+    "state": "active",
+    "rank":0
+  },
+  {
     "type": "admin",
     "email": "admin@gmail.com",
     "username": "admin",

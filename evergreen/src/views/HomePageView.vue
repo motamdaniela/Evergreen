@@ -20,6 +20,7 @@
         <button class="btn-page btnPk" @click="receive">Receber</button>
     </div>
   </v-dialog>
+
   <v-dialog v-model="open">
       <div class="fieldPklight modal">
         <button class="btn-page btnPklight" @click="open = false">x</button>
@@ -50,6 +51,7 @@
     </div>
       
     </v-dialog>
+    
     <div v-if="activitiesSub.length > 0">
     <div class="list">
     <v-row>

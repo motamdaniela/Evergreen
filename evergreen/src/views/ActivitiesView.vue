@@ -63,14 +63,14 @@
       <img src="../assets/images/flowerP.svg" />Plano de Atividades
     </h1>
     <button class="btn-card btnP" @click="pleeekkkkk">Filtrar</button>
-    <v-checkbox
-      label="red"
-      color="red"
-      value="red"
-      hide-details
-    ></v-checkbox>
+    <v-checkbox v-for="theme in themes" 
+    :label="theme.name" 
+    :color="theme.color" 
+    :value="theme.id"
+    hide-details>
+    </v-checkbox>
 
-    <v-select
+    <!-- <v-select
     v-model="themesPicked"
     :items="themeNames"
     label="Select"
@@ -80,7 +80,7 @@
           value="title"
           disabled
         ></v-list-item>
-</v-select>
+</v-select> -->
 
 
 
@@ -169,6 +169,7 @@ export default {
       themes: this.activityStore.getThemes,
       themeNames: [],
       themesPicked: [],
+      themesColors:[],
     };
   },
   methods: {

@@ -40,8 +40,8 @@ export const useMissionStore = defineStore("mission", {
     },
 
     completeMission(logged, type) {
-      // for missions type subscribe activity
       if (type == 0) {
+        // for missions type subscribe activity
         const activityStore = useActivityStore();
 
         let actList = [];
@@ -74,6 +74,7 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 1) {
+        // for missions type participate activity
         const activityStore = useActivityStore();
 
         let actList = [];
@@ -106,6 +107,7 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 2) {
+        // for missions type 1st occurrence
         const occurrenceStore = useOccurrenceStore();
         if (
           occurrenceStore.getOccurrences.find(
@@ -124,6 +126,7 @@ export const useMissionStore = defineStore("mission", {
           });
         }
       } else if (type == 3) {
+        // for missions type win points
         let pts;
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
@@ -150,6 +153,7 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 4) {
+        // for missions type subscribe council
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
           if (user.email == logged && user.council == true) {
@@ -166,7 +170,9 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 5) {
+        // for missions type fill form
       } else if (type == 6) {
+        // for missions type login every day for a week
         let num = 0;
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
@@ -194,6 +200,7 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 7) {
+        // for missions type edit profile
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
@@ -205,6 +212,7 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 8) {
+        // for missions type get to x rank
         const userStore = useUsersStore();
         let top3 = userStore.getTop3;
         let index;
@@ -230,6 +238,7 @@ export const useMissionStore = defineStore("mission", {
           });
         });
       } else if (type == 9) {
+        // for missions type do all missions
         let num = 0;
         this.missions.forEach((mission) => {
           mission.users.forEach((user) => {
@@ -253,6 +262,8 @@ export const useMissionStore = defineStore("mission", {
                 } else {
                   user[2] = "Em progresso";
                 }
+              } else if (user[0] == logged && user[1] == mission.max) {
+                user[2] = "Concluída";
               }
             });
           }

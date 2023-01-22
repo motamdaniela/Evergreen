@@ -26,21 +26,53 @@
 
 
 
-<v-dialog v-model="dialogLists">
-      <div class="fieldPklight modal">
-      
-        <div v-for="activity in activitiesSub">
-          <div class="fieldG">
-            {{ activity.title }}
-            helloooo
+    <v-dialog v-model="dialogAct" scrollable class="fieldP" >
+        <v-card >
+          <v-card-actions>
+            <button @click="dialogAct = false" class="btn-page btnP">
+              X
+            </button>
+          </v-card-actions>
+          <v-card-text style="height: 400px;">
+            <div v-for="activity in activitiesSub" class="fieldP">
+              <img class="img" :src="activity.photo" />
+              {{ activity.title }}
+            </div>
+              </v-card-text>
+        </v-card>
+    </v-dialog>
 
-          </div>
+    <v-dialog v-model="dialogOcDone" scrollable class="fieldPk" >
+        <v-card >
+          <v-card-actions>
+            <button @click="dialogOcDone = false" class="btn-page btnPk">
+              X
+            </button>
+          </v-card-actions>
+          <v-card-text style="height: 400px;">
+            <div v-for="oc in ocsDone" class="fieldPk">
+              <img class="img" :src="oc.photo" />
+              {{ oc.description }}
+            </div>
+              </v-card-text>
+        </v-card>
+    </v-dialog>
 
-        </div>
-      
-
-    </div>
-</v-dialog>
+    <v-dialog v-model="dialogOcPend" scrollable class="fieldY" >
+        <v-card >
+          <v-card-actions>
+            <button @click="dialogOcPend = false" class="btn-page btnY">
+              X
+            </button>
+          </v-card-actions>
+          <v-card-text style="height: 400px;">
+            <div v-for="oc in ocsPend" class="fieldY">
+              <img class="img" :src="oc.photo" />
+              {{ oc.description }}
+            </div>
+              </v-card-text>
+        </v-card>
+    </v-dialog>
 
 
 
@@ -54,10 +86,10 @@
     <p>{{ user.email }}</p>
   </div>
   <div>
-    <button class="btn-page btnP" @click="dialogLists = true">Atividades Inscritas</button>
+    <button class="btn-page btnP" @click="dialogAct = true">Atividades Inscritas</button>
     <!-- <button class="btn-page btnP">Atividades Participadas</button> -->
-    <button class="btn-page btnPk">Ocorrências Feitas</button>
-    <button class="btn-page btnY">Ocorrências Pendentes</button>
+    <button class="btn-page btnPk" @click="dialogOcDone = true">Ocorrências Feitas</button>
+    <button class="btn-page btnY" @click="dialogOcPend = true">Ocorrências Pendentes</button>
   </div>
   <button v-if="this.user.type == 'council'" class="btn-page btnR">Verificar presenças</button>
   <div>
@@ -71,27 +103,37 @@
 <script>
 import { useActivityStore } from "@/stores/Activity";
 import { useUsersStore } from "@/stores/User";
+import { useOccurrenceStore } from "@/stores/Occurrence";
 
 
 export default {
   setup() {
     const userStore = useUsersStore();
     const activityStore = useActivityStore();
+    const occurrenceStore = useOccurrenceStore();
 
-    return { userStore, activityStore };
+
+    return { userStore, activityStore, occurrenceStore };
   },
   data() {
     return {
       user: "",
       badges: [],
       dialog: false,
-      dialogLists: true,
+      dialogAct: false,
+      dialogOcDone: false,
+      dialogOcPend: false,
       newPassword: '',
       newUsername: '',
       newColor: '',
       newShape: '',
       activitiesSub: [],
-      activities: this.activityStore.getActivities
+      ocsDone: [],
+      ocsPend: [],
+      activities: this.activityStore.getActivities,
+      occurences: this.occurrenceStore.getOccurrences,
+      logged: this.userStore.getLogged,
+
     };
   },
   created() {
@@ -104,24 +146,6 @@ export default {
               this.badges.push(r)
 
         })
-      }
-    });
-
-    this.activities = this.activityStore.getActivities;
-    this.activities.forEach((activity) => {
-      activity.users.forEach((user) => {
-        if (user == this.logged) {
-          if(!this.activitiesSub.find(act=>act.id==activity.id)){
-            this.activitiesSub.push(activity);
-          }
-        }
-      });
-    });
-
-    this.activitiesSub.forEach((act) => {
-      if(!act.users.find(user=>user==this.logged)){
-        let index = this.activitiesSub.indexOf(act);
-        this.activitiesSub.splice(index, 1);
       }
     });
   },
@@ -142,7 +166,19 @@ export default {
         let index = this.activitiesSub.indexOf(act);
         this.activitiesSub.splice(index, 1);
       }
-    });;
+    });
+
+    this.occurences = this.occurrenceStore.getOccurrences;
+    let userOcs = this.occurences.filter((Occurence) => Occurence.user == this.logged)
+
+    userOcs.forEach((oc) => {
+      if(oc.state == 'pending'){
+        this.ocsPend.push(oc)
+      }else if(oc.state == 'solved'){
+        this.ocsDone.push(oc)
+      }
+    })
+    
   },
   methods: {
     Edit() {

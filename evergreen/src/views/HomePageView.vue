@@ -7,19 +7,26 @@
   <br />
   <v-dialog v-model="loginReward">
     <div class="fieldPklight modal">
-      <div class="days">
-        Dia 1<div id="day1"></div>
-        Dia 2<div id="day2"></div>
-        Dia 3<div id="day3"></div>
-        Dia 4<div id="day4"></div>
-        Dia 5<div id="day5"></div>
-        Dia 6<div id="day6"></div>
-        Dia 7<div id="day7"></div>
+      <div :class="loginClass">
+        <label class="tab">Dia 1</label>
+        <img src="../assets/images/day1_5.svg" id="day1">
+        <label class="tab">Dia 2</label>
+        <img src="../assets/images/day2_6.svg" id="day2">
+        <label class="tab">Dia 3</label>
+        <img src="../assets/images/day3_7.svg" id="day3">
+        <label class="tab">Dia 4</label>
+        <img src="../assets/images/day4.svg" id="day4">
+        <label class="tab">Dia 5</label>
+        <img src="../assets/images/day1_5.svg" id="day5">
+        <label class="tab">Dia 6</label>
+        <img src="../assets/images/day2_6.svg" id="day6">
+        <label class="tab">Dia 7</label>
+        <img src="../assets/images/day3_7.svg" id="day7">
       </div>
-        <p>{{ loginPoints }}</p>
         <button class="btn-page btnPk" @click="receive">Receber</button>
     </div>
   </v-dialog>
+
   <v-dialog v-model="open">
       <div class="fieldPklight modal">
         <button class="btn-page btnPklight" @click="open = false">x</button>
@@ -50,6 +57,7 @@
     </div>
       
     </v-dialog>
+    
     <div v-if="activitiesSub.length > 0">
     <div class="list">
     <v-row>
@@ -215,6 +223,7 @@ export default {
       open: false,
       loginReward: false, 
       loginPoints:0,
+      loginClass:""
     };
   },
   created () {
@@ -227,14 +236,29 @@ export default {
     if(this.user.received==false){
 
       if(this.user.previousLoginDate==yesterdayDate){
-          this.loginPoints=this.user.streak
+        if(this.user.streak==1){
+          this.loginPoints=1
+        }else if(this.user.streak==2){
+          this.loginPoints=3
+        }else if(this.user.streak==3){
+          this.loginPoints=5
+        }else if(this.user.streak==4){
+          this.loginPoints=8
+        }else if(this.user.streak==5){
+          this.loginPoints=10
+        }else if(this.user.streak==6){
+          this.loginPoints=15
+        }else if(this.user.streak==7){
+          this.loginPoints=20
+        }
+          this.loginClass="login"+this.user.streak
           this.loginReward=true
-          if(this.user.streak==7){
-            this.user.streak=0
-          }
+          
           // this.user.streak+=1
         }else if(this.user.previousLoginDate<this.user.loginDate){
           this.loginPoints=1
+          this.user.streak=1
+          this.loginClass="login"+this.user.streak
           this.loginReward=true
           // this.user.streak=1
           // logged.points+=1
@@ -265,6 +289,9 @@ export default {
       this.user.points+=this.loginPoints
       this.loginReward= false
       this.user.received=true
+      if(this.user.streak==7){
+            this.user.streak=0
+          }
     },
     subscribe(activity) {
       console.log(activity.id)

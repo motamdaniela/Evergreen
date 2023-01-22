@@ -29,25 +29,16 @@
 <v-dialog v-model="dialogLists">
       <div class="fieldPklight modal">
       
-      <v-card>
-        <v-card-actions>
-                <button class="btnRound btnPk" @click="dialog = false">
-                    <img style=" width: 15px " src="../assets/icons/icones/close.svg"/>
-                </button>
-            </v-card-actions>
-        <v-card-text>
-          <label for="username" class="semiTitle">Novo username</label>
-          <br />
-          <input class="input" id="username" v-model="newUsername" type="password" />
-          <br />
-          <label for="pass" class="semiTitle">Nova palavra-passe</label>
-          <br />
-          <input class="input" id="pass" v-model="newPassword" type="password" />
-        </v-card-text>
-        <v-card-actions>
-          <button class="btn-page btnG" @click="Edit" >Guardar</button>
-        </v-card-actions>
-      </v-card>
+        <div v-for="activity in activitiesSub">
+          <div class="fieldG">
+            {{ activity.title }}
+            helloooo
+
+          </div>
+
+        </div>
+      
+
     </div>
 </v-dialog>
 
@@ -63,7 +54,7 @@
     <p>{{ user.email }}</p>
   </div>
   <div>
-    <button class="btn-page btnP">Atividades Inscritas</button>
+    <button class="btn-page btnP" @click="dialogLists = true">Atividades Inscritas</button>
     <!-- <button class="btn-page btnP">Atividades Participadas</button> -->
     <button class="btn-page btnPk">Ocorrências Feitas</button>
     <button class="btn-page btnY">Ocorrências Pendentes</button>
@@ -78,25 +69,29 @@
 </template>
 
 <script>
-import { RouterLink } from "vue-router";
+import { useActivityStore } from "@/stores/Activity";
 import { useUsersStore } from "@/stores/User";
+
 
 export default {
   setup() {
     const userStore = useUsersStore();
+    const activityStore = useActivityStore();
 
-    return { userStore };
+    return { userStore, activityStore };
   },
   data() {
     return {
       user: "",
       badges: [],
       dialog: false,
-      dialogLists: false,
+      dialogLists: true,
       newPassword: '',
       newUsername: '',
       newColor: '',
       newShape: '',
+      activitiesSub: [],
+      activities: this.activityStore.getActivities
     };
   },
   created() {
@@ -112,11 +107,44 @@ export default {
       }
     });
 
+    this.activities = this.activityStore.getActivities;
+    this.activities.forEach((activity) => {
+      activity.users.forEach((user) => {
+        if (user == this.logged) {
+          if(!this.activitiesSub.find(act=>act.id==activity.id)){
+            this.activitiesSub.push(activity);
+          }
+        }
+      });
+    });
+
+    this.activitiesSub.forEach((act) => {
+      if(!act.users.find(user=>user==this.logged)){
+        let index = this.activitiesSub.indexOf(act);
+        this.activitiesSub.splice(index, 1);
+      }
+    });
+  },
+  updated () {
+    this.activities = this.activityStore.getActivities;
+    this.activities.forEach((activity) => {
+      activity.users.forEach((user) => {
+        if (user == this.logged) {
+          if(!this.activitiesSub.find(act=>act.id==activity.id)){
+            this.activitiesSub.push(activity);
+          }
+        }
+      });
+    });
+
+    this.activitiesSub.forEach((act) => {
+      if(!act.users.find(user=>user==this.logged)){
+        let index = this.activitiesSub.indexOf(act);
+        this.activitiesSub.splice(index, 1);
+      }
+    });;
   },
   methods: {
-    givemetheanswer(){
-      console.log(this.user.idRewards);
-    },
     Edit() {
       this.user.username = this.newUsername;
       this.user.password = this.newPassword;

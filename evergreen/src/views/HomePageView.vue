@@ -17,7 +17,7 @@
         Dia 7<div id="day7"></div>
       </div>
         <p>{{ loginPoints }}</p>
-        <button class="btn-page btnPk">Receber</button>
+        <button class="btn-page btnPk" @click="receive">Receber</button>
     </div>
   </v-dialog>
   <v-dialog v-model="open">
@@ -193,7 +193,7 @@ export default {
     const activityStore = useActivityStore();
     const missionStore = useMissionStore();
 
-    return { userStore, activityStore, missionStore };
+    return { userStore, activityStore, missionStore};
   },
   data() {
     return {
@@ -216,19 +216,22 @@ export default {
     let yesterday= new Date(today)
     yesterday.setDate(yesterday.getDate() - 1)
     let yesterdayDate =+(yesterday.getFullYear()+""+((yesterday.getMonth()+1).toString().length < 2 ? "0" + (yesterday.getMonth() + 1) : (yesterday.getMonth()+1))+""+(yesterday.getDate().toString().length < 2 ? "0" + yesterday.getDate() : yesterday.getDate()))
-    if(this.user.previousLoginDate==yesterdayDate){
-      this.loginPoints=this.user.streak
-      this.loginReward=true
-      if(this.user.streak==7){
-        this.user.streak=0
-      }
-      // this.user.streak+=1
-    }else if(this.user.previousLoginDate<this.user.loginDate){
-      this.loginPoints=1
-      this.loginReward=true
-      // this.user.streak=1
-      // logged.points+=1
-    }
+    if(this.user.received==false){
+
+      if(this.user.previousLoginDate==yesterdayDate){
+          this.loginPoints=this.user.streak
+          this.loginReward=true
+          if(this.user.streak==7){
+            this.user.streak=0
+          }
+          // this.user.streak+=1
+        }else if(this.user.previousLoginDate<this.user.loginDate){
+          this.loginPoints=1
+          this.loginReward=true
+          // this.user.streak=1
+          // logged.points+=1
+        }
+    } 
   },
   updated () {
     let activities = this.activityStore.getActivities;
@@ -250,6 +253,11 @@ export default {
     })
   },
   methods: {
+    receive(){
+      this.user.points+=this.loginPoints
+      this.loginReward= false
+      this.user.received=true
+    },
     subscribe(activity) {
       console.log(activity.id)
       this.activityStore.updateUsers(this.user, activity.id);

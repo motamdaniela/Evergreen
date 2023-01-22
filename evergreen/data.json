@@ -10,12 +10,12 @@
     "previousLoginDate":0,
     "loginDate": 0,
     "streak": 0,
+    "received":false,
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "points": 0,
     "rewards": [],
     "state": "active",
-    "rank":0,
     "council": false
   },
   {
@@ -28,12 +28,13 @@
     "previousLoginDate":"20230121",
     "loginDate": "20230121",
     "streak": 0,
+    "received":false,
     "photo":
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "points": 0,
     "rewards": [],
     "state": "active",
-    "rank":0
+    "council": false
   },
   {
     "type": "admin",

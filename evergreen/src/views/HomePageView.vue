@@ -169,7 +169,7 @@
   </div>
 
   <br /><br />
-  <div v-if="this.user.type == 'council'">
+  <div v-if="this.user.council">
     <h1 class="padding title"><span>Já és membro do conselho!</span></h1>
     <button class="btn-page btnP" @click="SubConselho" >Desistir</button>
   </div>
@@ -281,10 +281,10 @@ export default {
     },
     SubConselho(){
       this.user = this.userStore.getUsers.find((user)=> user.email == this.logged)
-      if(this.user.type != 'council'){
-        this.user.type = 'council'
+      if(this.user.council){
+        this.user.council = false
       }else{
-        this.user.type = 'user'
+        this.user.council = true
       }
       this.userStore.edit(JSON.stringify(this.user))
     }
@@ -304,14 +304,15 @@ export default {
         }
         return ListSuggest
       }else{
-        while(ListSuggest.length < 3){
-          let themesList = [];
-          this.activitiesSub.forEach(activity =>{
-            themesList.push(activity.idTheme)
-          })
-          newList = this.activities.filter(activity => activity.idTheme in themesList);
+        let themesList = [];
+        this.activitiesSub.forEach(activity =>{
+          themesList.push(activity.idTheme)
+        })
+        newList = this.activities.filter(activity => activity.idTheme in themesList);
+        
+        newSuggest = newList[Math.floor(Math.random()*newList.length)];
 
-          newSuggest = newList[Math.floor(Math.random()*newList.length)];
+        while(ListSuggest.length < 3){
           if(!(newSuggest.users.find((user)=> user == this.logged))){
             if(ListSuggest.length > 0 && newList.length == 0){
             newSuggest = this.activities[Math.floor(Math.random()*this.activities.length)]

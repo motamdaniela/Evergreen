@@ -56,6 +56,7 @@ export default {
       ),
       users: "",
       state: [],
+      logged: this.usersStore.getLogged,
     };
   },
   methods: {
@@ -144,6 +145,7 @@ export default {
     addBadge(missionReward) {
       if (!this.user.rewards.find((reward) => reward == missionReward)) {
         this.user.rewards.push(missionReward);
+        this.missionStore.completeMission(this.logged, 9);
       }
     },
   },

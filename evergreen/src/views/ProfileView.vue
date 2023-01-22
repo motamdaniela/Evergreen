@@ -11,7 +11,7 @@
         <v-card-text>
           <label for="username" class="semiTitle">Novo username</label>
           <br />
-          <input class="input" id="username" v-model="newUsername" type="password" />
+          <input class="input" id="username" v-model="newUsername" type="text" />
           <br />
           <label for="pass" class="semiTitle">Nova palavra-passe</label>
           <br />

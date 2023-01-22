@@ -59,7 +59,6 @@
 
     <div v-if="activitiesSub.length > 0">
       <div class="list">
-        <v-row>
           <div class="grid-item" v-for="activity in activitiesSub">
             <v-card class="mx-auto" max-width="400" id="card">
               <v-img
@@ -98,9 +97,8 @@
               </div>
             </v-card>
           </div>
-        </v-row>
       </div>
-      <button class="btn-page btnP">Ver todas</button>
+      <button class="btn-page btnP"><RouterLink to="/Activities">Ver todas</RouterLink></button>
     </div>
     <div v-else id="noActivities">
       <p>Não estás inscrito em nenhuma atividade!</p>

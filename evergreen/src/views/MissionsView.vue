@@ -1,11 +1,11 @@
 <template>
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
-    <fieldset :class="MissionsState(mission.reward,mission)">
-      <div class="badge" :class="BadgeState(mission.reward,mission)">
+    <fieldset :class="MissionsState(mission.reward, mission)">
+      <div class="badge" :class="BadgeState(mission.reward, mission)">
         <img
           class="badgebg"
-          :class="BgState(mission.reward,mission)"
+          :class="BgState(mission.reward, mission)"
           :src="mission.reward"
         />
       </div>
@@ -39,7 +39,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import { useMissionStore } from "@/stores/Mission";
-import { useUsersStore } from "@/stores/User"
+import { useUsersStore } from "@/stores/User";
 export default {
   setup() {
     const missionStore = useMissionStore();
@@ -58,61 +58,91 @@ export default {
       state: [],
     };
   },
-  created () {
-    console.log(this.state);
-  },
   methods: {
     complete(users, id) {
-      console.log(id)
       users.forEach((user) => {
         if (user[0] == this.usersStore.getLogged && id != undefined) {
-          console.log(1)
           this.state.push([id, user[2]]);
         }
-      })
-      console.log(this.state);
+      });
     },
     redirect(n) {
       this.$router.push(n);
     },
-    MissionsState(missionReward,mission) {
-        if (this.user.rewards.find((reward) => reward == missionReward)) {
-          return "fieldG";
-        } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged ) || 
-         !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged) )
-         {
-          return "fieldY";
-        } else if(mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
-          return "fieldR";
-        }
+    MissionsState(missionReward, mission) {
+      if (this.user.rewards.find((reward) => reward == missionReward)) {
+        return "fieldG";
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+        ) ||
+        (!this.user.rewards.find((reward) => reward == missionReward) &&
+          mission.users.find(
+            (user) =>
+              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+          ))
+      ) {
+        return "fieldY";
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+        )
+      ) {
+        return "fieldR";
+      }
     },
-    BadgeState(missionReward,mission) {
+    BadgeState(missionReward, mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
-      } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged)|| !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged))
-       {
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+        ) ||
+        (!this.user.rewards.find((reward) => reward == missionReward) &&
+          mission.users.find(
+            (user) =>
+              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+          ))
+      ) {
         return "badgeY";
-      } else if(
-        mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
-          return "badgeR";
-        }
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+        )
+      ) {
+        return "badgeR";
+      }
     },
-    BgState(missionReward,mission) {
+    BgState(missionReward, mission) {
       if (this.user.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
-      } else if (mission.users.find((user) => user[2] == "Em progresso" && user[0] == this.usersStore.getLogged)|| !this.user.rewards.find((reward) => reward == missionReward) && 
-          mission.users.find((user) => user[2] == "Concluída" && user[0] == this.usersStore.getLogged))
-       {
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+        ) ||
+        (!this.user.rewards.find((reward) => reward == missionReward) &&
+          mission.users.find(
+            (user) =>
+              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+          ))
+      ) {
         return "bgY";
-      } else if(
-        mission.users.find((user) => user[2] == "Não começou" && user[0] == this.usersStore.getLogged)) {
-          return "bgR";
-        }
+      } else if (
+        mission.users.find(
+          (user) =>
+            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+        )
+      ) {
+        return "bgR";
+      }
     },
     addBadge(missionReward) {
-      if(!this.user.rewards.find(reward=>reward==missionReward)){
+      if (!this.user.rewards.find((reward) => reward == missionReward)) {
         this.user.rewards.push(missionReward);
       }
     },

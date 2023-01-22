@@ -208,6 +208,7 @@
 import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useUsersStore } from "@/stores/User";
 import { useSchoolStore } from "@/stores/School";
+import { useMissionStore } from "@/stores/Mission";
 
 export default {
   setup() {
@@ -216,8 +217,9 @@ export default {
     const userStore = useUsersStore();
 
     const schoolStore = useSchoolStore();
+    const missionStore = useMissionStore();
 
-    return { occurrenceStore, userStore, schoolStore };
+    return { occurrenceStore, userStore, schoolStore, missionStore };
   },
 
   data() {
@@ -268,6 +270,7 @@ export default {
       this.form.user = this.userStore.getLogged;
       this.form.state = "pending";
       this.occurrenceStore.addOccurrence(this.form);
+      this.missionStore.completeMission(this.form.user, 2);
       location.reload();
     },
     id(id) {

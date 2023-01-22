@@ -71,22 +71,21 @@ export const useUsersStore = defineStore("user", {
         this.logged = logged.email;
         // changes the login date
         let today = new Date();
-        if (
-          +logged.loginDate !=
-          +(
-            today.getFullYear() +
-            "" +
-            ((today.getMonth() + 1).toString().length < 2
-              ? "0" + (today.getMonth() + 1)
-              : today.getMonth() + 1) +
-            "" +
-            (today.getDate().toString().length < 2
-              ? "0" + today.getDate()
-              : today.getDate())
-          )
-        ) {
-          logged.previousLoginDate = +logged.loginDate;
-        }
+        // if (
+        //   +logged.loginDate !=
+        //   +(
+        //     today.getFullYear() +
+        //     "" +
+        //     ((today.getMonth() + 1).toString().length < 2
+        //       ? "0" + (today.getMonth() + 1)
+        //       : today.getMonth() + 1) +
+        //     "" +
+        //     (today.getDate().toString().length < 2
+        //       ? "0" + today.getDate()
+        //       : today.getDate())
+        //   )) {
+        logged.previousLoginDate = +logged.loginDate;
+        // }
         logged.loginDate = +(
           today.getFullYear() +
           "" +

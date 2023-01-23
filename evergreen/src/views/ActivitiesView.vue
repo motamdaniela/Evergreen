@@ -62,13 +62,23 @@
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" />Plano de Atividades
     </h1>
-    <button class="btn-card btnP" @click="pleeekkkkk">Filtrar</button>
-    <v-checkbox v-for="theme in themes" 
-    :label="theme.name" 
-    :color="theme.color" 
-    :value="theme.id"
-    hide-details>
-    </v-checkbox>
+
+    <button class="btn-card btnP" @click="openFilter=true">Filtrar</button>
+    <v-dialog v-model="openFilter">
+      <div class="fieldP filterModal">
+        <button class="btn-page btnP" @click="openFilter = false; selectedThemes()">x</button>
+        <v-checkbox v-for="theme in themes" 
+        v-model="themesPicked"
+        :label="theme.name" 
+        :color="theme.color" 
+        :value="theme.id"
+        density="compact"
+        hide-details>
+        </v-checkbox>
+      </div>
+    </v-dialog>
+    
+    
 
     <!-- <v-select
     v-model="themesPicked"
@@ -87,9 +97,7 @@
 
     
     <button class="btn-card btnP" @click="suggestion = true">Sugerir Atividades</button>
-    <!-- <button class="btn-card btnP">
-      <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
-    </button> -->
+ 
     <div class="list">
       <div class="grid-item" v-for="activity in FilterThemes">
         <v-card
@@ -148,6 +156,7 @@ export default {
   created () {
     this.themes.forEach((theme) => 
     this.themeNames.push(theme.name))
+
   },
   name: "Activities",
   data() {
@@ -155,6 +164,7 @@ export default {
       activities: this.activityStore.getActivities,
       user: this.userStore.getLogged,
       open: false,
+      openFilter: false,
       suggestion: false,
       isFilter: true,
       form: {
@@ -169,7 +179,6 @@ export default {
       themes: this.activityStore.getThemes,
       themeNames: [],
       themesPicked: [],
-      themesColors:[],
     };
   },
   methods: {
@@ -196,37 +205,50 @@ export default {
       this.suggestionStore.addSuggestions(this.form);
       location.reload();
     },
-    pleeekkkkk(){
-      console.log('themesPicked:', this.themesPicked, 'Energia in themesPicked:', 'Energia' in this.themesPicked)
+    selectedThemes(){
+      console.log(this.themesPicked)
     }
+    
   },
   computed: {
     FilterThemes() {
       if(this.themesPicked.length <= 0){
         return this.activities
-      }else if(this.isFilter){
-        let filteredList = [];
-        let filteredIds =[];
-        this.themes.forEach((theme)=>{
-          if(theme.name in this.themesPicked){
-            filteredIds.push(theme.id);
-          }
-        })
-
+      } else {
         this.activities.forEach((activity) => {
-          if(activity.idTheme in filteredIds){
-            filteredList.push(activity)
+          if(this.themesPicked.includes(activity.idTheme)){
+            let filteredList=[];
+            filteredList.push(activity);
+            // let FilterThemes = [];
+            // FilterThemes = filteredList
+            console.log(filteredList)
+            
           }
         })
-
-        console.log("Energia" in this.themesPicked)
-        return filteredList
-      }else{
-        return this.activities
-      }
+        return this.filteredList
     }
-  },
+  }
+
+    //   }else if(this.isFilter){
+    //     let filteredList = [];
+    //     let filteredIds =[];
+    //     this.themes.forEach((theme)=>{
+    //       if(theme.name in this.themesPicked){
+    //         filteredIds.push(theme.id);
+    //       }
+    //     })
+
+    //     this.activities.forEach((activity) => {
+    //       if(activity.idTheme in filteredIds){
+    //         filteredList.push(activity)
+    //       }
+    //     })
+    //     return filteredList
+    //   }else{
+    //     return this.activities
+  }
 };
+
 </script>
 
 <style scoped>

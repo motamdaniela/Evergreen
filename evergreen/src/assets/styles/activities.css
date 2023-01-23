@@ -7,8 +7,6 @@
     font-family: gliker;
 }
 
-.filterModal{
-    width: 250px;
-    height: 370px;
-    margin-left: 40%;   
+.grid-item{
+    margin-bottom: 50px;
 }

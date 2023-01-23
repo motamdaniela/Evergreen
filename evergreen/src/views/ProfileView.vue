@@ -1,10 +1,40 @@
 <template>
+  <v-dialog v-model="open">
+      <div class="fieldPklight modal">
+        <button class="btn-page btnPklight" @click="open = false">x</button>
+        <img :src="this.activity.photo" width="200" />
+        <h1>{{ this.activity.title }}</h1>
+        <h3>Diagnostico:</h3>
+        <p>{{ this.activity.desc1 }}</p>
+        <h3>Objetivos:</h3>
+        <p>{{ this.activity.desc2 }}</p>
+        <h3>Metas:</h3>
+        <p>{{ this.activity.desc3 }}</p>
+        <input
+          v-if="!changeBtn(this.activity)"
+          type="button"
+          class="btn-page btnG"
+          id="sub"
+          value="Inscrever"
+          @click="subscribe(this.activity), changeBtn(this.activity)"
+        />
+        <input
+          v-else
+          type="button"
+          class="btn-page btnR"
+          id="unsub"
+          value="Anular Inscrição"
+          @click="unsubscribe(this.activity), changeBtn(this.activity)"
+        />
+      </div>
+    </v-dialog>
+
   <v-dialog v-model="dialog">
     <div class="fieldPklight modal">
       <v-card>
         <v-card-actions>
           <button class="btnRound btnPk" @click="dialog = false">
-            <img style="width: 15px" src="../assets/icons/icones/close.svg" />
+            <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
           </button>
         </v-card-actions>
         <v-card-text>
@@ -33,52 +63,76 @@
     </div>
   </v-dialog>
 
-  <v-dialog v-model="dialogAct" scrollable class="fieldP">
-    <v-card>
+  <v-dialog v-model="dialogAct" scrollable>
+    <div class="fieldP modal">
+    <card>
       <v-card-actions>
-        <button @click="dialogAct = false" class="btn-page btnP">X</button>
+        <button @click="dialogAct = false" class="btnRound btnP">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
       </v-card-actions>
       <v-card-text style="height: 400px">
-        <div v-for="activity in activitiesSub" class="fieldP">
+        <p v-if="activitiesSub.length <= 0">Ainda não estás inscrito em nenhuma atividade!</p>
+        <div v-for="activity in activitiesSub" class="fieldP profileList">
           <img class="img" :src="activity.photo" />
-          {{ activity.title }}
+          <div class="listText">
+            <h2>{{ activity.title }}</h2>
+            <br>
+            <h3>{{ activity.date }}</h3>
+          </div>
+          <button
+            class="btn-card btnP listBtn"
+            @click="open = true; this.activity = activity;">
+            Ver mais
+          </button>
+          
+
         </div>
       </v-card-text>
-    </v-card>
+    </card>
+    </div>
   </v-dialog>
 
-  <v-dialog v-model="dialogOcDone" scrollable class="fieldPk">
-    <v-card>
+  <v-dialog v-model="dialogOcDone" scrollable>
+    <div class="fieldPk modal">
+    <card>
       <v-card-actions>
-        <button @click="dialogOcDone = false" class="btn-page btnPk">X</button>
+        <button @click="dialogOcDone = false" class="btnRound btnPk">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
       </v-card-actions>
       <v-card-text style="height: 400px">
         <p v-if="ocsDone.length <= 0">Ainda não tens nenhuma ocorrência verificada!</p>
-        <div v-for="oc in ocsDone" class="fieldPk">
+        <div v-for="oc in ocsDone" class="fieldPk profileList">
           <img class="img" :src="oc.photo" />
           <p v-for="octype in types">
-            <p v-if="oc.idType == octype.id" > {{ octype.name }}</p>
+            <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
         </div>
       </v-card-text>
-    </v-card>
+    </card>
+    </div>
   </v-dialog>
 
-  <v-dialog v-model="dialogOcPend" scrollable class="fieldY">
-    <v-card>
+  <v-dialog v-model="dialogOcPend" scrollable>
+    <div class="fieldY modal">
+    <card>
       <v-card-actions>
-        <button @click="dialogOcPend = false" class="btn-page btnY">X</button>
+        <button @click="dialogOcPend = false" class="btnRound btnY">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
       </v-card-actions>
       <v-card-text style="height: 400px">
         <p v-if="ocsPend.length <= 0">Não tens nenhuma ocorrência pendente!</p>
-        <div v-for="oc in ocsPend" class="fieldY">
+        <div v-for="oc in ocsPend" class="fieldY profileList">
           <img class="img" :src="oc.photo" />
           <p v-for="octype in types">
-            <p v-if="oc.idType == octype.id" > {{ octype.name }}</p>
+            <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
         </div>
       </v-card-text>
-    </v-card>
+    </card>
+    </div>
   </v-dialog>
 
   <div>
@@ -117,14 +171,14 @@
 
   <br />
   <div>
-    <button class="btn-page btnP" @click="dialogAct = true">
+    <button class="btn-page btnP btnProfile" @click="dialogAct = true">
       Atividades Inscritas
     </button>
     <!-- <button class="btn-page btnP">Atividades Participadas</button> -->
-    <button class="btn-page btnPk" @click="dialogOcDone = true">
+    <button class="btn-page btnPk btnProfile" @click="dialogOcDone = true">
       Ocorrências Feitas
     </button>
-    <button class="btn-page btnY" @click="dialogOcPend = true">
+    <button class="btn-page btnY btnProfile" @click="dialogOcPend = true">
       Ocorrências Pendentes
     </button>
   </div>
@@ -167,6 +221,7 @@ export default {
       dialogAct: false,
       dialogOcDone: false,
       dialogOcPend: false,
+      open: false,
       newPassword: "",
       newUsername: "",
       newColor: "",
@@ -234,6 +289,23 @@ export default {
       this.dialog = false;
       this.userStore.edit(JSON.stringify(this.user));
       this.missionStore.completeMission(this.logged, 7);
+    },
+    subscribe(activity) {
+      console.log(activity);
+      this.activityStore.updateUsers(this.logged, activity.id);
+      this.missionStore.completeMission(this.logged, 0);
+    },
+    unsubscribe(activity) {
+      activity.users = activity.users.filter((e) => e != this.logged);
+      // this.activitiesSub
+    },
+    changeBtn(activity) {
+      let u = activity.users.find((user) => user == this.logged);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

@@ -3,7 +3,26 @@
     height: auto;
     border: 2px solid #050B06;
     border-radius: 1000px;
-    box-shadow: 5px 5px 0px #C2AFEA;
+    box-shadow: 8px 8px 0px #C2AFEA;
+}
+
+p{
+    font-weight: 500;
+}
+
+#ptsnBtn{
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+}
+
+#pontos{
+    margin-right: 130px;
+    display: flex;
+    align-items: center;
+}
+#ptsImg{
+    margin-right: 10px;
 }
 
 #pfpRow{
@@ -22,7 +41,18 @@
 #editIcon{
     width: 20px;
     /* margin-right: 100%; */
-    /* margin-top: 50%; */
+    margin-top: 50%;
+}
+#picture{
+    box-shadow: none;
+    height: 70px;
+}
+.editModal{
+    width: 40%;
+    margin-left: 33%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 #btnBonus{
@@ -30,7 +60,7 @@
     width: 100px;
     padding-left: 5px;
     padding-right: 5px;
-    font-weight: normal;
+    font-weight: 600;
 }
 
 #editIcon:hover{
@@ -77,5 +107,32 @@
 }
 
 .listBtn{
+    margin-left: auto;
+}
+
+.actModal{
+    width: 60%;
+    height: 50%;
+    margin-left: 20%;
+}
+.imgModal{
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.contentModal{
+    padding: 15px;
+}
+
+.row1{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+.rowText{
+    margin-left: 20px;
+}
+.btnModal{
     margin-left: 40%;
 }

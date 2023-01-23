@@ -1,19 +1,34 @@
 <template>
   <v-dialog v-model="open">
-      <div class="fieldPklight modal">
-        <button class="btn-page btnPklight" @click="open = false">x</button>
-        <img :src="this.activity.photo" width="200" />
-        <h1>{{ this.activity.title }}</h1>
-        <h3>Diagnostico:</h3>
-        <p>{{ this.activity.desc1 }}</p>
-        <h3>Objetivos:</h3>
-        <p>{{ this.activity.desc2 }}</p>
-        <h3>Metas:</h3>
-        <p>{{ this.activity.desc3 }}</p>
+      <div class="fieldPklight modal actModal">
+        <button class="btnRound btnPklight" @click="open = false">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
+        <div class="contentModal">
+          <div class="row1">
+            <img :src="this.activity.photo" class="imgModal" />
+            <div class="rowText">
+              <h2>{{ this.activity.title }}</h2>
+              <br>
+              <h3>Data:</h3>
+              <p>{{ this.activity.date }}</p>
+              <br>
+              <h3>Local:</h3>
+              <p>{{ this.activity.place }}</p>
+            </div>
+          </div>
+          
+          <h3>Diagnóstico:</h3>
+          <p>{{ this.activity.desc1 }}</p>
+          <h3>Objetivos:</h3>
+          <p>{{ this.activity.desc2 }}</p>
+          <h3>Metas:</h3>
+          <p>{{ this.activity.desc3 }}</p>
+        </div>
         <input
           v-if="!changeBtn(this.activity)"
           type="button"
-          class="btn-page btnG"
+          class="btn-page btnG btnModal"
           id="sub"
           value="Inscrever"
           @click="subscribe(this.activity), changeBtn(this.activity)"
@@ -21,7 +36,7 @@
         <input
           v-else
           type="button"
-          class="btn-page btnR"
+          class="btn-page btnR btnModal"
           id="unsub"
           value="Anular Inscrição"
           @click="unsubscribe(this.activity), changeBtn(this.activity)"
@@ -30,8 +45,8 @@
     </v-dialog>
 
   <v-dialog v-model="dialog">
-    <div class="fieldPklight modal">
-      <v-card>
+    <div class="fieldPklight modal editModal">
+      <v-card elevation="0" color="#F9F9F9">
         <v-card-actions>
           <button class="btnRound btnPk" @click="dialog = false">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -55,6 +70,18 @@
             v-model="newPassword"
             type="password"
           />
+          <br />
+          <label for="photo" class="semiTitle">Nova foto de perfil</label>
+          <br>
+          <input
+            class="input"
+            @change="previewFiles"
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/png, image/jpeg"
+            ref="myFiles"
+          />
         </v-card-text>
         <v-card-actions>
           <button class="btn-page btnG" @click="Edit">Guardar</button>
@@ -63,9 +90,9 @@
     </div>
   </v-dialog>
 
-  <v-dialog v-model="dialogAct" scrollable>
-    <div class="fieldP modal">
-    <card>
+  <v-dialog v-model="dialogAct" content-class="fieldP modal" scrollable>
+    
+    <v-card elevation="0" color="#F9F9F9">
       <v-card-actions>
         <button @click="dialogAct = false" class="btnRound btnP">
           <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -89,13 +116,13 @@
 
         </div>
       </v-card-text>
-    </card>
-    </div>
+    </v-card>
+    
   </v-dialog>
 
-  <v-dialog v-model="dialogOcDone" scrollable>
-    <div class="fieldPk modal">
-    <card>
+  <v-dialog v-model="dialogOcDone" content-class="fieldPk modal" scrollable>
+    
+    <v-card elevation="0" color="#F9F9F9">
       <v-card-actions>
         <button @click="dialogOcDone = false" class="btnRound btnPk">
           <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -110,13 +137,13 @@
           </p>
         </div>
       </v-card-text>
-    </card>
-    </div>
+    </v-card>
+    
   </v-dialog>
 
-  <v-dialog v-model="dialogOcPend" scrollable>
-    <div class="fieldY modal">
-    <card>
+  <v-dialog v-model="dialogOcPend" content-class="fieldY modal" scrollable>
+    
+    <v-card elevation="0" color="#F9F9F9">
       <v-card-actions>
         <button @click="dialogOcPend = false" class="btnRound btnY">
           <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -131,8 +158,8 @@
           </p>
         </div>
       </v-card-text>
-    </card>
-    </div>
+    </v-card>
+    
   </v-dialog>
 
   <div>
@@ -146,12 +173,11 @@
         <img id="ProfilePic" :src="user.photo" />
       </v-col>
       <v-col>
-        <v-row>
-          <p><img style="width: 20px" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
-        <v-row>
-        </v-row>
+        <div id="ptsnBtn">
+          <p id="pontos"><img style="width: 20px" id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
+          <br>
           <button class="btn-page btnG" id="btnBonus">Bónus Login</button>
-        </v-row>
+        </div>
         <v-row>
           <img
           id="editIcon"
@@ -163,9 +189,9 @@
     <p class="Name">
       <b>{{ user.name }}</b>
     </p>
-    <p>
+    <h3>
       <b>{{ user.school }}</b>
-    </p>
+    </h3>
     <p>{{ user.email }}</p>
   </div>
 
@@ -187,14 +213,15 @@
   </button>
   <br />
   <div>
-    <h2 class="gradientGreen"><span>Crachás</span></h2>
+    <h1 class="gradientGreen padding"><span>Crachás</span></h1>
+    <br>
     <div v-if="this.user.rewards.length <= 0">
       <p>Ainda não tens nenhum crachá!</p>
       <p>Coleciona-os todos completando</p>
       <RouterLink to="/Missions">missões</RouterLink>
     </div>
     <div class="badgesDiv">
-      <img class="badge" v-for="badge in this.user.rewards" :src="badge" />
+      <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true"/>
     </div>
   </div>
 </template>
@@ -306,6 +333,15 @@ export default {
       } else {
         return false;
       }
+    },
+    previewFiles(e) {
+      const files = e.target.files;
+      if (!files.length) return;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = () => (this.user.photo = reader.result);
+      console.log(this.user.photo);
     },
   },
 };

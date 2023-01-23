@@ -11,8 +11,8 @@ import Form from "../views/FormView.vue";
 import Missions from "../views/MissionsView.vue";
 import Profile from "../views/ProfileView.vue";
 import Rank from "../views/RankView.vue";
-import Activity from "../views/ActivityView.vue";
-import Suggestion from "../views/SuggestionView.vue";
+
+
 import Admin from "../views/AdminView.vue";
 import Users from "../views/ListofUsersView.vue";
 import ListOc from "../views/ListofOccurencesView.vue";
@@ -85,16 +85,6 @@ const router = createRouter({
       path: "/Rank",
       name: "Rank",
       component: Rank,
-    },
-    {
-      path: "/Activity/:id",
-      name: "Activity",
-      component: Activity,
-    },
-    {
-      path: "/Suggestion",
-      name: "Suggestion",
-      component: Suggestion,
     },
     {
       path: "/Users",

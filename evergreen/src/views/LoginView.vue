@@ -20,6 +20,9 @@
         >
         <button class="btn-page link" id="ok" type="submit">Entrar</button>
       </div>
+      <br />
+      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error" >{{error}}</v-alert>
+
     </v-form>
   </div>
 </template>
@@ -39,14 +42,19 @@ export default {
     return {
       email: "",
       password: "",
+      error: '',
     };
   },
   methods: {
     onSubmit() {
-      this.userStore.login(this.email, this.password);
       let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
-      if (users.find((u) => u.email == user && u.type == "user")) {
+      this.userStore.login(this.email, this.password);
+      if(this.userStore.login(this.email, this.password) == 'userWrong'){
+        this.error = 'Credenciais erradas!'
+      }else if(this.userStore.login(this.email, this.password) == 'userBlocked'){
+        this.error = 'Este utilizador foi bloqueado!'
+      }else if (users.find((u) => u.email == user && u.type == "user")) {
         this.missionStore.addUser(this.email);
         this.$router.push("/Home");
       } else if (users.find((u) => u.email == user && u.type == "admin")) {

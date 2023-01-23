@@ -7,8 +7,7 @@
         <v-card-title>Aviso!</v-card-title>
         <v-card-text>
           <p v-if="this.action == 'block'">Tem a certeza que pretende bloquear o utilizador
-            <b>{{ this.user.name }}</b>
-            por <b> 3dias</b> ?
+            <b>{{ this.user.name }}</b> ?
           </p>
           <p v-if="this.action == 'unblock'">Tem a certeza que pretende voltar a ativar o utilizador
             <b>{{ this.user.name }}</b> ?

@@ -58,10 +58,11 @@
     </v-dialog>
 
     <div v-if="activitiesSub.length > 0">
-      <v-sheet class="mx-auto" max-width="1500">
+      <!-- <v-sheet class="mx-auto" max-width="1500" > -->
         <v-slide-group class="group" show-arrows>
-          <v-slide-group-item v-for="activity in activitiesSub" class="element">
-            <v-card class="mx-auto card" max-width="400" id="card">
+          <slide-group-item v-for="activity in activitiesSub" class="items">
+            
+            <card class="card" max-width="400" id="card">
               <v-img
                 class="image"
                 :src="activity.photo"
@@ -96,10 +97,12 @@
                   </button>
                 </div>
               </div>
-            </v-card>
-          </v-slide-group-item>
+            </card>
+          
+          </slide-group-item>
         </v-slide-group>
-      </v-sheet>
+
+      <!-- </v-sheet> -->
       <!-- <div class="list">
         <div class="grid-item" v-for="activity in activitiesSub">
           <v-card class="mx-auto" max-width="400" id="card">
@@ -140,7 +143,7 @@
           </v-card>
         </div>
       </div> -->
-      <button class="btn-page btnP">
+      <button class="btn-page btnP" id="btnActSub">
         <RouterLink to="/Activities">Ver todas</RouterLink>
       </button>
     </div>

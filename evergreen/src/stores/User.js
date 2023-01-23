@@ -62,14 +62,14 @@ export const useUsersStore = defineStore("user", {
   actions: {
     // login action
     login(email, password) {
+      let curUser = this.users.find((user) =>
+      (user.email == email && user.password == password) ||
+      (user.username == email && user.password == password))
       // checks if email and password exist in the users list
-      if (
-        this.users.find(
-          (user) =>
-            (user.email == email && user.password == password) ||
-            (user.username == email && user.password == password)
-        )
-      ) {
+      if( curUser && curUser.state == 'blocked' ){
+        // alert('user bloqued')
+        return('userBlocked')
+      }else if ( curUser && curUser.state == 'active') {
         let logged = this.users.find(
           (user) => user.email == email || user.username == email
         );
@@ -101,10 +101,7 @@ export const useUsersStore = defineStore("user", {
             ? "0" + yesterday.getDate()
             : yesterday.getDate());
         // checks when was the last time the user logged in
-        console.log(+logged.previousLoginDate);
-        console.log(+yesterdayDate);
         if (+logged.previousLoginDate == +yesterdayDate) {
-          console.log(1);
           logged.streak += 1;
           logged.received = false;
         } else if (+logged.previousLoginDate < +logged.loginDate) {
@@ -112,7 +109,7 @@ export const useUsersStore = defineStore("user", {
           logged.received = false;
         }
       } else {
-        alert("Credenciais erradas");
+        return('userWrong');
       }
     },
 
@@ -144,9 +141,9 @@ export const useUsersStore = defineStore("user", {
     signUp(name, email, username, school, password, passConf) {
       // checks if email has already been used
       if (this.users.find((user) => user.email == email)) {
-        alert("Email já existe");
+        return('email')
       } else if (this.users.find((user) => user.username == username)) {
-        alert("Nome de utilizador já existe");
+        return('username');
       } else {
         let today = new Date();
         // checks if passwords match
@@ -182,9 +179,8 @@ export const useUsersStore = defineStore("user", {
           };
           this.users.push(obj);
           this.logged = obj.email;
-          alert("henlo");
         } else {
-          alert("Password errada");
+          return ('password');
         }
       }
     },

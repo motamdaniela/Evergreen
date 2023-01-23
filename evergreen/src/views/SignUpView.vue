@@ -45,6 +45,9 @@
         <button class="btn-page link" id="ok" type="submit">Registar</button>
         <RouterLink class="link" to="/login" id="signUpBtn">Entrar</RouterLink>
       </div>
+
+      <br />
+      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error" >{{error}}</v-alert>
     </v-form>
   </div>
 </template>
@@ -73,6 +76,7 @@ export default {
       password: "",
       passConf: "",
       schools: this.schoolStore.getSchools,
+      error: '',
     };
   },
   methods: {
@@ -87,9 +91,18 @@ export default {
       );
       let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
+
+      let signup = this.userStore.signUp(this.name, this.email, this.username, this.school,this.password, this.passConf);
+ 
       if (users.find((u) => u.email == user && u.type == "user")) {
         this.missionStore.addUser(this.email);
         this.$router.push("/Home");
+      }else if(signup == 'email'){
+        this.error = 'Este email já existe!'
+      }else if(signup == 'username'){
+        this.error = 'Este username já existe!'
+      }else if(signup == 'password'){
+        this.error = 'Confirme que a palavra-passe coincide.'
       }
     },
   },

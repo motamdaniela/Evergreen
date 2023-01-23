@@ -44,7 +44,7 @@
       </div>
     
       <div v-for="oc in ocs">
-        <div class="boardR board">
+        <div class="boardR board" v-if="oc.state == 'pending'">
           <img :src="oc.photo" id="profilePic" />
           <div>
               <p class="semiTitle">{{ oc.type }}</p>
@@ -80,7 +80,7 @@
       },
       methods: {
         Resolve() {
-          this.oc.state = 'resolved';
+          this.oc.state = 'solved';
           this.dialog = false;
           this.ocStore.edit(JSON.stringify(this.oc))
         },

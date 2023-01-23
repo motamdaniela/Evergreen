@@ -42,21 +42,31 @@
           <div class="formContent">
             <div>
               <label class="semiTitle">Campus:</label><br />
-              <select v-model="form.campus" class="input">
-                <option v-for="camp in campus">{{ camp.name }}</option>
+              <select v-model="form.campus" class="input" @change="changeCamp">
+                <option v-for="camp in campus">
+                  {{ camp.name }}
+                </option>
               </select>
             </div>
 
             <div>
               <label class="semiTitle">Escola:</label><br />
-              <select v-model="form.school" class="input">
+              <select
+                v-model="form.school"
+                class="input"
+                @change="changeSchool"
+              >
                 <option v-for="school in schools">{{ school.name }}</option>
               </select>
             </div>
 
             <div>
               <label class="semiTitle">Bloco:</label><br />
-              <select v-model="form.building" class="input">
+              <select
+                v-model="form.building"
+                class="input"
+                @change="changeBuilding"
+              >
                 <option v-for="building in buildings">
                   {{ building.name }}
                 </option>
@@ -65,7 +75,7 @@
 
             <div>
               <label class="semiTitle">Piso:</label><br />
-              <select v-model="form.floor" class="input">
+              <select v-model="form.floor" class="input" @change="changeFloor">
                 <option v-for="floor in floors">
                   {{ floor.id }}
                 </option>
@@ -126,7 +136,8 @@
               placeholder="Outro"
               type="text"
               v-model="form.other"
-              required disabled
+              required
+              disabled
             />
           </div>
         </v-window-item>
@@ -245,12 +256,15 @@ export default {
       first: null,
       second: null,
       campus: this.schoolStore.getCampus,
-      schools: this.schoolStore.getSchools,
-      buildings: this.schoolStore.getBuildings,
-      floors: this.schoolStore.getFloors,
-      classrooms: this.schoolStore.getClassrooms,
+      schools: [],
+      buildings: [],
+      floors: [],
+      classrooms: [],
       types: this.occurrenceStore.getTypes,
     };
+  },
+  updated() {
+    console.log(1);
   },
   methods: {
     onSubmit() {
@@ -276,12 +290,12 @@ export default {
     id(id) {
       let select = document.querySelector('input[name="type"]:checked');
       select.id = id;
-      
-      const text = document.querySelector('#outro')
-      if(select.id == 6){
-        text.removeAttribute('disabled', '');
+
+      const text = document.querySelector("#outro");
+      if (select.id == 6) {
+        text.removeAttribute("disabled", "");
       } else {
-        text.setAttribute('disabled','');
+        text.setAttribute("disabled", "");
       }
     },
     // idk if this works
@@ -293,6 +307,85 @@ export default {
       reader.readAsDataURL(files[0]);
       reader.onload = () => (this.form.photo = reader.result);
       console.log(this.form.photo);
+    },
+    changeCamp() {
+      let camp = this.campus.find((camp) => camp.name == this.form.campus);
+      this.form.building = "";
+      this.form.floor = "";
+      this.form.classroom = "";
+      console.log(camp);
+      let schools = [];
+      this.schoolStore.getSchools.forEach((school) => {
+        if (school.idCampus == camp.id) {
+          console.log(0);
+          schools.push(school);
+        }
+      });
+      this.schools = schools;
+    },
+    changeSchool() {
+      let school = this.schoolStore.getSchools.find(
+        (school) => school.name == this.form.school
+      );
+      this.form.floor = "";
+      this.form.classroom = "";
+      let buildings = [];
+      this.schoolStore.getBuildings.forEach((building) => {
+        building.idSchools.forEach((s) => {
+          if (s == school.id) {
+            buildings.push(building);
+          }
+        });
+        this.buildings = buildings;
+      });
+    },
+    changeBuilding() {
+      let building = this.schoolStore.getBuildings.find(
+        (building) => building.name == this.form.building
+      );
+      let school = this.schoolStore.getSchools.find(
+        (school) => school.name == this.form.school
+      );
+      this.form.classroom = "";
+      let floors = [];
+      this.schoolStore.getFloors.forEach((floor) => {
+        floor.idBuildings.forEach((b) => {
+          floor.idSchools.forEach((s) => {
+            if (b == building.id && s == school.id) {
+              floors.push(floor);
+            }
+          });
+        });
+        this.floors = floors;
+      });
+    },
+
+    changeFloor() {
+      let floor = +this.form.floor;
+      let building = this.schoolStore.getBuildings.find(
+        (building) => building.name == this.form.building
+      );
+      let school = this.schoolStore.getSchools.find(
+        (school) => school.name == this.form.school
+      );
+      let classrooms = [];
+      this.schoolStore.getClassrooms.forEach((classroom) => {
+        classroom.idBuildings.forEach((b) => {
+          classroom.idSchools.forEach((s) => {
+            if (
+              classroom.idFloor == floor &&
+              b == building.id &&
+              s == school.id
+            ) {
+              classrooms.push(classroom);
+            }
+          });
+        });
+        // if (classroom.idFloor == floor) {
+        //   classrooms.push(classroom);
+        // }
+      });
+      this.classrooms = classrooms;
     },
   },
 };

@@ -182,13 +182,12 @@ export const useMissionStore = defineStore("mission", {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
                   if (u[0] == logged && u[1] < mission.max) {
-                    u[1] == points;
                     if (u[1] < mission.max) {
                       u[1] = num;
                     }
                     if (u[1] == 0) {
                       u[2] = "Não começou";
-                    } else if (u[1] >= mission.max) {
+                    } else if (u[1] == mission.max) {
                       u[2] = "Concluída";
                     } else {
                       u[2] = "Em progresso";

@@ -139,3 +139,13 @@
   height: 100%;
   border-radius: 15px;
 }
+
+.cardImg{
+  height: 300px;
+  width: 95%;
+}
+
+.listAct{
+  display: grid;
+    grid-template-columns: auto auto auto;
+}

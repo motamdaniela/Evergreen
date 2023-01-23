@@ -7,18 +7,13 @@
             </h1>
         </div>
 
-<div class="list">
+<div class="listAct">
       <div class="grid-item" v-for="activity in FilteredActivities">
         <v-card
-          class="mx-auto"
-          max-width="400"
-          id="card"
-        >
+          class="cardP">
           <v-img
-            class="image"
+            class="image cardImg"
             :src="activity.photo"
-            height="219"
-            width="380"
             cover
           >
           </v-img>

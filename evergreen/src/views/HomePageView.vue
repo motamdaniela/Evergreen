@@ -306,6 +306,7 @@ export default {
         : yesterday.getDate())
     );
     if (this.user.received == false) {
+      console.log(1);
       if (this.user.previousLoginDate == yesterdayDate) {
         if (this.user.streak == 1) {
           this.loginPoints = 1;
@@ -352,9 +353,17 @@ export default {
         this.activitiesSub.splice(index, 1);
       }
     });
+
+    this.users = this.userStore.getTop3;
     this.missionStore.completeMission(this.logged, 1);
+    this.missionStore.completeMission(this.logged, 2);
     this.missionStore.completeMission(this.logged, 3);
+    this.missionStore.completeMission(this.logged, 4);
+    this.missionStore.completeMission(this.logged, 5);
+    // this.missionStore.completeMission(this.logged, 6);
+    // this.missionStore.completeMission(this.logged, 7);
     this.missionStore.completeMission(this.logged, 8);
+    this.missionStore.completeMission(this.logged, 9);
   },
   methods: {
     receive() {

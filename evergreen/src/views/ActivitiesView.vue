@@ -2,35 +2,37 @@
   <div>
     <v-dialog v-model="suggestion">
       <div class="fieldPklight modal">
-        <button class="btn-page btnPklight" @click="suggestion = false">x</button>
-      <h1>Sugerir Atividade</h1>
-    <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-      @submit.prevent="onSubmit"
-    >
-      Tema:
-      <select v-model="form.theme">
-        <option v-for="theme in themes">{{ theme.name }}</option>
-      </select>
-      Descrição:
-      <input type="text" v-model="form.description" />
-      Objetivos:
-      <input type="text" v-model="form.objectives" />
-      Metas:
-      <input type="text" v-model="form.goals" />
-      Recursos:
-      <input type="text" v-model="form.resources" />
+        <button class="btn-page btnPklight" @click="suggestion = false">
+          x
+        </button>
+        <h1>Sugerir Atividade</h1>
+        <v-form
+          ref="form"
+          v-model="valid"
+          lazy-validation
+          @submit.prevent="onSubmit"
+        >
+          Tema:
+          <select v-model="form.theme">
+            <option v-for="theme in themes">{{ theme.name }}</option>
+          </select>
+          Descrição:
+          <input type="text" v-model="form.description" />
+          Objetivos:
+          <input type="text" v-model="form.objectives" />
+          Metas:
+          <input type="text" v-model="form.goals" />
+          Recursos:
+          <input type="text" v-model="form.resources" />
 
-      <button type="submit" class="btn-page">Submeter</button>
-    </v-form>
-  </div>
+          <button type="submit" class="btn-page">Submeter</button>
+        </v-form>
+      </div>
     </v-dialog>
     <v-dialog v-model="open">
       <div class="fieldPklight modal">
         <button class="btn-page btnPklight" @click="open = false">x</button>
-        <img :src="this.activity.photo" width="200">
+        <img :src="this.activity.photo" width="200" />
         <h1>{{ this.activity.title }}</h1>
         <h3>Diagnostico:</h3>
         <p>{{ this.activity.desc1 }}</p>
@@ -44,7 +46,7 @@
           class="btn-page"
           id="sub"
           value="Inscrever"
-          @click="subscribe(this.activity),changeBtn(this.activity)"
+          @click="subscribe(this.activity), changeBtn(this.activity)"
         />
         <input
           v-else
@@ -52,23 +54,59 @@
           class="btn-page"
           id="unsub"
           value="Anular Inscrição"
-          @click="unsubscribe(this.activity),changeBtn(this.activity)"
+          @click="unsubscribe(this.activity), changeBtn(this.activity)"
         />
       </div>
     </v-dialog>
 
-
-
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" />Plano de Atividades
     </h1>
-    <button class="btn-card btnP" @click="pleeekkkkk">Filtrar</button>
-    <v-checkbox v-for="theme in themes" 
-    :label="theme.name" 
-    :color="theme.color" 
-    :value="theme.id"
-    hide-details>
-    </v-checkbox>
+
+    <!-- <button class="btn-card btnP" @click="openFilter = true">Filtrar</button>
+    <v-dialog v-model="openFilter">
+      <div class="fieldP filterModal">
+        <button
+          class="btn-page btnP"
+          @click="
+            openFilter = false;
+            selectedThemes();
+          "
+        >
+          x
+        </button>
+        <v-checkbox
+          v-for="theme in themes"
+          v-model="themesPicked"
+          :label="theme.name"
+          :color="theme.color"
+          :value="theme.id"
+          density="compact"
+          hide-details
+        >
+        </v-checkbox>
+      </div>
+    </v-dialog> -->
+    <v-menu>
+      <template v-slot:activator="{ props }">
+        <button class="btn-page btnP" v-bind="props">Filtrar</button>
+      </template>
+
+      <v-list>
+        <!-- <v-list-item v-for="(theme, index) in themes" :key="index"> -->
+        <v-checkbox
+          v-for="theme in themes"
+          v-model="themesPicked"
+          :label="theme.name"
+          :color="theme.color"
+          :value="theme.id"
+          density="compact"
+          hide-details
+          >{{ FilterThemes }}
+        </v-checkbox>
+        <!-- </v-list-item> -->
+      </v-list>
+    </v-menu>
 
     <!-- <v-select
     v-model="themesPicked"
@@ -82,21 +120,13 @@
         ></v-list-item>
 </v-select> -->
 
+    <button class="btn-card btnP" @click="suggestion = true">
+      Sugerir Atividades
+    </button>
 
-
-
-    
-    <button class="btn-card btnP" @click="suggestion = true">Sugerir Atividades</button>
-    <!-- <button class="btn-card btnP">
-      <RouterLink to="/Suggestion">Sugerir Atividades</RouterLink>
-    </button> -->
     <div class="list">
-      <div class="grid-item" v-for="activity in FilterThemes">
-        <v-card
-          class="mx-auto"
-          max-width="400"
-          id="card"
-        >
+      <div class="grid-item" v-for="activity in activities">
+        <v-card class="mx-auto" max-width="400" id="card">
           <v-img
             class="image"
             :src="activity.photo"
@@ -120,7 +150,15 @@
                   >
                 </div>
               </v-card-subtitle>
-              <button class="btn-card btnP" @click="open = true; this.activity = activity">Ver mais</button>
+              <button
+                class="btn-card btnP"
+                @click="
+                  open = true;
+                  this.activity = activity;
+                "
+              >
+                Ver mais
+              </button>
             </div>
           </div>
         </v-card>
@@ -143,18 +181,18 @@ export default {
     const userStore = useUsersStore();
     const suggestionStore = useSuggestionStore();
 
-    return { activityStore, missionStore, userStore, suggestionStore};
+    return { activityStore, missionStore, userStore, suggestionStore };
   },
-  created () {
-    this.themes.forEach((theme) => 
-    this.themeNames.push(theme.name))
+  created() {
+    this.themes.forEach((theme) => this.themeNames.push(theme.name));
   },
   name: "Activities",
   data() {
     return {
-      activities: this.activityStore.getActivities,
+      activities: [],
       user: this.userStore.getLogged,
       open: false,
+      openFilter: false,
       suggestion: false,
       isFilter: true,
       form: {
@@ -169,12 +207,17 @@ export default {
       themes: this.activityStore.getThemes,
       themeNames: [],
       themesPicked: [],
-      themesColors:[],
     };
+  },
+  created() {
+    this.activities = this.activityStore.getActivities;
+  },
+  updated() {
+    console.log(this.themesPicked);
   },
   methods: {
     subscribe(activity) {
-      console.log(activity.id)
+      console.log(activity.id);
       this.activityStore.updateUsers(this.user, activity.id);
       this.missionStore.completeMission(this.user, 0);
     },
@@ -182,7 +225,6 @@ export default {
       activity.users = activity.users.filter((e) => e != this.user);
     },
     changeBtn(activity) {
-      
       let u = activity.users.find((user) => user == this.user);
       if (u) {
         return true;
@@ -196,35 +238,26 @@ export default {
       this.suggestionStore.addSuggestions(this.form);
       location.reload();
     },
-    pleeekkkkk(){
-      console.log('themesPicked:', this.themesPicked, 'Energia in themesPicked:', 'Energia' in this.themesPicked)
-    }
+    selectedThemes() {
+      console.log(this.themesPicked);
+    },
   },
   computed: {
     FilterThemes() {
-      if(this.themesPicked.length <= 0){
-        return this.activities
-      }else if(this.isFilter){
-        let filteredList = [];
-        let filteredIds =[];
-        this.themes.forEach((theme)=>{
-          if(theme.name in this.themesPicked){
-            filteredIds.push(theme.id);
-          }
-        })
-
-        this.activities.forEach((activity) => {
-          if(activity.idTheme in filteredIds){
-            filteredList.push(activity)
-          }
-        })
-
-        console.log("Energia" in this.themesPicked)
-        return filteredList
-      }else{
-        return this.activities
+      let filteredList = [];
+      if (this.themesPicked.length <= 0) {
+        this.activities = this.activityStore.getActivities;
+      } else {
+        this.activityStore.getActivities.forEach((activity) => {
+          this.themesPicked.forEach((theme) => {
+            if (theme == activity.idTheme) {
+              filteredList.push(activity);
+            }
+          });
+        });
+        this.activities = filteredList;
       }
-    }
+    },
   },
 };
 </script>

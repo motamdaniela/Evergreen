@@ -38,12 +38,17 @@ export const useUsersStore = defineStore("user", {
           usersU.push(user);
         }
       });
-      usersU.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
-      
-      let top=[]
-      if(usersU.length<3){
-        for (let i=0; i<usersU.length; i++){
-          top.push(usersU[i])
+      usersU.sort(
+        (a, b) =>
+          b.points - a.points ||
+          b.activities - a.activities ||
+          b.occurences - a.occurences
+      );
+
+      let top = [];
+      if (usersU.length < 3) {
+        for (let i = 0; i < usersU.length; i++) {
+          top.push(usersU[i]);
         }
       } else if (usersU.length >= 3) {
         for (let i = 0; i < 3; i++) {
@@ -71,21 +76,7 @@ export const useUsersStore = defineStore("user", {
         this.logged = logged.email;
         // changes the login date
         let today = new Date();
-        // if (
-        //   +logged.loginDate !=
-        //   +(
-        //     today.getFullYear() +
-        //     "" +
-        //     ((today.getMonth() + 1).toString().length < 2
-        //       ? "0" + (today.getMonth() + 1)
-        //       : today.getMonth() + 1) +
-        //     "" +
-        //     (today.getDate().toString().length < 2
-        //       ? "0" + today.getDate()
-        //       : today.getDate())
-        //   )) {
         logged.previousLoginDate = +logged.loginDate;
-        // }
         logged.loginDate = +(
           today.getFullYear() +
           "" +
@@ -110,7 +101,10 @@ export const useUsersStore = defineStore("user", {
             ? "0" + yesterday.getDate()
             : yesterday.getDate());
         // checks when was the last time the user logged in
+        console.log(+logged.previousLoginDate);
+        console.log(+yesterdayDate);
         if (+logged.previousLoginDate == +yesterdayDate) {
+          console.log(1);
           logged.streak += 1;
           logged.received = false;
         } else if (+logged.previousLoginDate < +logged.loginDate) {

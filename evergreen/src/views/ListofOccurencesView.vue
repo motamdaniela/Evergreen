@@ -34,13 +34,32 @@
     
       <div>
             <h1 class="title">
-              <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
+              <img v-if="isLogged && this.user.type == 'admin'" class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
               <span>Ocorrências</span>
             </h1>
         </div>
     
       <div class="searchbar">
-          <button class="btn-page btnR">Filtrar</button>
+          <!-- <button class="btn-page btnR">Filtrar</button> -->
+          <v-menu>
+      <template v-slot:activator="{ props }">
+        <button class="btn-page btnR" id="btnFiltrar" v-bind="props">Filtrar</button>
+      </template>
+
+      <v-list id="menu">
+        <!-- <v-list-item v-for="(theme, index) in themes" :key="index"> -->
+        <v-checkbox
+          v-for="tp in types2"
+          v-model="typesPicked"
+          :label="tp.name"
+          :value="tp.id"
+          density="compact"
+          hide-details
+          >{{ FilterTypes }}
+        </v-checkbox>
+        <!-- </v-list-item> -->
+      </v-list>
+    </v-menu>
       </div>
       <p v-if="this.ocs.length <= 0">Não existe nenhuma ocorrência por resolver!</p>
     
@@ -78,10 +97,11 @@
         return {
           ocs: this.ocStore.getOccurrences ,
           dialog: false,
-          oc: '',
+          // oc: '',
           isFilter: false,
           users: this.userStore.getUsers ,
           types: this.ocStore.getTypes,
+          typesPicked: [],
         };
       },
       methods: {
@@ -105,6 +125,22 @@
         },
       },
       computed: {
+        FilterTypes() {
+          let filteredList = [];
+          if (this.typesPicked.length <= 0) {
+            this.ocs = this.ocStore.getOccurrences;
+          } else {
+            this.ocStore.getOccurrences.forEach((oc) => {
+              this.typesPicked.forEach((tp) => {
+                if (tp == oc.idType) {
+                  filteredList.push(oc);
+                }
+              });
+            });
+            this.ocs = filteredList;
+          }
+        },
+  
         filteredUsers() {
                 if(this.isFilter) {
                     return this.users.filter(user => user.name.startsWith(this.search))

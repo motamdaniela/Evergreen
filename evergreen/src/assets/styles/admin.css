@@ -1,167 +1,188 @@
 .inputSmall {
-    width: 90%;
-    height: 30px;
-    border-radius: 33px;
-    background-color: #FDFAF9;
-    border: 2px solid rgb(0, 0, 0);
-    margin-bottom: 30px;
-    padding: 20px;
+  width: 90%;
+  height: 45px;
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  margin-bottom: 30px;
+  padding-left: 20px;
 }
 
-.modal{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+.modal {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.boardP{
-    background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #c2afea;
-    border: 2px solid #050B06;
-    padding: 20px;
-    border-radius: 30px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-  }
-  .boardG{
-      background-color: #FDF9F9;
-      box-shadow: 5px 5px 0px #62b273;
-      border: 2px solid #050B06;
-      padding: 20px;
-      border-radius: 30px;
-      width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-      text-align: left;
-  }
-  .boardR{
-      background-color: #FDF9F9;
-      box-shadow: 5px 5px 0px #E9674D;
-      border: 2px solid #050B06;
-      padding: 20px;
-      border-radius: 30px;
-      width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-  }
-  .boardY{
-    background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #E9A13B;
-    border: 2px solid #050B06;
-    padding: 20px;
-    /* padding-left: 20px;
+.boardP {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #c2afea;
+  border: 2px solid #050b06;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.boardG {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #62b273;
+  border: 2px solid #050b06;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.boardR {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #e9674d;
+  border: 2px solid #050b06;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.boardY {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #e9a13b;
+  border: 2px solid #050b06;
+  padding: 20px;
+  /* padding-left: 20px;
     padding-right: 20px; */
-    border-radius: 30px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-  }
-  .boardPk{
-    background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #D26174;
-    border: 2px solid #050B06;
-    padding: 20px;
-    border-radius: 30px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-  }
-
-.searchbar{
-    width: 40%;
+  border-radius: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.boardPk {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #d26174;
+  border: 2px solid #050b06;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
-.cardY{
-  background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #E9A13B;
-    border: 2px solid #050B06;
-    border-radius: 15px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: 100%;
+.searchbar {
+  width: 40%;
 }
 
-.cardP{
-  background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #c2afea;
-    border: 2px solid #050B06;
-    border-radius: 15px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: 100%;
+.cardY {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #e9a13b;
+  border: 2px solid #050b06;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
 }
 
-.cardR{
-  background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #E9674D;
-    border: 2px solid #050B06;
-    border-radius: 15px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: 100%;
-}
-.cardG{
-  background-color: #FDF9F9;
-    box-shadow: 5px 5px 0px #62b273;
-    border: 2px solid #050B06;
-    border-radius: 15px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: 100%;
+.cardP {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #c2afea;
+  border: 2px solid #050b06;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
 }
 
-.carddiv{
+.cardR {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #e9674d;
+  border: 2px solid #050b06;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+}
+.cardG {
+  background-color: #fdf9f9;
+  box-shadow: 5px 5px 0px #62b273;
+  border: 2px solid #050b06;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.carddiv {
   margin: 20px;
   width: 25%;
 }
 
-.carddivTables{
+.carddivTables {
   margin: 20px;
   width: 30%;
 }
 
-.icon{
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin-bottom: -40px;
-    z-index: 1;
-    margin-left: auto;
-    margin-right: auto;
+.icon {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: -40px;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.thumbnail{
+.thumbnail {
   height: 100%;
   border-radius: 15px;
 }
 
-.cardImg{
+.cardImg {
   height: 300px;
   width: 95%;
 }
 
-.listAct{
+.listAct {
   display: grid;
-    grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto;
 }
 
 .linkUsers:hover span {
-  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(233,161,59,1) 16%, rgba(233,161,59,1) 41%, rgba(255,0,255,0) 41%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 16%,
+    rgba(233, 161, 59, 1) 16%,
+    rgba(233, 161, 59, 1) 41%,
+    rgba(255, 0, 255, 0) 41%
+  );
 }
 
 .linkActs:hover span {
-  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(194,175,234,1) 16%, rgba(194,175,234,1) 41%, rgba(255,0,255,0) 41%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 16%,
+    rgba(194, 175, 234, 1) 16%,
+    rgba(194, 175, 234, 1) 41%,
+    rgba(255, 0, 255, 0) 41%
+  );
 }
 
 .linkOcs:hover span {
-  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(233,103,77,1) 16%, rgba(233,103,77,1) 41%, rgba(255,0,255,0) 41%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 16%,
+    rgba(233, 103, 77, 1) 16%,
+    rgba(233, 103, 77, 1) 41%,
+    rgba(255, 0, 255, 0) 41%
+  );
 }
 
-p{
+p {
   font-size: 91%;
 }

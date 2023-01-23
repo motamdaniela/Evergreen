@@ -190,15 +190,17 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    newAdmin(name, email, username, password, passConf) {
+    newAdmin(type, name, email, username, password, passConf) {
       // checks if email has already been used
       if (this.users.find((user) => user.email == email)) {
         alert("Email já existe");
+      } else if (this.users.find((user) => user.username == username)) {
+        alert("Nome de utilizador já existe");
       } else {
         // checks if passwords match
         if (password == passConf) {
           let obj = {
-            type: "admin",
+            type: type,
             email: email,
             username: username,
             name: name,

@@ -52,9 +52,7 @@ export default {
       let login = this.userStore.login(this.email, this.password);
       if (login == "userWrong") {
         this.error = "Credenciais erradas!";
-      } else if (
-        login == "userBlocked"
-      ) {
+      } else if (login == "userBlocked") {
         this.error = "Este utilizador foi bloqueado!";
       } else if (
         users.find(
@@ -69,6 +67,12 @@ export default {
         )
       ) {
         this.$router.push("/Admin");
+      } else if (
+        users.find(
+          (u) => u.email == this.userStore.getLogged && u.type == "security"
+        )
+      ) {
+        this.$router.push("/Occurences");
       }
     },
   },

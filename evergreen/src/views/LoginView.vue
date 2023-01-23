@@ -21,8 +21,9 @@
         <button class="btn-page link" id="ok" type="submit">Entrar</button>
       </div>
       <br />
-      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error" >{{error}}</v-alert>
-
+      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
+        error
+      }}</v-alert>
     </v-form>
   </div>
 </template>
@@ -42,22 +43,31 @@ export default {
     return {
       email: "",
       password: "",
-      error: '',
+      error: "",
     };
   },
   methods: {
     onSubmit() {
-      let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
-      this.userStore.login(this.email, this.password);
-      if(this.userStore.login(this.email, this.password) == 'userWrong'){
-        this.error = 'Credenciais erradas!'
-      }else if(this.userStore.login(this.email, this.password) == 'userBlocked'){
-        this.error = 'Este utilizador foi bloqueado!'
-      }else if (users.find((u) => u.email == user && u.type == "user")) {
+      let login = this.userStore.login(this.email, this.password);
+      if (login == "userWrong") {
+        this.error = "Credenciais erradas!";
+      } else if (
+        login == "userBlocked"
+      ) {
+        this.error = "Este utilizador foi bloqueado!";
+      } else if (
+        users.find(
+          (u) => u.email == this.userStore.getLogged && u.type == "user"
+        )
+      ) {
         this.missionStore.addUser(this.email);
         this.$router.push("/Home");
-      } else if (users.find((u) => u.email == user && u.type == "admin")) {
+      } else if (
+        users.find(
+          (u) => u.email == this.userStore.getLogged && u.type == "admin"
+        )
+      ) {
         this.$router.push("/Admin");
       }
     },

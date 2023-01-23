@@ -62,14 +62,16 @@ export const useUsersStore = defineStore("user", {
   actions: {
     // login action
     login(email, password) {
-      let curUser = this.users.find((user) =>
-      (user.email == email && user.password == password) ||
-      (user.username == email && user.password == password))
+      let curUser = this.users.find(
+        (user) =>
+          (user.email == email && user.password == password) ||
+          (user.username == email && user.password == password)
+      );
       // checks if email and password exist in the users list
-      if( curUser && curUser.state == 'blocked' ){
+      if (curUser && curUser.state == "blocked") {
         // alert('user bloqued')
-        return('userBlocked')
-      }else if ( curUser && curUser.state == 'active') {
+        return "userBlocked";
+      } else if (curUser && curUser.state == "active") {
         let logged = this.users.find(
           (user) => user.email == email || user.username == email
         );
@@ -90,7 +92,7 @@ export const useUsersStore = defineStore("user", {
         );
         let yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
-        let yesterdayDate =
+        let yesterdayDate = +(
           yesterday.getFullYear() +
           "" +
           ((yesterday.getMonth() + 1).toString().length < 2
@@ -99,7 +101,9 @@ export const useUsersStore = defineStore("user", {
           "" +
           (yesterday.getDate().toString().length < 2
             ? "0" + yesterday.getDate()
-            : yesterday.getDate());
+            : yesterday.getDate())
+        );
+        console.log(logged.previousLoginDate);
         // checks when was the last time the user logged in
         if (+logged.previousLoginDate == +yesterdayDate) {
           logged.streak += 1;
@@ -108,8 +112,9 @@ export const useUsersStore = defineStore("user", {
           logged.streak = 1;
           logged.received = false;
         }
+        return "active";
       } else {
-        return('userWrong');
+        return "userWrong";
       }
     },
 
@@ -141,9 +146,9 @@ export const useUsersStore = defineStore("user", {
     signUp(name, email, username, school, password, passConf) {
       // checks if email has already been used
       if (this.users.find((user) => user.email == email)) {
-        return('email')
+        return "email";
       } else if (this.users.find((user) => user.username == username)) {
-        return('username');
+        return "username";
       } else {
         let today = new Date();
         // checks if passwords match
@@ -180,7 +185,7 @@ export const useUsersStore = defineStore("user", {
           this.users.push(obj);
           this.logged = obj.email;
         } else {
-          return ('password');
+          return "password";
         }
       }
     },

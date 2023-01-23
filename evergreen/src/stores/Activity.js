@@ -46,8 +46,8 @@ export const useActivityStore = defineStore("activity", {
           if (u == user.email) {
             if (themes.length > 0) {
               themes.forEach((theme) => {
-                console.log(4);
                 if (!theme == activity.idTheme) {
+                  console.log(4);
                   themes.push(activity.idTheme);
                 }
               });
@@ -80,16 +80,18 @@ export const useActivityStore = defineStore("activity", {
 
       if (acts.length < 3) {
         activities.forEach((activity) => {
-          acts.forEach((a) => {
-            if (
-              !acts.find((act) => act.id == activity.id) &&
-              !activitiesSub.find((act) => act.id == activity.id)
-            ) {
-              if (acts.length < 3) {
-                acts.push(activity);
-              }
+          // acts.forEach((a) => {
+          if (
+            !acts.find((act) => act.id == activity.id) &&
+            !activitiesSub.find((act) => act.id == activity.id)
+          ) {
+            if (acts.length < 3) {
+              console.log(activity);
+              acts.push(activity);
             }
-          });
+          }
+          // });
+          console.log(acts);
         });
       }
 
@@ -100,6 +102,7 @@ export const useActivityStore = defineStore("activity", {
           }
         });
       }
+      console.log(activitiesSub);
       console.log(acts);
       return acts;
     },

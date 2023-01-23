@@ -1,5 +1,44 @@
 <template>
 
+<v-dialog v-model="open">
+      <div class="fieldP modal">
+        <div>
+          <button class="btn-page btnP" @click="open = false">x</button>
+        </div>
+        <img :src="this.activity.photo" width="200" />
+        <h1>{{ this.activity.title }}</h1>
+        <h3>Diagnostico:</h3>
+        <p>{{ this.activity.desc1 }}</p>
+        <h3>Objetivos:</h3>
+        <p>{{ this.activity.desc2 }}</p>
+        <h3>Metas:</h3>
+        <p>{{ this.activity.desc3 }}</p>
+        <button class="btn-page btnP" @click="listDialog = true">Inscições</button>
+      </div>
+    </v-dialog>
+
+    <v-dialog v-model="listDialog">
+      <div class="fieldP modal">
+        <div>
+          <button class="btn-page btnP" @click="listDialog = false">x</button>
+        </div>
+        <p v-if="activityUsers.length <= 0"> Não exitem inscrições!</p>
+        <div v-for="user in activityUsers" >
+          <v-row class="boardP">
+            <img :src="user.photo" id="profilePic" />
+            <p class="semiTitle">{{ user.name }}</p>
+            <div>
+              <button class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
+            </div>
+          </v-row>
+        </div>
+      </div>
+    </v-dialog>
+
+
+
+
+
 <div>
             <h1 class="title">
               <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
@@ -55,8 +94,11 @@
       data() {
         return {
           activities: this.activityStore.getActivities,
+          activity: '',
           users: this.userStore.getUsers,
-          dialog: false,
+          user: '',
+          open: false,
+          listDialog: false,
           isFilter: false,
         };
       },
@@ -66,25 +108,24 @@
           this.dialog = false;
           this.userStore.edit(JSON.stringify(this.user))
         },
-        Block() {
-          this.user.state = 'blocked';
-          this.dialog = false;
-          this.userStore.edit(JSON.stringify(this.user))
-        },
-        Unblock() {
-          this.user.state = 'active';
-          this.dialog = false;
-          this.userStore.edit(JSON.stringify(this.user))
-        },
-        Delete() {
-          this.dialog = false;
-          this.userStore.delete(JSON.stringify(this.user))
-        },
+        Participation(){
+          alert(this.user.email, this.activity.id)
+          this.activityStore.updateParticipated(this.user.email, this.activity.id)
+        }
       },
       computed: {
         FilteredActivities() {
                   return this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
+              },
+        activityUsers(){
+          let listUsers = [];
+            this.users.forEach(user => {
+              if(this.activity.users.find((sign) => sign == user.email)){
+                listUsers.push(user)
               }
+            });
+          return listUsers
+        }
       },
     };
     </script>

@@ -33,6 +33,16 @@ export const useActivityStore = defineStore('activity',{
           activity.users.push(user)
         }
       });
+    },
+
+    updateParticipated(user,id){
+      this.activities.forEach(activity => {
+        if(activity.id == id){
+          activity.participated.push(user)
+          activity.users.splice(
+            activity.users.indexOf(user),1)
+        }
+      });
     }
 
   },

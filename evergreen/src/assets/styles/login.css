@@ -65,3 +65,10 @@
     display: flex;
     justify-content: space-between;
 }
+
+#errorAlert{
+    border-radius: 33px;
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    box-shadow: 3px 3px 0px #050B06;
+}

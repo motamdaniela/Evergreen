@@ -98,9 +98,11 @@ export default {
         this.missionStore.addUser(this.email);
         this.$router.push("/Home");
       }else if(signup == 'email'){
-        this.error = 'Este email já existe'
+        this.error = 'Este email já existe!'
       }else if(signup == 'username'){
-        this.error = 'Este username já existe'
+        this.error = 'Este username já existe!'
+      }else if(signup == 'password'){
+        this.error = 'Confirme que a palavra-passe coincide.'
       }
     },
   },

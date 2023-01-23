@@ -179,9 +179,8 @@ export const useUsersStore = defineStore("user", {
           };
           this.users.push(obj);
           this.logged = obj.email;
-          alert("henlo");
         } else {
-          alert("Password errada");
+          return ('password');
         }
       }
     },

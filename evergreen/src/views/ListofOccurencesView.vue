@@ -34,7 +34,7 @@
     
       <div>
             <h1 class="title">
-              <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/back.svg">
+              <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
               <span>Ocorrências</span>
             </h1>
         </div>
@@ -42,10 +42,11 @@
       <div class="searchbar">
           <button class="btn-page btnR">Filtrar</button>
       </div>
+      <p v-if="this.ocs.length <= 0">Não existe nenhuma ocorrência por resolver!</p>
     
       <div v-for="oc in ocs">
         <div class="boardR board" v-if="oc.state == 'pending'">
-          <img :src="oc.photo" id="profilePic" />
+          <img :src="oc.photo" class="thumbnail" />
           <div>
               <p class="semiTitle">{{ oc.type }}</p>
               <p>{{ oc.school }} {{ oc.building }}, Sala {{ oc.classroom }}</p>
@@ -66,9 +67,9 @@
     export default {
       setup() {
         const ocStore = useOccurrenceStore();
-        const users = useUsersStore();
+        const userStore = useUsersStore();
     
-        return { ocStore, users };
+        return { ocStore, userStore };
       },
       data() {
         return {
@@ -76,13 +77,17 @@
           dialog: false,
           oc: '',
           isFilter: false,
+          users: this.userStore.getUsers ,
         };
       },
       methods: {
         Resolve() {
           this.oc.state = 'solved';
           this.dialog = false;
+          let user = this.users.find((user)=> user.email == this.oc.user)
+          user.points += 5;
           this.ocStore.edit(JSON.stringify(this.oc))
+          this.userStore.edit(JSON.stringify(user))
         },
         Repeat() {
           this.oc.state = 'repeat';

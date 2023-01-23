@@ -134,3 +134,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.thumbnail{
+  height: 100%;
+  border-radius: 15px;
+}

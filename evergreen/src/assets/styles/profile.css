@@ -1,13 +1,36 @@
 #ProfilePic{
-    width: 15%;
+    width: 100%;
     height: auto;
     border: 2px solid #050B06;
     border-radius: 1000px;
     box-shadow: 5px 5px 0px #C2AFEA;
 }
 
+#pfpRow{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #profileContent{
+    margin-left: 57%;
+    margin-right: 50%;
+    margin-top: 11%;
+    position: absolute;
+} */
+
 #editIcon{
-    width: 30px;
+    width: 20px;
+    /* margin-right: 100%; */
+    /* margin-top: 50%; */
+}
+
+#btnBonus{
+    font-size: 12px;
+    width: 100px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: normal;
 }
 
 #editIcon:hover{

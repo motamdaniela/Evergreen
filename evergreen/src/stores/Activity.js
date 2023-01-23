@@ -118,6 +118,7 @@ export const useActivityStore = defineStore("activity", {
       this.activities.forEach((activity) => {
         if (activity.id == id) {
           activity.users.push(user);
+          console.log(activity);
         }
       });
     },

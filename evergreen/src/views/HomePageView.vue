@@ -59,48 +59,46 @@
 
     <div v-if="activitiesSub.length > 0">
       <!-- <v-sheet class="mx-auto" max-width="1500" > -->
-        <v-slide-group class="group" show-arrows>
-          <slide-group-item v-for="activity in activitiesSub" class="items">
-            
-            <card class="card" max-width="400" id="card">
-              <v-img
-                class="image"
-                :src="activity.photo"
-                height="219"
-                width="380"
-                cover
-              >
-              </v-img>
+      <v-slide-group class="group" show-arrows>
+        <slide-group-item v-for="activity in activitiesSub" class="items">
+          <card class="card" max-width="400" id="card">
+            <v-img
+              class="image"
+              :src="activity.photo"
+              height="219"
+              width="380"
+              cover
+            >
+            </v-img>
 
-              <div class="cardText">
-                <v-card-title>
-                  <b>{{ activity.title }}</b>
-                </v-card-title>
+            <div class="cardText">
+              <v-card-title>
+                <b>{{ activity.title }}</b>
+              </v-card-title>
 
-                <div class="alignCard">
-                  <v-card-subtitle>
-                    <div>
-                      <b
-                        >{{ activity.date }} <br />
-                        {{ activity.place }}</b
-                      >
-                    </div>
-                  </v-card-subtitle>
-                  <button
-                    class="btn-card btnP"
-                    @click="
-                      open = true;
-                      this.activity = activity;
-                    "
-                  >
-                    Ver mais
-                  </button>
-                </div>
+              <div class="alignCard">
+                <v-card-subtitle>
+                  <div>
+                    <b
+                      >{{ activity.date }} <br />
+                      {{ activity.place }}</b
+                    >
+                  </div>
+                </v-card-subtitle>
+                <button
+                  class="btn-card btnP"
+                  @click="
+                    open = true;
+                    this.activity = activity;
+                  "
+                >
+                  Ver mais
+                </button>
               </div>
-            </card>
-          
-          </slide-group-item>
-        </v-slide-group>
+            </div>
+          </card>
+        </slide-group-item>
+      </v-slide-group>
 
       <!-- </v-sheet> -->
       <!-- <div class="list">
@@ -381,9 +379,9 @@ export default {
       }
     },
     subscribe(activity) {
-      console.log(activity.id);
-      this.activityStore.updateUsers(this.user, activity.id);
-      this.missionStore.completeMission(this.user, 0);
+      console.log(activity);
+      this.activityStore.updateUsers(this.logged, activity.id);
+      this.missionStore.completeMission(this.logged, 0);
     },
     unsubscribe(activity) {
       activity.users = activity.users.filter((e) => e != this.logged);

@@ -332,6 +332,7 @@ export default {
         this.user.streak = 1;
         this.loginClass = "login" + this.user.streak;
         this.loginReward = true;
+        console.log(1);
         // this.user.streak=1
         // logged.points+=1
       }

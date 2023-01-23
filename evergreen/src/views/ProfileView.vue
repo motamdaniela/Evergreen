@@ -55,7 +55,9 @@
       <v-card-text style="height: 400px">
         <div v-for="oc in ocsDone" class="fieldPk">
           <img class="img" :src="oc.photo" />
-          {{ oc.description }}
+          <p v-for="octype in types">
+            <p v-if="oc.idType == octype.id" > {{ octype.name }}</p>
+          </p>
         </div>
       </v-card-text>
     </v-card>
@@ -90,8 +92,8 @@
       <v-col>
         <v-row>
           <p><img style="width: 20px" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
-        </v-row>
         <v-row>
+        </v-row>
           <button class="btn-page btnG" id="btnBonus">Bónus Login</button>
         </v-row>
         <v-row>
@@ -110,6 +112,8 @@
     </p>
     <p>{{ user.email }}</p>
   </div>
+
+  <br />
   <div>
     <button class="btn-page btnP" @click="dialogAct = true">
       Atividades Inscritas
@@ -122,13 +126,19 @@
       Ocorrências Pendentes
     </button>
   </div>
-  <button v-if="this.user.type == 'council'" class="btn-page btnR">
+  <button v-if="this.user.council" class="btn-page btnR">
     Verificar presenças
   </button>
+  <br />
   <div>
     <h2 class="gradientGreen"><span>Crachás</span></h2>
+    <div v-if="this.user.rewards.length <= 0">
+      <p>Ainda não tens nenhum crachá!</p>
+      <p>Coleciona-os todos completando</p>
+      <RouterLink to="/Missions">missões</RouterLink>
+    </div>
     <div class="badgesDiv">
-      <img class="badge" v-for="badge in this.badges" :src="badge" />
+      <img class="badge" v-for="badge in this.user.rewards" :src="badge" />
     </div>
   </div>
 </template>
@@ -151,7 +161,6 @@ export default {
   data() {
     return {
       user: "",
-      badges: [],
       dialog: false,
       dialogAct: false,
       dialogOcDone: false,
@@ -165,21 +174,18 @@ export default {
       ocsPend: [],
       activities: this.activityStore.getActivities,
       occurences: this.occurrenceStore.getOccurrences,
-      types: this.occurrenceStore.getTypes,
       logged: this.userStore.getLogged,
     };
   },
   created() {
-    let user = this.userStore.getLogged;
     let users = this.userStore.getUsers;
     users.forEach((u) => {
-      if (u.email == user) {
+      if (u.email == this.logged) {
         this.user = u;
-        u.rewards.forEach((r) => {
-          this.badges.push(r);
-        });
       }
     });
+    
+
   },
   updated() {
     this.activities = this.activityStore.getActivities;
@@ -212,6 +218,7 @@ export default {
         this.ocsDone.push(oc);
       }
     });
+
   },
   methods: {
     Edit() {

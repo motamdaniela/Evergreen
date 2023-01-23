@@ -74,6 +74,7 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
   padding-right: 20px;
   font-weight: bold;
   border-radius: 30px;
+  margin-bottom: 30px;
 }
 
 .btnRound{

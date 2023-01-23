@@ -87,12 +87,13 @@
         </v-checkbox>
       </div>
     </v-dialog> -->
+
     <v-menu>
       <template v-slot:activator="{ props }">
-        <button class="btn-card btnP" v-bind="props">Filtrar</button>
+        <button class="btn-page btnP btns" id="btnFiltrar" v-bind="props">Filtrar</button>
       </template>
 
-      <v-list>
+      <v-list id="menu">
         <!-- <v-list-item v-for="(theme, index) in themes" :key="index"> -->
         <v-checkbox
           v-for="theme in themes"
@@ -120,7 +121,7 @@
         ></v-list-item>
 </v-select> -->
 
-    <button class="btn-card btnP" @click="suggestion = true">
+    <button class="btn-page btnP btns" @click="suggestion = true">
       Sugerir Atividades
     </button>
 

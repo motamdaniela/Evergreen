@@ -364,6 +364,8 @@ export default {
     // this.missionStore.completeMission(this.logged, 7);
     this.missionStore.completeMission(this.logged, 8);
     this.missionStore.completeMission(this.logged, 9);
+    console.log();
+    this.activitiesSug = this.activityStore.getActivitySuggestions;
   },
   methods: {
     receive() {

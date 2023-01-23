@@ -62,7 +62,6 @@ export const useUsersStore = defineStore("user", {
   actions: {
     // login action
     login(email, password) {
-      console.log(1);
       let curUser = this.users.find(
         (user) =>
           (user.email == email && user.password == password) ||

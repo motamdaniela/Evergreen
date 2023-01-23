@@ -48,13 +48,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      // let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
-      this.userStore.login(this.email, this.password);
-      if (this.userStore.login(this.email, this.password) == "userWrong") {
+      let login = this.userStore.login(this.email, this.password);
+      if (login == "userWrong") {
         this.error = "Credenciais erradas!";
       } else if (
-        this.userStore.login(this.email, this.password) == "userBlocked"
+        login == "userBlocked"
       ) {
         this.error = "Este utilizador foi bloqueado!";
       } else if (

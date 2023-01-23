@@ -45,7 +45,7 @@
 
   <div>
         <h1 class="title">
-          <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/back.svg">
+          <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
           <span>Utilizadores</span>
         </h1>
     </div>
@@ -100,9 +100,6 @@ export default {
       search: '',
       isFilter: false,
     };
-  },
-  created () {
-    alert(this.users);
   },
   methods: {
     Edit() {

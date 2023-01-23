@@ -1,5 +1,12 @@
 <template>
 
+<div>
+            <h1 class="title">
+              <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
+              <span>Atividades</span>
+            </h1>
+        </div>
+
 <div class="list">
       <div class="grid-item" v-for="activity in FilteredActivities">
         <v-card

@@ -76,12 +76,30 @@
   </v-dialog>
 
   <div>
-    <img id="ProfilePic" :src="user.photo" />
-    <img
-      id="editIcon"
-      src="/src/assets/icons/icones/editProfile.svg"
-      @click="dialog = true"
-    />
+    <div id="profileContent">
+      <img src=""/>
+    </div>
+    <v-row id="pfpRow">
+      <v-col>
+      </v-col>
+      <v-col>
+        <img id="ProfilePic" :src="user.photo" />
+      </v-col>
+      <v-col>
+        <v-row>
+          <p><img style="width: 20px" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
+        </v-row>
+        <v-row>
+          <button class="btn-page btnG" id="btnBonus">Bónus Login</button>
+        </v-row>
+        <v-row>
+          <img
+          id="editIcon"
+          src="/src/assets/icons/icones/editProfile.svg"
+          @click="dialog = true"/>
+        </v-row>
+      </v-col>
+    </v-row>
     <p class="Name">
       <b>{{ user.name }}</b>
     </p>

@@ -69,7 +69,9 @@
       <v-card-text style="height: 400px">
         <div v-for="oc in ocsPend" class="fieldY">
           <img class="img" :src="oc.photo" />
-          {{ oc.description }}
+          <p v-for="octype in types">
+            <p v-if="oc.idType == octype.id" > {{ octype.name }}</p>
+          </p>
         </div>
       </v-card-text>
     </v-card>
@@ -163,6 +165,7 @@ export default {
       ocsPend: [],
       activities: this.activityStore.getActivities,
       occurences: this.occurrenceStore.getOccurrences,
+      types: this.occurrenceStore.getTypes,
       logged: this.userStore.getLogged,
     };
   },

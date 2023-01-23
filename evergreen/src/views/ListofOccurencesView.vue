@@ -48,6 +48,9 @@
         <div class="boardR board" v-if="oc.state == 'pending'">
           <img :src="oc.photo" class="thumbnail" />
           <div>
+            <p v-for="octype in types">
+            <p v-if="oc.idType == octype.id" class="semiTitle"> {{ octype.name }}</p>
+          </p>
               <p class="semiTitle">{{ oc.type }}</p>
               <p>{{ oc.school }} {{ oc.building }}, Sala {{ oc.classroom }}</p>
               <p>{{ oc.date }} &nbsp {{ oc.hour }}</p>
@@ -78,6 +81,7 @@
           oc: '',
           isFilter: false,
           users: this.userStore.getUsers ,
+          types: this.ocStore.getTypes,
         };
       },
       methods: {

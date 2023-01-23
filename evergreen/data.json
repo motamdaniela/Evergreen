@@ -299,31 +299,31 @@
   ],
   "types": [
     {
-      "id": 0,
+      "id": "0",
       "name": "Lâmpada fundida"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Torneira a pingar"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Luz ligada"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Objeto quebrado"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Malfuncionamento"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Lixo no chão"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Outro"
     }
   ],
@@ -629,37 +629,6 @@
       "id": 2,
       "name": "5",
       "idSchools": [2]
-    }
-  ],
-
-  "ocurrences": [
-    {
-      "id": 0,
-      "date": "16.01",
-      "hour": "10.51",
-      "campus": "Campus 1",
-      "building": "B",
-      "floor": "2",
-      "classroom": "208",
-      "type": "Lâmpada fundida",
-      "description": "Encontrei uma lampada fundida",
-      "photo": "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
-      "user": "user@gmail.com",
-      "state": "pendent"
-    },
-    {
-      "id": 0,
-      "date": "16.01",
-      "hour": "10.51",
-      "campus": "Campus 1",
-      "building": "B",
-      "floor": "2",
-      "classroom": "208",
-      "type": "outra lâmpada fundida",
-      "description": "É so disto aqui",
-      "photo": "https://thumbs.dreamstime.com/b/banco-do-jardim-52684013.jpg",
-      "user": "user@gmail.com",
-      "state": "pendent"
     }
   ]
 }

@@ -56,7 +56,7 @@ button:hover, #login:hover, #signup:hover, .btn-page:hover{
 }
 
 .backbtn:hover{
-  content: url("src/assets/icons/iconesthicc/back.svg")
+  content: url("src/assets/icons/iconesthicc/arrowback.svg")
 }
 
 #profilePhoto{

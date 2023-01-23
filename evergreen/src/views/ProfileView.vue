@@ -53,6 +53,7 @@
         <button @click="dialogOcDone = false" class="btn-page btnPk">X</button>
       </v-card-actions>
       <v-card-text style="height: 400px">
+        <p v-if="ocsDone.length <= 0">Ainda não tens nenhuma ocorrência verificada!</p>
         <div v-for="oc in ocsDone" class="fieldPk">
           <img class="img" :src="oc.photo" />
           <p v-for="octype in types">
@@ -69,6 +70,7 @@
         <button @click="dialogOcPend = false" class="btn-page btnY">X</button>
       </v-card-actions>
       <v-card-text style="height: 400px">
+        <p v-if="ocsPend.length <= 0">Não tens nenhuma ocorrência pendente!</p>
         <div v-for="oc in ocsPend" class="fieldY">
           <img class="img" :src="oc.photo" />
           <p v-for="octype in types">
@@ -175,6 +177,7 @@ export default {
       activities: this.activityStore.getActivities,
       occurences: this.occurrenceStore.getOccurrences,
       logged: this.userStore.getLogged,
+      types: this.occurrenceStore.getTypes
     };
   },
   created() {
@@ -205,7 +208,9 @@ export default {
         this.activitiesSub.splice(index, 1);
       }
     });
-
+    
+    this.ocsDone = [];
+    this.ocsPend = [];
     this.occurences = this.occurrenceStore.getOccurrences;
     let userOcs = this.occurences.filter(
       (Occurence) => Occurence.user == this.logged

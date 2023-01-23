@@ -89,7 +89,7 @@
     </v-dialog> -->
     <v-menu>
       <template v-slot:activator="{ props }">
-        <button class="btn-page btnP" v-bind="props">Filtrar</button>
+        <button class="btn-card btnP" v-bind="props">Filtrar</button>
       </template>
 
       <v-list>

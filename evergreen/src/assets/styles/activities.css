@@ -22,3 +22,36 @@
 .btns{
     margin-right: 20px;
 }
+
+.textBox{
+    border-radius: 33px;
+    background-color: #FDFAF9;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 20px;
+    height: 100px;
+    width: 300px;
+}
+.sugModal{
+    padding: 20px;
+    width: 70%;
+    height: 60%;
+    margin-left: 15%;
+}
+#sugCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#colL{
+    margin-right: 60px;
+}
+
+/* #modTitle{
+    display: flex;
+    justify-content: center;
+} */
+#modBtn{
+    margin-left: 45%;
+    margin-top: 20px;
+}
+

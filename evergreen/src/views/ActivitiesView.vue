@@ -1,34 +1,44 @@
 <template>
   <div>
     <v-dialog v-model="suggestion">
-      <div class="fieldPklight modal">
-        <button class="btn-page btnPklight" @click="suggestion = false">
-          x
+      <div class="fieldP modal sugModal">
+        <button class="btnRound btnP" @click="suggestion = false">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
         </button>
-        <h1>Sugerir Atividade</h1>
+        
+        <!-- <h1 id="modTitle">Sugerir Atividade</h1> -->
         <v-form
           ref="form"
           v-model="valid"
           lazy-validation
           @submit.prevent="onSubmit"
-        >
-          Tema:
-          <select v-model="form.theme">
+        ><br>
+        <div id="sugCont">
+        <div id="colL">
+          <h3>Tema:</h3>
+          <select v-model="form.theme" class="input" >
             <option v-for="theme in themes">{{ theme.name }}</option>
           </select>
-          Descrição:
-          <input type="text" v-model="form.description" />
-          Objetivos:
-          <input type="text" v-model="form.objectives" />
-          Metas:
-          <input type="text" v-model="form.goals" />
-          Recursos:
-          <input type="text" v-model="form.resources" />
 
-          <button type="submit" class="btn-page">Submeter</button>
+          <h3>Descrição:</h3>
+          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.description"> </textarea>
+          <br><br>
+          <h3>Objetivos:</h3>
+          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.objectives"></textarea> 
+        </div>
+        <div id="colR">
+          <h3>Metas:</h3>
+          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.goals"></textarea> 
+          <br><br>
+          <h3>Recursos:</h3>
+          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.resources"></textarea>
+        </div>
+      </div>
+          <button type="submit" class="btn-page btnP" id="modBtn">Submeter</button>
         </v-form>
       </div>
     </v-dialog>
+
     <v-dialog v-model="open">
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">

@@ -44,24 +44,42 @@
 
     <div class="carddivTables">
       <p class="semiTitle">Atividades próximas</p>
-      <v-card class="cardG"> </v-card>
+      <v-card class="cardG">
+        <div
+          v-if="closeActivities.length > 0"
+          v-for="activity in closeActivities"
+        >
+          <span class="cardText">{{ activity.title }}</span>
+          <span>{{ activity.date }}</span>
+        </div>
+        <div v-else>
+          <span>Não tem atividades próximas</span>
+        </div>
+      </v-card>
     </div>
   </v-row>
 </template>
 
 <script>
 import { useUsersStore } from "@/stores/User";
+import { useActivityStore } from "@/stores/Activity";
 
 export default {
   setup() {
     const userStore = useUsersStore();
+    const activityStore = useActivityStore();
 
-    return { userStore };
+    return { userStore, activityStore };
   },
   data() {
     return {
       users: this.userStore.getUsers,
       councilUsers: [],
+      activities: this.activityStore.getActivities,
+      myActivities: [],
+      closeActivities: [],
+      logged: this.userStore.getLogged,
+      user: "",
     };
   },
   created() {
@@ -71,6 +89,55 @@ export default {
         // alert(this.councilUsers)
       }
     });
+
+    this.user = this.userStore.getUsers.find(
+      (user) => user.email == this.logged
+    );
+
+    this.activities.forEach((activity) => {
+      if (
+        activity.coordinator == this.logged &&
+        !this.myActivities.find((a) => a.id == activity.id)
+      ) {
+        this.myActivities.push(activity);
+      }
+    });
+
+    let today = new Date();
+    let todayDate = +(
+      today.getFullYear() +
+      "" +
+      ((today.getMonth() + 1).toString().length < 2
+        ? "0" + (today.getMonth() + 1)
+        : today.getMonth() + 1) +
+      "" +
+      (today.getDate().toString().length < 2
+        ? "0" + today.getDate()
+        : today.getDate())
+    );
+
+    this.myActivities.forEach((act) => {
+      if (
+        this.closeActivities.length < 5 &&
+        +act.begin > +todayDate &&
+        !this.closeActivities.find((a) => a.id == act.id)
+      ) {
+        this.closeActivities.push(act);
+      } else {
+        this.closeActivities.forEach((a) => {
+          if (
+            +a.begin > +act.begin &&
+            +a.begin > +todayDate &&
+            !this.closeActivities.find((ac) => a.id == ac.id)
+          ) {
+            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+            this.closeActivities.push(a);
+          }
+        });
+      }
+    });
+
+    console.log(this.closeActivities);
   },
 };
 </script>

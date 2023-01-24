@@ -12,7 +12,7 @@
         </h2>
         <div class="boardTop">
           <div
-            v-if="activitiesSub.length > 0"
+            v-if="closeActivities.length > 0"
             v-for="activity in closeActivities"
           >
             <span class="cardText">{{ activity.title }}</span>
@@ -28,14 +28,16 @@
         </h2>
         <div class="boardTop">
           <div
-            v-if="activitiesSub.length > 0"
-            v-for="activity in closeActivities"
+            v-if="activitiesNow.length > 0"
+            v-for="activity in activitiesNow"
           >
             <span class="cardText">{{ activity.title }}</span>
             <span>{{ activity.date }}</span>
             <br />
           </div>
-          <div v-else>Não tem atividades próximas</div>
+          <div v-else>
+            Nenhuma atividade em que está inscrito, está de momento a decorrer.
+          </div>
         </div>
       </div>
     </div>
@@ -93,7 +95,7 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.desc3 }}</p>
         </div>
-        <div v-if="this.activity.begin > this.user.loginDate">
+        <div v-if="+this.activity.begin > +this.user.loginDate">
           <input
             v-if="!changeBtn(this.activity)"
             type="button"
@@ -113,8 +115,8 @@
         </div>
         <div
           v-else-if="
-            this.activity.begin <= this.user.loginDate &&
-            this.activity.end >= this.user.loginDate
+            +this.activity.begin <= +this.user.loginDate &&
+            +this.activity.end >= +this.user.loginDate
           "
         >
           <span>
@@ -357,6 +359,7 @@ export default {
       loginPoints: 0,
       loginClass: "",
       closeActivities: [],
+      activitiesNow: [],
     };
   },
   created() {
@@ -442,8 +445,6 @@ export default {
 
     // shows the 5 activities that are closest to todays date
     this.activitiesSub.forEach((act) => {
-      console.log(+act.begin);
-      console.log(this.user.loginDate);
       if (
         this.closeActivities.length < 5 &&
         +act.begin > this.user.loginDate &&
@@ -462,6 +463,15 @@ export default {
             this.closeActivities.push(a);
           }
         });
+      }
+    });
+    this.activitiesSub.forEach((act) => {
+      if (
+        +act.begin <= this.user.loginDate &&
+        +act.end >= this.user.loginDate &&
+        !this.activitiesNow.find((a) => a.id == act.id)
+      ) {
+        this.activitiesNow.push(act);
       }
     });
   },

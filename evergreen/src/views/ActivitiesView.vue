@@ -92,7 +92,7 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.desc3 }}</p>
         </div>
-        <div v-if="this.activity.begin > this.userObj.loginDate">
+        <div v-if="+this.activity.begin > +this.userObj.loginDate">
           <input
             v-if="!changeBtn(this.activity)"
             type="button"
@@ -113,8 +113,8 @@
         <div
           class="textRed"
           v-else-if="
-            this.activity.begin <= this.userObj.loginDate &&
-            this.activity.end >= this.userObj.loginDate
+            +this.activity.begin <= +this.userObj.loginDate &&
+            +this.activity.end >= +this.userObj.loginDate
           "
         >
           <span>
@@ -202,7 +202,7 @@
           class="mx-auto card"
           :class="'class' + activity.idTheme"
           max-width="400"
-          v-if="activity.end > this.userObj.loginDate"
+          v-if="+activity.end > +this.userObj.loginDate"
         >
           <v-img
             class="image"

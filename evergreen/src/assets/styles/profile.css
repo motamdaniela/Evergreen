@@ -71,7 +71,7 @@ p{
 }
 .editModal{
     width: 40%;
-    margin-left: 33%;
+    align-self: center;
 
 }
 
@@ -142,7 +142,7 @@ p{
 }
 .badgeModal{
     width: 45%;
-    margin-left: 28%;
+    align-self: center;
 }
 .badgeModalImg{
     width: 35%;

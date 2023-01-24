@@ -1,23 +1,53 @@
 <template>
   <div>
-    <h1 class="padding title">
-      <span>Atividades Próximas</span>
-    </h1>
-    <div id="board">
-      <div v-if="activitiesSub.length > 0" v-for="activity in closeActivities">
-        <span class="cardText">{{ activity.title }}</span>
-        <span>{{ activity.date }}</span>
-        <br />
+    <br />
+    <div id="divTop">
+      <img
+        id="imgTop"
+        src="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+      />
+      <div>
+        <h2 class="gradientGreen padding title">
+          <span>Atividades Próximas</span>
+        </h2>
+        <div class="boardTop">
+          <div
+            v-if="closeActivities.length > 0"
+            v-for="activity in closeActivities"
+          >
+            <span class="cardText">{{ activity.title }}</span>
+            <span>{{ activity.date }}</span>
+            <br />
+          </div>
+          <div v-else>Não tem atividades próximas</div>
+        </div>
       </div>
-      <div v-else>Não tem atividades próximas</div>
+      <div>
+        <h2 class="gradientGreen padding title">
+          <span>Atividades a Decorrer</span>
+        </h2>
+        <div class="boardTop">
+          <div
+            v-if="activitiesNow.length > 0"
+            v-for="activity in activitiesNow"
+          >
+            <span class="cardText">{{ activity.title }}</span>
+            <span>{{ activity.date }}</span>
+            <br />
+          </div>
+          <div v-else>
+            Nenhuma atividade em que está inscrito, está de momento a decorrer.
+          </div>
+        </div>
+      </div>
     </div>
     <br />
     <h1 class="gradientPurple padding title">
       <span>Atividades Inscritas</span>
     </h1>
     <br />
-    <v-dialog v-model="loginReward">
-      <div class="fieldPklight modal">
+    <v-dialog v-model="loginReward" persistent>
+      <div class="fieldPklight modal bonusModal">
         <div :class="loginClass">
           <label class="tab">Dia 1</label>
           <img src="../assets/images/day1_5.svg" id="day1" />
@@ -26,15 +56,16 @@
           <label class="tab">Dia 3</label>
           <img src="../assets/images/day3_7.svg" id="day3" />
           <label class="tab">Dia 4</label>
-          <img src="../assets/images/day4.svg" id="day4" />
-          <label class="tab">Dia 5</label>
+          <img src="../assets/images/day4.svg" id="day4" /><br><br>
+          <label class="tab" id="tab5">Dia 5</label>
           <img src="../assets/images/day1_5.svg" id="day5" />
           <label class="tab">Dia 6</label>
           <img src="../assets/images/day2_6.svg" id="day6" />
           <label class="tab">Dia 7</label>
           <img src="../assets/images/day3_7.svg" id="day7" />
         </div>
-        <button class="btn-page btnPk" @click="receive">Receber</button>
+        <br>
+        <button style="margin-left:40%" class="btn-page btnPk" @click="receive">Receber</button>
       </div>
     </v-dialog>
 
@@ -64,7 +95,7 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.desc3 }}</p>
         </div>
-        <div v-if="this.activity.begin > this.user.loginDate">
+        <div v-if="+this.activity.begin > +this.user.loginDate">
           <input
             v-if="!changeBtn(this.activity)"
             type="button"
@@ -84,8 +115,8 @@
         </div>
         <div
           v-else-if="
-            this.activity.begin <= this.user.loginDate &&
-            this.activity.end >= this.user.loginDate
+            +this.activity.begin <= +this.user.loginDate &&
+            +this.activity.end >= +this.user.loginDate
           "
         >
           <span>
@@ -328,6 +359,7 @@ export default {
       loginPoints: 0,
       loginClass: "",
       closeActivities: [],
+      activitiesNow: [],
     };
   },
   created() {
@@ -413,8 +445,6 @@ export default {
 
     // shows the 5 activities that are closest to todays date
     this.activitiesSub.forEach((act) => {
-      console.log(+act.begin);
-      console.log(this.user.loginDate);
       if (
         this.closeActivities.length < 5 &&
         +act.begin > this.user.loginDate &&
@@ -433,6 +463,15 @@ export default {
             this.closeActivities.push(a);
           }
         });
+      }
+    });
+    this.activitiesSub.forEach((act) => {
+      if (
+        +act.begin <= this.user.loginDate &&
+        +act.end >= this.user.loginDate &&
+        !this.activitiesNow.find((a) => a.id == act.id)
+      ) {
+        this.activitiesNow.push(act);
       }
     });
   },

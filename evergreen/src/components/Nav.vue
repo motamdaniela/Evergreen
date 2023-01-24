@@ -86,10 +86,10 @@
     >
       <v-app-bar-title>
         <RouterLink v-if="!isLogged" to="/"
-          ><img src="src/assets/logored.svg" id="logo"
+          ><img style="margin-right: 550px; margin-top: 30px;" src="src/assets/logored.svg" id="logo"
         /></RouterLink>
         <RouterLink v-else to="/"
-          ><img src="src/assets/logored.svg" id="logo"
+          ><img style="margin-right: 250px; margin-top: 30px;" src="src/assets/logored.svg" id="logo"
         /></RouterLink>
       </v-app-bar-title>
 
@@ -113,7 +113,7 @@
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
-          Sair
+          <img style="width:30px; height: 25px;" src="src/assets/icons/icones/logout.svg" />
         </button>
         <RouterLink v-else to="/Profile">
           <img :src="this.user.photo" id="profilePhoto" />

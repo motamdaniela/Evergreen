@@ -111,6 +111,7 @@
           />
         </div>
         <div
+          class="textRed"
           v-else-if="
             this.activity.begin <= this.userObj.loginDate &&
             this.activity.end >= this.userObj.loginDate
@@ -121,7 +122,7 @@
             inscrições/anulações de inscrição.</span
           >
         </div>
-        <div v-else>
+        <div v-else class="textRed">
           <span> Esta atividade já acabou.</span>
         </div>
       </div>

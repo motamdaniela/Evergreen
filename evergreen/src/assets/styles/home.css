@@ -1,3 +1,14 @@
+#imgTop {
+  width: 650px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+#divTop {
+  display: flex;
+  justify-content: space-evenly;
+}
 /* buttons */
 .btn-card {
   border: 2px solid #050b06;
@@ -9,14 +20,13 @@
   margin-bottom: 25px;
 }
 
-#board {
+.boardTop {
   background-color: #fdf9f9;
   border: 2px solid #09140b;
   border-radius: 50px;
   box-shadow: 10px 10px 0px #62b273;
   height: 300px;
-  width: 400px;
-  margin: 30px 150px;
+  width: 300px;
 }
 
 /* atividades */

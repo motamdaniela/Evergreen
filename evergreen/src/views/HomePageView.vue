@@ -28,20 +28,35 @@
     </v-dialog>
 
     <v-dialog v-model="open">
-      <div class="fieldPklight modal">
-        <button class="btn-page btnPklight" @click="open = false">x</button>
-        <img :src="this.activity.photo" width="200" />
-        <h1>{{ this.activity.title }}</h1>
-        <h3>Diagnostico:</h3>
-        <p>{{ this.activity.desc1 }}</p>
-        <h3>Objetivos:</h3>
-        <p>{{ this.activity.desc2 }}</p>
-        <h3>Metas:</h3>
-        <p>{{ this.activity.desc3 }}</p>
+      <div class="fieldPklight modal actModal">
+        <button class="btnRound btnPklight" @click="open = false">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
+        <div class="contentModal">
+          <div class="row1">
+            <img :src="this.activity.photo" class="imgModal" />
+            <div class="rowText">
+              <h2>{{ this.activity.title }}</h2>
+              <br>
+              <h3>Data:</h3>
+              <p>{{ this.activity.date }}</p>
+              <br>
+              <h3>Local:</h3>
+              <p>{{ this.activity.place }}</p>
+            </div>
+          </div>
+          
+          <h3>Diagnóstico:</h3>
+          <p>{{ this.activity.desc1 }}</p>
+          <h3>Objetivos:</h3>
+          <p>{{ this.activity.desc2 }}</p>
+          <h3>Metas:</h3>
+          <p>{{ this.activity.desc3 }}</p>
+        </div>
         <input
           v-if="!changeBtn(this.activity)"
           type="button"
-          class="btn-page"
+          class="btn-page btnG btnModal"
           id="sub"
           value="Inscrever"
           @click="subscribe(this.activity), changeBtn(this.activity)"
@@ -49,7 +64,7 @@
         <input
           v-else
           type="button"
-          class="btn-page"
+          class="btn-page btnR btnModal"
           id="unsub"
           value="Anular Inscrição"
           @click="unsubscribe(this.activity), changeBtn(this.activity)"

@@ -100,9 +100,9 @@
       </v-app-bar-title>
 
       <nav v-if="!isLogged">
-        <RouterLink to="/">Início</RouterLink>
-        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q.</RouterLink>
+        <RouterLink  class="homeLink" to="/">Início</RouterLink>
+        <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
@@ -111,33 +111,34 @@
         </button>
       </nav>
       <nav v-if="isLogged && this.user.type == 'user'">
-        <RouterLink to="/Home">Página principal</RouterLink>
-        <RouterLink to="/Activities">Atividades</RouterLink>
-        <RouterLink to="/Occurrence">Ocorrências</RouterLink>
-        <RouterLink to="/Form">Questionário</RouterLink>
-        <RouterLink to="/Missions">Missões</RouterLink>
-        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q.</RouterLink>
+        <RouterLink class="homeLink"  to="/Home">Página principal</RouterLink>
+        <RouterLink class="actLink" to="/Activities">Atividades</RouterLink>
+        <RouterLink class="ocLink" to="/Occurrence">Ocorrências</RouterLink>
+        <RouterLink class="formLink" to="/Form">Questionário</RouterLink>
+        <RouterLink class="missionsLink" to="/Missions">Missões</RouterLink>
+        <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
+          class="logoutbtn"
             style="width: 30px; height: 25px"
             src="src/assets/icons/icones/logout.svg"
           />
         </button>
-        <RouterLink v-else to="/Profile">
+        <RouterLink v-else to="/Profile" class="navbtn">
           <img :src="this.user.photo" id="profilePhoto" />
         </RouterLink>
       </nav>
       <nav v-if="isLogged && this.user.type == 'admin'">
-        <button @click="dialogAdd = true">
+        <button @click="dialogAdd = true" class="addbtn">
           <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
         </button>
-        <button @click="logOut">
+        <button @click="logOut" class="navbtn logoutbtn">
           <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
       <nav v-if="isLogged && this.user.type == 'security'">
-        <button @click="logOut">
+        <button @click="logOut" class="navbtn logoutbtn">
           <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
@@ -265,4 +266,5 @@ export default {
 
 <style scoped>
 @import "../assets/styles/admin.css";
+@import "../assets/styles/nav.css";
 </style>

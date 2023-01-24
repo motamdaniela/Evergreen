@@ -41,18 +41,6 @@ a {
     url("../gliker/gliker-bold.ttf") format("truetype");
 }
 
-#profile,
-#login,
-#signup {
-  border: 1px solid #050b06;
-  border-radius: 30px;
-}
-
-nav a:hover {
-  font-weight: bold;
-}
-
-button:hover,
 #login:hover,
 #signup:hover,
 .btn-page:hover {
@@ -121,7 +109,28 @@ button:hover,
   background-color: #fdf9f9;
   box-shadow: 3px 5px 0px #050b06;
 }
-/* button hovers */
+/* buttona active */
+.btnP:active {
+  background-color: #D4C7F0;
+}
+.tnG:active {
+  background-color: #91C99D;
+}
+.btnR:active {
+  background-color: #F09583;
+}
+.btnY:active {
+  background-color: #F0BC75;
+}
+.btnPk:active {
+  background-color: #EFC6CD;
+}
+.btnPklight:active {
+  background-color: #F4D8DD;
+}
+.btnB:active {
+  background-color: #C0E0C7;
+}
 
 /* fieldsets */
 .fieldP {
@@ -311,46 +320,6 @@ button:hover,
   display: none;
 }
 
-#login:active {
-  background-color: #d4c7f0;
-}
-#signup:active {
-  background-color: #91c99d;
-}
-
-nav a.router-link-exact-active {
-  color: #050b06;
-  font-weight: bold;
-  box-shadow: 0px -8px #e9674d inset;
-}
-
-nav a,
-.navbtn {
-  font-size: 15px;
-  text-decoration: none;
-  color: #050b06;
-  display: inline-block;
-  margin: 0 1rem 0 1rem;
-}
-nav a {
-  font-weight: 500;
-}
-
-button:last-of-type {
-  margin-right: 3rem;
-}
-
-/* .appBar{
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-} */
-
-#logo {
-  width: 8rem;
-  margin-left: -30%;
-}
-
 footer {
   background-color: #91c99d;
   width: 100%;
@@ -375,23 +344,6 @@ footer {
 @media screen and (min-width: 700px) {
   #ddmenu {
     display: none;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  nav {
-    display: none;
-  }
-}
-@media screen and (max-width: 950px) {
-  nav a {
-    font-size: 10px;
-  }
-}
-@media screen and (max-width: 1000px) {
-  #logo {
-    content: url("src/assets/images/flowerR.svg");
-    height: 3rem;
   }
 }
 

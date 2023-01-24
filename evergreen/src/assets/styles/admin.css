@@ -148,6 +148,14 @@
   border-radius: 15px;
 }
 
+.logoutbtn:hover{
+  content: url("/src/assets/icons/iconesthicc/logout.svg")
+}
+
+.addbtn:hover{
+  content: url("/src/assets/icons/iconesthicc/addUser.svg")
+}
+
 .cardImg {
   height: 300px;
   width: 95%;

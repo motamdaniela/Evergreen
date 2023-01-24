@@ -1,4 +1,5 @@
 <template>
+  <!-- each activity -->
   <v-dialog v-model="open">
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">
@@ -44,6 +45,56 @@
       </div>
     </v-dialog>
 
+    <!-- each occurence -->
+    <v-dialog v-model="openOc">
+      <div class="fieldG modal actModal">
+        <button class="btnRound btnG" @click="openOc = false">
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+        </button>
+        <div class="contentModal">
+          <div class="row1">
+            <img :src="this.oc.photo" class="imgModalOc" />
+            <div class="rowText">
+              <p v-for="octype in types">
+                <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
+              </p>
+              <br>
+              <h3>Local:</h3>
+              <p>{{ this.oc.campus }}, {{ this.oc.school }}, Bloco {{ this.oc.building }}</p>
+              <br>
+              <h3>Hora:</h3>
+              <p>{{ this.oc.hour }}</p>
+              <br>
+              <h3>Descrição:</h3>
+              <p>{{ this.oc.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-dialog>
+
+  <!-- each badge -->
+    <v-dialog v-model="openBadge">
+      <div class="fieldPk modal badgeModal">
+        <v-card elevation="0" color="#F9F9F9">
+          <v-card-actions>
+            <button class="btnRound btnPk" @click="openBadge = false">
+              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+            </button>
+          </v-card-actions>
+          <div id="bdgCont">
+          <img class="badgeModalImg" :src="badge">
+          <br>
+          <p v-for="mission in missions">
+            <h2 v-if=" mission.reward == badge" > {{ mission.title }}</h2>
+          </p>
+          </div>
+        </v-card>
+      </div>
+
+    </v-dialog>
+
+<!-- edit profile -->
   <v-dialog v-model="dialog">
     <div class="fieldPklight modal editModal">
       <v-card elevation="0" color="#F9F9F9">
@@ -90,6 +141,7 @@
     </div>
   </v-dialog>
 
+  <!-- activity list -->
   <v-dialog v-model="dialogAct" content-class="fieldP modal" scrollable>
     
     <v-card elevation="0" color="#F9F9F9">
@@ -112,14 +164,12 @@
             @click="open = true; this.activity = activity;">
             Ver mais
           </button>
-          
-
         </div>
       </v-card-text>
     </v-card>
-    
   </v-dialog>
 
+<!-- verified occurences -->
   <v-dialog v-model="dialogOcDone" content-class="fieldPk modal" scrollable>
     
     <v-card elevation="0" color="#F9F9F9">
@@ -132,15 +182,23 @@
         <p v-if="ocsDone.length <= 0">Ainda não tens nenhuma ocorrência verificada!</p>
         <div v-for="oc in ocsDone" class="fieldPk profileList">
           <img class="img" :src="oc.photo" />
+          <div class="ocTxt">
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
+          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+        </div>
+          <button
+            class="btn-card btnPk listBtn"
+            @click="openOc = true; this.oc = oc;">
+            Ver mais
+          </button>
         </div>
       </v-card-text>
     </v-card>
-    
   </v-dialog>
 
+<!-- pending occurences -->
   <v-dialog v-model="dialogOcPend" content-class="fieldY modal" scrollable>
     
     <v-card elevation="0" color="#F9F9F9">
@@ -153,15 +211,24 @@
         <p v-if="ocsPend.length <= 0">Não tens nenhuma ocorrência pendente!</p>
         <div v-for="oc in ocsPend" class="fieldY profileList">
           <img class="img" :src="oc.photo" />
+          <div class="ocTxt">
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
+          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+          </div>
+          <button
+            class="btn-card btnY listBtn"
+            @click="openOc = true; this.oc = oc;">
+            Ver mais
+          </button>
         </div>
       </v-card-text>
     </v-card>
-    
   </v-dialog>
 
+
+<!-- page content -->
   <div id="prfContent">
   <div>
     <div id="profileContent">
@@ -175,7 +242,6 @@
         <RouterLink to="/Rank">
           <img id="positionIcon" src="../assets/images/aboutPurple.svg">
           <p id="userPos">{{ users.indexOf(user) + 1 }}</p>
-          <!-- this is wrong ^ -->
         </RouterLink>
         <!-- ^ n vai pra cima -_- -->
       </v-col>
@@ -228,7 +294,7 @@
       <RouterLink to="/Missions">missões</RouterLink>
     </div>
     <div class="badgesDiv">
-      <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true"/>
+      <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true; this.badge = badge"/>
     </div>
   </div>
 </div>
@@ -256,7 +322,9 @@ export default {
       dialogAct: false,
       dialogOcDone: false,
       dialogOcPend: false,
+      openOc: false,
       open: false,
+      openBadge: false,
       newPassword: "",
       newUsername: "",
       newColor: "",
@@ -267,7 +335,8 @@ export default {
       activities: this.activityStore.getActivities,
       occurences: this.occurrenceStore.getOccurrences,
       logged: this.userStore.getLogged,
-      types: this.occurrenceStore.getTypes
+      types: this.occurrenceStore.getTypes,
+      missions: this.missionStore.getMissions,
     };
   },
   created() {

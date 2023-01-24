@@ -1,14 +1,15 @@
 <template>
   <div>
     <h1 class="padding title">
-      <span>Próximas Atividades</span>
+      <span>Atividades Próximas</span>
     </h1>
     <div id="board">
-      <div v-for="activity in activitiesSub">
+      <div v-if="activitiesSub.length > 0" v-for="activity in closeActivities">
         <span class="cardText">{{ activity.title }}</span>
         <span>{{ activity.date }}</span>
         <br />
       </div>
+      <div v-else>Não tem atividades próximas</div>
     </div>
     <br />
     <h1 class="gradientPurple padding title">
@@ -310,6 +311,7 @@ export default {
       loginReward: false,
       loginPoints: 0,
       loginClass: "",
+      closeActivities: [],
     };
   },
   created() {
@@ -392,6 +394,31 @@ export default {
     this.missionStore.completeMission(this.logged, 9);
     console.log();
     this.activitiesSug = this.activityStore.getActivitySuggestions;
+
+    // shows the 5 activities that are closest to todays date
+    this.activitiesSub.forEach((act) => {
+      console.log(+act.begin);
+      console.log(this.user.loginDate);
+      if (
+        this.closeActivities.length < 5 &&
+        +act.begin > this.user.loginDate &&
+        !this.closeActivities.find((a) => a.id == act.id)
+      ) {
+        console.log(6);
+        this.closeActivities.push(act);
+      } else {
+        this.closeActivities.forEach((a) => {
+          if (
+            +a.begin > +act.begin &&
+            +a.begin > this.user.loginDate &&
+            !this.closeActivities.find((ac) => a.id == ac.id)
+          ) {
+            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+            this.closeActivities.push(a);
+          }
+        });
+      }
+    });
   },
   methods: {
     receive() {

@@ -1,9 +1,14 @@
 <template>
   <div id="backgroundSign">
-    <v-form ref="form" @submit.prevent="onSubmit">
+    <!-- <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+      @submit.prevent="onSubmit"
+    > -->
+    <form @submit.prevent="onSubmit">
       <div id="signContent">
         <img id="signImg" src="../assets/logored.svg" />
-        <!-- <form> -->
         <div id="group">
           <div id="col1">
             <label for="name" class="semiTitle">Nome</label>
@@ -55,9 +60,7 @@
           </div>
         </div>
         <div>
-          <button class="btn-page link" id="ok" type="submit" @click="onSubmit">
-            Registar
-          </button>
+          <button class="btn-page link" id="ok" type="submit">Registar</button>
           <RouterLink
             style="margin: 10px 10px 0px 40px"
             class="link"
@@ -66,13 +69,13 @@
             >Entrar</RouterLink
           >
         </div>
-        <!-- </form> -->
       </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
-    </v-form>
+    </form>
+    <!-- </v-form> -->
   </div>
 </template>
 
@@ -104,47 +107,37 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
-      if (
-        this.name &&
-        this.email &&
-        this.username &&
-        this.school &&
-        this.password &&
+    onSubmit() {
+      this.userStore.signUp(
+        this.name,
+        this.email,
+        this.username,
+        this.school,
+        this.password,
         this.passConf
-      ) {
-        this.userStore.signUp(
-          this.name,
-          this.email,
-          this.username,
-          this.school,
-          this.password,
-          this.passConf
-        );
-        let user = this.userStore.getLogged;
-        let users = this.userStore.getUsers;
+      );
+      let user = this.userStore.getLogged;
+      let users = this.userStore.getUsers;
 
-        let signup = this.userStore.signUp(
-          this.name,
-          this.email,
-          this.username,
-          this.school,
-          this.password,
-          this.passConf
-        );
-        console.log(1);
-        if (users.find((u) => u.email == user && u.type == "user")) {
-          this.missionStore.addUser(this.email);
-          this.$router.push("/Home");
-        } else if (signup == "email") {
-          this.error = "Este email já existe!";
-        } else if (signup == "username") {
-          this.error = "Este username já existe!";
-        } else if (signup == "password") {
-          this.error = "Confirme que a palavra-passe coincide.";
-        }
+      let signup = this.userStore.signUp(
+        this.name,
+        this.email,
+        this.username,
+        this.school,
+        this.password,
+        this.passConf
+      );
+
+      if (users.find((u) => u.email == user && u.type == "user")) {
+        this.missionStore.addUser(this.email);
+        this.$router.push("/Home");
+      } else if (signup == "email") {
+        this.error = "Este email já existe!";
+      } else if (signup == "username") {
+        this.error = "Este username já existe!";
+      } else if (signup == "password") {
+        this.error = "Confirme que a palavra-passe coincide.";
       }
-      e.preventDefault();
     },
   },
 };

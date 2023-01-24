@@ -7,16 +7,12 @@
         </button>
 
         <!-- <h1 id="modTitle">Sugerir Atividade</h1> -->
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-          @submit.prevent="onSubmit"
-          ><br />
+        <form @submit.prevent="onSubmit">
+          <br />
           <div id="sugCont">
             <div id="colL">
               <h3>Tema:</h3>
-              <select v-model="form.theme" class="input">
+              <select v-model="form.theme" class="input" required>
                 <option v-for="theme in themes">{{ theme.name }}</option>
               </select>
 
@@ -27,6 +23,7 @@
                 height="60px"
                 type="text"
                 v-model="form.description"
+                required
               >
               </textarea>
               <br /><br />
@@ -37,6 +34,7 @@
                 height="60px"
                 type="text"
                 v-model="form.objectives"
+                required
               ></textarea>
             </div>
             <div id="colR">
@@ -47,6 +45,7 @@
                 height="60px"
                 type="text"
                 v-model="form.goals"
+                required
               ></textarea>
               <br /><br />
               <h3>Recursos:</h3>
@@ -56,13 +55,14 @@
                 height="60px"
                 type="text"
                 v-model="form.resources"
+                required
               ></textarea>
             </div>
           </div>
           <button type="submit" class="btn-page btnP" id="modBtn">
             Submeter
           </button>
-        </v-form>
+        </form>
       </div>
     </v-dialog>
 

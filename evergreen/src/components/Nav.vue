@@ -4,7 +4,7 @@
       <div class="fieldPklight modal">
         <v-card>
           <v-card-title>Novo Admin</v-card-title>
-          <form ref="form" @submit.prevent="onSubmit">
+          <form @submit.prevent="onSubmit">
             <v-row>
               <v-col style="width: 50%">
                 <label class="semiTitle">Tipo</label><br />

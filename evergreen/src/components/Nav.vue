@@ -4,11 +4,15 @@
       <div class="fieldPklight modal">
         <v-card>
           <v-card-title>Novo Admin</v-card-title>
-          <v-form ref="form" lazy-validation @submit.prevent="onSubmit">
+          <form @submit.prevent="onSubmit">
             <v-row>
               <v-col style="width: 50%">
                 <label class="semiTitle">Tipo</label><br />
-                <select class="inputSmall" v-model="this.newAdmin.type">
+                <select
+                  class="inputSmall"
+                  v-model="this.newAdmin.type"
+                  required
+                >
                   <option value="admin">Admin</option>
                   <option value="security">Segurança</option>
                 </select>
@@ -18,6 +22,7 @@
                   class="inputSmall"
                   id="name"
                   v-model="this.newAdmin.name"
+                  required
                 />
                 <br />
                 <label for="email" class="semiTitle">E-mail</label>
@@ -27,6 +32,7 @@
                   id="email"
                   v-model="this.newAdmin.email"
                   type="email"
+                  required
                 />
               </v-col>
               <v-col>
@@ -38,6 +44,7 @@
                   class="inputSmall"
                   id="username"
                   v-model="this.newAdmin.username"
+                  required
                 />
                 <br />
                 <label for="pass" class="semiTitle">Palavra-passe</label>
@@ -47,6 +54,7 @@
                   id="pass"
                   v-model="this.newAdmin.password"
                   type="password"
+                  required
                 />
                 <br />
                 <label for="confirm" class="semiTitle"
@@ -58,16 +66,19 @@
                   id="confirm"
                   v-model="this.newAdmin.passConf"
                   type="password"
+                  required
                 />
               </v-col>
             </v-row>
-          </v-form>
-          <v-card-actions>
-            <button class="btn-page btnPk" @click="onSubmit">Criar</button>
-            <button class="btn-page btnPklight" @click="dialogAdd = false">
-              Cancelar
-            </button>
-          </v-card-actions>
+            <v-card-actions>
+              <button class="btn-page btnPk" type="submit" @click="onSubmit">
+                Criar
+              </button>
+              <button class="btn-page btnPklight" @click="dialogAdd = false">
+                Cancelar
+              </button>
+            </v-card-actions>
+          </form>
         </v-card>
       </div>
     </v-dialog>
@@ -100,9 +111,9 @@
       </v-app-bar-title>
 
       <nav v-if="!isLogged">
-        <RouterLink to="/">Início</RouterLink>
-        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q.</RouterLink>
+        <RouterLink  class="homeLink" to="/">Início</RouterLink>
+        <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login">Entrar</RouterLink>
         </button>
@@ -120,24 +131,25 @@
         <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
+          class="logoutbtn"
             style="width: 30px; height: 25px"
             src="src/assets/icons/icones/logout.svg"
           />
         </button>
-        <RouterLink v-else to="/Profile">
+        <RouterLink v-else to="/Profile" class="navbtn">
           <img :src="this.user.photo" id="profilePhoto" />
         </RouterLink>
       </nav>
       <nav v-if="isLogged && this.user.type == 'admin'">
-        <button @click="dialogAdd = true">
+        <button @click="dialogAdd = true" class="addbtn">
           <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
         </button>
-        <button @click="logOut">
+        <button @click="logOut" class="navbtn logoutbtn">
           <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
       <nav v-if="isLogged && this.user.type == 'security'">
-        <button @click="logOut">
+        <button @click="logOut" class="navbtn logoutbtn">
           <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
@@ -279,4 +291,5 @@ export default {
 
 <style scoped>
 @import "../assets/styles/admin.css";
+@import "../assets/styles/nav.css";
 </style>

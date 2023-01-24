@@ -163,8 +163,8 @@ export const useUsersStore = defineStore("user", {
             previousLoginDate: 0,
             streak: 0,
             received: false,
-            loginDate:
-              +today.getFullYear() +
+            loginDate: +(
+              today.getFullYear() +
               "" +
               ((today.getMonth() + 1).toString().length != 2
                 ? "0" + (today.getMonth() + 1)
@@ -172,7 +172,8 @@ export const useUsersStore = defineStore("user", {
               "" +
               (today.getDate().toString().length != 2
                 ? "0" + today.getDate()
-                : today.getDate()),
+                : today.getDate())
+            ),
             photo:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
             points: 0,

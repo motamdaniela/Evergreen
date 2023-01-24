@@ -7,6 +7,8 @@
 
 #ProfilePic{
     width: 100%;
+    max-width: 250px;
+    min-width: 150px;
     height: auto;
     border: 2px solid #050B06;
     border-radius: 1000px;
@@ -14,18 +16,22 @@
     z-index: 0;
 }
 
-#positionIcon{
+#divRank{
+    position: relative;
+    z-index: 1;
+    margin-left: 100%;
+}
+
+#rankIcon{
     width: 100px;
     height: 100px;
-    z-index: 1;
-    margin-top: -400px;
-    margin-left: -95px;
 }
+
 #userPos{
-    z-index: 2;
-    margin-left: -100px;
+    position: relative;
+    z-index: 1;
+    margin-left: 45px;
     margin-top: -70px;
-    margin-bottom: 40px;
 }
 
 p{
@@ -44,26 +50,22 @@ p{
     align-items: center;
 }
 #ptsImg{
+    /* position: absolute; */
+    width: 20px;
     margin-right: 10px;
 }
 
 #pfpRow{
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* #profileContent{
-    margin-left: 57%;
-    margin-right: 50%;
-    margin-top: 11%;
-    position: absolute;
-} */
 
 #editIcon{
+    height: 160%;
     width: 20px;
-    /* margin-right: 100%; */
-    margin-top: 70%;
+    position: relative;
 }
 #picture{
     box-shadow: none;
@@ -158,11 +160,39 @@ p{
     padding-bottom: 30px;
 
 }
-/* 
-.colSide{
-    width: 20%,
-} */
 
+@media screen and (min-width: 1300px) {
+    .colPfp{
+        margin-left: -150px;
+        margin-right: -150px;
+    }
+    #divRank{
+        margin-left: 110%;
+    }
+}
 
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 1050px) {
+    .colPfp{
+        margin-left: -90px;
+        margin-right: -90px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    #editIcon{
+        height: 150%;
+    }
+    #pontos{
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #pfpRow{
+        margin-right: -5%;
+    }
+    .colPfp{
+        margin-left: 5px;
+        margin-right: -10px;
+    }
 }

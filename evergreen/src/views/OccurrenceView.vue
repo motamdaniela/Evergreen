@@ -1,11 +1,6 @@
 <template>
   <div class="form">
-    <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-      @submit.prevent="onSubmit"
-    >
+    <form ref="form" @submit.prevent="onSubmit">
       <v-window show-arrows>
         <template v-slot:prev="{ props }">
           <btn class="btn-page btnG" id="prevBtn" @click="props.onClick">
@@ -42,7 +37,12 @@
           <div class="formContent">
             <div>
               <label class="semiTitle">Campus:</label><br />
-              <select v-model="form.campus" class="input" @change="changeCamp">
+              <select
+                v-model="form.campus"
+                class="input"
+                @change="changeCamp"
+                required
+              >
                 <option v-for="camp in campus">
                   {{ camp.name }}
                 </option>
@@ -55,6 +55,7 @@
                 v-model="form.school"
                 class="input"
                 @change="changeSchool"
+                required
               >
                 <option v-for="school in schools">{{ school.name }}</option>
               </select>
@@ -66,6 +67,7 @@
                 v-model="form.building"
                 class="input"
                 @change="changeBuilding"
+                required
               >
                 <option v-for="building in buildings">
                   {{ building.name }}
@@ -75,7 +77,12 @@
 
             <div>
               <label class="semiTitle">Piso:</label><br />
-              <select v-model="form.floor" class="input" @change="changeFloor">
+              <select
+                v-model="form.floor"
+                class="input"
+                @change="changeFloor"
+                required
+              >
                 <option v-for="floor in floors">
                   {{ floor.id }}
                 </option>
@@ -84,7 +91,7 @@
 
             <div>
               <label class="semiTitle">Sala:</label><br />
-              <select v-model="form.classroom" class="input">
+              <select v-model="form.classroom" class="input" required>
                 <option v-for="classroom in classrooms">
                   {{ classroom.id }}
                 </option>
@@ -120,13 +127,8 @@
                 v-model="form.idType"
                 class="rb"
                 name="type"
-                @:click="
-                  {
-                    {
-                      id(tp.id);
-                    }
-                  }
-                "
+                :value="tp.id"
+                required
               />
               <label class="typeLbl">{{ tp.name }}</label>
             </div>
@@ -172,6 +174,7 @@
             placeholder="O problema encontra-se... "
             type="text"
             v-model="form.description"
+            required
           ></textarea>
         </v-window-item>
         <v-window-item :key="`card-${4}`">
@@ -204,6 +207,7 @@
             name="picture"
             accept="image/png, image/jpeg"
             ref="myFiles"
+            required
           />
 
           <br /><br />
@@ -211,7 +215,7 @@
           ><br /><br />
         </v-window-item>
       </v-window>
-    </v-form>
+    </form>
   </div>
 </template>
 
@@ -271,7 +275,7 @@ export default {
       this.form.id = this.occurrenceStore.getOccurrences.length;
       this.form.idType = document.querySelector(
         'input[name="type"]:checked'
-      ).id;
+      ).value;
       let today = new Date();
       this.form.date =
         today.getFullYear() +
@@ -287,17 +291,6 @@ export default {
       this.missionStore.completeMission(this.form.user, 2);
       location.reload();
     },
-    id(id) {
-      let select = document.querySelector('input[name="type"]:checked');
-      select.id = id;
-
-      const text = document.querySelector("#outro");
-      if (select.id == 6) {
-        text.removeAttribute("disabled", "");
-      } else {
-        text.setAttribute("disabled", "");
-      }
-    },
     // idk if this works
     previewFiles(e) {
       const files = e.target.files;
@@ -306,7 +299,6 @@ export default {
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = () => (this.form.photo = reader.result);
-      console.log(this.form.photo);
     },
     changeCamp() {
       let camp = this.campus.find((camp) => camp.name == this.form.campus);

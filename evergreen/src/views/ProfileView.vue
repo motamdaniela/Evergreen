@@ -250,7 +250,7 @@
           <br>
         </v-row>
         <v-row id="editIcon">
-          <img
+          <img id="edit"
           src="/src/assets/icons/icones/editProfile.svg"
           @click="dialog = true"/>
         </v-row>

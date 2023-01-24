@@ -23,19 +23,19 @@
           <div class="tabs">
             <div>
               <img src="../assets/images/icone_local.svg" class="img" /><br />
-              <label class="tab" id="lblY">Local</label>
+              <label class="tabO" id="lblY">Local</label>
             </div>
             <div>
               <img src="../assets/images/tipo_bw.svg" class="img" /><br />
-              <label class="tab">Tipo</label>
+              <label class="tabO">Tipo</label>
             </div>
             <div>
               <img src="../assets/images/descricao_bw.svg" class="img" /><br />
-              <label class="tab">Descrição</label>
+              <label class="tabO">Descrição</label>
             </div>
             <div>
               <img src="../assets/images/foto_bw.svg" class="img" /><br />
-              <label class="tab">Foto</label>
+              <label class="tabO">Foto</label>
             </div>
           </div>
 
@@ -97,19 +97,19 @@
           <div class="tabs">
             <div>
               <img src="../assets/images/local_bw.svg" class="img" /><br />
-              <label class="tab">Local</label>
+              <label class="tabO">Local</label>
             </div>
             <div>
               <img src="../assets/images/icone_tipo.svg" class="img" /><br />
-              <label class="tab" id="lblR">Tipo</label>
+              <label class="tabO" id="lblR">Tipo</label>
             </div>
             <div>
               <img src="../assets/images/descricao_bw.svg" class="img" /><br />
-              <label class="tab">Descrição</label>
+              <label class="tabO">Descrição</label>
             </div>
             <div>
               <img src="../assets/images/foto_bw.svg" class="img" /><br />
-              <label class="tab">Foto</label>
+              <label class="tabO">Foto</label>
             </div>
           </div>
 
@@ -146,22 +146,22 @@
           <div class="tabs">
             <div>
               <img src="../assets/images/local_bw.svg" class="img" /><br />
-              <label class="tab">Local</label>
+              <label class="tabO">Local</label>
             </div>
             <div>
               <img src="../assets/images/tipo_bw.svg" class="img" /><br />
-              <label class="tab">Tipo</label>
+              <label class="tabO">Tipo</label>
             </div>
             <div>
               <img
                 src="../assets/images/icone_descricao.svg"
                 class="img"
               /><br />
-              <label class="tab" id="lblG">Descrição</label>
+              <label class="tabO" id="lblG">Descrição</label>
             </div>
             <div>
               <img src="../assets/images/foto_bw.svg" class="img" /><br />
-              <label class="tab">Foto</label>
+              <label class="tabO">Foto</label>
             </div>
           </div>
 
@@ -179,19 +179,19 @@
           <div class="tabs">
             <div>
               <img src="../assets/images/local_bw.svg" class="img" /><br />
-              <label class="tab">Local</label>
+              <label class="tabO">Local</label>
             </div>
             <div>
               <img src="../assets/images/tipo_bw.svg" class="img" /><br />
-              <label class="tab">Tipo</label>
+              <label class="tabO">Tipo</label>
             </div>
             <div>
               <img src="../assets/images/descricao_bw.svg" class="img" /><br />
-              <label class="tab">Descrição</label>
+              <label class="tabO">Descrição</label>
             </div>
             <div>
               <img src="../assets/images/icone_foto.svg" class="img" /><br />
-              <label class="tab" id="lblP">Foto</label>
+              <label class="tabO" id="lblP">Foto</label>
             </div>
           </div>
 

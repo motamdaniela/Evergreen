@@ -7,7 +7,7 @@
         src="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
       />
       <div>
-        <h2 class="padding title">
+        <h2 class="gradientGreen padding title">
           <span>Atividades Próximas</span>
         </h2>
         <div class="boardTop">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div>
-        <h2 class="padding title">
+        <h2 class="gradientGreen padding title">
           <span>Atividades a Decorrer</span>
         </h2>
         <div class="boardTop">

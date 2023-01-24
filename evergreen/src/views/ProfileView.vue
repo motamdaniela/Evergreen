@@ -236,7 +236,7 @@
     </div>
     <v-row id="pfpRow">
       <v-col>
-        <img id="smallStar" src="/src/assets/images/aboutPurple.svg"/>
+        <!-- <img id="smallStar" src="/src/assets/images/aboutPurple.svg"/> -->
       </v-col>
       <v-col>
         <img id="ProfilePic" :src="user.photo" />
@@ -292,7 +292,7 @@
     <div v-if="this.user.rewards.length <= 0">
       <p>Ainda não tens nenhum crachá!</p>
       <p>Coleciona-os todos completando</p>
-      <RouterLink to="/Missions">missões</RouterLink>
+      <p><RouterLink to="/Missions">missões</RouterLink></p>
     </div>
     <div class="badgesDiv">
       <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true; this.badge = badge"/>

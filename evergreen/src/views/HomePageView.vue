@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="padding title">
+    <h1 class="gradientGreen padding title">
       <span>Atividades Próximas</span>
     </h1>
     <div id="board">

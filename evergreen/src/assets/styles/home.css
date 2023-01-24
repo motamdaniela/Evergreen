@@ -146,6 +146,10 @@
   content: url("../images/day7color.svg");
 }
 
+#day1, #day2, #day3, #day4, #day5, #day6, #day7{
+  width: 100px;
+  height: 100px;
+}
 /* end of modal login bonus colors */
 
 #noActivities {

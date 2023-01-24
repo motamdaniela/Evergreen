@@ -271,7 +271,7 @@ button:hover,
 .actModal {
   width: 60%;
   height: 50%;
-  margin-left: 20%;
+  align-self: center;
 }
 .imgModal {
   width: 350px;

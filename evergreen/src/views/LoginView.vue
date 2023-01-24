@@ -6,21 +6,43 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
-    <div id="loginContent">
-      <img id="loginImg" src="../assets/logored.svg">
-      <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
-      <br />
-      <input class="input" id="email" v-model="email" type="email" />
-      <br />
-      <label for="pass" class="semiTitle">Palavra-passe</label>
-      <br />
-      <input class="input" id="pass" v-model="password" type="password" />
-      <br />
-      <div id="btns">
-        <RouterLink style="margin: 10px 10px 0px 40px;" class="link" id="signUpBtn" to="/signUp">Registar</RouterLink>
-        
-        <button class="btn-page link" id="ok" type="submit">Entrar</button>
-      </div>
+      <div id="loginContent">
+        <img id="loginImg" src="../assets/logored.svg" />
+        <form>
+          <label for="email" class="semiTitle"
+            >E-mail / Nome de utilizador</label
+          >
+          <br />
+          <input
+            class="input"
+            id="email"
+            v-model="email"
+            type="email"
+            required
+          />
+          <br />
+          <label for="pass" class="semiTitle" required>Palavra-passe</label>
+          <br />
+          <input
+            class="input"
+            id="pass"
+            v-model="password"
+            type="password"
+            required
+          />
+          <br />
+          <div id="btns">
+            <RouterLink
+              style="margin: 10px 10px 0px 40px"
+              class="link"
+              id="signUpBtn"
+              to="/signUp"
+              >Registar</RouterLink
+            >
+
+            <button class="btn-page link" id="ok" type="submit">Entrar</button>
+          </div>
+        </form>
       </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
@@ -50,8 +72,10 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(this.email);
       let users = this.userStore.getUsers;
       let login = this.userStore.login(this.email, this.password);
+
       if (login == "userWrong") {
         this.error = "Credenciais erradas!";
       } else if (login == "userBlocked") {

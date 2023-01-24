@@ -6,50 +6,77 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
-    <div id="signContent">
-    <img id="signImg" src="../assets/logored.svg">
-      <div id="group">
-        <div id="col1">
-          <label for="name" class="semiTitle">Nome</label>
-          <br />
-          <input class="input" id="name" v-model="name" />
-          <br />
-          <label for="email" class="semiTitle">E-mail</label>
-          <br />
-          <input class="input" id="email" v-model="email" type="email" />
-          <br />
-          <label for="username" class="semiTitle">Nome de utilizador</label>
-          <br />
-          <input class="input" id="username" v-model="username" />
-        </div>
-        <div id="col2">
-          <label for="school" class="semiTitle">Escola</label>
-          <br />
-          <select v-model="school" id="school" class="input">
-            <option v-for="school in schools">{{ school.name }}</option>
-          </select>
-          <br />
-          <label for="pass" class="semiTitle">Palavra-passe</label>
-          <br />
-          <input class="input" id="pass" v-model="password" type="password" />
-          <br />
-          <label for="confirm" class="semiTitle">Confirmar palavra-passe</label>
-          <br />
-          <input
-            class="input"
-            id="confirm"
-            v-model="passConf"
-            type="password"
-          />
-        </div>
+      <div id="signContent">
+        <img id="signImg" src="../assets/logored.svg" />
+        <form>
+          <div id="group">
+            <div id="col1">
+              <label for="name" class="semiTitle">Nome</label>
+              <br />
+              <input class="input" id="name" v-model="name" required />
+              <br />
+              <label for="email" class="semiTitle">E-mail</label>
+              <br />
+              <input
+                class="input"
+                id="email"
+                v-model="email"
+                type="email"
+                required
+              />
+              <br />
+              <label for="username" class="semiTitle">Nome de utilizador</label>
+              <br />
+              <input class="input" id="username" v-model="username" required />
+            </div>
+            <div id="col2">
+              <label for="school" class="semiTitle">Escola</label>
+              <br />
+              <select v-model="school" id="school" class="input" required>
+                <option v-for="school in schools">{{ school.name }}</option>
+              </select>
+              <br />
+              <label for="pass" class="semiTitle">Palavra-passe</label>
+              <br />
+              <input
+                class="input"
+                id="pass"
+                v-model="password"
+                type="password"
+                required
+              />
+              <br />
+              <label for="confirm" class="semiTitle"
+                >Confirmar palavra-passe</label
+              >
+              <br />
+              <input
+                class="input"
+                id="confirm"
+                v-model="passConf"
+                type="password"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <button class="btn-page link" id="ok" type="submit">
+              Registar
+            </button>
+            <RouterLink
+              style="margin: 10px 10px 0px 40px"
+              class="link"
+              to="/login"
+              id="signUpBtn"
+              >Entrar</RouterLink
+            >
+          </div>
+        </form>
       </div>
-      <div >
-        <button class="btn-page link" id="ok" type="submit">Registar</button>
-        <RouterLink style="margin: 10px 10px 0px 40px;" class="link" to="/login" id="signUpBtn">Entrar</RouterLink>
-      </div>
-    </div>
       <br />
-      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error" >{{error}}</v-alert>
+      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
+        error
+      }}</v-alert>
     </v-form>
   </div>
 </template>
@@ -78,7 +105,7 @@ export default {
       password: "",
       passConf: "",
       schools: this.schoolStore.getSchools,
-      error: '',
+      error: "",
     };
   },
   methods: {
@@ -94,17 +121,24 @@ export default {
       let user = this.userStore.getLogged;
       let users = this.userStore.getUsers;
 
-      let signup = this.userStore.signUp(this.name, this.email, this.username, this.school,this.password, this.passConf);
- 
+      let signup = this.userStore.signUp(
+        this.name,
+        this.email,
+        this.username,
+        this.school,
+        this.password,
+        this.passConf
+      );
+
       if (users.find((u) => u.email == user && u.type == "user")) {
         this.missionStore.addUser(this.email);
         this.$router.push("/Home");
-      }else if(signup == 'email'){
-        this.error = 'Este email já existe!'
-      }else if(signup == 'username'){
-        this.error = 'Este username já existe!'
-      }else if(signup == 'password'){
-        this.error = 'Confirme que a palavra-passe coincide.'
+      } else if (signup == "email") {
+        this.error = "Este email já existe!";
+      } else if (signup == "username") {
+        this.error = "Este username já existe!";
+      } else if (signup == "password") {
+        this.error = "Confirme que a palavra-passe coincide.";
       }
     },
   },

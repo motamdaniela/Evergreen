@@ -18,14 +18,20 @@ fieldset{
 
 .badgeG{
     box-shadow: 3px 5px 0px #050B06;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .badgeY{
     background: #f6d9b0;
     box-shadow: 3px 5px 0px #050B06;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .badgeR{
     background-color: #f6c3b8;
     box-shadow: 3px 5px 0px #050B06;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .bgG{
@@ -51,15 +57,18 @@ fieldset{
     height: 5rem;
     background-color: #f6c3b8;
     box-shadow: 3px 5px 0px #E9674D;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .btnMissionY{
     border-radius: 100px;
     width: 5rem;
     height: 5rem;
-
     background-color: #f6d9b0;
     box-shadow: 3px 5px 0px #e9a13b;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .btnMissionG{
     border-radius: 100px;
@@ -67,6 +76,8 @@ fieldset{
     height: 5rem;
     background-color: #fdf9f9;
     box-shadow: 3px 5px 0px #62b273;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .btnContent{

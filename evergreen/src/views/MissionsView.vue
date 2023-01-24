@@ -2,6 +2,7 @@
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
     <fieldset :class="MissionsState(mission.reward, mission)">
+      <v-row>
       <div class="badge" :class="BadgeState(mission.reward, mission)">
         <img
           class="badgebg"
@@ -14,13 +15,15 @@
           src="/src/assets/icons/icones/lock.svg"
         />
       </div>
-      <h3>{{ mission.title }}</h3>
-      <p class="idk">{{ complete(mission.users, mission.id) }}</p>
-      <p>{{ mission.description }}</p>
-      <p v-if="state[mission.id][0] == mission.id">
-        {{ state[mission.id][1] }}
-      </p>
-      <p v-else></p>
+      <v-col>
+        <h3>{{ mission.title }}</h3>
+        <p class="idk">{{ complete(mission.users, mission.id) }}</p>
+        <p>{{ mission.description }}</p>
+        <p v-if="state[mission.id][0] == mission.id">
+          {{ state[mission.id][1] }}
+        </p>
+        <p v-else></p>
+      </v-col>
       <button
         v-if="state[mission.id][1] != 'Concluída'"
         @click="redirect(mission.redirect)"
@@ -42,6 +45,7 @@
       >
         <img class="btnContent" src="/src/assets/icons/icones/checkmark.svg" />
       </button>
+      </v-row>
     </fieldset>
   </div>
 </template>

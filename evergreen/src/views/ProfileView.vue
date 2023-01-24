@@ -162,6 +162,7 @@
     
   </v-dialog>
 
+  <div id="prfContent">
   <div>
     <div id="profileContent">
       <img src=""/>
@@ -171,12 +172,17 @@
       </v-col>
       <v-col>
         <img id="ProfilePic" :src="user.photo" />
+        <RouterLink to="/Rank">
+          <img id="positionIcon" src="../assets/images/aboutPurple.svg">
+          <p id="userPos">{{ userStore.users.indexOf(user) + 1 }}</p>
+        </RouterLink>
+        <!-- ^ n vai pra cima -_- -->
       </v-col>
       <v-col>
         <div id="ptsnBtn">
           <p id="pontos"><img style="width: 20px" id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
           <br>
-          <button class="btn-page btnG" id="btnBonus">Bónus Login</button>
+          <!-- <button class="btn-page btnG" id="btnBonus">Bónus Login</button> -->
         </div>
         <v-row>
           <img
@@ -224,6 +230,7 @@
       <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true"/>
     </div>
   </div>
+</div>
 </template>
 
 <script>

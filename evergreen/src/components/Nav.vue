@@ -122,13 +122,13 @@
         </button>
       </nav>
       <nav v-if="isLogged && this.user.type == 'user'">
-        <RouterLink class="homeLink"  to="/Home">Página principal</RouterLink>
-        <RouterLink class="actLink" to="/Activities">Atividades</RouterLink>
-        <RouterLink class="ocLink" to="/Occurrence">Ocorrências</RouterLink>
-        <RouterLink class="formLink" to="/Form">Questionário</RouterLink>
-        <RouterLink class="missionsLink" to="/Missions">Missões</RouterLink>
-        <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
+        <RouterLink to="/Home">Página principal</RouterLink>
+        <RouterLink to="/Activities">Atividades</RouterLink>
+        <RouterLink to="/Occurrence">Ocorrências</RouterLink>
+        <RouterLink to="/Form">Questionário</RouterLink>
+        <RouterLink to="/Missions"><v-badge :value="notifs" @change="updateNotifs" dot floating color="success">Missões</v-badge></RouterLink>
+        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
           class="logoutbtn"
@@ -183,12 +183,14 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import { useUsersStore } from "@/stores/User";
+import { useMissionStore } from "@/stores/Mission";
+
 export default {
   setup() {
     const usersStore = useUsersStore();
     const Logged = usersStore.getLoggedObj;
-
-    return { usersStore, Logged };
+    const missionStore = useMissionStore();
+    return { usersStore, Logged , missionStore};
   },
   created() {
     this.users = this.usersStore.getUsers;
@@ -216,6 +218,7 @@ export default {
         passConf: "",
       },
       dialogAdd: false,
+      notifs: false,
     };
   },
   computed: {
@@ -262,6 +265,17 @@ export default {
       this.newAdmin.password = "";
       this.newAdmin.passConf = "";
     },
+    updateNotifs() {
+      missionsStore.missions.users.forEach((user) => {
+        if(user[2] = "Concluída" || !(user.rewards.includes(mission.reward))){
+          notifs = true;
+        } else {
+          notifs = false;
+        }
+      })
+      
+      
+    }
   },
 
   // computed: {

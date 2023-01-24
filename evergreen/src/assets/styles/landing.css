@@ -50,15 +50,6 @@ body{
     padding-top: 120px;
 }
 
-/* div1 */
-#div1{
-    background-color: #E6DFF6;
-    display: flex;
-    align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    z-index: 0;
-}
 #text1 p{
     font-size: 20px;
     font-weight: 500;
@@ -81,14 +72,6 @@ body{
     box-shadow: none;
 }
 
-/* div2 */
-#div2{
-    background-color: #F6C3B8;
-    display: flex;
-    align-items: center;
-    padding-left: 120px;
-    z-index: 0; 
-}
 #img2{
     width: 500px;
     height: 400px;
@@ -111,14 +94,6 @@ body{
     box-shadow: none;
 }
 
-/* div3 */
-#div3{
-    background-color: #C0E0C7;
-    display: flex;
-    align-items: center;
-    padding-left: 50px;
-    padding-right: 80px;
-}
 #text3 p{
     font-size: 20px;
     font-weight: 500;
@@ -162,41 +137,67 @@ body{
     box-shadow: none;
 }
 
+
+#div1{
+    background-color: #E6DFF6;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    z-index: 0;
+    margin-top: -110px;
+}
 #landingImg1{
     width: 200px;
     height: 200px;
     z-index: 1;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    margin-right: -70px;
-    margin-bottom: -95px;
+    position: relative;
+    top: 0px;
+    right: -47%;
+    margin-top: -110px;
+}
+#div2{
+    background-color: #F6C3B8;
+    display: flex;
+    align-items: center;
+    padding-left: 120px;
+    z-index: 0; 
+    margin-top: -120px;
 }
 #landingImg2{
     width: 220px;
     height: 220px;
     z-index: 1;
-    position: absolute;
-    bottom: -115%;
-    left: 0px;
-    margin-left: -90px;   
+    position: relative;
+    left: -47%;
+    margin-top: -110px;
+}
+#div3{
+    background-color: #C0E0C7;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 80px;
+    margin-top: -120px;
+
 }
 #landingImg3{
-    width: 230px;
-    height: 230px;
+    width: 220px;
+    height: 220px;
     z-index: 1;
-    position: absolute;
-    bottom: -202%;
-    right: 0px;
-    margin-right: -70px;
-    margin-bottom: -95px;
+    position: relative;
+    top: 0px;
+    right: -47%;
+    margin-top: -110px;
 }
 #landingImg4{
     width: 240px;
     height: 240px;
     z-index: 1;
-    position: absolute;
-    bottom: -316%;
-    left: 0px;
-    margin-left: -100px;  
+    position: relative;
+    left: -47%;
+    margin-top: -115px;
 }
+
+@media screen and (max-width: 1000px) {
+  }

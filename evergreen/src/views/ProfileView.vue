@@ -235,20 +235,20 @@
       <img src=""/>
     </div>
     <v-row id="pfpRow">
-      <v-col>
+      <v-col class="colSide">
         <!-- <img id="smallStar" src="/src/assets/images/aboutPurple.svg"/> -->
-      </v-col>
-      <v-col>
-        <img id="ProfilePic" :src="user.photo" />
         <RouterLink to="/Rank">
           <img id="positionIcon" src="../assets/images/aboutPurple.svg">
-          <p id="userPos">{{ users.indexOf(user) + 1 }}</p>
+          <p id="userPos">{{ this.users.indexOf(user) + 1 }}</p>
         </RouterLink>
+      </v-col>
+      <v-col class="colPfp">
+        <img id="ProfilePic" :src="user.photo" />
         <!-- ^ n vai pra cima -_- -->
       </v-col>
-      <v-col>
+      <v-col class="colSide">
         <div id="ptsnBtn">
-          <p id="pontos"><img style="width: 20px" id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
+          <p id="pontos"><img id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
           <br>
           <!-- <button class="btn-page btnG" id="btnBonus">Bónus Login</button> -->
         </div>
@@ -263,6 +263,7 @@
     <p class="Name">
       <b>{{ user.name }}</b>
     </p>
+    <p>{{ user.username }}</p>
     <h3>
       <b>{{ user.school }}</b>
     </h3>

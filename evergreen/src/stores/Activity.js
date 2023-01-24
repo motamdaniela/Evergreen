@@ -37,7 +37,6 @@ export const useActivityStore = defineStore("activity", {
           activitiesSub.splice(index, 1);
         }
       });
-      console.log(activitiesSub);
       let themes = [];
       let acts = [];
 
@@ -47,7 +46,6 @@ export const useActivityStore = defineStore("activity", {
             if (themes.length > 0) {
               themes.forEach((theme) => {
                 if (!theme == activity.idTheme) {
-                  console.log(4);
                   themes.push(activity.idTheme);
                 }
               });
@@ -60,7 +58,11 @@ export const useActivityStore = defineStore("activity", {
 
       themes.forEach((theme) => {
         activities.forEach((activity) => {
-          if (activity.idTheme == theme && activity.begin > user.loginDate) {
+          if (
+            activity.idTheme == theme &&
+            !activitiesSub.find((act) => act.id == activity.id) &&
+            activity.begin > user.loginDate
+          ) {
             if (acts.length < 3) {
               acts.push(activity);
             }
@@ -76,8 +78,6 @@ export const useActivityStore = defineStore("activity", {
         });
       });
 
-      console.log(acts);
-
       if (acts.length < 3) {
         activities.forEach((activity) => {
           // acts.forEach((a) => {
@@ -87,12 +87,10 @@ export const useActivityStore = defineStore("activity", {
             activity.begin > user.loginDate
           ) {
             if (acts.length < 3) {
-              console.log(activity);
               acts.push(activity);
             }
           }
           // });
-          console.log(acts);
         });
       }
 
@@ -103,8 +101,7 @@ export const useActivityStore = defineStore("activity", {
           }
         });
       }
-      console.log(activitiesSub);
-      console.log(acts);
+
       return acts;
     },
   },

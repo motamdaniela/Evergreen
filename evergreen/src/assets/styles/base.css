@@ -43,7 +43,9 @@ a {
 
 #login:hover,
 #signup:hover,
-.btn-page:hover {
+.btn-page:hover,
+.btn-card:hover,
+.btnRound:hover {
   box-shadow: none;
   position: relative;
   left: 3px;

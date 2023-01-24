@@ -6,6 +6,8 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
+    <div id="loginContent">
+      <img id="loginImg" src="../assets/logored.svg">
       <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
       <br />
       <input class="input" id="email" v-model="email" type="email" />
@@ -15,10 +17,10 @@
       <input class="input" id="pass" v-model="password" type="password" />
       <br />
       <div id="btns">
-        <RouterLink class="link" id="signUpBtn" to="/signUp"
-          >Registar</RouterLink
-        >
+        <RouterLink style="margin: 10px 10px 0px 40px;" class="link" id="signUpBtn" to="/signUp">Registar</RouterLink>
+        
         <button class="btn-page link" id="ok" type="submit">Entrar</button>
+      </div>
       </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{

@@ -3,24 +3,40 @@
 <v-dialog v-model="open">
       <div class="fieldP modal">
         <div>
-          <button class="btn-page btnP" @click="open = false">x</button>
+          <button class="btnRound btnP" @click="open = false">
+            <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          </button>
+          <div class="contentModal">
+            <div class="row1">
+              <img class="imgModal" :src="this.activity.photo" width="200" />
+              <div class="rowText">
+              <h2>{{ this.activity.title }}</h2>
+              <br>
+              <h3>Data:</h3>
+              <p>{{ this.activity.date }}</p>
+              <br>
+              <h3>Local:</h3>
+              <p>{{ this.activity.place }}</p>
+            </div>
+            </div>
+          </div>
+          <h3>Diagnostico:</h3>
+          <p>{{ this.activity.desc1 }}</p>
+          <h3>Objetivos:</h3>
+          <p>{{ this.activity.desc2 }}</p>
+          <h3>Metas:</h3>
+          <p>{{ this.activity.desc3 }}</p>
+          <button class="btn-page btnP btnModal" style="margin-top:20px" @click="listDialog = true">Inscrições</button>
         </div>
-        <img :src="this.activity.photo" width="200" />
-        <h1>{{ this.activity.title }}</h1>
-        <h3>Diagnostico:</h3>
-        <p>{{ this.activity.desc1 }}</p>
-        <h3>Objetivos:</h3>
-        <p>{{ this.activity.desc2 }}</p>
-        <h3>Metas:</h3>
-        <p>{{ this.activity.desc3 }}</p>
-        <button class="btn-page btnP" @click="listDialog = true">Inscições</button>
       </div>
     </v-dialog>
 
     <v-dialog v-model="listDialog">
       <div class="fieldP modal">
         <div>
-          <button class="btn-page btnP" @click="listDialog = false">x</button>
+          <button class="btnRound btnP" @click="listDialog = false">
+            <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          </button><br><br>
         </div>
         <p v-if="activityUsers.length <= 0"> Não exitem inscrições!</p>
         <div v-for="user in activityUsers" >
@@ -40,19 +56,24 @@
 
 
 <div>
-            <h1 class="title">
-              <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
-              <span>Atividades</span>
-            </h1>
-        </div>
+  <h1 class="title">
+    <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
+    <span>Atividades</span>
+  </h1>
+</div>
 
-<div class="listAct">
+<div class="listAct" style="padding:30px;">
       <div class="grid-item" v-for="activity in FilteredActivities">
         <v-card
-          class="cardP">
+          class="max-auto cardPc"
+          max-width="400"
+          >
           <v-img
             class="image cardImg"
             :src="activity.photo"
+            height="219"
+            width="380"
+            margin-bottom="20"
             cover
           >
           </v-img>

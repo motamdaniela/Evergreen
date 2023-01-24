@@ -10,7 +10,7 @@
         <h2 class="gradientGreen padding title">
           <span>Atividades Próximas</span>
         </h2>
-        <div class="boardTop">
+        <div style="padding: 15px;" class="boardTop">
           <div
             v-if="closeActivities.length > 0"
             v-for="activity in closeActivities"
@@ -26,7 +26,7 @@
         <h2 class="gradientGreen padding title">
           <span>Atividades a Decorrer</span>
         </h2>
-        <div class="boardTop">
+        <div style="padding: 15px;" class="boardTop">
           <div
             v-if="activitiesNow.length > 0"
             v-for="activity in activitiesNow"

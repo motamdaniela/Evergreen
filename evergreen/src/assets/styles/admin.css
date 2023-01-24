@@ -86,6 +86,14 @@
   width: 100%;
 }
 
+.cardPc {
+  background-color: #fdf9f9;
+  box-shadow: 8px 8px 0px #c2afea;
+  border: 2px solid #050b06;
+  border-radius: 30px;
+  width: 100%;
+  margin-bottom: 50px;
+}
 .cardP {
   background-color: #fdf9f9;
   box-shadow: 5px 5px 0px #c2afea;

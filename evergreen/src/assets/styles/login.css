@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 357px;
+    padding-bottom: 144px;
 }
 #backgroundSign{
     background-image: url("../images/entrar.png");
@@ -20,7 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 180px;
+    padding-bottom: 52px;
 }
 
 #group{
@@ -71,4 +71,18 @@
     background-color: #FDFAF9;
     border: 2px solid rgb(0, 0, 0);
     box-shadow: 3px 3px 0px #050B06;
+}
+
+#loginContent{
+    margin-top: 20%;
+}
+#loginImg{
+    margin-bottom: 100px;
+}
+#signContent{
+    margin-top: 8%;
+}
+#signImg{
+    width: 43%;
+    margin-bottom: 30px;
 }

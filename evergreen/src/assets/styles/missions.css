@@ -35,3 +35,49 @@ fieldset{
 .bgR{
     opacity: 0;
 }
+
+#lock{
+    width: 4rem;
+    margin-top: 1rem;
+    margin-left: -5rem;
+    position: absolute;
+}
+
+.btnMissionR{
+    border-radius: 100px;
+    width: 4rem;
+    height: 4rem;
+    background-color: #f6c3b8;
+    box-shadow: 3px 5px 0px #E9674D;
+}
+
+.btnMissionY{
+    border-radius: 100px;
+    width: 4rem;
+    height: 4rem;
+
+    background-color: #f6d9b0;
+    box-shadow: 3px 5px 0px #e9a13b;
+}
+.btnMissionG{
+    border-radius: 100px;
+    width: 4rem;
+    height: 4rem;
+    background-color: #fdf9f9;
+    box-shadow: 3px 5px 0px #62b273;
+}
+
+.btnContent{
+    margin-left: -0.6rem;
+    width: 2.5rem;
+}
+
+.lockG{
+    opacity: 0;
+}
+.lockY{
+    content: url("/src/assets/icons/icones/unlocked.svg");
+}
+.lockR{
+    opacity: 1;
+}

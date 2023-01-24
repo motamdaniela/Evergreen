@@ -117,7 +117,7 @@
           "
         >
           <span>
-            Esta atividade está a ser realizada e, por isso, não ceita mais
+            Esta atividade está a ser realizada e, por isso, não aceita mais
             inscrições/anulações de inscrição.</span
           >
         </div>

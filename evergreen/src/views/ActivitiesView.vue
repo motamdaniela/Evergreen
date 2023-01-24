@@ -3,38 +3,65 @@
     <v-dialog v-model="suggestion">
       <div class="fieldP modal sugModal">
         <button class="btnRound btnP" @click="suggestion = false">
-          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          <img style="width: 15px" src="../assets/icons/icones/close.svg" />
         </button>
-        
+
         <!-- <h1 id="modTitle">Sugerir Atividade</h1> -->
         <v-form
           ref="form"
           v-model="valid"
           lazy-validation
           @submit.prevent="onSubmit"
-        ><br>
-        <div id="sugCont">
-        <div id="colL">
-          <h3>Tema:</h3>
-          <select v-model="form.theme" class="input" >
-            <option v-for="theme in themes">{{ theme.name }}</option>
-          </select>
+          ><br />
+          <div id="sugCont">
+            <div id="colL">
+              <h3>Tema:</h3>
+              <select v-model="form.theme" class="input">
+                <option v-for="theme in themes">{{ theme.name }}</option>
+              </select>
 
-          <h3>Descrição:</h3>
-          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.description"> </textarea>
-          <br><br>
-          <h3>Objetivos:</h3>
-          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.objectives"></textarea> 
-        </div>
-        <div id="colR">
-          <h3>Metas:</h3>
-          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.goals"></textarea> 
-          <br><br>
-          <h3>Recursos:</h3>
-          <textarea class="textBox" rows="5" height="60px" type="text" v-model="form.resources"></textarea>
-        </div>
-      </div>
-          <button type="submit" class="btn-page btnP" id="modBtn">Submeter</button>
+              <h3>Descrição:</h3>
+              <textarea
+                class="textBox"
+                rows="5"
+                height="60px"
+                type="text"
+                v-model="form.description"
+              >
+              </textarea>
+              <br /><br />
+              <h3>Objetivos:</h3>
+              <textarea
+                class="textBox"
+                rows="5"
+                height="60px"
+                type="text"
+                v-model="form.objectives"
+              ></textarea>
+            </div>
+            <div id="colR">
+              <h3>Metas:</h3>
+              <textarea
+                class="textBox"
+                rows="5"
+                height="60px"
+                type="text"
+                v-model="form.goals"
+              ></textarea>
+              <br /><br />
+              <h3>Recursos:</h3>
+              <textarea
+                class="textBox"
+                rows="5"
+                height="60px"
+                type="text"
+                v-model="form.resources"
+              ></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-page btnP" id="modBtn">
+            Submeter
+          </button>
         </v-form>
       </div>
     </v-dialog>
@@ -42,22 +69,22 @@
     <v-dialog v-model="open">
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">
-          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          <img style="width: 15px" src="../assets/icons/icones/close.svg" />
         </button>
         <div class="contentModal">
           <div class="row1">
             <img :src="this.activity.photo" class="imgModal" />
             <div class="rowText">
               <h2>{{ this.activity.title }}</h2>
-              <br>
+              <br />
               <h3>Data:</h3>
               <p>{{ this.activity.date }}</p>
-              <br>
+              <br />
               <h3>Local:</h3>
               <p>{{ this.activity.place }}</p>
             </div>
           </div>
-          
+
           <h3>Diagnóstico:</h3>
           <p>{{ this.activity.desc1 }}</p>
           <h3>Objetivos:</h3>
@@ -65,22 +92,38 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.desc3 }}</p>
         </div>
-        <input
-          v-if="!changeBtn(this.activity)"
-          type="button"
-          class="btn-page btnG btnModal"
-          id="sub"
-          value="Inscrever"
-          @click="subscribe(this.activity), changeBtn(this.activity)"
-        />
-        <input
-          v-else
-          type="button"
-          class="btn-page btnR btnModal"
-          id="unsub"
-          value="Anular Inscrição"
-          @click="unsubscribe(this.activity), changeBtn(this.activity)"
-        />
+        <div v-if="this.activity.begin > this.userObj.loginDate">
+          <input
+            v-if="!changeBtn(this.activity)"
+            type="button"
+            class="btn-page btnG btnModal"
+            id="sub"
+            value="Inscrever"
+            @click="subscribe(this.activity), changeBtn(this.activity)"
+          />
+          <input
+            v-else
+            type="button"
+            class="btn-page btnR btnModal"
+            id="unsub"
+            value="Anular Inscrição"
+            @click="unsubscribe(this.activity), changeBtn(this.activity)"
+          />
+        </div>
+        <div
+          v-else-if="
+            this.activity.begin <= this.userObj.loginDate &&
+            this.activity.end >= this.userObj.loginDate
+          "
+        >
+          <span>
+            Esta atividade está a ser realizada e, por isso, não ceita mais
+            inscrições/anulações de inscrição.</span
+          >
+        </div>
+        <div v-else>
+          <span> Esta atividade já acabou.</span>
+        </div>
       </div>
     </v-dialog>
 
@@ -115,7 +158,9 @@
 
     <v-menu>
       <template v-slot:activator="{ props }">
-        <button class="btn-page btnP btns" id="btnFiltrar" v-bind="props">Filtrar</button>
+        <button class="btn-page btnP btns" id="btnFiltrar" v-bind="props">
+          Filtrar
+        </button>
       </template>
 
       <v-list id="menu">
@@ -152,7 +197,12 @@
 
     <div class="list">
       <div class="grid-item" v-for="activity in activities">
-        <v-card class="mx-auto" max-width="400" id="card">
+        <v-card
+          class="mx-auto card"
+          :class="'class' + activity.idTheme"
+          max-width="400"
+          v-if="activity.end > this.userObj.loginDate"
+        >
           <v-img
             class="image"
             :src="activity.photo"
@@ -177,7 +227,44 @@
                 </div>
               </v-card-subtitle>
               <button
-                class="btn-card btnP"
+                class="btn-card"
+                :class="'btn' + activity.idTheme"
+                @click="
+                  open = true;
+                  this.activity = activity;
+                "
+              >
+                Ver mais
+              </button>
+            </div>
+          </div>
+        </v-card>
+        <v-card class="mx-auto card gray" max-width="400" v-else>
+          <v-img
+            class="image imgGray"
+            :src="activity.photo"
+            height="219"
+            width="380"
+            cover
+          >
+          </v-img>
+
+          <div class="cardText">
+            <v-card-title>
+              <b>{{ activity.title }}</b>
+            </v-card-title>
+
+            <div class="alignCard">
+              <v-card-subtitle>
+                <div>
+                  <b
+                    >{{ activity.date }} <br />
+                    {{ activity.place }}</b
+                  >
+                </div>
+              </v-card-subtitle>
+              <button
+                class="btn-card btnGray"
                 @click="
                   open = true;
                   this.activity = activity;
@@ -217,6 +304,7 @@ export default {
     return {
       activities: [],
       user: this.userStore.getLogged,
+      userObj: "",
       open: false,
       openFilter: false,
       suggestion: false,
@@ -237,6 +325,9 @@ export default {
   },
   created() {
     this.activities = this.activityStore.getActivities;
+    this.userObj = this.userStore.getUsers.find(
+      (user) => user.email == this.user
+    );
   },
   updated() {
     console.log(this.themesPicked);

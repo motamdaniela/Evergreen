@@ -7,6 +7,8 @@ fieldset{
     width: 6.2rem;
     border-radius: 1000px;
     border: 2px solid #050B06;
+    margin-top: 0.2rem;
+    margin-left: 1rem;
 }
 .badgebg{
     height: 6rem;
@@ -15,15 +17,15 @@ fieldset{
 }
 
 .badgeG{
-    box-shadow: 3px 5px 0px #62b273;
+    box-shadow: 3px 5px 0px #050B06;
 }
 .badgeY{
-    background: #E9A13B;
-    box-shadow: 3px 5px 0px #E9A13B;
+    background: #f6d9b0;
+    box-shadow: 3px 5px 0px #050B06;
 }
 .badgeR{
-    background-color: #E9674D;
-    box-shadow: 3px 5px 0px #E9674D;
+    background-color: #f6c3b8;
+    box-shadow: 3px 5px 0px #050B06;
 }
 
 .bgG{
@@ -45,30 +47,30 @@ fieldset{
 
 .btnMissionR{
     border-radius: 100px;
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     background-color: #f6c3b8;
     box-shadow: 3px 5px 0px #E9674D;
 }
 
 .btnMissionY{
     border-radius: 100px;
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
 
     background-color: #f6d9b0;
     box-shadow: 3px 5px 0px #e9a13b;
 }
 .btnMissionG{
     border-radius: 100px;
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     background-color: #fdf9f9;
     box-shadow: 3px 5px 0px #62b273;
 }
 
 .btnContent{
-    margin-left: -0.6rem;
+    margin-top: 0.5rem;
     width: 2.5rem;
 }
 
@@ -80,4 +82,11 @@ fieldset{
 }
 .lockR{
     opacity: 1;
+}
+
+.btnMissionG:hover{
+    box-shadow: 3px 5px 0px #62b273;
+    position: relative;
+    left: 0;
+    top: 0;
 }

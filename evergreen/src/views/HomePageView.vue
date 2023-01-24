@@ -1,5 +1,16 @@
 <template>
   <div>
+    <h1 class="padding title">
+      <span>Atividades Próximas</span>
+    </h1>
+    <div id="board">
+      <div v-if="activitiesSub.length > 0" v-for="activity in closeActivities">
+        <span class="cardText">{{ activity.title }}</span>
+        <span>{{ activity.date }}</span>
+        <br />
+      </div>
+      <div v-else>Não tem atividades próximas</div>
+    </div>
     <br />
     <h1 class="gradientPurple padding title">
       <span>Atividades Inscritas</span>
@@ -30,22 +41,22 @@
     <v-dialog v-model="open">
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">
-          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          <img style="width: 15px" src="../assets/icons/icones/close.svg" />
         </button>
         <div class="contentModal">
           <div class="row1">
             <img :src="this.activity.photo" class="imgModal" />
             <div class="rowText">
               <h2>{{ this.activity.title }}</h2>
-              <br>
+              <br />
               <h3>Data:</h3>
               <p>{{ this.activity.date }}</p>
-              <br>
+              <br />
               <h3>Local:</h3>
               <p>{{ this.activity.place }}</p>
             </div>
           </div>
-          
+
           <h3>Diagnóstico:</h3>
           <p>{{ this.activity.desc1 }}</p>
           <h3>Objetivos:</h3>
@@ -300,6 +311,7 @@ export default {
       loginReward: false,
       loginPoints: 0,
       loginClass: "",
+      closeActivities: [],
     };
   },
   created() {
@@ -370,7 +382,6 @@ export default {
         this.activitiesSub.splice(index, 1);
       }
     });
-
     this.users = this.userStore.getTop3;
     this.missionStore.completeMission(this.logged, 1);
     this.missionStore.completeMission(this.logged, 2);
@@ -383,6 +394,31 @@ export default {
     this.missionStore.completeMission(this.logged, 9);
     console.log();
     this.activitiesSug = this.activityStore.getActivitySuggestions;
+
+    // shows the 5 activities that are closest to todays date
+    this.activitiesSub.forEach((act) => {
+      console.log(+act.begin);
+      console.log(this.user.loginDate);
+      if (
+        this.closeActivities.length < 5 &&
+        +act.begin > this.user.loginDate &&
+        !this.closeActivities.find((a) => a.id == act.id)
+      ) {
+        console.log(6);
+        this.closeActivities.push(act);
+      } else {
+        this.closeActivities.forEach((a) => {
+          if (
+            +a.begin > +act.begin &&
+            +a.begin > this.user.loginDate &&
+            !this.closeActivities.find((ac) => a.id == ac.id)
+          ) {
+            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+            this.closeActivities.push(a);
+          }
+        });
+      }
+    });
   },
   methods: {
     receive() {
@@ -424,46 +460,6 @@ export default {
       this.userStore.edit(JSON.stringify(this.user));
     },
   },
-  // computed: {
-  //   activitiesSuggest() {
-  //     let ListSuggest = [];
-  //     let newList = this.activities;
-  //     let newSuggest = '';
-  //     if(this.activitiesSub.length <= 0){
-  //       while(ListSuggest.length < 3){
-  //         newSuggest = this.activities[Math.floor(Math.random()*this.activities.length)]
-  //         ListSuggest.push(newSuggest);
-  //         if(newSuggest.length > 0){
-  //           newList.splice(newList.indexOf.find(newSuggest), 1)
-  //         }
-  //       }
-  //       return ListSuggest
-  //     }else{
-  //       let themesList = [];
-  //       this.activitiesSub.forEach(activity =>{
-  //         themesList.push(activity.idTheme)
-  //       })
-  //       let newListThemes = this.activities.filter(activity => activity.idTheme in themesList);
-  //       newListThemes.forEach(activity =>{
-  //         if(!(this.activitiesSub.find((item) => item == activity))){
-  //           newList.push(activity);
-  //         }
-  //       })
-  //       while(ListSuggest.length < 3){
-  //         newSuggest = newList[Math.floor(Math.random()*newList.length)];
-  //         newList.splice(newList.indexOf(newList.find((item) => item == newSuggest)), 1)
-  //         while(ListSuggest.find(sug => sug == newSuggest)){
-  //           newSuggest = newList[Math.floor(Math.random()*newList.length)];
-  //         }
-  //         ListSuggest.push(newSuggest)
-  //         // if(newList.length == 0){
-  //         //   this.activitiesSug = ListSuggest
-  //         // }
-  //       }
-  //       this.activitiesSug = ListSuggest
-  //     }
-  //   }
-  //   },
 };
 </script>
 

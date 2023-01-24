@@ -1,9 +1,31 @@
+#prfContent{
+    background-image: url("../images/bgPerfil.png");
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: right 100px; 
+}
+
 #ProfilePic{
     width: 100%;
     height: auto;
     border: 2px solid #050B06;
     border-radius: 1000px;
     box-shadow: 8px 8px 0px #C2AFEA;
+    z-index: 0;
+}
+
+#positionIcon{
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    margin-top: -400px;
+    margin-left: -95px;
+}
+#userPos{
+    z-index: 2;
+    margin-left: -100px;
+    margin-top: -70px;
+    margin-bottom: 40px;
 }
 
 p{
@@ -41,7 +63,7 @@ p{
 #editIcon{
     width: 20px;
     /* margin-right: 100%; */
-    margin-top: 50%;
+    margin-top: 70%;
 }
 #picture{
     box-shadow: none;

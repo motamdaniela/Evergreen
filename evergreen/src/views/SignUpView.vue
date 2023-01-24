@@ -60,7 +60,12 @@
             </div>
           </div>
           <div>
-            <button class="btn-page link" id="ok" type="submit">
+            <button
+              class="btn-page link"
+              id="ok"
+              type="submit"
+              @click="onSubmit"
+            >
               Registar
             </button>
             <RouterLink
@@ -109,7 +114,7 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    onSubmit(e) {
       this.userStore.signUp(
         this.name,
         this.email,
@@ -140,6 +145,7 @@ export default {
       } else if (signup == "password") {
         this.error = "Confirme que a palavra-passe coincide.";
       }
+      e.preventDefault();
     },
   },
 };

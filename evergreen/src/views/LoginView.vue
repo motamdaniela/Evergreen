@@ -13,13 +13,7 @@
             >E-mail / Nome de utilizador</label
           >
           <br />
-          <input
-            class="input"
-            id="email"
-            v-model="email"
-            type="email"
-            required
-          />
+          <input class="input" id="email" v-model="email" required />
           <br />
           <label for="pass" class="semiTitle" required>Palavra-passe</label>
           <br />
@@ -40,7 +34,14 @@
               >Registar</RouterLink
             >
 
-            <button class="btn-page link" id="ok" type="submit">Entrar</button>
+            <button
+              class="btn-page link"
+              id="ok"
+              type="submit"
+              @click="onSubmit"
+            >
+              Entrar
+            </button>
           </div>
         </form>
       </div>
@@ -71,7 +72,7 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    onSubmit(e) {
       console.log(this.email);
       let users = this.userStore.getUsers;
       let login = this.userStore.login(this.email, this.password);
@@ -100,6 +101,7 @@ export default {
       ) {
         this.$router.push("/Occurences");
       }
+      e.preventDefault();
     },
   },
 };

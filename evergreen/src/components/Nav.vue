@@ -111,7 +111,7 @@
       </v-app-bar-title>
 
       <nav v-if="!isLogged">
-        <RouterLink  class="homeLink" to="/">Início</RouterLink>
+        <RouterLink class="homeLink" to="/">Início</RouterLink>
         <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button id="login" class="navbtn btnP">
@@ -126,12 +126,19 @@
         <RouterLink to="/Activities">Atividades</RouterLink>
         <RouterLink to="/Occurrence">Ocorrências</RouterLink>
         <RouterLink to="/Form">Questionário</RouterLink>
-        <RouterLink to="/Missions"><v-badge :value="notifs" @change="updateNotifs" dot floating color="success">Missões</v-badge></RouterLink>
+        <RouterLink to="/Missions"
+          >Missões<v-badge
+            v-if="updateNotifs"
+            dot
+            floating
+            color="success"
+          ></v-badge
+        ></RouterLink>
         <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
-          class="logoutbtn"
+            class="logoutbtn"
             style="width: 30px; height: 25px"
             src="src/assets/icons/icones/logout.svg"
           />
@@ -190,7 +197,7 @@ export default {
     const usersStore = useUsersStore();
     const Logged = usersStore.getLoggedObj;
     const missionStore = useMissionStore();
-    return { usersStore, Logged , missionStore};
+    return { usersStore, Logged, missionStore };
   },
   created() {
     this.users = this.usersStore.getUsers;
@@ -221,6 +228,7 @@ export default {
       notifs: false,
     };
   },
+  updated() {},
   computed: {
     isLogged() {
       if (this.usersStore.getLogged) {
@@ -241,6 +249,24 @@ export default {
         (this.user = this.usersStore.getUsers.find(
           (user) => user.email == this.usersStore.getLogged
         ));
+    },
+    updateNotifs() {
+      let y = [];
+      let missions = this.missionStore.getMissions;
+      console.log(missions);
+      missions.forEach((mission) => {
+        mission.users.forEach((user) => {
+          if (
+            user[2] == "Concluída" &&
+            !this.user.rewards.includes(mission.reward)
+          ) {
+            y.push(mission);
+          }
+        });
+      });
+      if (y.length > 0) {
+        return true;
+      }
     },
   },
   methods: {
@@ -265,17 +291,16 @@ export default {
       this.newAdmin.password = "";
       this.newAdmin.passConf = "";
     },
-    updateNotifs() {
-      missionsStore.missions.users.forEach((user) => {
-        if(user[2] = "Concluída" || !(user.rewards.includes(mission.reward))){
-          notifs = true;
-        } else {
-          notifs = false;
-        }
-      })
-      
-      
-    }
+    // updateNotifs() {
+    //   missionsStore.missions.users.forEach((user) => {
+    //     if(user[2] = "Concluída" || !(user.rewards.includes(mission.reward))){
+    //       notifs = true;
+    //     } else {
+    //       notifs = false;
+    //     }
+    //   })
+
+    // }
   },
 
   // computed: {

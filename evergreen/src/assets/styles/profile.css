@@ -1,198 +1,195 @@
-#prfContent{
-    background-image: url("../images/bgPerfil.png");
-    background-size: 100%;
-    background-attachment: fixed;
-    background-position: right 100px; 
+#prfContent {
+  background-image: url("../images/bgPerfil.png");
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: right 100px;
 }
 
-#ProfilePic{
-    width: 100%;
-    max-width: 250px;
-    min-width: 150px;
-    height: auto;
-    border: 2px solid #050B06;
-    border-radius: 1000px;
-    box-shadow: 8px 8px 0px #C2AFEA;
-    z-index: 0;
+#ProfilePic {
+  width: 100%;
+  max-width: 250px;
+  min-width: 150px;
+  height: auto;
+  border: 2px solid #050b06;
+  border-radius: 1000px;
+  box-shadow: 8px 8px 0px #c2afea;
+  z-index: 0;
 }
 
-#divRank{
-    position: relative;
-    z-index: 1;
-    margin-left: 100%;
+#divRank {
+  position: relative;
+  z-index: 1;
+  margin-left: 100%;
 }
 
-#rankIcon{
-    width: 100px;
-    height: 100px;
+#rankIcon {
+  width: 100px;
+  height: 100px;
 }
 
-#userPos{
-    position: relative;
-    z-index: 1;
-    margin-left: 45px;
-    margin-top: -70px;
+#userPos {
+  position: relative;
+  z-index: 1;
+  margin-left: 45px;
+  margin-top: -70px;
 }
 
-p{
-    font-weight: 500;
+p {
+  font-weight: 500;
 }
 
-#ptsnBtn{
-    display: flex;
-    flex-direction: column;
-    justify-items: space-between;
+#ptsnBtn {
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
 }
 
-#pontos{
-    margin-right: 130px;
-    display: flex;
-    align-items: center;
+#pontos {
+  margin-right: 130px;
+  display: flex;
+  align-items: center;
 }
-#ptsImg{
-    /* position: absolute; */
-    width: 20px;
-    margin-right: 10px;
-}
-
-#pfpRow{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+#ptsImg {
+  /* position: absolute; */
+  width: 20px;
+  margin-right: 10px;
 }
 
-
-#editIcon{
-    height: 160%;
-    width: 20px;
-    position: relative;
-}
-#picture{
-    box-shadow: none;
-    height: 70px;
-}
-.editModal{
-    width: 40%;
-    align-self: center;
-
+#pfpRow {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#btnBonus{
-    font-size: 12px;
-    width: 100px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-weight: 600;
+#editIcon {
+  height: 160%;
+  width: 20px;
+  position: relative;
+}
+#picture {
+  box-shadow: none;
+  height: 70px;
+}
+.editModal {
+  width: 40%;
+  align-self: center;
 }
 
-#editIcon:hover{
-    content: url("src/assets/icons/iconesthicc/editProfile.svg")
+#btnBonus {
+  font-size: 12px;
+  width: 100px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: 600;
 }
 
-.Name{
-    font-size: 45px;
+#edit:hover {
+  content: url("src/assets/icons/iconesthicc/editProfile.svg");
 }
 
-.badgesDiv{
-    width: 55%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.badge{
-    width: 20%;
-    box-shadow: 3px 3px 0px #050B06;
-    border: 2px solid #050B06;
-    border-radius: 100px;
-    margin: 10px;
+.Name {
+  font-size: 45px;
 }
 
-.btnProfile{
-    margin: 20px 20px;
+.badgesDiv {
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.badge {
+  width: 20%;
+  box-shadow: 3px 3px 0px #050b06;
+  border: 2px solid #050b06;
+  border-radius: 100px;
+  margin: 10px;
 }
 
-.profileList{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.listText{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.btnProfile {
+  margin: 20px 20px;
 }
 
-.img{
-    width: 150px;
-    height: 100px;
-    border-radius: 10px;
-    margin-right: 20px;
+.profileList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.listText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.listBtn{
-    margin-left: auto;
+.img {
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 
-.ocTxt{
-    display: flex;
-    flex-direction: column;
+.listBtn {
+  margin-left: auto;
 }
 
-.imgModalOc{
-    width: 350px;
-    height: 70%;
-    border-radius: 10px;
+.ocTxt {
+  display: flex;
+  flex-direction: column;
 }
-.badgeModal{
-    width: 45%;
-    align-self: center;
-}
-.badgeModalImg{
-    width: 35%;
-    box-shadow: 3px 3px 0px #050B06;
-    border: 2px solid #050B06;
-    border-radius: 150px;
-    margin: 10px;
-}
-#bdgCont{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 30px;
 
+.imgModalOc {
+  width: 350px;
+  height: 70%;
+  border-radius: 10px;
+}
+.badgeModal {
+  width: 45%;
+  align-self: center;
+}
+.badgeModalImg {
+  width: 35%;
+  box-shadow: 3px 3px 0px #050b06;
+  border: 2px solid #050b06;
+  border-radius: 150px;
+  margin: 10px;
+}
+#bdgCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
 }
 
 @media screen and (min-width: 1300px) {
-    .colPfp{
-        margin-left: -150px;
-        margin-right: -150px;
-    }
-    #divRank{
-        margin-left: 110%;
-    }
+  .colPfp {
+    margin-left: -150px;
+    margin-right: -150px;
+  }
+  #divRank {
+    margin-left: 110%;
+  }
 }
 
 @media screen and (min-width: 1050px) {
-    .colPfp{
-        margin-left: -90px;
-        margin-right: -90px;
-    }
+  .colPfp {
+    margin-left: -90px;
+    margin-right: -90px;
+  }
 }
 
 @media screen and (max-width: 750px) {
-    #editIcon{
-        height: 150%;
-    }
-    #pontos{
-        font-size: 9px;
-    }
+  #editIcon {
+    height: 150%;
+  }
+  #pontos {
+    font-size: 9px;
+  }
 }
 
 @media screen and (max-width: 550px) {
-    #pfpRow{
-        margin-right: -5%;
-    }
-    .colPfp{
-        margin-left: 5px;
-        margin-right: -10px;
-    }
+  #pfpRow {
+    margin-right: -5%;
+  }
+  .colPfp {
+    margin-left: 5px;
+    margin-right: -10px;
+  }
 }

@@ -2,6 +2,9 @@ fieldset{
     flex-direction: column;
     /* flex-wrap: nowrap; */
 }
+p{
+    font-weight: 500;
+}
 .badge{
     height: 6.2rem;
     width: 6.2rem;
@@ -100,4 +103,16 @@ fieldset{
     position: relative;
     left: 0;
     top: 0;
+}
+
+.missionCard{
+    display: flex;
+    flex-direction: row;
+}
+.missionTxt{
+    margin-left: 5%;
+    
+}
+.btnMission{
+    margin-left: auto;
 }

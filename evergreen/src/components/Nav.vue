@@ -87,7 +87,7 @@
       <v-app-bar-title>
         <RouterLink v-if="!isLogged" to="/"
           ><img
-            style="margin-right: 550px; margin-top: 30px"
+            style="margin-right: 500px; margin-top: 30px"
             src="src/assets/logored.svg"
             id="logo"
         /></RouterLink>

@@ -60,7 +60,7 @@ export const useActivityStore = defineStore("activity", {
 
       themes.forEach((theme) => {
         activities.forEach((activity) => {
-          if (activity.idTheme == theme) {
+          if (activity.idTheme == theme && activity.begin > user.loginDate) {
             if (acts.length < 3) {
               acts.push(activity);
             }
@@ -83,7 +83,8 @@ export const useActivityStore = defineStore("activity", {
           // acts.forEach((a) => {
           if (
             !acts.find((act) => act.id == activity.id) &&
-            !activitiesSub.find((act) => act.id == activity.id)
+            !activitiesSub.find((act) => act.id == activity.id) &&
+            activity.begin > user.loginDate
           ) {
             if (acts.length < 3) {
               console.log(activity);
@@ -97,7 +98,7 @@ export const useActivityStore = defineStore("activity", {
 
       if (activitiesSub.length == 0) {
         activities.forEach((activity) => {
-          if (acts.length < 3) {
+          if (acts.length < 3 && activity.begin < user.loginDate) {
             acts.push(activity);
           }
         });

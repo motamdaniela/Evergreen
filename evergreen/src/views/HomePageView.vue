@@ -64,22 +64,38 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.desc3 }}</p>
         </div>
-        <input
-          v-if="!changeBtn(this.activity)"
-          type="button"
-          class="btn-page btnG btnModal"
-          id="sub"
-          value="Inscrever"
-          @click="subscribe(this.activity), changeBtn(this.activity)"
-        />
-        <input
-          v-else
-          type="button"
-          class="btn-page btnR btnModal"
-          id="unsub"
-          value="Anular Inscrição"
-          @click="unsubscribe(this.activity), changeBtn(this.activity)"
-        />
+        <div v-if="this.activity.begin > this.user.loginDate">
+          <input
+            v-if="!changeBtn(this.activity)"
+            type="button"
+            class="btn-page btnG btnModal"
+            id="sub"
+            value="Inscrever"
+            @click="subscribe(this.activity), changeBtn(this.activity)"
+          />
+          <input
+            v-else
+            type="button"
+            class="btn-page btnR btnModal"
+            id="unsub"
+            value="Anular Inscrição"
+            @click="unsubscribe(this.activity), changeBtn(this.activity)"
+          />
+        </div>
+        <div
+          v-else-if="
+            this.activity.begin <= this.user.loginDate &&
+            this.activity.end >= this.user.loginDate
+          "
+        >
+          <span>
+            Esta atividade está a ser realizada e, por isso, não aceita mais
+            inscrições/anulações de inscrição.</span
+          >
+        </div>
+        <div v-else>
+          <span> Esta atividade já acabou.</span>
+        </div>
       </div>
     </v-dialog>
 
@@ -183,7 +199,7 @@
       <div class="board">
         <img :src="user.photo" id="profilePic" />
         <p>
-          {{ user.name }} <br />
+          {{ user.username }} <br />
           {{ user.school }}
         </p>
         <p>{{ user.activities }} atividades</p>

@@ -158,3 +158,11 @@ p{
     padding-bottom: 30px;
 
 }
+/* 
+.colSide{
+    width: 20%,
+} */
+
+
+@media screen and (max-width: 1000px) {
+}

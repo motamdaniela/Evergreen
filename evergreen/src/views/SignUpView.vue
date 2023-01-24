@@ -6,6 +6,8 @@
       lazy-validation
       @submit.prevent="onSubmit"
     >
+    <div id="signContent">
+    <img id="signImg" src="../assets/logored.svg">
       <div id="group">
         <div id="col1">
           <label for="name" class="semiTitle">Nome</label>
@@ -41,11 +43,11 @@
           />
         </div>
       </div>
-      <div id="btns">
+      <div >
         <button class="btn-page link" id="ok" type="submit">Registar</button>
-        <RouterLink class="link" to="/login" id="signUpBtn">Entrar</RouterLink>
+        <RouterLink style="margin: 10px 10px 0px 40px;" class="link" to="/login" id="signUpBtn">Entrar</RouterLink>
       </div>
-
+    </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error" >{{error}}</v-alert>
     </v-form>

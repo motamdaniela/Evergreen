@@ -231,30 +231,26 @@
 <!-- page content -->
   <div id="prfContent">
   <div>
-    <div id="profileContent">
-      <img src=""/>
-    </div>
     <v-row id="pfpRow">
-      <v-col class="colSide">
+      <v-col>
         <!-- <img id="smallStar" src="/src/assets/images/aboutPurple.svg"/> -->
-        <RouterLink to="/Rank">
-          <img id="positionIcon" src="../assets/images/aboutPurple.svg">
-          <p id="userPos">{{ this.users.indexOf(user) + 1 }}</p>
-        </RouterLink>
+        <RouterLink to="/Rank" id="positionIcon">
+            <div id="divRank">
+          <img id="rankIcon" src="../assets/images/aboutPurple.svg">
+            <p id="userPos">{{ this.users.indexOf(user) + 1 }}</p>
+          </div>
+          </RouterLink>
       </v-col>
       <v-col class="colPfp">
         <img id="ProfilePic" :src="user.photo" />
-        <!-- ^ n vai pra cima -_- -->
       </v-col>
       <v-col class="colSide">
-        <div id="ptsnBtn">
+        <v-row id="ptsnBtn">
           <p id="pontos"><img id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
           <br>
-          <!-- <button class="btn-page btnG" id="btnBonus">Bónus Login</button> -->
-        </div>
-        <v-row>
+        </v-row>
+        <v-row id="editIcon">
           <img
-          id="editIcon"
           src="/src/assets/icons/icones/editProfile.svg"
           @click="dialog = true"/>
         </v-row>

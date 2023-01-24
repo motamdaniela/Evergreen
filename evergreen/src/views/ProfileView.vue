@@ -168,6 +168,7 @@
     </div>
     <v-row id="pfpRow">
       <v-col>
+        <img id="smallStar" src="/src/assets/images/aboutPurple.svg"/>
       </v-col>
       <v-col>
         <img id="ProfilePic" :src="user.photo" />

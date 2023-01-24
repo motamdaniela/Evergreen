@@ -199,7 +199,7 @@
       <div class="board">
         <img :src="user.photo" id="profilePic" />
         <p>
-          {{ user.name }} <br />
+          {{ user.username }} <br />
           {{ user.school }}
         </p>
         <p>{{ user.activities }} atividades</p>

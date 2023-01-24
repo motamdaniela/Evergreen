@@ -8,7 +8,12 @@
     > -->
     <form @submit.prevent="onSubmit">
       <div id="loginContent">
-        <img id="loginImg" src="../assets/logored.svg" />
+        <div>
+          <RouterLink to="/">
+              <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
+            </RouterLink>
+          <img id="signImg" src="../assets/logored.svg" />
+        </div>
         <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
         <br />
         <input class="input" id="email" v-model="email" required />

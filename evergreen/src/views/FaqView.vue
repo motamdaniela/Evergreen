@@ -18,7 +18,7 @@
             <div class="faqText shadowPd">
                 <h2 class="gradientDarkPink padding" ><span>Ocorrências</span></h2>
             <br>
-            <p class="ptext">Se estiveres a andar pela escola e notares algo de errado como luzes acesas em salas vazias ou uma torneira
+            <p class="ptext" style="font-size:1vw;">Se estiveres a andar pela escola e notares algo de errado como luzes acesas em salas vazias ou uma torneira
                  a pingar não fiques calado! Tira uma foto e diz-nos qual é o problema, um docente vai ser logo informado!</p>
             </div>
         </div>

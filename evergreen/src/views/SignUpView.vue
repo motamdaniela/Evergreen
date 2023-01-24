@@ -1,88 +1,81 @@
 <template>
   <div id="backgroundSign">
-    <v-form
+    <!-- <v-form
       ref="form"
       v-model="valid"
       lazy-validation
       @submit.prevent="onSubmit"
-    >
+    > -->
+    <form @submit.prevent="onSubmit">
       <div id="signContent">
         <img id="signImg" src="../assets/logored.svg" />
-        <form>
-          <div id="group">
-            <div id="col1">
-              <label for="name" class="semiTitle">Nome</label>
-              <br />
-              <input class="input" id="name" v-model="name" required />
-              <br />
-              <label for="email" class="semiTitle">E-mail</label>
-              <br />
-              <input
-                class="input"
-                id="email"
-                v-model="email"
-                type="email"
-                required
-              />
-              <br />
-              <label for="username" class="semiTitle">Nome de utilizador</label>
-              <br />
-              <input class="input" id="username" v-model="username" required />
-            </div>
-            <div id="col2">
-              <label for="school" class="semiTitle">Escola</label>
-              <br />
-              <select v-model="school" id="school" class="input" required>
-                <option v-for="school in schools">{{ school.name }}</option>
-              </select>
-              <br />
-              <label for="pass" class="semiTitle">Palavra-passe</label>
-              <br />
-              <input
-                class="input"
-                id="pass"
-                v-model="password"
-                type="password"
-                required
-              />
-              <br />
-              <label for="confirm" class="semiTitle"
-                >Confirmar palavra-passe</label
-              >
-              <br />
-              <input
-                class="input"
-                id="confirm"
-                v-model="passConf"
-                type="password"
-                required
-              />
-            </div>
+        <div id="group">
+          <div id="col1">
+            <label for="name" class="semiTitle">Nome</label>
+            <br />
+            <input class="input" id="name" v-model="name" required />
+            <br />
+            <label for="email" class="semiTitle">E-mail</label>
+            <br />
+            <input
+              class="input"
+              id="email"
+              v-model="email"
+              type="email"
+              required
+            />
+            <br />
+            <label for="username" class="semiTitle">Nome de utilizador</label>
+            <br />
+            <input class="input" id="username" v-model="username" required />
           </div>
-          <div>
-            <button
-              class="btn-page link"
-              id="ok"
-              type="submit"
-              @click="onSubmit"
+          <div id="col2">
+            <label for="school" class="semiTitle">Escola</label>
+            <br />
+            <select v-model="school" id="school" class="input" required>
+              <option v-for="school in schools">{{ school.name }}</option>
+            </select>
+            <br />
+            <label for="pass" class="semiTitle">Palavra-passe</label>
+            <br />
+            <input
+              class="input"
+              id="pass"
+              v-model="password"
+              type="password"
+              required
+            />
+            <br />
+            <label for="confirm" class="semiTitle"
+              >Confirmar palavra-passe</label
             >
-              Registar
-            </button>
-            <RouterLink
-              style="margin: 10px 10px 0px 40px"
-              class="link"
-              to="/login"
-              id="signUpBtn"
-              >Entrar</RouterLink
-            >
+            <br />
+            <input
+              class="input"
+              id="confirm"
+              v-model="passConf"
+              type="password"
+              required
+            />
           </div>
-        </form>
+        </div>
+        <div>
+          <button class="btn-page link" id="ok" type="submit">Registar</button>
+          <RouterLink
+            style="margin: 10px 10px 0px 40px"
+            class="link"
+            to="/login"
+            id="signUpBtn"
+            >Entrar</RouterLink
+          >
+        </div>
       </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
-    </v-form>
+    </form>
+    <!-- </v-form> -->
   </div>
 </template>
 
@@ -114,7 +107,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
+    onSubmit() {
       this.userStore.signUp(
         this.name,
         this.email,
@@ -145,7 +138,6 @@ export default {
       } else if (signup == "password") {
         this.error = "Confirme que a palavra-passe coincide.";
       }
-      e.preventDefault();
     },
   },
 };

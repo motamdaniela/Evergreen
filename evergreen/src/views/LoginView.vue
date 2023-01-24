@@ -1,55 +1,46 @@
 <template>
   <div id="backgroundLogin">
-    <v-form
+    <!-- <v-form
       ref="form"
       v-model="valid"
       lazy-validation
       @submit.prevent="onSubmit"
-    >
+    > -->
+    <form @submit.prevent="onSubmit">
       <div id="loginContent">
         <img id="loginImg" src="../assets/logored.svg" />
-        <form>
-          <label for="email" class="semiTitle"
-            >E-mail / Nome de utilizador</label
+        <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
+        <br />
+        <input class="input" id="email" v-model="email" required />
+        <br />
+        <label for="pass" class="semiTitle" required>Palavra-passe</label>
+        <br />
+        <input
+          class="input"
+          id="pass"
+          v-model="password"
+          type="password"
+          required
+        />
+        <br />
+        <div id="btns">
+          <RouterLink
+            style="margin: 10px 10px 0px 40px"
+            class="link"
+            id="signUpBtn"
+            to="/signUp"
+            >Registar</RouterLink
           >
-          <br />
-          <input class="input" id="email" v-model="email" required />
-          <br />
-          <label for="pass" class="semiTitle" required>Palavra-passe</label>
-          <br />
-          <input
-            class="input"
-            id="pass"
-            v-model="password"
-            type="password"
-            required
-          />
-          <br />
-          <div id="btns">
-            <RouterLink
-              style="margin: 10px 10px 0px 40px"
-              class="link"
-              id="signUpBtn"
-              to="/signUp"
-              >Registar</RouterLink
-            >
 
-            <button
-              class="btn-page link"
-              id="ok"
-              type="submit"
-              @click="onSubmit"
-            >
-              Entrar
-            </button>
-          </div>
-        </form>
+          <button class="btn-page link" id="ok" type="submit">Entrar</button>
+        </div>
       </div>
       <br />
       <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
-    </v-form>
+    </form>
+    <!-- </v-form> -->
   </div>
 </template>
 
@@ -72,7 +63,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
+    onSubmit() {
       console.log(this.email);
       let users = this.userStore.getUsers;
       let login = this.userStore.login(this.email, this.password);
@@ -101,7 +92,6 @@ export default {
       ) {
         this.$router.push("/Occurences");
       }
-      e.preventDefault();
     },
   },
 };

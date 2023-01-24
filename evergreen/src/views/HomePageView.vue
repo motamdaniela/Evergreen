@@ -16,8 +16,8 @@
       <span>Atividades Inscritas</span>
     </h1>
     <br />
-    <v-dialog v-model="loginReward">
-      <div class="fieldPklight modal">
+    <v-dialog v-model="loginReward" persistent>
+      <div class="fieldPklight modal bonusModal">
         <div :class="loginClass">
           <label class="tab">Dia 1</label>
           <img src="../assets/images/day1_5.svg" id="day1" />
@@ -26,15 +26,16 @@
           <label class="tab">Dia 3</label>
           <img src="../assets/images/day3_7.svg" id="day3" />
           <label class="tab">Dia 4</label>
-          <img src="../assets/images/day4.svg" id="day4" />
-          <label class="tab">Dia 5</label>
+          <img src="../assets/images/day4.svg" id="day4" /><br><br>
+          <label class="tab" id="tab5">Dia 5</label>
           <img src="../assets/images/day1_5.svg" id="day5" />
           <label class="tab">Dia 6</label>
           <img src="../assets/images/day2_6.svg" id="day6" />
           <label class="tab">Dia 7</label>
           <img src="../assets/images/day3_7.svg" id="day7" />
         </div>
-        <button class="btn-page btnPk" @click="receive">Receber</button>
+        <br>
+        <button style="margin-left:40%" class="btn-page btnPk" @click="receive">Receber</button>
       </div>
     </v-dialog>
 

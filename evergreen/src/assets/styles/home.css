@@ -149,7 +149,25 @@
 #day1, #day2, #day3, #day4, #day5, #day6, #day7{
   width: 100px;
   height: 100px;
+  margin-bottom: 25px;
+  margin-right: 30px;
+  margin-left: 45px;
 }
+#day5{
+  margin-left: 18%;
+}
+.bonusModal{
+  width: 35%;
+  padding: 20px;
+  align-self: center;
+}
+.tab{
+  margin-bottom: -70px;
+  margin-right: -95px;
+}
+/* #tab5{
+  margin-left: 30px;
+} */
 /* end of modal login bonus colors */
 
 #noActivities {

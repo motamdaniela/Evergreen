@@ -8,7 +8,12 @@
     > -->
     <form @submit.prevent="onSubmit">
       <div id="signContent">
-        <img id="signImg" src="../assets/logored.svg" />
+        <div>
+          <RouterLink to="/">
+              <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
+            </RouterLink>
+          <img id="signImg" src="../assets/logored.svg" />
+        </div>
         <div id="group">
           <div id="col1">
             <label for="name" class="semiTitle">Nome</label>

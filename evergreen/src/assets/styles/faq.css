@@ -38,9 +38,16 @@
 }
 
 /* .ptext{
-    font-weight: 500;
+    font-size: 3vh;
 }
 
+@media screen and (max-width: 800px) {
+.ptext{
+    font-size: 70%;
+}
+} */
+
+/* 
 @media screen and (max-width: 1190px) {
     .FAQ{
         font-size: 15px;

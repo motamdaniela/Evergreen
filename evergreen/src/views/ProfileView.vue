@@ -174,7 +174,8 @@
         <img id="ProfilePic" :src="user.photo" />
         <RouterLink to="/Rank">
           <img id="positionIcon" src="../assets/images/aboutPurple.svg">
-          <p id="userPos">{{ userStore.users.indexOf(user) + 1 }}</p>
+          <p id="userPos">{{ users.indexOf(user) + 1 }}</p>
+          <!-- this is wrong ^ -->
         </RouterLink>
         <!-- ^ n vai pra cima -_- -->
       </v-col>
@@ -276,6 +277,15 @@ export default {
         this.user = u;
       }
     });
+    let list = [];
+    users.forEach((user) => {
+      if (user.type == "user") {
+        list.push(user);
+      }
+    });
+    this.users=list;
+    
+    this.users.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
     
 
   },

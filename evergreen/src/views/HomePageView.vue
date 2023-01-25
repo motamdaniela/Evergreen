@@ -240,9 +240,9 @@
           {{ user.username }} <br />
           {{ user.school }}
         </p>
+        <p>{{ user.points }} pontos</p>
         <p>{{ user.activities }} atividades</p>
         <p>{{ user.occurences }} ocorrências</p>
-        <p>{{ user.points }} pontos</p>
         <div class="firstPlace">{{ users.indexOf(user) + 1 }}</div>
       </div>
     </div>

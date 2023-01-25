@@ -4,111 +4,116 @@
   border: 1px solid #050b06;
   border-radius: 30px;
 }
-.adminRow{
+.adminRow {
   display: flex;
   flex-direction: row;
 }
-.btnAdm{
+.btnAdm {
   margin: auto;
 }
-#addBtn{
+#addBtn {
   margin-right: 20px;
 }
 
 nav a:hover {
-    font-weight: bold;
-  }
+  font-weight: bold;
+}
 
-  #login:active {
-    background-color: #d4c7f0;
-  }
-  #signup:active {
-    background-color: #91c99d;
-  }
-  
-  nav a,.navbtn {
-    font-size: 15px;
-    text-decoration: none;
-    color: #050b06;
-    display: inline-block;
-    margin: 0 1rem 0 1rem;
-  }
+#login:active {
+  background-color: #d4c7f0;
+}
+#signup:active {
+  background-color: #91c99d;
+}
 
-  .navbtn:last-of-type{
-    margin-right: 2rem;
+nav a,
+.navbtn {
+  font-size: 15px;
+  text-decoration: none;
+  color: #050b06;
+  display: inline-block;
+  margin: 0 1rem 0 1rem;
+}
+
+.navbtn:last-of-type {
+  margin-right: 2rem;
+}
+nav a {
+  font-weight: 500;
+}
+
+#logo {
+  width: 8rem;
+  margin-bottom: 1rem;
+}
+
+#profilePhoto:hover {
+  box-shadow: none;
+  position: relative;
+  left: 3px;
+  top: 5px;
+}
+
+nav a.router-link-exact-active {
+  color: #050b06;
+  font-weight: bold;
+}
+
+.homeLink.router-link-exact-active {
+  box-shadow: 0px -8px #e9674d inset;
+}
+.actLink.router-link-exact-active {
+  box-shadow: 0px -8px #c2afea inset;
+}
+.ocLink.router-link-exact-active {
+  box-shadow: 0px -8px #d26174 inset;
+}
+.formLink.router-link-exact-active {
+  box-shadow: 0px -8px #62b273 inset;
+}
+.missionsLink.router-link-exact-active {
+  box-shadow: 0px -8px #e9a13b inset;
+}
+.aboutLink.router-link-exact-active {
+  box-shadow: 0px -8px #62b273 inset;
+}
+.faqLink.router-link-exact-active {
+  box-shadow: 0px -8px #c2afea inset;
+}
+
+.logoutbtn:hover {
+  content: url("/src/assets/icons/iconesthicc/logout.svg");
+}
+
+.addbtn:hover {
+  content: url("/src/assets/icons/iconesthicc/addUser.svg");
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) {
+  #logo {
+    height: 3rem;
   }
   nav a {
-    font-weight: 500;
+    font-size: 9px;
   }
+}
 
+@media screen and (max-width: 800px) {
   #logo {
-    width: 8rem;
-    margin-bottom: 1rem;
+    height: 1rem;
   }
-
-  #profilePhoto:hover{
-    box-shadow: none;
-    position: relative;
-    left: 3px;
-    top: 5px;
+}
+@media screen and (max-width: 730px) {
+  nav {
+    display: none;
   }
-
-  nav a.router-link-exact-active {
-    color: #050b06;
-    font-weight: bold;
+  #logo {
+    height: 8rem;
+    /* margin-left: -3rem; */
   }
-
-  .homeLink.router-link-exact-active {
-    box-shadow: 0px -8px #E9674D inset;
-  }
-  .actLink.router-link-exact-active {
-    box-shadow: 0px -8px #C2AFEA  inset;
-  }
-  .ocLink.router-link-exact-active {
-    box-shadow: 0px -8px #D26174 inset;
-  }
-  .formLink.router-link-exact-active {
-    box-shadow: 0px -8px #62B273 inset;
-  }
-  .missionsLink.router-link-exact-active {
-    box-shadow: 0px -8px #E9A13B inset;
-  }
-  .aboutLink.router-link-exact-active {
-    box-shadow: 0px -8px #62B273 inset;
-  }
-  .faqLink.router-link-exact-active {
-    box-shadow: 0px -8px #C2AFEA inset;
-  }
-
-  .logoutbtn:hover{
-    content: url("/src/assets/icons/iconesthicc/logout.svg")
-  }
-
-  .addbtn:hover{
-    content: url("/src/assets/icons/iconesthicc/addUser.svg")
-  }
-
-  
-  @media screen and (max-width: 1000px) {
-    #logo {
-      height: 3rem;
-    }
-    nav a {
-        font-size: 9px;
-      }
-  }
-
-  @media screen and (max-width: 800px) {
-    #logo {
-        height: 1rem;
-      }
-  }
-  @media screen and (max-width: 730px) {
-    nav {
-      display: none;
-    }
-    #logo {
-        height: 8rem;
-        /* margin-left: -3rem; */
-      }
-  }
+}

@@ -10,13 +10,14 @@
         <h2 class="gradientGreen padding title">
           <span>Atividades Próximas</span>
         </h2>
-        <div style="padding: 15px;" class="boardTop">
+        <div style="padding: 15px" class="boardTop">
           <div
             v-if="closeActivities.length > 0"
             v-for="activity in closeActivities"
           >
-            <span class="cardText">{{ activity.title }}</span>
+            <span class="cardText">{{ activity.title }}: </span>
             <span>{{ activity.date }}</span>
+            <br />
             <br />
           </div>
           <div v-else>Não tem atividades próximas</div>
@@ -26,7 +27,7 @@
         <h2 class="gradientGreen padding title">
           <span>Atividades a Decorrer</span>
         </h2>
-        <div style="padding: 15px;" class="boardTop">
+        <div style="padding: 15px" class="boardTop">
           <div
             v-if="activitiesNow.length > 0"
             v-for="activity in activitiesNow"
@@ -56,7 +57,7 @@
           <label class="tab">Dia 3</label>
           <img src="../assets/images/day3_7.svg" id="day3" />
           <label class="tab">Dia 4</label>
-          <img src="../assets/images/day4.svg" id="day4" /><br><br>
+          <img src="../assets/images/day4.svg" id="day4" /><br /><br />
           <label class="tab" id="tab5">Dia 5</label>
           <img src="../assets/images/day1_5.svg" id="day5" />
           <label class="tab">Dia 6</label>
@@ -64,8 +65,14 @@
           <label class="tab">Dia 7</label>
           <img src="../assets/images/day3_7.svg" id="day7" />
         </div>
-        <br>
-        <button style="margin-left:40%" class="btn-page btnPk" @click="receive">Receber</button>
+        <br />
+        <button
+          style="margin-left: 40%"
+          class="btn-page btnPk"
+          @click="receive"
+        >
+          Receber
+        </button>
       </div>
     </v-dialog>
 

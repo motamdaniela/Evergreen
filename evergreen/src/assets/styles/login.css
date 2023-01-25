@@ -6,6 +6,7 @@
 
     /* height: 865px; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 144px;
@@ -18,6 +19,7 @@
 
     /* height: 865px; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 52px;
@@ -63,7 +65,7 @@
 #btns{
     width: 376px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #errorAlert{
@@ -77,10 +79,11 @@
     margin-top: 20%;
 }
 #loginImg{
-    margin-bottom: 100px;
+    margin-bottom: 12%;
 }
+
 #signContent{
-    margin-top: 8%;
+    margin-top: 1%;
 }
 #signImg{
     width: 43%;
@@ -89,4 +92,8 @@
 
 .backbtn{
     width: 50px;
+}
+.backBtnDiv{
+    margin-right: auto;
+    margin-left: 2%;
 }

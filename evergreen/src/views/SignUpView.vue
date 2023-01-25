@@ -6,14 +6,15 @@
       lazy-validation
       @submit.prevent="onSubmit"
     > -->
+    <div class="backBtnDiv">
+      <RouterLink to="/">
+        <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
+      </RouterLink>
+    </div>
     <form @submit.prevent="onSubmit">
       <div id="signContent">
-        <div>
-          <RouterLink to="/">
-              <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
-            </RouterLink>
+        
           <img id="signImg" src="../assets/logored.svg" />
-        </div>
         <div id="group">
           <div id="col1">
             <label for="name" class="semiTitle">Nome</label>

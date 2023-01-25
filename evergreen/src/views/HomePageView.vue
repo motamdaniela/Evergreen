@@ -44,7 +44,7 @@
       </div>
     </div>
     <br />
-    <h1 style="margin-top:5%;" class="gradientPurple padding title">
+    <h1 style="margin-top: 5%" class="gradientPurple padding title">
       <span>Atividades Inscritas</span>
     </h1>
     <br />
@@ -180,48 +180,6 @@
           </card>
         </slide-group-item>
       </v-slide-group>
-
-      <!-- </v-sheet> -->
-      <!-- <div class="list">
-        <div class="grid-item" v-for="activity in activitiesSub">
-          <v-card class="mx-auto" max-width="400" id="card">
-            <v-img
-              class="image"
-              :src="activity.photo"
-              height="219"
-              width="380"
-              cover
-            >
-            </v-img>
-
-            <div class="cardText">
-              <v-card-title>
-                <b>{{ activity.title }}</b>
-              </v-card-title>
-
-              <div class="alignCard">
-                <v-card-subtitle>
-                  <div>
-                    <b
-                      >{{ activity.date }} <br />
-                      {{ activity.place }}</b
-                    >
-                  </div>
-                </v-card-subtitle>
-                <button
-                  class="btn-card btnP"
-                  @click="
-                    open = true;
-                    this.activity = activity;
-                  "
-                >
-                  Ver mais
-                </button>
-              </div>
-            </div>
-          </v-card>
-        </div>
-      </div> -->
       <button class="btn-page btnP" id="btnActSub">
         <RouterLink to="/Activities">Ver todas</RouterLink>
       </button>
@@ -314,10 +272,10 @@
         <v-col>
           <p id="qstnText">
             Este questionário servirá para compreender melhor os hábitos e as
-            opiniões dos alunos desta escola, em aspectos relacionados com o
-            ambiente.As tuas respostas são muito importantes!Só juntos poderemos
-            detectar os principais problemas e contribuir para que a nossa
-            escola se transforme num local ainda mais agradável.O Conselho
+            opiniões dos alunos desta escola, em aspetos relacionados com o
+            ambiente. As tuas respostas são muito importantes!Só juntos
+            poderemos detetar os principais problemas e contribuir para que a
+            nossa escola se transforme num local ainda mais agradável.O Conselho
             Eco-Escola agradece a tua colaboração.
           </p>
           <RouterLink to="/Form">
@@ -341,7 +299,7 @@
   </div>
   <div id="divBtnUp">
     <button class="btnUp" @click.native="scrollToTop">
-        <img style="width: 50px;" src="../assets/icons/icones/up.svg">
+      <img style="width: 50px" src="../assets/icons/icones/up.svg" />
     </button>
   </div>
 </template>
@@ -528,8 +486,8 @@ export default {
       this.userStore.edit(JSON.stringify(this.user));
     },
     scrollToTop() {
-      window.scrollTo(0,0);
-    }
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>

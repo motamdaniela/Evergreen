@@ -480,16 +480,6 @@
       "type": 4
     },
     {
-      "id": 12,
-      "title": "Preenche o questionario do Eco-escolas",
-      "description": "Preenche o questionario do Eco-escolas",
-      "reward": "/src/assets/images/preencher_questionario.png",
-      "users": [],
-      "max": 1,
-      "redirect": "/Form",
-      "type": 5
-    },
-    {
       "id": 13,
       "title": "Faz login todos os dias durante uma semana",
       "description": "Faz login todos os dias durante uma semana",
@@ -545,7 +535,7 @@
       "description": "Completa todas as missões",
       "reward": "/src/assets/images/completar_tudo.png",
       "users": [],
-      "max": 18,
+      "max": 17,
       "redirect": "/Missions",
       "type": 9
     }

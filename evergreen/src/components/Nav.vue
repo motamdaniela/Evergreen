@@ -131,6 +131,7 @@
             v-if="updateNotifs"
             dot
             floating
+            offset-y="-10"
             color="success"
           ></v-badge
         ></RouterLink>
@@ -225,7 +226,6 @@ export default {
         passConf: "",
       },
       dialogAdd: false,
-      notifs: false,
     };
   },
   updated() {},

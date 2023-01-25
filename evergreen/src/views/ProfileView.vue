@@ -98,13 +98,13 @@
 <v-dialog v-model="editProfile">
     <div class="fieldPklight modal editModal">
       <!-- <v-card elevation="0" color="#F9F9F9"> -->
-        <v-card-actions>
+        <!-- <v-card-actions> -->
           <button class="btnRound btnPk" @click="editProfile = false">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
           </button>
-        </v-card-actions>
+        <!-- </v-card-actions> -->
         
-        <v-card-text>
+        <!-- <v-card-text> -->
           <form @submit.prevent="onSubmit">
 
             <label for="photo" class="semiTitle">Nova foto de perfil</label>
@@ -140,7 +140,7 @@
             <button class="btn-card btnG" type="submit" @click="EditUser">Guardar</button>
           </form>
           <br />
-          <form @submit.prevent="onSubmit">
+          <form id="editPass" @submit.prevent="onSubmit">
 
             <label for="pass" class="semiTitle">Nova palavra-passe</label>
             <br />
@@ -161,8 +161,8 @@
             />
             <button class="btn-card btnG" type="submit" @click="EditPass">Guardar</button>
           </form>
-          
-        </v-card-text>
+          <!--  -->
+        <!-- </v-card-text> -->
         <!-- <v-card-actions>
           <button class="btn-page btnG" @click="Edit">Guardar</button>
         </v-card-actions> -->
@@ -170,6 +170,8 @@
       <!-- </v-card> -->
     </div>
   </v-dialog>
+
+
   <v-dialog v-model="dialog">
     <div class="fieldPklight modal editModal">
       <v-card elevation="0" color="#F9F9F9">
@@ -475,21 +477,35 @@ export default {
   },
   methods: {
     EditPhoto() {
-      this.user.photo=this.form.newPhoto;
-      this.editProfile = false;
-      this.missionStore.completeMission(this.logged, 7);
+      if(this.form.newPhoto){
+
+        this.user.photo=this.form.newPhoto;
+        this.editProfile = false;
+        this.missionStore.completeMission(this.logged, 7);
+        this.form.newPhoto=""
+      }
     },
     EditUser() {
-      this.user.username = this.form.newUsername;
-      this.editProfile = false;
-      this.missionStore.completeMission(this.logged, 7);
+      if(this.form.newUsername){
+        if(!this.userStore.getUsers.find(user=>user.username==this.form.newUsername)){
+
+          this.user.username = this.form.newUsername;
+          this.editProfile = false;
+          this.missionStore.completeMission(this.logged, 7);
+          this.form.newUsername=""
+        }
+      }
     },
     EditPass() {
-      if(this.form.newPassword==this.form.newPasswordConf){
+      if(this.form.newPassword && this.form.newPasswordConf){
 
-         this.user.password = this.form.newPassword;
-         this.editProfile = false;
-         this.missionStore.completeMission(this.logged, 7);
+        if(this.form.newPassword==this.form.newPasswordConf){
+  
+           this.user.password = this.form.newPassword;
+           this.editProfile = false;
+           this.missionStore.completeMission(this.logged, 7);
+           this.form.newPassword=this.form.newPasswordConf=""
+        }
       }
     },
     subscribe(activity) {

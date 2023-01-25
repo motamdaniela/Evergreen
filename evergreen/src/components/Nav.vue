@@ -2,86 +2,81 @@
   <div>
     <v-dialog v-model="dialogAdd">
       <div class="fieldPklight modal">
-        <v-card elevation="0" color="F9F9F9">
-          <v-card-title>Novo Admin</v-card-title>
-          <form @submit.prevent="onSubmit">
-            <div class="adminRow">
-              <div style="width: 50%">
-                <label class="semiTitle">Tipo</label><br />
-                <select
-                  class="inputSmall"
-                  v-model="this.newAdmin.type"
-                  required
-                >
-                  <option value="admin">Admin</option>
-                  <option value="security">Segurança</option>
-                </select>
-                <label for="name" class="semiTitle">Nome</label>
-                <br />
-                <input
-                  class="inputSmall"
-                  id="name"
-                  v-model="this.newAdmin.name"
-                  required
-                />
-                <br />
-                <label for="email" class="semiTitle">E-mail</label>
-                <br />
-                <input
-                  class="inputSmall"
-                  id="email"
-                  v-model="this.newAdmin.email"
-                  type="email"
-                  required
-                />
-              </div>
-              <div>
-                <label for="username" class="semiTitle"
-                  >Nome de utilizador</label
-                >
-                <br />
-                <input
-                  class="inputSmall"
-                  id="username"
-                  v-model="this.newAdmin.username"
-                  required
-                />
-                <br />
-                <label for="pass" class="semiTitle">Palavra-passe</label>
-                <br />
-                <input
-                  class="inputSmall"
-                  id="pass"
-                  v-model="this.newAdmin.password"
-                  type="password"
-                  required
-                />
-                <br />
-                <label for="confirm" class="semiTitle"
-                  >Confirmar palavra-passe</label
-                >
-                <br />
-                <input
-                  class="inputSmall"
-                  id="confirm"
-                  v-model="this.newAdmin.passConf"
-                  type="password"
-                  required
-                />
-              </div>
+        <v-card-title>Novo Admin</v-card-title>
+        <form @submit.prevent="onSubmit">
+          <div class="adminRow">
+            <div style="width: 50%">
+              <label class="semiTitle">Tipo</label><br />
+              <select class="inputSmall" v-model="this.newAdmin.type" required>
+                <option value="admin">Admin</option>
+                <option value="security">Segurança</option>
+              </select>
+              <label for="name" class="semiTitle">Nome</label>
+              <br />
+              <input
+                class="inputSmall"
+                id="name"
+                v-model="this.newAdmin.name"
+                required
+              />
+              <br />
+              <label for="email" class="semiTitle">E-mail</label>
+              <br />
+              <input
+                class="inputSmall"
+                id="email"
+                v-model="this.newAdmin.email"
+                type="email"
+                required
+              />
             </div>
-            <v-card-actions>
-              <div class=" btnAdm">
-              <button class="btn-page btnPk" id="addBtn" type="submit" @click="onSubmit">
-                Criar
-              </button>
-              <button class="btn-page btnPklight" @click="dialogAdd = false">
-                Cancelar
-              </button>
-              </div>
-            </v-card-actions>
-          </form>
-        </v-card>
+            <div style="width: 50%">
+              <label for="username" class="semiTitle">Nome de utilizador</label>
+              <br />
+              <input
+                class="inputSmall"
+                id="username"
+                v-model="this.newAdmin.username"
+                required
+              />
+              <br />
+              <label for="pass" class="semiTitle">Palavra-passe</label>
+              <br />
+              <input
+                class="inputSmall"
+                id="pass"
+                v-model="this.newAdmin.password"
+                type="password"
+                required
+              />
+              <br />
+              <label for="confirm" class="semiTitle"
+                >Confirmar palavra-passe</label
+              >
+              <br />
+              <input
+                class="inputSmall"
+                id="confirm"
+                v-model="this.newAdmin.passConf"
+                type="password"
+                required
+              />
+            </div>
+          </div>
+          <div class="btnAdm">
+            <button
+              class="btn-page btnPk"
+              id="addBtn"
+              type="submit"
+              @click="onSubmit"
+            >
+              Criar
+            </button>
+            <button class="btn-page btnPklight" @click="dialogAdd = false">
+              Cancelar
+            </button>
+          </div>
+        </form>
       </div>
     </v-dialog>
   </div>
@@ -280,21 +275,30 @@ export default {
       this.$router.push("/");
     },
     onSubmit() {
-      this.dialogAdd = false;
-      this.usersStore.newAdmin(
-        this.newAdmin.type,
-        this.newAdmin.name,
-        this.newAdmin.email,
-        this.newAdmin.username,
-        this.newAdmin.password,
+      if (
+        this.newAdmin.type &&
+        this.newAdmin.name &&
+        this.newAdmin.email &&
+        this.newAdmin.username &&
+        this.newAdmin.password &&
         this.newAdmin.passConf
-      );
-      this.newAdmin.type = "";
-      this.newAdmin.name = "";
-      this.newAdmin.email = "";
-      this.newAdmin.username = "";
-      this.newAdmin.password = "";
-      this.newAdmin.passConf = "";
+      ) {
+        this.dialogAdd = false;
+        this.usersStore.newAdmin(
+          this.newAdmin.type,
+          this.newAdmin.name,
+          this.newAdmin.email,
+          this.newAdmin.username,
+          this.newAdmin.password,
+          this.newAdmin.passConf
+        );
+        this.newAdmin.type = "";
+        this.newAdmin.name = "";
+        this.newAdmin.email = "";
+        this.newAdmin.username = "";
+        this.newAdmin.password = "";
+        this.newAdmin.passConf = "";
+      }
     },
     // updateNotifs() {
     //   missionsStore.missions.users.forEach((user) => {

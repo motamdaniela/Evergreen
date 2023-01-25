@@ -16,6 +16,10 @@
   box-shadow: 8px 8px 0px #c2afea;
   z-index: 0;
 }
+/* .colSide{
+  margin-left: -5%;
+  margin-top: 2%;
+} */
 
 #divRank {
   position: relative;

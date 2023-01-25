@@ -43,7 +43,7 @@
       </div>
     </div>
     <br />
-    <h1 class="gradientPurple padding title">
+    <h1 style="margin-top:5%;" class="gradientPurple padding title">
       <span>Atividades Inscritas</span>
     </h1>
     <br />

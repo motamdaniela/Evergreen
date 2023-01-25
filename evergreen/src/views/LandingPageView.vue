@@ -15,7 +15,7 @@
     <div class="midDiv" id="div1">
       <div id="text1">
         <h1 class="title">Participa em atividades</h1>
-        <p class="desc" style="font-size:2vw;">O projeto Eco-Escolas tem tantas atividades divertidas que não vais querer perder!
+        <p class="desc">O projeto Eco-Escolas tem tantas atividades divertidas que não vais querer perder!
         Aposto que vais adorar pelo menos uma e, com sorte vais adorar todas! Mas para descobrires isso tens que te inscrever em pelo menos uma!</p>
         <button class="btn-page" id="btn1">
           <RouterLink to="/signUp">Começa já</RouterLink>
@@ -51,7 +51,7 @@
           <RouterLink to="/signUp">Começa já</RouterLink>
         </button>
       </div>
-      <img src="../assets/images/missoes.svg" id="img3">
+      <img src="../assets/images/missoes.png" id="img3">
       </div>
   </div>
 

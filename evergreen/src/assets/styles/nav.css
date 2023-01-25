@@ -94,10 +94,6 @@ form {
   flex-direction: column;
 }
 
-.bg-green{
-  background-color: #C0E0C7;
-}
-
 .drawerLink:hover{
   font-weight: bold;
 }

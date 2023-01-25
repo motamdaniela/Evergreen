@@ -197,6 +197,9 @@ p {
   #pontos {
     font-size: 9px;
   }
+  .btn-page{
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 550px) {

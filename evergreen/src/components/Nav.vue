@@ -169,7 +169,6 @@
     </v-app-bar>
 
     <v-navigation-drawer
-      class="bg-green"
       v-model="drawer"
       location="right"
       temporary

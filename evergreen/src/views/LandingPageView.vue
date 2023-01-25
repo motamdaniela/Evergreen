@@ -65,8 +65,23 @@
     </div>
   </div>
   
+  <div id="divBtnUp">
+    <button class="btnUp" @click.native="scrollToTop">
+        <img style="width: 50px;" src="../assets/icons/icones/up.svg">
+    </button>
+  </div>
   
 </template>
+
+<script>
+export default{
+    methods: {
+      scrollToTop() {
+        window.scrollTo(0,0);
+      }
+    }
+}
+</script>
 
 <style> @import "../assets/styles/landing.css";
 </style>

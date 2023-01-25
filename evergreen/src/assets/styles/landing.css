@@ -118,7 +118,7 @@ body{
 
 /* last div*/
 #lastdiv{
-    height: 50vh;
+    height: 35vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -198,6 +198,29 @@ body{
     left: -47%;
     margin-top: -115px;
 }
+.btnUp{
+    border: 2px solid #050b06;
+    background-color: #FFFFFF;
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    box-shadow: 5px 5px #000000;
+}
+.btnUp:hover{
+    box-shadow: none;
+    position: relative;
+    left: 3px;
+    top: 5px;
+}
+.btnUp:active {
+    background-color: #91c99d;
+  }
+#divBtnUp{
+    text-align: right;
+    margin-right: 5%;
+}
+
 
 @media screen and (max-width: 1000px) {
   }

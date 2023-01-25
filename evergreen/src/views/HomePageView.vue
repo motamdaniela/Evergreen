@@ -338,6 +338,11 @@
       <button class="btn-page btnP" @click="SubConselho">Inscrever-me</button>
     </div>
   </div>
+  <div id="divBtnUp">
+    <button class="btnUp" @click.native="scrollToTop">
+        <img style="width: 50px;" src="../assets/icons/icones/up.svg">
+    </button>
+  </div>
 </template>
 
 <script>
@@ -521,6 +526,9 @@ export default {
       }
       this.userStore.edit(JSON.stringify(this.user));
     },
+    scrollToTop() {
+      window.scrollTo(0,0);
+    }
   },
 };
 </script>

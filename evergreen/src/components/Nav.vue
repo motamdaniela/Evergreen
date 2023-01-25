@@ -163,7 +163,9 @@
         id="ddmenu"
         variant="text"
         @click.stop="drawer = !drawer"
-        >=</v-app-bar-nav-icon
+        >
+        <img src="/src/" />
+        </v-app-bar-nav-icon
       >
     </v-app-bar>
 
@@ -173,10 +175,19 @@
       location="right"
       temporary
     >
-      <v-list>
-        <v-list-item title="About" value="about"> </v-list-item>
-        <v-list-item title="login" value="login"> </v-list-item>
-        <v-list-item title="About" value="about"> </v-list-item>
+      <v-list  v-if="!isLogged">
+        <v-list-item title="Página Principal" value="about"> </v-list-item>
+        <v-list-item title="Sobre Eco-Escolas" value="login"> </v-list-item>
+        <v-list-item title="FAQ" value="about"> </v-list-item>
+      </v-list>
+      <v-list  v-if="isLogged">
+        <v-list-item title="Página Principal" value="about"> </v-list-item>
+        <v-list-item title="Atividades" value="about"> </v-list-item>
+        <v-list-item title="Ocorrências" value="about"> </v-list-item>
+        <v-list-item title="Questionário" value="about"> </v-list-item>
+        <v-list-item title="Missões" value="about"> </v-list-item>
+        <v-list-item title="Sobre Eco-Escolas" value="login"> </v-list-item>
+        <v-list-item title="FAQ" value="about"> </v-list-item>
       </v-list>
     </v-navigation-drawer>
 

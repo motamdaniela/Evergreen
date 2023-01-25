@@ -94,6 +94,10 @@ form {
   flex-direction: column;
 }
 
+.bg-green{
+  background-color: #62b273;
+}
+
 @media screen and (max-width: 1000px) {
   #logo {
     height: 3rem;

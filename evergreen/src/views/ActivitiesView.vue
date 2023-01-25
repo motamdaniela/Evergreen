@@ -66,7 +66,7 @@
       </div>
     </v-dialog>
 
-    <v-dialog v-model="open">
+    <v-dialog v-model="open" scrollable>
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">
           <img style="width: 15px" src="../assets/icons/icones/close.svg" />

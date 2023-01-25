@@ -2,11 +2,11 @@
   <div>
     <v-dialog v-model="dialogAdd">
       <div class="fieldPklight modal">
-        <v-card>
+        <v-card elevation="0" color="F9F9F9">
           <v-card-title>Novo Admin</v-card-title>
           <form @submit.prevent="onSubmit">
-            <v-row>
-              <v-col style="width: 50%">
+            <div class="adminRow">
+              <div style="width: 50%">
                 <label class="semiTitle">Tipo</label><br />
                 <select
                   class="inputSmall"
@@ -34,8 +34,8 @@
                   type="email"
                   required
                 />
-              </v-col>
-              <v-col>
+              </div>
+              <div>
                 <label for="username" class="semiTitle"
                   >Nome de utilizador</label
                 >
@@ -68,15 +68,17 @@
                   type="password"
                   required
                 />
-              </v-col>
-            </v-row>
+              </div>
+            </div>
             <v-card-actions>
-              <button class="btn-page btnPk" type="submit" @click="onSubmit">
+              <div class=" btnAdm">
+              <button class="btn-page btnPk" id="addBtn" type="submit" @click="onSubmit">
                 Criar
               </button>
               <button class="btn-page btnPklight" @click="dialogAdd = false">
                 Cancelar
               </button>
+              </div>
             </v-card-actions>
           </form>
         </v-card>

@@ -343,12 +343,6 @@ footer {
   color: #244a2c;
 }
 
-@media screen and (min-width: 700px) {
-  #ddmenu {
-    display: none;
-  }
-}
-
 .hide,
 #hide {
   display: none;

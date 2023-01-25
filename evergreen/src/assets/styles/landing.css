@@ -64,21 +64,12 @@ body{
     font-size: 42px;
     color: #774ED0;
 }
-#img1{
-    width: 700px;
-    height: 500px;
-}
 #btn1{
     background-color: #FBF3F1;
     box-shadow: 3px 5px #774ED0; 
 }
 #btn1:hover{
     box-shadow: none;
-}
-
-#img2{
-    width: 500px;
-    height: 400px;
 }
 #text2 h1{
     font-size: 42px;
@@ -108,10 +99,7 @@ body{
     font-size: 42px;
     color: #40814E;
 }
-#img3{
-    width: 700px;
-    height: 500px;
-}
+
 #btn3{
     background-color: #FBF3F1;
     box-shadow: 3px 5px #40814E; 
@@ -225,6 +213,44 @@ body{
     margin-right: 5%;
 }
 
+#img1,#img2,#img3{
+    width: 40%;
+    height: auto;
+}
+#img1Small,#img2Small,#img3Small{
+    width: 0px;
+}
+
+#divBtnUp{
+    margin-top: 50px;
+    margin-bottom: -90px;
+}
+
 
 @media screen and (max-width: 1000px) {
+    #img1{
+        display: none;
+    }
+    #img2{
+        display: none;
+    }
+    #img3{
+        display: none;
+    }
+    #img1Small, #img2Small, #img3Small{
+        width: 50%;
+    }
+    #text2{
+        margin-left: -100px;
+    }
+    #title2{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #firstdiv{
+        background-image: url("../images/landingbg.svg");
+        background-size: 85%;
+        background-position: 50px 80px;
+    }
   }

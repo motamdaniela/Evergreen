@@ -122,7 +122,7 @@
             />
             <button class="btn-card btnG" type="submit" @click="EditPhoto">Guardar</button>
           </form>
-          <br />
+          
           <form @submit.prevent="onSubmit">
 
             <!-- <label class="semiTitle">Nome de utilizador atual</label>
@@ -139,7 +139,7 @@
             />
             <button class="btn-card btnG" type="submit" @click="EditUser">Guardar</button>
           </form>
-          <br />
+          
           <form id="editPass" @submit.prevent="onSubmit">
 
             <label for="pass" class="semiTitle">Nova palavra-passe</label>
@@ -162,7 +162,18 @@
               required
             />
             <button class="btn-card btnG" type="submit" @click="EditPass">Guardar</button>
+            <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{
+        error
+      }}</v-alert>
+      <v-alert
+        class="errorAlert"
+        type="warning"
+        color="#E9A13B"
+        v-if="warning"
+        >{{ warning }}</v-alert
+      >
           </form>
+          
           <!--  -->
         <!-- </v-card-text> -->
         <!-- <v-card-actions>
@@ -421,6 +432,8 @@ export default {
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
       missions: this.missionStore.getMissions,
+      error:"",
+      warning:"",
     };
   },
   created() {
@@ -479,6 +492,7 @@ export default {
   },
   methods: {
     EditPhoto() {
+      
       if(this.form.newPhoto){
 
         this.user.photo=this.form.newPhoto;
@@ -488,25 +502,49 @@ export default {
       }
     },
     EditUser() {
-      if(this.form.newUsername){
-        if(!this.userStore.getUsers.find(user=>user.username==this.form.newUsername)){
+      if (this.form.newUsername.indexOf(" ") != -1) {
+        this.warning = "Nome de utilizador não pode conter espaços.";
+        this.error = "";
+      } else if (this.form.newUsername.length < 3) {
+        this.warning = "Nome de utilizador tem de ter no mínimo 3 caracteres.";
+        this.error = "";
+      }else{
 
-          this.user.username = this.form.newUsername;
-          this.editProfile = false;
-          this.missionStore.completeMission(this.logged, 7);
-          this.form.newUsername=""
+        if(this.form.newUsername){
+          if(!this.userStore.getUsers.find(user=>user.username==this.form.newUsername)){
+  
+            this.user.username = this.form.newUsername;
+            this.editProfile = false;
+            this.missionStore.completeMission(this.logged, 7);
+            this.form.newUsername=""
+          }else{
+            this.error = "Este username já existe!";
+            this.warning = "";
+          }
         }
       }
     },
     EditPass() {
-      if(this.form.newPassword && this.form.newPasswordConf){
+      if (this.form.newPassword.indexOf(" ") != -1) {
+        this.warning = "Palavra-passe não pode conter espaços.";
+        this.error = "";
+      }else if (this.form.newPassword.length < 8) {
+        this.warning = "Palavra-passe tem de ter no mínimo 8 caracteres.";
+        this.error = "";
+      } else {
 
-        if(this.form.newPassword==this.form.newPasswordConf){
+        if(this.form.newPassword && this.form.newPasswordConf){
   
-           this.user.password = this.form.newPassword;
-           this.editProfile = false;
-           this.missionStore.completeMission(this.logged, 7);
-           this.form.newPassword=this.form.newPasswordConf=""
+          if(this.form.newPassword==this.form.newPasswordConf){
+    
+             this.user.password = this.form.newPassword;
+             this.editProfile = false;
+             this.missionStore.completeMission(this.logged, 7);
+             this.form.newPassword=this.form.newPasswordConf=""
+          }else{
+            this.error = "Confirme que a palavra-passe coincide.";
+            this.warning = "";
+          }
         }
       }
     },

@@ -32,8 +32,9 @@
             v-if="activitiesNow.length > 0"
             v-for="activity in activitiesNow"
           >
-            <span class="cardText">{{ activity.title }}</span>
+            <span class="cardText">{{ activity.title }}: </span>
             <span>{{ activity.date }}</span>
+            <br />
             <br />
           </div>
           <div v-else>

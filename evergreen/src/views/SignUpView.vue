@@ -8,13 +8,12 @@
     > -->
     <div class="backBtnDiv">
       <RouterLink to="/">
-        <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
+        <img class="backbtn" src="../assets/icons/icones/arrowback.svg" />
       </RouterLink>
     </div>
     <form @submit.prevent="onSubmit">
       <div id="signContent">
-        
-          <img id="signImg" src="../assets/logored.svg" />
+        <img id="signImg" src="../assets/logored.svg" />
         <div id="group">
           <div id="col1">
             <label for="name" class="semiTitle">Nome</label>
@@ -77,9 +76,16 @@
         </div>
       </div>
       <br />
-      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
+      <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
+      <v-alert
+        class="errorAlert"
+        type="warning"
+        color="#E9A13B"
+        v-if="warning"
+        >{{ warning }}</v-alert
+      >
     </form>
     <!-- </v-form> -->
   </div>
@@ -110,39 +116,56 @@ export default {
       passConf: "",
       schools: this.schoolStore.getSchools,
       error: "",
+      warning: "",
     };
   },
   methods: {
     onSubmit() {
-      this.userStore.signUp(
-        this.name,
-        this.email,
-        this.username,
-        this.school,
-        this.password,
-        this.passConf
-      );
-      let user = this.userStore.getLogged;
-      let users = this.userStore.getUsers;
-
-      let signup = this.userStore.signUp(
-        this.name,
-        this.email,
-        this.username,
-        this.school,
-        this.password,
-        this.passConf
-      );
-
-      if (users.find((u) => u.email == user && u.type == "user")) {
-        this.missionStore.addUser(this.email);
-        this.$router.push("/Home");
-      } else if (signup == "email") {
-        this.error = "Este email já existe!";
-      } else if (signup == "username") {
-        this.error = "Este username já existe!";
-      } else if (signup == "password") {
-        this.error = "Confirme que a palavra-passe coincide.";
+      // console.log(this.password.indexOf(" "));
+      if (this.password.indexOf(" ") != -1) {
+        this.warning = "Palavra-passe não pode conter espaços.";
+        this.error = "";
+      } else if (this.password.length < 8) {
+        this.warning = "Palavra-passe tem de ter no mínimo 8 caracteres.";
+        this.error = "";
+      } else if (this.username.indexOf(" ") != -1) {
+        this.warning = "Nome de utilizador não pode conter espaços.";
+        this.error = "";
+      } else if (this.username.length < 3) {
+        this.warning = "Nome de utilizador tem de ter no mínimo 3 caracteres.";
+        this.error = "";
+      } else {
+        this.userStore.signUp(
+          this.name,
+          this.email,
+          this.username,
+          this.school,
+          this.password,
+          this.passConf
+        );
+        let user = this.userStore.getLogged;
+        let users = this.userStore.getUsers;
+        let signup = this.userStore.signUp(
+          this.name,
+          this.email,
+          this.username,
+          this.school,
+          this.password,
+          this.passConf
+        );
+        if (users.find((u) => u.email == user && u.type == "user")) {
+          this.missionStore.addUser(this.email);
+          this.$router.push("/Home");
+        } else if (signup == "email") {
+          this.error = "Este email já existe!";
+          this.warning = "";
+        } else if (signup == "username") {
+          this.error = "Este username já existe!";
+          this.warning = "";
+        } else if (signup == "password") {
+          this.error = "Confirme que a palavra-passe coincide.";
+          this.warning = "";
+        }
       }
     },
   },

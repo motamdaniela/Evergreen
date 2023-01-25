@@ -163,10 +163,9 @@
         id="ddmenu"
         variant="text"
         @click.stop="drawer = !drawer"
-        >
-        <img src="/src/" />
-        </v-app-bar-nav-icon
       >
+        <img src="/src/" />
+      </v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -175,12 +174,12 @@
       location="right"
       temporary
     >
-      <v-list  v-if="!isLogged">
+      <v-list v-if="!isLogged">
         <v-list-item title="Página Principal" value="about"> </v-list-item>
         <v-list-item title="Sobre Eco-Escolas" value="login"> </v-list-item>
         <v-list-item title="FAQ" value="about"> </v-list-item>
       </v-list>
-      <v-list  v-if="isLogged">
+      <v-list v-if="isLogged">
         <v-list-item title="Página Principal" value="about"> </v-list-item>
         <v-list-item title="Atividades" value="about"> </v-list-item>
         <v-list-item title="Ocorrências" value="about"> </v-list-item>
@@ -287,29 +286,39 @@ export default {
       this.$router.push("/");
     },
     onSubmit() {
-      if (
-        this.newAdmin.type &&
-        this.newAdmin.name &&
-        this.newAdmin.email &&
-        this.newAdmin.username &&
-        this.newAdmin.password &&
-        this.newAdmin.passConf
-      ) {
-        this.dialogAdd = false;
-        this.usersStore.newAdmin(
-          this.newAdmin.type,
-          this.newAdmin.name,
-          this.newAdmin.email,
-          this.newAdmin.username,
-          this.newAdmin.password,
+      if (this.newAdmin.password.indexOf(" ") != -1) {
+        alert("Palavra-passe não pode conter espaços.");
+      } else if (this.newAdmin.password.length < 8) {
+        alert("Palavra-passe tem de ter no mínimo 8 caracteres.");
+      } else if (this.newAdmin.username.indexOf(" ") != -1) {
+        alert("Nome de utilizador não pode conter espaços.");
+      } else if (this.newAdmin.username.length < 3) {
+        alert("Nome de utilizador tem de ter no mínimo 3 caracteres.");
+      } else {
+        if (
+          this.newAdmin.type &&
+          this.newAdmin.name &&
+          this.newAdmin.email &&
+          this.newAdmin.username &&
+          this.newAdmin.password &&
           this.newAdmin.passConf
-        );
-        this.newAdmin.type = "";
-        this.newAdmin.name = "";
-        this.newAdmin.email = "";
-        this.newAdmin.username = "";
-        this.newAdmin.password = "";
-        this.newAdmin.passConf = "";
+        ) {
+          this.dialogAdd = false;
+          this.usersStore.newAdmin(
+            this.newAdmin.type,
+            this.newAdmin.name,
+            this.newAdmin.email,
+            this.newAdmin.username,
+            this.newAdmin.password,
+            this.newAdmin.passConf
+          );
+          this.newAdmin.type = "";
+          this.newAdmin.name = "";
+          this.newAdmin.email = "";
+          this.newAdmin.username = "";
+          this.newAdmin.password = "";
+          this.newAdmin.passConf = "";
+        }
       }
     },
     // updateNotifs() {

@@ -199,7 +199,7 @@
     <div class="list">
       <div class="grid-item" v-for="activity in activities">
         <v-card
-          class="mx-auto card"
+          class="card"
           :class="'class' + activity.idTheme"
           max-width="400"
           v-if="+activity.end > +this.userObj.loginDate"

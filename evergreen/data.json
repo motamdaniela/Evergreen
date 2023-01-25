@@ -480,7 +480,7 @@
       "type": 4
     },
     {
-      "id": 13,
+      "id": 12,
       "title": "Faz login todos os dias durante uma semana",
       "description": "Faz login todos os dias durante uma semana",
       "reward": "/src/assets/images/loginbonus.png",
@@ -490,7 +490,7 @@
       "type": 6
     },
     {
-      "id": 14,
+      "id": 13,
       "title": "Edita o teu perfil",
       "description": "Edita o teu perfil",
       "reward": "/src/assets/images/editar_perfil.png",
@@ -500,7 +500,7 @@
       "type": 7
     },
     {
-      "id": 15,
+      "id": 14,
       "title": "Chega ao top 3 do quadro de líderes",
       "description": "Chega ao top 3 do quadro de líderes",
       "reward": "/src/assets/images/3rd_place.png",
@@ -510,7 +510,7 @@
       "type": 8
     },
     {
-      "id": 16,
+      "id": 15,
       "title": "Chega ao top 2 do quadro de líderes",
       "description": "Chega ao top 2 do quadro de líderes",
       "reward": "/src/assets/images/2nd_place.png",
@@ -520,7 +520,7 @@
       "type": 8
     },
     {
-      "id": 17,
+      "id": 16,
       "title": "Chega ao top 1 do quadro de líderes",
       "description": "Chega ao top 1 do quadro de líderes",
       "reward": "/src/assets/images/1st_place.png",
@@ -530,7 +530,7 @@
       "type": 8
     },
     {
-      "id": 18,
+      "id": 17,
       "title": "Completa todas as missões",
       "description": "Completa todas as missões",
       "reward": "/src/assets/images/completar_tudo.png",

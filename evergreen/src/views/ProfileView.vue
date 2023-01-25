@@ -334,7 +334,7 @@
       <v-col class="colPfp">
         <img id="ProfilePic" :src="user.photo" />
       </v-col>
-      <v-col class="colSide">
+      <v-col class="colSide" style="margin-top:4%;">
         <v-row id="ptsnBtn">
           <p id="pontos"><img id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
           <br>

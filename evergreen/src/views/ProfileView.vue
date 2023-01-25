@@ -95,6 +95,81 @@
     </v-dialog>
 
 <!-- edit profile -->
+<v-dialog v-model="editProfile">
+    <div class="fieldPklight modal editModal">
+      <!-- <v-card elevation="0" color="#F9F9F9"> -->
+        <v-card-actions>
+          <button class="btnRound btnPk" @click="editProfile = false">
+            <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          </button>
+        </v-card-actions>
+        
+        <v-card-text>
+          <form @submit.prevent="onSubmit">
+
+            <label for="photo" class="semiTitle">Nova foto de perfil</label>
+            <br>
+            <img v-if="form.newPhoto==''" :src="user.photo" width="100">
+            <img v-else :src="form.newPhoto" width="100">
+            <br />
+            <input 
+              @change="previewFiles"
+              type="file"
+              name="picture"
+              accept="image/png, image/jpeg"
+              ref="myFiles"
+              required
+            />
+            <button class="btn-card btnG" type="submit" @click="EditPhoto">Guardar</button>
+          </form>
+          <br />
+          <form @submit.prevent="onSubmit">
+
+            <label class="semiTitle">Nome de utilizador atual</label>
+            <h3>@{{ user.username }}</h3>
+            <br />
+            <label for="username" class="semiTitle">Novo nome de utilizador</label>
+            <br />
+            <input
+              class="input"
+              id="username"
+              v-model="form.newUsername"
+              type="text"
+              required
+            />
+            <button class="btn-card btnG" type="submit" @click="EditUser">Guardar</button>
+          </form>
+          <br />
+          <form @submit.prevent="onSubmit">
+
+            <label for="pass" class="semiTitle">Nova palavra-passe</label>
+            <br />
+            <input
+              class="input"
+              id="pass"
+              v-model="form.newPassword"
+              type="password"
+              required
+            />
+            <br />
+            <input
+              class="input"
+              id="pass"
+              v-model="form.newPasswordConf"
+              type="password"
+              required
+            />
+            <button class="btn-card btnG" type="submit" @click="EditPass">Guardar</button>
+          </form>
+          
+        </v-card-text>
+        <!-- <v-card-actions>
+          <button class="btn-page btnG" @click="Edit">Guardar</button>
+        </v-card-actions> -->
+        
+      <!-- </v-card> -->
+    </div>
+  </v-dialog>
   <v-dialog v-model="dialog">
     <div class="fieldPklight modal editModal">
       <v-card elevation="0" color="#F9F9F9">
@@ -252,7 +327,7 @@
         <v-row id="editIcon">
           <img id="edit"
           src="/src/assets/icons/icones/editProfile.svg"
-          @click="dialog = true"/>
+          @click="editProfile = true"/>
         </v-row>
       </v-col>
     </v-row>
@@ -315,7 +390,14 @@ export default {
   },
   data() {
     return {
+      form:{
+        newPhoto:'',
+        newUsername:'',
+        newPassword:'',
+        newPasswordConf:'',
+      },
       user: "",
+      editProfile:false,
       dialog: false,
       dialogAct: false,
       dialogOcDone: false,
@@ -392,14 +474,23 @@ export default {
 
   },
   methods: {
-    Edit() {
-      this.user.username = this.newUsername;
-      this.user.password = this.newPassword;
-      // this.user.color = this.newColor;
-      // this.user.shape = this.newShape;
-      this.dialog = false;
-      this.userStore.edit(JSON.stringify(this.user));
+    EditPhoto() {
+      this.user.photo=this.form.newPhoto;
+      this.editProfile = false;
       this.missionStore.completeMission(this.logged, 7);
+    },
+    EditUser() {
+      this.user.username = this.form.newUsername;
+      this.editProfile = false;
+      this.missionStore.completeMission(this.logged, 7);
+    },
+    EditPass() {
+      if(this.form.newPassword==this.form.newPasswordConf){
+
+         this.user.password = this.form.newPassword;
+         this.editProfile = false;
+         this.missionStore.completeMission(this.logged, 7);
+      }
     },
     subscribe(activity) {
       console.log(activity);
@@ -424,7 +515,7 @@ export default {
 
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = () => (this.user.photo = reader.result);
+      reader.onload = () => (this.form.newPhoto = reader.result);
       console.log(this.user.photo);
     },
   },

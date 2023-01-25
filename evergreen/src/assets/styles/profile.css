@@ -68,11 +68,14 @@ p {
 }
 #picture {
   box-shadow: none;
-  height: 70px;
+  height: 10px;
+  width: 100px;
 }
 .editModal {
   width: 40%;
   align-self: center;
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 #btnBonus {

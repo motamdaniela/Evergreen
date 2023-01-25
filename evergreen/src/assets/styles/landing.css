@@ -110,7 +110,7 @@ body{
 
 /* last div*/
 #lastdiv{
-    height: 35vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -237,8 +237,11 @@ body{
     #img3{
         display: none;
     }
-    #img1Small, #img2Small, #img3Small{
-        width: 50%;
+    #img1Small, #img3Small{
+        width: 60%;
+    }
+    #img2Small{
+        width: 35%;
     }
     #text2{
         margin-left: -100px;
@@ -251,6 +254,22 @@ body{
     #firstdiv{
         background-image: url("../images/landingbg.svg");
         background-size: 85%;
-        background-position: 50px 80px;
+        background-position: 50px 90px;
+    }
+    #text1>p, #text2>p, #text3>p{
+        font-size: 15px;
+    }
+    #text1>h1, #text2>h1, #text3>h1, #lastdiv>h1, #text0>h1{
+        font-size: 25px;
+    }
+    .btn-page{
+        width: 130px;
+        height: 45px;
+    }
+    #btn0, #btn1, #btn2, #btn3, #btn4{
+        font-size: 15px;
+    }
+    #btn4{
+        width: 150px;
     }
   }

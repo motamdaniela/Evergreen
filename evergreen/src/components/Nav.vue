@@ -255,7 +255,8 @@ export default {
         mission.users.forEach((user) => {
           if (
             user[2] == "Concluída" &&
-            !this.user.rewards.includes(mission.reward)
+            !this.user.rewards.includes(mission.reward) &&
+            user[0] == this.user.email
           ) {
             y.push(mission);
           }

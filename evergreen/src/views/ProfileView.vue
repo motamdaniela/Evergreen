@@ -125,9 +125,9 @@
           <br />
           <form @submit.prevent="onSubmit">
 
-            <label class="semiTitle">Nome de utilizador atual</label>
+            <!-- <label class="semiTitle">Nome de utilizador atual</label>
             <h3>@{{ user.username }}</h3>
-            <br />
+            <br /> -->
             <label for="username" class="semiTitle">Novo nome de utilizador</label>
             <br />
             <input
@@ -152,9 +152,11 @@
               required
             />
             <br />
+            <label for="passC" class="semiTitle">Confirmar palavra-passe</label>
+            <br />
             <input
               class="input"
-              id="pass"
+              id="passC"
               v-model="form.newPasswordConf"
               type="password"
               required

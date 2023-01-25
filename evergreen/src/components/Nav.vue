@@ -266,8 +266,11 @@ export default {
           }
         });
       });
+      console.log(y);
       if (y.length > 0) {
         return true;
+      } else {
+        return false;
       }
     },
   },

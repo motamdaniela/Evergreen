@@ -97,3 +97,9 @@
     margin-right: auto;
     margin-left: 2%;
 }
+.backBtnRank{
+    display: flex;
+    align-self: left;
+    margin-left: 4%;
+    margin-bottom: -3%;
+}

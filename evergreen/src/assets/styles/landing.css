@@ -13,6 +13,10 @@ body{
 
 /* first div */
 #firstdiv{
+    background-image: url("../images/landingbg.svg");
+    background-size: 85%;
+    background-position: 100px 80px;
+    /* margin-left: 10%; */
     padding-bottom: 120px;
     display: flex;
     justify-content: center;
@@ -202,8 +206,8 @@ body{
     border: 2px solid #050b06;
     background-color: #FFFFFF;
     padding: 10px;
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 90px;
     border-radius: 100px;
     box-shadow: 5px 5px #000000;
 }

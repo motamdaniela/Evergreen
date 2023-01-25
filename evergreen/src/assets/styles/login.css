@@ -1,105 +1,106 @@
-#backgroundLogin{
-    background-image: url("../images/entrar.png");
-    background-size: 90%;
-    background-attachment: fixed;
-    background-position: right 90px;
+#backgroundLogin {
+  background-image: url("../images/entrar.png");
+  background-size: 90%;
+  background-attachment: fixed;
+  background-position: right 90px;
 
-    /* height: 865px; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 144px;
+  /* height: 865px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 144px;
 }
-#backgroundSign{
-    background-image: url("../images/entrar.png");
-    background-size: 90%;
-    background-attachment: fixed;
-    background-position: right 90px;
+#backgroundSign {
+  background-image: url("../images/entrar.png");
+  background-size: 90%;
+  background-attachment: fixed;
+  background-position: right 90px;
 
-    /* height: 865px; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 52px;
-}
-
-#group{
-    display: flex;
+  /* height: 865px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 52px;
 }
 
-#col1, #col2{
-    margin: 30px;
+#group {
+  display: flex;
 }
 
-.input{
-    width: 376px;
-    height: 44px;
-    border-radius: 33px;
-    background-color: #FDFAF9;
-    border: 2px solid rgb(0, 0, 0);
-    margin-bottom: 30px;
-    padding-left: 10px;
+#col1,
+#col2 {
+  margin: 30px;
 }
 
-.btn-page{
-    background-color: #C0E0C7;
-    box-shadow: 3px 5px 0px #62B273;   
+.input {
+  width: 376px;
+  height: 44px;
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  margin-bottom: 30px;
+  padding-left: 10px;
 }
 
-.btn-page:active{
-    background-color: #91C99D;
-  }
-
-.link{
-    font-size: 22px;
-    text-decoration: none;
-    color: black;
+.btn-page {
+  background-color: #c0e0c7;
+  box-shadow: 3px 5px 0px #62b273;
 }
 
-#signUpBtn{
-    font-weight: 500;
+.btn-page:active {
+  background-color: #91c99d;
 }
 
-#btns{
-    width: 376px;
-    display: flex;
-    justify-content: space-around;
+.link {
+  font-size: 22px;
+  text-decoration: none;
+  color: black;
 }
 
-#errorAlert{
-    border-radius: 33px;
-    background-color: #FDFAF9;
-    border: 2px solid rgb(0, 0, 0);
-    box-shadow: 3px 3px 0px #050B06;
+#signUpBtn {
+  font-weight: 500;
 }
 
-#loginContent{
-    margin-top: 20%;
-}
-#loginImg{
-    margin-bottom: 12%;
-}
-
-#signContent{
-    margin-top: 1%;
-}
-#signImg{
-    width: 43%;
-    margin-bottom: 30px;
+#btns {
+  width: 376px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.backbtn{
-    width: 50px;
+.errorAlert {
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 3px 3px 0px #050b06;
 }
-.backBtnDiv{
-    margin-right: auto;
-    margin-left: 2%;
+
+#loginContent {
+  margin-top: 20%;
 }
-.backBtnRank{
-    display: flex;
-    align-self: left;
-    margin-left: 4%;
-    margin-bottom: -3%;
+#loginImg {
+  margin-bottom: 12%;
+}
+
+#signContent {
+  margin-top: 1%;
+}
+#signImg {
+  width: 43%;
+  margin-bottom: 30px;
+}
+
+.backbtn {
+  width: 50px;
+}
+.backBtnDiv {
+  margin-right: auto;
+  margin-left: 2%;
+}
+.backBtnRank {
+  display: flex;
+  align-self: left;
+  margin-left: 4%;
+  margin-bottom: -3%;
 }

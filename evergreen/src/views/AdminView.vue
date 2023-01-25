@@ -49,7 +49,7 @@
           v-if="closeActivities.length > 0"
           v-for="activity in closeActivities"
         >
-          <span class="cardText">{{ activity.title }}</span>
+          <span class="cardText">{{ activity.title }}: </span>
           <span>{{ activity.date }}</span>
         </div>
         <div v-else>

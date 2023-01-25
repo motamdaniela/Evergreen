@@ -118,7 +118,7 @@
           <RouterLink to="/signUp">Registar</RouterLink>
         </button>
       </nav>
-      <nav  class="longNav" v-if="isLogged && this.user.type == 'user'">
+      <nav class="longNav" v-if="isLogged && this.user.type == 'user'">
         <RouterLink to="/Home">Página principal</RouterLink>
         <RouterLink to="/Activities">Atividades</RouterLink>
         <RouterLink to="/Occurrence">Ocorrências</RouterLink>
@@ -163,10 +163,9 @@
         v-if="!isLogged || (isLogged && this.user.type == 'user')"
         id="ddmenu"
         @click.stop="drawer = !drawer"
-        >
-        <img style="width: 30px" src="/src/assets/icons/icones/menu.svg" />
-        </v-app-bar-nav-icon
       >
+        <img style="width: 30px" src="/src/assets/icons/icones/menu.svg" />
+      </v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -175,23 +174,41 @@
       location="right"
       temporary
     >
-
       <v-list v-if="!isLogged">
-        <RouterLink class="drawerLink" to="/"><v-list-item title="Início"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/sobre"><v-list-item title="Sobre Eco-Escolas"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/faq"><v-list-item title="F.A.Q."></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/"
+          ><v-list-item title="Início"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/sobre"
+          ><v-list-item title="Sobre Eco-Escolas"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/faq"
+          ><v-list-item title="F.A.Q."></v-list-item
+        ></RouterLink>
         <br />
-        <RouterLink class="drawerLink" to="/login"><v-list-item title="Entrar"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/login"
+          ><v-list-item title="Entrar"></v-list-item
+        ></RouterLink>
         <br />
-        <RouterLink  class="drawerLink" to="/signUp"><v-list-item title="Registar"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/signUp"
+          ><v-list-item title="Registar"></v-list-item
+        ></RouterLink>
       </v-list>
       <v-list v-if="isLogged && this.user.type == 'user'">
-        <RouterLink class="drawerLink" to="/Home"><v-list-item title="Página Principal"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/Activities"><v-list-item title="Atividades"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/Occurrence"><v-list-item title="Ocorrências"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/Form"><v-list-item title="Questionário"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/Home"
+          ><v-list-item title="Página Principal"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/Activities"
+          ><v-list-item title="Atividades"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/Occurrence"
+          ><v-list-item title="Ocorrências"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/Form"
+          ><v-list-item title="Questionário"></v-list-item
+        ></RouterLink>
         <RouterLink class="drawerLink" to="/Missions"
-          ><v-list-item title="Missões"></v-list-item><v-badge
+          ><v-list-item title="Missões"></v-list-item
+          ><v-badge
             v-if="updateNotifs"
             dot
             floating
@@ -199,8 +216,12 @@
             color="success"
           ></v-badge
         ></RouterLink>
-        <RouterLink class="drawerLink" to="/sobre"><v-list-item title="Sobre Eco-Escolas"></v-list-item></RouterLink>
-        <RouterLink class="drawerLink" to="/faq"><v-list-item title="F.A.Q"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/sobre"
+          ><v-list-item title="Sobre Eco-Escolas"></v-list-item
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/faq"
+          ><v-list-item title="F.A.Q"></v-list-item
+        ></RouterLink>
         <br />
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
@@ -227,19 +248,6 @@
           <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
         </button>
       </v-list>
-
-
-
-
-
-
-
-      
-
-
-
-
-
     </v-navigation-drawer>
 
     <v-main> </v-main>
@@ -338,29 +346,39 @@ export default {
       this.$router.push("/");
     },
     onSubmit() {
-      if (
-        this.newAdmin.type &&
-        this.newAdmin.name &&
-        this.newAdmin.email &&
-        this.newAdmin.username &&
-        this.newAdmin.password &&
-        this.newAdmin.passConf
-      ) {
-        this.dialogAdd = false;
-        this.usersStore.newAdmin(
-          this.newAdmin.type,
-          this.newAdmin.name,
-          this.newAdmin.email,
-          this.newAdmin.username,
-          this.newAdmin.password,
+      if (this.newAdmin.password.indexOf(" ") != -1) {
+        alert("Palavra-passe não pode conter espaços.");
+      } else if (this.newAdmin.password.length < 8) {
+        alert("Palavra-passe tem de ter no mínimo 8 caracteres.");
+      } else if (this.newAdmin.username.indexOf(" ") != -1) {
+        alert("Nome de utilizador não pode conter espaços.");
+      } else if (this.newAdmin.username.length < 3) {
+        alert("Nome de utilizador tem de ter no mínimo 3 caracteres.");
+      } else {
+        if (
+          this.newAdmin.type &&
+          this.newAdmin.name &&
+          this.newAdmin.email &&
+          this.newAdmin.username &&
+          this.newAdmin.password &&
           this.newAdmin.passConf
-        );
-        this.newAdmin.type = "";
-        this.newAdmin.name = "";
-        this.newAdmin.email = "";
-        this.newAdmin.username = "";
-        this.newAdmin.password = "";
-        this.newAdmin.passConf = "";
+        ) {
+          this.dialogAdd = false;
+          this.usersStore.newAdmin(
+            this.newAdmin.type,
+            this.newAdmin.name,
+            this.newAdmin.email,
+            this.newAdmin.username,
+            this.newAdmin.password,
+            this.newAdmin.passConf
+          );
+          this.newAdmin.type = "";
+          this.newAdmin.name = "";
+          this.newAdmin.email = "";
+          this.newAdmin.username = "";
+          this.newAdmin.password = "";
+          this.newAdmin.passConf = "";
+        }
       }
     },
     // updateNotifs() {

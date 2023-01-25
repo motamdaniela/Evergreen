@@ -21,6 +21,13 @@
   margin-top: 2%;
 } */
 
+.errorAlert {
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 3px 3px 0px #050b06;
+}
+
 #divRank {
   position: relative;
   z-index: 1;

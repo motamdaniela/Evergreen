@@ -8,13 +8,12 @@
     > -->
     <div class="backBtnDiv">
       <RouterLink to="/">
-        <img class="backbtn" src="../assets/icons/icones/arrowback.svg">
+        <img class="backbtn" src="../assets/icons/icones/arrowback.svg" />
       </RouterLink>
     </div>
     <form @submit.prevent="onSubmit">
       <div id="loginContent">
-        
-          <img id="loginImg" src="../assets/logored.svg" />
+        <img id="loginImg" src="../assets/logored.svg" />
         <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
         <br />
         <input class="input" id="email" v-model="email" required />
@@ -42,7 +41,7 @@
         </div>
       </div>
       <br />
-      <v-alert id="errorAlert" type="error" color="#E9674D" v-if="error">{{
+      <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
     </form>

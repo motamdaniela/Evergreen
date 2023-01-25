@@ -115,9 +115,9 @@
       data() {
         return {
           activities: this.activityStore.getActivities,
-          activity: '',
+          // activity: '',
           users: this.userStore.getUsers,
-          user: '',
+          // user: '',
           open: false,
           listDialog: false,
           isFilter: false,
@@ -131,6 +131,8 @@
         },
         Participation(){
           alert(this.user.email, this.activity.id)
+          this.user.activities += 1;
+          this.user.points += 5;
           this.activityStore.updateParticipated(this.user.email, this.activity.id)
         }
       },

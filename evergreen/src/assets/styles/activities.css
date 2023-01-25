@@ -143,29 +143,35 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .list {
     display: flex;
     flex-direction: column;
   }
-
+  .sugModal{
+    height: 20%;
+  }
   #sugCont {
     display: flex;
     flex-direction: column;
-    margin-left: 25%;
+    margin-left: 15%;
+
   }
 
   .input,
   .textBox {
-    width: 200px;
+    width: 90%;
+    height: 30px;
+  }
+  #colL>.input, #colL>.textBox{
+    width: 110%;
   }
 
-  .textBox {
-    height: 50px;
-  }
-
-  .rowText {
-    font-size: 90%;
+  /* .rowText {
+    font-size: 80%;
+  } */
+  .contentModal{
+    font-size: 80%;
   }
 
   v-dialog {

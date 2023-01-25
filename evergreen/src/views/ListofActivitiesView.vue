@@ -115,9 +115,7 @@
       data() {
         return {
           activities: this.activityStore.getActivities,
-          // activity: '',
           users: this.userStore.getUsers,
-          // user: '',
           open: false,
           listDialog: false,
           isFilter: false,

@@ -347,3 +347,11 @@ footer {
 #hide {
   display: none;
 }
+
+@media screen and (max-width: 1000px){
+  .btn-page{
+    width: 130px;
+    height: 50px;
+    font-size: 13px;
+  }
+}

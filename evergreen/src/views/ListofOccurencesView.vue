@@ -110,8 +110,10 @@
           this.dialog = false;
           let user = this.users.find((user)=> user.email == this.oc.user)
           user.points += 5;
+          user.occurences += 1;
           this.ocStore.edit(JSON.stringify(this.oc))
           this.userStore.edit(JSON.stringify(user))
+
         },
         Repeat() {
           this.oc.state = 'repeat';

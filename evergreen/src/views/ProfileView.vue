@@ -361,7 +361,6 @@
     <button class="btn-page btnP btnProfile" @click="dialogAct = true">
       Atividades Inscritas
     </button>
-    <!-- <button class="btn-page btnP">Atividades Participadas</button> -->
     <button class="btn-page btnPk btnProfile" @click="dialogOcDone = true">
       Ocorrências Feitas
     </button>
@@ -369,8 +368,10 @@
       Ocorrências Pendentes
     </button>
   </div>
-  <button v-if="this.user.council" class="btn-page btnR">
-    Verificar presenças
+  <button v-if="FilteredActivities.length > 0" class="btn-page btnR">
+    <RouterLink to="/ActivitiesList">
+      Verificar presenças
+    </RouterLink>
   </button>
   <br />
   <div>
@@ -574,6 +575,11 @@ export default {
       reader.onload = () => (this.form.newPhoto = reader.result);
       console.log(this.user.photo);
     },
+  },
+  computed: {
+    FilteredActivities() {
+                  return this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
+              },
   },
 };
 </script>

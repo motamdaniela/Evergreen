@@ -107,7 +107,7 @@
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav v-if="!isLogged">
+      <nav class="longNav" v-if="!isLogged">
         <RouterLink class="homeLink" to="/">Início</RouterLink>
         <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
@@ -118,7 +118,7 @@
           <RouterLink to="/signUp">Registar</RouterLink>
         </button>
       </nav>
-      <nav v-if="isLogged && this.user.type == 'user'">
+      <nav  class="longNav" v-if="isLogged && this.user.type == 'user'">
         <RouterLink to="/Home">Página principal</RouterLink>
         <RouterLink to="/Activities">Atividades</RouterLink>
         <RouterLink to="/Occurrence">Ocorrências</RouterLink>
@@ -160,11 +160,11 @@
       </nav>
 
       <v-app-bar-nav-icon
+        v-if="!isLogged || (isLogged && this.user.type == 'user')"
         id="ddmenu"
-        variant="text"
         @click.stop="drawer = !drawer"
         >
-        <img src="/src/" />
+        <img style="width: 30px" src="/src/assets/icons/icones/menu.svg" />
         </v-app-bar-nav-icon
       >
     </v-app-bar>
@@ -175,20 +175,71 @@
       location="right"
       temporary
     >
-      <v-list  v-if="!isLogged">
-        <v-list-item title="Página Principal" value="about"> </v-list-item>
-        <v-list-item title="Sobre Eco-Escolas" value="login"> </v-list-item>
-        <v-list-item title="FAQ" value="about"> </v-list-item>
+
+      <v-list v-if="!isLogged">
+        <RouterLink class="drawerLink" to="/"><v-list-item title="Início"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/sobre"><v-list-item title="Sobre Eco-Escolas"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/faq"><v-list-item title="F.A.Q."></v-list-item></RouterLink>
+        <br />
+        <RouterLink class="drawerLink" to="/login"><v-list-item title="Entrar"></v-list-item></RouterLink>
+        <br />
+        <RouterLink  class="drawerLink" to="/signUp"><v-list-item title="Registar"></v-list-item></RouterLink>
       </v-list>
-      <v-list  v-if="isLogged">
-        <v-list-item title="Página Principal" value="about"> </v-list-item>
-        <v-list-item title="Atividades" value="about"> </v-list-item>
-        <v-list-item title="Ocorrências" value="about"> </v-list-item>
-        <v-list-item title="Questionário" value="about"> </v-list-item>
-        <v-list-item title="Missões" value="about"> </v-list-item>
-        <v-list-item title="Sobre Eco-Escolas" value="login"> </v-list-item>
-        <v-list-item title="FAQ" value="about"> </v-list-item>
+      <v-list v-if="isLogged && this.user.type == 'user'">
+        <RouterLink class="drawerLink" to="/Home"><v-list-item title="Página Principal"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/Activities"><v-list-item title="Atividades"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/Occurrence"><v-list-item title="Ocorrências"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/Form"><v-list-item title="Questionário"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/Missions"
+          ><v-list-item title="Missões"></v-list-item><v-badge
+            v-if="updateNotifs"
+            dot
+            floating
+            offset-y="-10"
+            color="success"
+          ></v-badge
+        ></RouterLink>
+        <RouterLink class="drawerLink" to="/sobre"><v-list-item title="Sobre Eco-Escolas"></v-list-item></RouterLink>
+        <RouterLink class="drawerLink" to="/faq"><v-list-item title="F.A.Q"></v-list-item></RouterLink>
+        <br />
+        <button v-if="this.$route.name == 'Profile'" @click="logOut">
+          <img
+            class="logoutbtn"
+            style="width: 30px; height: 25px"
+            src="src/assets/icons/icones/logout.svg"
+          />
+        </button>
+        <RouterLink v-else to="/Profile" class="drawerLink">
+          <v-list-item title="Perfil"></v-list-item>
+        </RouterLink>
       </v-list>
+
+      <v-list v-if="isLogged && this.user.type == 'admin'">
+        <button @click="dialogAdd = true" class="addbtn">
+          <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
+        </button>
+        <button @click="logOut" class="navbtn logoutbtn">
+          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+        </button>
+      </v-list>
+      <v-list v-if="isLogged && this.user.type == 'security'">
+        <button @click="logOut" class="navbtn logoutbtn">
+          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+        </button>
+      </v-list>
+
+
+
+
+
+
+
+      
+
+
+
+
+
     </v-navigation-drawer>
 
     <v-main> </v-main>

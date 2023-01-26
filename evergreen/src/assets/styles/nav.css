@@ -58,8 +58,13 @@ nav a.router-link-exact-active {
   color: #050b06;
   font-weight: bold;
 }
-
-.homeLink.router-link-exact-active {
+/* .router-link-exact-active {
+  box-shadow: 0px -8px #e9674d inset;
+} */
+nav a.router-link-active {
+  box-shadow: 0px -8px #e9674d inset;
+}
+.homeLink.router-link-active {
   box-shadow: 0px -8px #e9674d inset;
 }
 .actLink.router-link-exact-active {

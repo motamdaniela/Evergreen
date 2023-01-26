@@ -10,7 +10,7 @@
             </v-card-actions>
             <v-card-text>
                 <v-row>
-                    <img :src="this.oc.photo" id="profilePic">
+                    <img :src="this.oc.photo" class="thumbnail" style="height: 100px;">
                     <div>
                         <p class="semiTitle">{{ oc.type }}</p>
                         <p>{{ oc.school }} {{ oc.building }}, Sala {{ oc.classroom }}</p>

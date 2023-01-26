@@ -615,27 +615,27 @@
     {
       "id": 3,
       "name": "ISEP",
-      "idCampus": 1
+      "idCampus": 0
     },
     {
       "id": 4,
       "name": "ISCAP",
-      "idCampus": 1
+      "idCampus": 0
     },
     {
       "id": 5,
       "name": "ESE",
-      "idCampus": 1
+      "idCampus": 0
     },
     {
       "id": 6,
       "name": "ESMAE",
-      "idCampus": 1
+      "idCampus": 0
     },
     {
       "id": 7,
       "name": "ESTG",
-      "idCampus": 3
+      "idCampus": 2
     }
   ],
   "floors": [

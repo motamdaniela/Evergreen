@@ -119,11 +119,11 @@
         </button>
       </nav>
       <nav class="longNav" v-if="isLogged && this.user.type == 'user'">
-        <RouterLink to="/Home">Página principal</RouterLink>
-        <RouterLink to="/Activities">Atividades</RouterLink>
-        <RouterLink to="/Occurrence">Ocorrências</RouterLink>
-        <RouterLink to="/Form">Questionário</RouterLink>
-        <RouterLink to="/Missions"
+        <RouterLink  class="homeLink" to="/Home">Página principal</RouterLink>
+        <RouterLink  class="actLink" to="/Activities">Atividades</RouterLink>
+        <RouterLink  class="ocLink" to="/Occurrence">Ocorrências</RouterLink>
+        <RouterLink  class="formLink" to="/Form">Questionário</RouterLink>
+        <RouterLink  class="missionsLink" to="/Missions"
           >Missões<v-badge
             v-if="updateNotifs"
             dot
@@ -132,8 +132,8 @@
             color="success"
           ></v-badge
         ></RouterLink>
-        <RouterLink to="/sobre">Sobre Eco-Escolas</RouterLink>
-        <RouterLink to="/faq">F.A.Q.</RouterLink>
+        <RouterLink  class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
             class="logoutbtn"

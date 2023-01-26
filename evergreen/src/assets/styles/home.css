@@ -333,5 +333,36 @@
   .board>p{
     font-size: 11px;
   }
+  p{
+    font-size: 1.6vw;
+  }
+  #divTop{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .title{
+    font-size: 4vw;
+  }
+  .boardTop{
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #imgTop{
+    width: 100%;
+  }
+
+  .listSug{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+  }
+  .itemR{
+    margin-bottom: 20px;
+  }
 
 }

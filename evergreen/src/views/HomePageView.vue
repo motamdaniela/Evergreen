@@ -215,8 +215,8 @@
       <span>Sugestões de atividades</span>
     </h1>
 
-    <div class="list">
-      <div class="grid-item" v-for="activity in activitiesSug">
+    <div class="list listSug">
+      <div class="grid-item itemR" v-for="activity in activitiesSug">
         <v-card class="mx-auto" max-width="400" id="cardR">
           <v-img
             class="image"

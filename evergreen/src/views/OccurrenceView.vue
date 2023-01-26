@@ -128,6 +128,13 @@
                 class="rb"
                 name="type"
                 :value="tp.id"
+                @:change="
+                  {
+                    {
+                      id(tp.id);
+                    }
+                  }
+                "
                 required
               />
               <label class="typeLbl">{{ tp.name }}</label>
@@ -276,6 +283,7 @@ export default {
       this.form.idType = document.querySelector(
         'input[name="type"]:checked'
       ).value;
+
       let today = new Date();
       this.form.date =
         today.getFullYear() +
@@ -290,6 +298,16 @@ export default {
       this.occurrenceStore.addOccurrence(this.form);
       this.missionStore.completeMission(this.form.user, 2);
       location.reload();
+    },
+    id(id) {
+      let select = document.querySelector('input[name="type"]:checked');
+      select.id = id;
+      const text = document.querySelector("#outro");
+      if (select.id == 6) {
+        text.removeAttribute("disabled", "");
+      } else {
+        text.setAttribute("disabled", "");
+      }
     },
     // idk if this works
     previewFiles(e) {

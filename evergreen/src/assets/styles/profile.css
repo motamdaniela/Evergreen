@@ -188,6 +188,53 @@ p {
     margin-left: -90px;
     margin-right: -90px;
   }
+  
+}
+
+@media screen and (max-width: 1000px){
+  v-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contentModal{
+    font-size: 80%;
+  }
+  .imgModal {
+    width: 70%;
+    height: 70%;
+  }
+  .row1 {
+    display: flex;
+    flex-direction: column; 
+  }
+  .row1>img{
+    width: 50%;
+  }
+
+  .profileList{
+    margin-left: 0px;
+    width: 100%;
+  }
+  .img{
+    width: 25%;
+  }
+  .listBtn{
+    height: 50px;
+  }
+
+  .editModal{
+    width: 70%;
+    font-size: 13px;
+    
+  }
+  form>label{
+    font-size: 15px;
+  }
+  .input{
+    width: 80%;
+  }
+  
 }
 
 @media screen and (max-width: 750px) {
@@ -200,6 +247,13 @@ p {
   .btn-page{
     font-size: 12px;
   }
+  .listText{
+    font-size: 15px;
+  }
+  .ocTxt{
+    font-size: 15px;
+  }
+  
 }
 
 @media screen and (max-width: 550px) {
@@ -210,4 +264,11 @@ p {
     margin-left: 5px;
     margin-right: -10px;
   }
+  .listText{
+    font-size: 10px;
+  }
+  .ocTxt{
+    font-size: 10px;
+  }
+  
 }

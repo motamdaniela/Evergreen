@@ -49,7 +49,7 @@
       <v-list id="menu">
         <!-- <v-list-item v-for="(theme, index) in themes" :key="index"> -->
         <v-checkbox
-          v-for="tp in types2"
+          v-for="tp in types"
           v-model="typesPicked"
           :label="tp.name"
           :value="tp.id"

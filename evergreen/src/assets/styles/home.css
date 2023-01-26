@@ -317,3 +317,21 @@
 #qstnBtn {
   margin: 40px 15px;
 }
+
+@media screen and (max-width: 1000px){
+  .group{
+    margin: 0px;
+  }
+  .card{
+    margin-left: 0px;
+  }
+  .board{
+    width: 90%;
+    margin-left: 5%; 
+    padding: 15px;
+  }
+  .board>p{
+    font-size: 11px;
+  }
+
+}

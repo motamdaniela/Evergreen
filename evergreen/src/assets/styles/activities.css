@@ -157,7 +157,6 @@
     margin-left: 15%;
 
   }
-
   .input,
   .textBox {
     width: 90%;
@@ -166,10 +165,6 @@
   #colL>.input, #colL>.textBox{
     width: 110%;
   }
-
-  /* .rowText {
-    font-size: 80%;
-  } */
   .contentModal{
     font-size: 80%;
   }

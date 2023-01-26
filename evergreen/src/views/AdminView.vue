@@ -30,7 +30,7 @@
 
   <v-row class="d-flex justify-center flex-row">
     <div class="carddivTables">
-      <p class="semiTitle">Insçriões conselho Eco-Escolas</p>
+      <p class="semiTitle">Inscrições conselho Eco-Escolas</p>
       <v-card class="cardG">
         <p v-if="councilUsers.length <= 0">Ainda não existem inscrições!</p>
         <div v-for="user in councilUsers">

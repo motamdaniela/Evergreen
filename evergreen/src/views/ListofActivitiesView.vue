@@ -38,13 +38,14 @@
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
           </button><br><br>
         </div>
-        <p v-if="activityUsers.length <= 0"> Não exitem inscrições!</p>
+        <p v-if="activityUsers.length == 0"> Não exitem inscrições!</p>
         <div v-for="user in activityUsers" >
           <v-row class="boardP">
             <img :src="user.photo" id="profilePic" />
             <p class="semiTitle">{{ user.name }}</p>
             <div>
-              <button class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
+              <button v-if="datePassed"
+                 class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
             </div>
           </v-row>
         </div>
@@ -112,10 +113,17 @@
     
         return { userStore, activityStore };
       },
+      created () {
+        this.activities = this.activityStore.getActivities;
+        this.userObj = this.userStore.getUsers.find(
+          (user) => user.email == this.user
+        );;
+      },
       data() {
         return {
           activities: this.activityStore.getActivities,
           users: this.userStore.getUsers,
+          userObj: "",
           open: false,
           listDialog: false,
           isFilter: false,
@@ -146,6 +154,14 @@
               }
             });
           return listUsers
+        },
+        datePassed(){
+          let date = new Date();
+          if(this.activity.end < date.getDate()){ 
+            return true
+          }else{
+            return false;
+          }
         }
       },
     };

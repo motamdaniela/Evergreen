@@ -368,7 +368,7 @@
       Ocorrências Pendentes
     </button>
   </div>
-  <button v-if="FilteredActivities.length > 0" class="btn-page btnR">
+  <button v-if="filteredActivities.length > 0" class="btn-page btnR">
     <RouterLink to="/ActivitiesList">
       Verificar presenças
     </RouterLink>
@@ -435,6 +435,7 @@ export default {
       missions: this.missionStore.getMissions,
       error:"",
       warning:"",
+      filteredActivities:""
     };
   },
   created() {
@@ -489,6 +490,8 @@ export default {
         this.ocsDone.push(oc);
       }
     });
+
+    this.filteredActivities= this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
 
   },
   methods: {
@@ -576,11 +579,11 @@ export default {
       console.log(this.user.photo);
     },
   },
-  computed: {
-    FilteredActivities() {
-                  return this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
-              },
-  },
+  // computed: {
+  //   FilteredActivities() {
+  //                 this.filteredActivities= this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
+  //             },
+  // },
 };
 </script>
 

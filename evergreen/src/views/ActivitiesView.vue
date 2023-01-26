@@ -356,9 +356,6 @@ export default {
       this.suggestionStore.addSuggestions(this.form);
       location.reload();
     },
-    selectedThemes() {
-      console.log(this.themesPicked);
-    },
   },
   computed: {
     FilterThemes() {

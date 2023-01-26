@@ -205,10 +205,12 @@
         <div class="firstPlace">{{ users.indexOf(user) + 1 }}</div>
       </div>
     </div>
+    <RouterLink to="/Rank">
     <button class="btn-page btnPk">
-      <RouterLink to="/Rank">Ver todos</RouterLink>
+      Ver todos
     </button>
-    <!-- ^ this mf nao vai pro meio T-T  -->
+    </RouterLink>
+   
 
     <br /><br />
     <h1 class="gradientRed padding title">

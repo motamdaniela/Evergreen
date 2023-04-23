@@ -9,7 +9,7 @@ app.get("/", function (req, res) {
 });
 
 app.use("/activities", require("./routes/activities.routes.js"));
-// app.use("/missions", require("./routes/missions.routes.js"));
+app.use("/missions", require("./routes/missions.routes.js"));
 
 app.all("*", function (req, res) {
   res.status(404).json({ message: "WHAT???" });

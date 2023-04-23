@@ -192,47 +192,4 @@ let missions = [
   },
 ];
 
-let typeM = [
-  {
-    id: 0,
-    name: "inscrever atividades",
-  },
-  {
-    id: 1,
-    name: "participar atividades",
-  },
-  {
-    id: 2,
-    name: "fazer ocorrências",
-  },
-  {
-    id: 3,
-    name: "chegar a x pontos",
-  },
-  {
-    id: 4,
-    name: "inscrever no conselho",
-  },
-  {
-    id: 5,
-    name: "preencher questionário",
-  },
-  {
-    id: 6,
-    name: "login todos os dias",
-  },
-  {
-    id: 7,
-    name: "editar perfil",
-  },
-  {
-    id: 8,
-    name: "chegar a top x",
-  },
-  {
-    id: 9,
-    name: "completar tudo",
-  },
-];
-
-module.exports = { missions, typeM };
+module.exports = missions;

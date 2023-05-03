@@ -29,5 +29,6 @@ router.use((req, res, next) => {
 });
 router.route("/").get(activitiesController.findAll);
 router.route("/:activityID").get(activitiesController.findOne);
+router.route("/:activityID/users/:userID").put(activitiesController.subscribe);
 
 module.exports = router;

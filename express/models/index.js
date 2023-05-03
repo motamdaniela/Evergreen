@@ -33,4 +33,5 @@ db.mongoose = mongoose;
 
 db.activities = require("./activities.model.js")(mongoose);
 db.missions = require("./missions.model.js")(mongoose);
+db.users = require("./users.model.js")(mongoose);
 module.exports = db;

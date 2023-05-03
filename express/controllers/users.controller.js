@@ -39,7 +39,6 @@ exports.findOne = async (req, res) => {
     }
   };
 
-
 exports.findAdmins = async (req, res) => {
   
     try {

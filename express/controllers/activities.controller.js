@@ -1,12 +1,8 @@
 const db = require("../models");
 const Activity = db.activities;
-// const Comment = db.comments;
-// Create and Save a new Comment into a certain tutorial:
-// use comment.save() to create a new comment document
-// use Tutorial.findByIdAndUpdate() (with the $push operator) to include the new comment
-// reference in the tutorial document
+
+// ? gets all activities
 exports.findAll = async (req, res) => {
-  console.log(await Activity.find());
   try {
     let data = await Activity.find({});
 
@@ -21,48 +17,30 @@ exports.findAll = async (req, res) => {
     });
   }
 };
-// Find a single Tutorial with an id: use Model.findById(), and including its comments
-// exports.findOne = async (req, res) => {
-//   try {
-//     const tutorial = await Tutorial.findById(req.params.idT)
-//       .populate("comments")
-//       .exec();
 
-//     if (tutorial === null)
-//       return res.status(404).json({
-//         success: false,
-//         msg: `Cannot find any tutorial with ID ${req.params.idT}`,
-//       });
-//     return res.json({ success: true, tutorial: tutorial });
-//   } catch (err) {
-//     if (err.name === "CastError") {
-//       return res.status(400).json({
-//         success: false,
-//         msg: "id parameter is not a valid object id",
-//       });
-//     }
-//     return res.status(500).json({
-//       success: false,
-//       msg: `error retrieving tutorial with ID ${req.params.tutorialID}`,
-//     });
-//   }
-// };
-
-// const activities = require("../models/activities.model");
-
-// exports.bodyValidator =
-//   ("/:activityID",
-//   (req, res, next) => {
-//     console.log("bodyValidator");
-//     console.log("Request Type:", req.method);
-
-//     next();
-//   });
-
-// // Display list of all activities
-// exports.findAll = (req, res) => {
-//   res.json(activities);
-// };
+// ? get one activity by id
+exports.findOne = async (req, res) => {
+  try {
+    const activity = await Activity.findById(req.params.activityID);
+    if (activity === null)
+      return res.status(404).json({
+        success: false,
+        msg: `Cannot find any activity with ID ${req.params.activityID}`,
+      });
+    return res.json({ success: true, activity: activity });
+  } catch (err) {
+    if (err.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        msg: "id parameter is not a valid object id",
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      msg: `error retrieving activity with ID ${req.params.activityID}`,
+    });
+  }
+};
 
 // // Display list of all activities of a theme
 // exports.filter = (req, res) => {
@@ -73,11 +51,6 @@ exports.findAll = async (req, res) => {
 //     }
 //   });
 //   res.json(acts);
-// };
-
-// // Display only 1 activity
-// exports.findOne = (req, res) => {
-//   res.json(activities.find((activity) => activity.id == req.params.activityID));
 // };
 
 // // subscribe / unsubscribe activity

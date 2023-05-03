@@ -28,6 +28,6 @@ router.use((req, res, next) => {
   next();
 });
 router.route("/").get(activitiesController.findAll);
-// router.route("/:activityID").get(activitiesController.findOne);
+router.route("/:activityID").get(activitiesController.findOne);
 
 module.exports = router;

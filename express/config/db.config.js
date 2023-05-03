@@ -7,6 +7,6 @@ const config = {
   HOST: process.env.DB_HOST || "atlascluster.wdlmhli.mongodb.net",
 };
 // config.URL = `mongodb+srv://${config.USER}:${config.PASSWORD}.@${config.HOST}/${config.DB}?retryWrites=true&w=majority`;
-config.URL = `mongodb+srv://beatriz:123@atlascluster.wdlmhli.mongodb.net/?retryWrites=true&w=majority`;
+config.URL = `mongodb+srv://beatriz:123@atlascluster.wdlmhli.mongodb.net/Evergreen?retryWrites=true&w=majority`;
 console.log(config.URL);
 module.exports = config;

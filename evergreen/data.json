@@ -1,6 +1,7 @@
 {
   "predefinedUsers": [
     {
+      "id": 1,
       "type": "user",
       "email": "user@gmail.com",
       "username": "user",
@@ -20,6 +21,7 @@
       "council": false
     },
     {
+      "id": 2,
       "type": "user",
       "email": "user2@gmail.com",
       "username": "user2",
@@ -39,6 +41,7 @@
       "council": false
     },
     {
+      "id": 3,
       "type": "admin",
       "email": "admin@gmail.com",
       "username": "admin",
@@ -49,7 +52,6 @@
       "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
     }
   ],
-
 
   "activities": [
     {
@@ -294,7 +296,6 @@
     }
   ],
 
-
   "themes": [
     {
       "id": 0,
@@ -333,7 +334,6 @@
     }
   ],
 
-
   "types": [
     {
       "id": "0",
@@ -364,7 +364,6 @@
       "name": "Outro"
     }
   ],
-
 
   "missions": [
     {
@@ -549,7 +548,6 @@
     }
   ],
 
-
   "typeM": [
     {
       "id": 0,
@@ -593,7 +591,6 @@
     }
   ],
 
-
   "campus": [
     {
       "id": 0,
@@ -608,7 +605,6 @@
       "name": "Campus 3"
     }
   ],
-
 
   "schools": [
     {
@@ -653,7 +649,6 @@
     }
   ],
 
-
   "floors": [
     {
       "id": 0,
@@ -671,7 +666,6 @@
       "idSchools": [0, 1, 3, 5]
     }
   ],
-
 
   "classrooms": [
     {
@@ -718,7 +712,6 @@
     }
   ],
 
-  
   "buildings": [
     {
       "id": 0,

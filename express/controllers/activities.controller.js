@@ -6,14 +6,9 @@ const Activity = db.activities;
 // use Tutorial.findByIdAndUpdate() (with the $push operator) to include the new comment
 // reference in the tutorial document
 exports.findAll = async (req, res) => {
-  let title = req.query.title;
-
-  let condition = title ? { title: new RegExp(title, "i") } : {};
-
+  console.log(await Activity.find());
   try {
-    let data = await Activity.find(condition)
-      .select("title description published")
-      .exec();
+    let data = await Activity.find({});
 
     return res.status(200).json({
       success: true,

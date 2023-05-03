@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const missionsController = require("../controllers/users.controller");
+const usersController = require("../controllers/users.controller");
 
 router.use((req, res, next) => {
   const start = Date.now();
@@ -15,5 +15,7 @@ router.use((req, res, next) => {
   next();
 });
 router.route("/").get(usersController.findAll);
+router.route("/admins").get(usersController.findAdmins);
+router.route("/allusers").get(usersController.findUsers);
 
 module.exports = router;

@@ -6,14 +6,10 @@ const Mission = db.missions;
 // use Tutorial.findByIdAndUpdate() (with the $push operator) to include the new comment
 // reference in the tutorial document
 exports.findAll = async (req, res) => {
-  let title = req.query.title;
-
-  let condition = title ? { title: new RegExp(title, "i") } : {};
+  // let title = req.query.title;
 
   try {
-    let data = await Mission.find(condition)
-      .select("title description published")
-      .exec();
+    let data = await Mission.find({})
 
     return res.status(200).json({
       success: true,

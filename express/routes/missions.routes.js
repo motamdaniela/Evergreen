@@ -15,7 +15,8 @@ router.use((req, res, next) => {
   next();
 });
 router.route("/").get(missionsController.findAll);
-// router.route("/:missionID").get(missionsController.findOne);
+
+router.route("/:missionID").get(missionsController.findOne);
 
 // router.route("/").get(missionsController.findAll);
 // router.route("/:missionID").get(missionsController.findOne);

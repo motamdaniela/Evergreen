@@ -23,18 +23,30 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// const missions = require("../models/missions.model");
-// const users = require("../models/users.model");
+// Display only 1 mission
+exports.findOne = async (req, res) => {
+  // res.json(missions.find((mission) => mission.id == req.params.missionID));
+  try {
+      const mission = await Mission.findById(req.params.missionID)
+      
+      if(mission === null) {
+        return res.status(404).json({
+            success: false,
+            message:`Cannot find mission with id ${req.params.missionID}`
+        })
+      }
+      return res.json({ success: true, mission: mission})
+  }
+  catch(err){
+    if (err.name === "CastError") {
+      return res.status(404).json({
+          success: false, 
+          msg: "Id parameter is not a valid ObjectID"
+      })
+  }
+  }
+};
 
-// // Display list of all missions
-// exports.findAll = (req, res) => {
-//   res.json(missions);
-// };
-
-// // Display only 1 mission
-// exports.findOne = (req, res) => {
-//   res.json(missions.find((mission) => mission.id == req.params.missionID));
-// };
 
 // // receive badge
 // exports.addBadge = (req, res) => {

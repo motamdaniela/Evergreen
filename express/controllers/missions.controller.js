@@ -47,6 +47,38 @@ exports.findOne = async (req, res) => {
   }
 };
 
+// exports.update = async (req, res) => {
+//   try {
+//     const mission = await Mission.findByIdAndUpdate(
+//       req.params.missionID,
+//       req.body,
+//       {
+//           runValidators: true,
+//       }
+//     ).exec()
+    
+//     if(!mission) {
+//       return res.status(404).json({
+//           success: false,
+//           msg: `Cannot update mission with ID ${req.params.missionID}`
+//       })
+//     }
+//     return res.status(200).json({
+//         success: true,
+//         msg: 'mission was updated successfully'
+//     })
+
+//   }
+  
+//   catch(err) {
+//     if (err.name === "CastError" ) {
+//       return res.status(400).json({
+//           success: false,
+//           msg: "Id parameter is not a valid ObjectID"
+//       })
+//     }
+//   }
+// }
 
 // // receive badge
 // exports.addBadge = (req, res) => {

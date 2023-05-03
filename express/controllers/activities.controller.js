@@ -54,17 +54,18 @@ exports.findOne = async (req, res) => {
 exports.subscribe = async (req, res) => {
   try {
     const activity = await Activity.findById(req.params.activityID);
-    const user = await User.findById(req.params.userID);
     if (activity === null)
       return res.status(404).json({
         success: false,
         msg: `Cannot find any activity with ID ${req.params.activityID}`,
       });
-    if (activity.users.find((u) => u == req.params.userID)) {
+
+    if (activity.users.find((id) => id == req.params.userID)) {
       activity.users.splice(activity.users.indexOf(req.params.userID), 1);
     } else {
       activity.users.push(req.params.userID);
     }
+    await activity.save();
     return res.json({ success: true, activity: activity });
   } catch (err) {
     if (err.name === "CastError") {
@@ -79,19 +80,3 @@ exports.subscribe = async (req, res) => {
     });
   }
 };
-
-// // subscribe / unsubscribe activity
-// // user id 0 doesn't work
-// exports.subscribe = (req, res) => {
-//   activities.forEach((activity) => {
-//     if (activity.id == req.params.activityID) {
-//       if (activity.users.find((user) => user == +req.params.userID)) {
-//         activity.users.splice(activity.users.indexOf(+req.params.userID), 1);
-//         res.json(activity);
-//       } else {
-//         activity.users.push(+req.params.userID);
-//         res.json(activity);
-//       }
-//     }
-//   });
-// };

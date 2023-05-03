@@ -18,7 +18,7 @@ router.route("/").get(missionsController.findAll);
 
 router.route("/:missionID")
   .get(missionsController.findOne)
-  .patch(missionsController.update)
+  // .patch(missionsController.update)
 
 
 // router.route("/").get(missionsController.findAll);

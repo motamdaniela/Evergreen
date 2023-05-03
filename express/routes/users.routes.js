@@ -15,6 +15,7 @@ router.use((req, res, next) => {
   next();
 });
 router.route("/").get(usersController.findAll);
+router.route("/:userID").get(usersController.findOne)
 router.route("/admins").get(usersController.findAdmins);
 router.route("/allusers").get(usersController.findUsers);
 

@@ -25,7 +25,7 @@ exports.findAll = async (req, res) => {
 
 // Display only 1 mission
 exports.findOne = async (req, res) => {
-  // res.json(missions.find((mission) => mission.id == req.params.missionID));
+
   try {
       const mission = await Mission.findById(req.params.missionID)
       

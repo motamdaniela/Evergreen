@@ -19,16 +19,18 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-    let userId = req.query.id;
-    let condition = id ? {id: new RegExp(id, '1')} : {};
-  
-    try {
-      let data = await User.find(condition)
-  
-      return res.status(200).json({
-        success: true,
-        users: data,
-      });
+
+    try {  
+      const user = await User.findById(req.params.userID)
+      
+      if(user === null) {
+        return res.status(404).json({
+            success: false,
+            message:`Cannot find mission with id ${req.params.userID}`
+        })
+      }
+      return res.json({ success: true, user: user})
+      
     } catch (err) {
       return res.status(500).json({
         success: false,

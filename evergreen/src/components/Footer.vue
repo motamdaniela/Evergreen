@@ -9,7 +9,7 @@
     "
   >
     <div>
-      <img src="../assets/logored.svg" style="width: 10rem; height: auto" />
+      <img src="../assets/logored.svg" width="150" height="30" alt=""/>
     </div>
     <br />
     <div>

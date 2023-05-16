@@ -10,6 +10,7 @@
   "dependencies": {
     "@vueuse/core": "^9.7.0",
     "pinia": "^2.0.26",
+    "terser": "^5.17.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuetify": "^3.0.1"

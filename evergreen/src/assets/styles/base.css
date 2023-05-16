@@ -17,6 +17,7 @@ body {
   font-family: "Quicksand", sans-serif;
   color: #050b06;
   background-color: #fbf3f1;
+  font-display: swap;
 }
 
 router-link a {

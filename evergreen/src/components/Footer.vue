@@ -1,7 +1,7 @@
 <template>
   <footer v-if="!(this.$route.name == 'login' || this.$route.name == 'signUp'|| this.$route.name == 'Occurrence')">
     <div>
-      <img src="../assets/logored.svg" style="width: 10rem" />
+      <img src="../assets/logored.svg" style="width: 10rem" alt=""/>
     </div>
     <br />
     <div>

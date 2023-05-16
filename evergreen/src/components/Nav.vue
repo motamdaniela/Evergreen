@@ -98,6 +98,7 @@
             style="margin-right: 500px; margin-top: 30px"
             src="src/assets/logored.svg"
             id="logo"
+            alt=""
         /></RouterLink>
         <RouterLink v-else to="/Home"
           ><img
@@ -106,6 +107,7 @@
             height="25"
             src="src/assets/logored.svg"
             id="logo"
+            alt=""
         /></RouterLink>
       </v-app-bar-title>
 
@@ -144,7 +146,7 @@
           />
         </button>
         <RouterLink v-else to="/Profile" class="navbtn">
-          <img :src="this.user.photo" id="profilePhoto" />
+          <img :src="this.user.photo" id="profilePhoto" alt=""/>
         </RouterLink>
       </nav>
       <nav v-if="isLogged && this.user.type == 'admin'">
@@ -166,7 +168,7 @@
         id="ddmenu"
         @click.stop="drawer = !drawer"
       >
-        <img style="width: 30px" src="/src/assets/icons/icones/menu.svg" />
+        <img style="width: 30px" src="/src/assets/icons/icones/menu.svg" alt=""/>
       </v-app-bar-nav-icon>
     </v-app-bar>
 

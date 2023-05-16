@@ -17,6 +17,7 @@ body {
   font-family: "Quicksand", sans-serif;
   color: #050b06;
   background-color: #fbf3f1;
+  font-display: swap;
 }
 
 router-link a {
@@ -39,6 +40,7 @@ a {
   src: url("../gliker/gliker-bold.woff2") format("woff2"),
     url("../gliker/gliker-bold.woff") format("woff"),
     url("../gliker/gliker-bold.ttf") format("truetype");
+  font-display: swap;
 }
 
 #login:hover,

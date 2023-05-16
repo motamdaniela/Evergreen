@@ -102,6 +102,8 @@
         <RouterLink v-else to="/Home"
           ><img
             style="margin-right: 250px; margin-top: 30px"
+            width="25"
+            height="25"
             src="src/assets/logored.svg"
             id="logo"
         /></RouterLink>
@@ -119,11 +121,11 @@
         </button>
       </nav>
       <nav class="longNav" v-if="isLogged && this.user.type == 'user'">
-        <RouterLink  class="homeLink" to="/Home">Página principal</RouterLink>
-        <RouterLink  class="actLink" to="/Activities">Atividades</RouterLink>
-        <RouterLink  class="ocLink" to="/Occurrence">Ocorrências</RouterLink>
-        <RouterLink  class="formLink" to="/Form">Questionário</RouterLink>
-        <RouterLink  class="missionsLink" to="/Missions"
+        <RouterLink class="homeLink" to="/Home">Página principal</RouterLink>
+        <RouterLink class="actLink" to="/Activities">Atividades</RouterLink>
+        <RouterLink class="ocLink" to="/Occurrence">Ocorrências</RouterLink>
+        <RouterLink class="formLink" to="/Form">Questionário</RouterLink>
+        <RouterLink class="missionsLink" to="/Missions"
           >Missões<v-badge
             v-if="updateNotifs"
             dot
@@ -132,7 +134,7 @@
             color="success"
           ></v-badge
         ></RouterLink>
-        <RouterLink  class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
+        <RouterLink class="aboutLink" to="/sobre">Sobre Eco-Escolas</RouterLink>
         <RouterLink class="faqLink" to="/faq">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut">
           <img
@@ -168,11 +170,7 @@
       </v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      location="right"
-      temporary
-    >
+    <v-navigation-drawer v-model="drawer" location="right" temporary>
       <v-list v-if="!isLogged">
         <RouterLink class="drawerLink" to="/"
           ><v-list-item title="Início"></v-list-item

@@ -6,6 +6,12 @@
         id="imgTop"
         src="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
       />
+      <link
+        id="imgTop"
+        rel="preload"
+        as="image"
+        href="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+      />
       <div>
         <h2 class="gradientGreen padding title">
           <span>Atividades Próximas</span>
@@ -206,11 +212,8 @@
       </div>
     </div>
     <RouterLink to="/Rank">
-    <button class="btn-page btnPk">
-      Ver todos
-    </button>
+      <button class="btn-page btnPk">Ver todos</button>
     </RouterLink>
-   
 
     <br /><br />
     <h1 class="gradientRed padding title">
@@ -268,6 +271,8 @@
           <img
             id="imgQstn"
             class="image"
+            width="5"
+            height="50"
             src="https://cdn.pixabay.com/photo/2018/03/23/22/06/question-mark-3255118_960_720.jpg"
           />
         </v-col>

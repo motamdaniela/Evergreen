@@ -231,6 +231,7 @@
 
 #imgQstn {
   width: 100%;
+  height: auto;
 }
 
 /* ranking */
@@ -318,51 +319,50 @@
   margin: 40px 15px;
 }
 
-@media screen and (max-width: 1000px){
-  .group{
+@media screen and (max-width: 1000px) {
+  .group {
     margin: 0px;
   }
-  .card{
+  .card {
     margin-left: 0px;
   }
-  .board{
+  .board {
     width: 90%;
-    margin-left: 5%; 
+    margin-left: 5%;
     padding: 15px;
   }
-  .board>p{
+  .board > p {
     font-size: 11px;
   }
-  p{
+  p {
     font-size: 1.6vw;
   }
-  #divTop{
+  #divTop {
     display: flex;
     flex-direction: column;
-    justify-content: space-around; 
+    justify-content: space-around;
     margin-right: auto;
     margin-left: auto;
   }
 
-  .title{
+  .title {
     font-size: 4vw;
   }
-  .boardTop{
+  .boardTop {
     width: 95%;
     margin-right: auto;
     margin-left: auto;
   }
-  #imgTop{
+  #imgTop {
     width: 100%;
   }
 
-  .listSug{
+  .listSug {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
   }
-  .itemR{
+  .itemR {
     margin-bottom: 20px;
   }
-
 }

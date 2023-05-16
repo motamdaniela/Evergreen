@@ -354,23 +354,9 @@ export default {
       } else if (this.newAdmin.username.length < 3) {
         alert("Nome de utilizador tem de ter no mínimo 3 caracteres.");
       } else {
-        if (
-          this.newAdmin.type &&
-          this.newAdmin.name &&
-          this.newAdmin.email &&
-          this.newAdmin.username &&
-          this.newAdmin.password &&
-          this.newAdmin.passConf
-        ) {
+        if (this.newAdmin.type && this.newAdmin.name && this.newAdmin.email && this.newAdmin.username && this.newAdmin.password && this.newAdmin.passConf) {
           this.dialogAdd = false;
-          this.usersStore.newAdmin(
-            this.newAdmin.type,
-            this.newAdmin.name,
-            this.newAdmin.email,
-            this.newAdmin.username,
-            this.newAdmin.password,
-            this.newAdmin.passConf
-          );
+          this.usersStore.newAdmin( this.newAdmin.type, this.newAdmin.name, this.newAdmin.email, this.newAdmin.username, this.newAdmin.password, this.newAdmin.passConf);
           this.newAdmin.type = "";
           this.newAdmin.name = "";
           this.newAdmin.email = "";
@@ -380,26 +366,7 @@ export default {
         }
       }
     },
-    // updateNotifs() {
-    //   missionsStore.missions.users.forEach((user) => {
-    //     if(user[2] = "Concluída" || !(user.rewards.includes(mission.reward))){
-    //       notifs = true;
-    //     } else {
-    //       notifs = false;
-    //     }
-    //   })
-
-    // }
   },
-
-  // computed: {
-  //   onScroll(e) {
-  //     this.offsetTop = e.target.scrollTop;
-  //     if (this.offsetTop > 0) {
-  //       this.collapse = true;
-  //     }
-  //   },
-  // },
 };
 </script>
 

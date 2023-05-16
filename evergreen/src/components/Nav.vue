@@ -96,6 +96,8 @@
         <RouterLink v-if="!isLogged" to="/"
           ><img
             style="margin-right: 500px; margin-top: 30px"
+            width="25"
+            height="25"
             src="src/assets/logored.svg"
             id="logo"
         /></RouterLink>

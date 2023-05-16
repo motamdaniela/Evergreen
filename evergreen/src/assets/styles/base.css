@@ -17,6 +17,7 @@ body {
   font-family: "Quicksand", sans-serif;
   color: #050b06;
   background-color: #fbf3f1;
+  font-display: swap;
 }
 
 router-link a {
@@ -39,6 +40,7 @@ a {
   src: url("../gliker/gliker-bold.woff2") format("woff2"),
     url("../gliker/gliker-bold.woff") format("woff"),
     url("../gliker/gliker-bold.ttf") format("truetype");
+  font-display: swap;
 }
 
 #login:hover,
@@ -113,25 +115,25 @@ a {
 }
 /* buttona active */
 .btnP:active {
-  background-color: #D4C7F0;
+  background-color: #d4c7f0;
 }
 .btnG:active {
-  background-color: #91C99D;
+  background-color: #91c99d;
 }
 .btnR:active {
-  background-color: #F09583;
+  background-color: #f09583;
 }
 .btnY:active {
-  background-color: #F0BC75;
+  background-color: #f0bc75;
 }
 .btnPk:active {
-  background-color: #EFC6CD;
+  background-color: #efc6cd;
 }
 .btnPklight:active {
-  background-color: #F4D8DD;
+  background-color: #f4d8dd;
 }
 .btnB:active {
-  background-color: #C0E0C7;
+  background-color: #c0e0c7;
 }
 
 /* fieldsets */
@@ -348,8 +350,8 @@ footer {
   display: none;
 }
 
-@media screen and (max-width: 1000px){
-  .btn-page{
+@media screen and (max-width: 1000px) {
+  .btn-page {
     width: 130px;
     height: 50px;
     font-size: 13px;

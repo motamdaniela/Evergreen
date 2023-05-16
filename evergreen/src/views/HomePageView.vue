@@ -7,7 +7,6 @@
         src="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
       />
       <link
-        id="imgTop"
         rel="preload"
         as="image"
         href="https://images.unsplash.com/photo-1624347537322-cbcd453c2032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
@@ -306,7 +305,10 @@
   </div>
   <div id="divBtnUp">
     <button class="btnUp" @click.native="scrollToTop">
-      <img style="width: 50px" src="../assets/icons/icones/up.svg" />
+      <img
+        style="width: 50px; height: 50px"
+        src="../assets/icons/icones/up.svg"
+      />
     </button>
   </div>
 </template>
@@ -341,12 +343,10 @@ export default {
     };
   },
   created() {
-    this.user = this.userStore.getUsers.find(
-      (user) => user.email == this.logged
-    );
-    this.themes = this.activityStore.getThemes;
-    let today = new Date();
-    let yesterday = new Date(today);
+    (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
+      (this.themes = this.activityStore.getThemes);
+    let today = new Date(),
+      yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     let yesterdayDate = +(
       yesterday.getFullYear() +
@@ -354,143 +354,109 @@ export default {
       ((yesterday.getMonth() + 1).toString().length < 2
         ? "0" + (yesterday.getMonth() + 1)
         : yesterday.getMonth() + 1) +
-      "" +
       (yesterday.getDate().toString().length < 2
         ? "0" + yesterday.getDate()
         : yesterday.getDate())
     );
-    if (this.user.received == false) {
-      console.log(1);
-      if (this.user.previousLoginDate == yesterdayDate) {
-        if (this.user.streak == 1) {
-          this.loginPoints = 1;
-        } else if (this.user.streak == 2) {
-          this.loginPoints = 3;
-        } else if (this.user.streak == 3) {
-          this.loginPoints = 5;
-        } else if (this.user.streak == 4) {
-          this.loginPoints = 8;
-        } else if (this.user.streak == 5) {
-          this.loginPoints = 10;
-        } else if (this.user.streak == 6) {
-          this.loginPoints = 15;
-        } else if (this.user.streak == 7) {
-          this.loginPoints = 20;
-        }
-        this.loginClass = "login" + this.user.streak;
-        this.loginReward = true;
-        // this.user.streak+=1
-      } else if (this.user.previousLoginDate < this.user.loginDate) {
-        this.loginPoints = 1;
-        this.user.streak = 1;
-        this.loginClass = "login" + this.user.streak;
-        this.loginReward = true;
-        console.log(1);
-        // this.user.streak=1
-        // logged.points+=1
-      }
-    }
+    0 == this.user.received &&
+      (console.log(1),
+      this.user.previousLoginDate == yesterdayDate
+        ? (1 == this.user.streak
+            ? (this.loginPoints = 1)
+            : 2 == this.user.streak
+            ? (this.loginPoints = 3)
+            : 3 == this.user.streak
+            ? (this.loginPoints = 5)
+            : 4 == this.user.streak
+            ? (this.loginPoints = 8)
+            : 5 == this.user.streak
+            ? (this.loginPoints = 10)
+            : 6 == this.user.streak
+            ? (this.loginPoints = 15)
+            : 7 == this.user.streak && (this.loginPoints = 20),
+          (this.loginClass = "login" + this.user.streak),
+          (this.loginReward = !0))
+        : this.user.previousLoginDate < this.user.loginDate &&
+          ((this.loginPoints = 1),
+          (this.user.streak = 1),
+          (this.loginClass = "login" + this.user.streak),
+          (this.loginReward = !0),
+          console.log(1)));
   },
   updated() {
     let activities = this.activityStore.getActivities;
-    activities.forEach((activity) => {
-      activity.users.forEach((user) => {
-        if (user == this.logged) {
-          if (!this.activitiesSub.find((act) => act.id == activity.id)) {
-            this.activitiesSub.push(activity);
-          }
-        }
+    activities.forEach((s) => {
+      s.users.forEach((i) => {
+        i == this.logged &&
+          (this.activitiesSub.find((i) => i.id == s.id) ||
+            this.activitiesSub.push(s));
       });
-    });
-    this.activitiesSub.forEach((act) => {
-      if (!act.users.find((user) => user == this.logged)) {
-        let index = this.activitiesSub.indexOf(act);
-        this.activitiesSub.splice(index, 1);
-      }
-    });
-    this.users = this.userStore.getTop3;
-    this.missionStore.completeMission(this.logged, 1);
-    this.missionStore.completeMission(this.logged, 2);
-    this.missionStore.completeMission(this.logged, 3);
-    this.missionStore.completeMission(this.logged, 4);
-    this.missionStore.completeMission(this.logged, 5);
-    // this.missionStore.completeMission(this.logged, 6);
-    // this.missionStore.completeMission(this.logged, 7);
-    this.missionStore.completeMission(this.logged, 8);
-    this.missionStore.completeMission(this.logged, 9);
-    console.log();
-    this.activitiesSug = this.activityStore.getActivitySuggestions;
-
-    // shows the 5 activities that are closest to todays date
-    this.activitiesSub.forEach((act) => {
-      if (
+    }),
+      this.activitiesSub.forEach((i) => {
+        i.users.find((i) => i == this.logged) ||
+          ((i = this.activitiesSub.indexOf(i)),
+          this.activitiesSub.splice(i, 1));
+      }),
+      (this.users = this.userStore.getTop3),
+      this.missionStore.completeMission(this.logged, 1),
+      this.missionStore.completeMission(this.logged, 2),
+      this.missionStore.completeMission(this.logged, 3),
+      this.missionStore.completeMission(this.logged, 4),
+      this.missionStore.completeMission(this.logged, 5),
+      this.missionStore.completeMission(this.logged, 8),
+      this.missionStore.completeMission(this.logged, 9),
+      console.log(),
+      (this.activitiesSug = this.activityStore.getActivitySuggestions),
+      this.activitiesSub.forEach((t) => {
         this.closeActivities.length < 5 &&
-        +act.begin > this.user.loginDate &&
-        !this.closeActivities.find((a) => a.id == act.id)
-      ) {
-        console.log(6);
-        this.closeActivities.push(act);
-      } else {
-        this.closeActivities.forEach((a) => {
-          if (
-            +a.begin > +act.begin &&
-            +a.begin > this.user.loginDate &&
-            !this.closeActivities.find((ac) => a.id == ac.id)
-          ) {
-            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
-            this.closeActivities.push(a);
-          }
-        });
-      }
-    });
-    this.activitiesSub.forEach((act) => {
-      if (
-        +act.begin <= this.user.loginDate &&
-        +act.end >= this.user.loginDate &&
-        !this.activitiesNow.find((a) => a.id == act.id)
-      ) {
-        this.activitiesNow.push(act);
-      }
-    });
+        +t.begin > this.user.loginDate &&
+        !this.closeActivities.find((i) => i.id == t.id)
+          ? (console.log(6), this.closeActivities.push(t))
+          : this.closeActivities.forEach((s) => {
+              +s.begin > +t.begin &&
+                +s.begin > this.user.loginDate &&
+                !this.closeActivities.find((i) => s.id == i.id) &&
+                (this.closeActivities.splice(
+                  this.closeActivities.indexOf(t),
+                  1
+                ),
+                this.closeActivities.push(s));
+            });
+      }),
+      this.activitiesSub.forEach((s) => {
+        +s.begin <= this.user.loginDate &&
+          +s.end >= this.user.loginDate &&
+          !this.activitiesNow.find((i) => i.id == s.id) &&
+          this.activitiesNow.push(s);
+      });
   },
   methods: {
     receive() {
-      this.user.points += this.loginPoints;
-      this.loginReward = false;
-      this.user.received = true;
-      this.missionStore.completeMission(this.logged, 6);
-      if (this.user.streak == 7) {
-        this.user.streak = 0;
-      }
+      (this.user.points += this.loginPoints),
+        (this.loginReward = !1),
+        (this.user.received = !0),
+        this.missionStore.completeMission(this.logged, 6),
+        7 == this.user.streak && (this.user.streak = 0);
     },
     subscribe(activity) {
-      console.log(activity);
-      this.activityStore.updateUsers(this.logged, activity.id);
-      this.missionStore.completeMission(this.logged, 0);
+      console.log(activity),
+        this.activityStore.updateUsers(this.logged, activity.id),
+        this.missionStore.completeMission(this.logged, 0);
     },
     unsubscribe(activity) {
-      activity.users = activity.users.filter((e) => e != this.logged);
+      activity.users = activity.users.filter((i) => i != this.logged);
       // this.activitiesSub
     },
-    changeBtn(activity) {
-      let u = activity.users.find((user) => user == this.logged);
-      if (u) {
-        return true;
-      } else {
-        return false;
-      }
+    changeBtn(n) {
+      return !!n.users.find((n) => n == this.logged);
     },
     SubConselho() {
-      this.user = this.userStore.getUsers.find(
-        (user) => user.email == this.logged
-      );
-      if (this.user.council) {
-        this.user.council = false;
-      } else {
-        this.user.council = true;
-        this.missionStore.completeMission(this.logged, 4);
-      }
-      this.userStore.edit(JSON.stringify(this.user));
+      (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),
+        this.user.council
+          ? (this.user.council = !1)
+          : ((this.user.council = !0),
+            this.missionStore.completeMission(this.logged, 4)),
+        this.userStore.edit(JSON.stringify(this.user));
     },
     scrollToTop() {
       window.scrollTo(0, 0);

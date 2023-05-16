@@ -439,144 +439,36 @@ export default {
     };
   },
   created() {
-    let users = this.userStore.getUsers;
-    users.forEach((u) => {
-      if (u.email == this.logged) {
-        this.user = u;
-      }
-    });
-    let list = [];
-    users.forEach((user) => {
-      if (user.type == "user") {
-        list.push(user);
-      }
-    });
-    this.users=list;
-    
-    this.users.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
+    let users=this.userStore.getUsers;users.forEach(s=>{s.email==this.logged&&(this.user=s)});let list=[];users.forEach(s=>{"user"==s.type&&list.push(s)}),this.users=list,this.users.sort((s,e)=>e.points-s.points||e.activities-s.activities||e.occurences-s.occurences);
     
 
   },
   updated() {
-    this.activities = this.activityStore.getActivities;
-    this.activities.forEach((activity) => {
-      activity.users.forEach((user) => {
-        if (user == this.logged) {
-          if (!this.activitiesSub.find((act) => act.id == activity.id)) {
-            this.activitiesSub.push(activity);
-          }
-        }
-      });
-    });
-
-    this.activitiesSub.forEach((act) => {
-      if (!act.users.find((user) => user == this.logged)) {
-        let index = this.activitiesSub.indexOf(act);
-        this.activitiesSub.splice(index, 1);
-      }
-    });
-    
-    this.ocsDone = [];
-    this.ocsPend = [];
-    this.occurences = this.occurrenceStore.getOccurrences;
-    let userOcs = this.occurences.filter(
-      (Occurence) => Occurence.user == this.logged
-    );
-
-    userOcs.forEach((oc) => {
-      if (oc.state == "pending") {
-        this.ocsPend.push(oc);
-      } else if (oc.state == "solved") {
-        this.ocsDone.push(oc);
-      }
-    });
-
-    this.filteredActivities= this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
+    this.activities=this.activityStore.getActivities,this.activities.forEach(t=>{t.users.forEach(i=>{i==this.logged&&(this.activitiesSub.find(i=>i.id==t.id)||this.activitiesSub.push(t))})}),this.activitiesSub.forEach(i=>{i.users.find(i=>i==this.logged)||(i=this.activitiesSub.indexOf(i),this.activitiesSub.splice(i,1))}),this.ocsDone=[],this.ocsPend=[],this.occurences=this.occurrenceStore.getOccurrences;let userOcs=this.occurences.filter(i=>i.user==this.logged);userOcs.forEach(i=>{"pending"==i.state?this.ocsPend.push(i):"solved"==i.state&&this.ocsDone.push(i)}),this.filteredActivities=this.activities.filter(i=>i.coordinator==this.userStore.getLogged);
 
   },
   methods: {
     EditPhoto() {
-      
-      if(this.form.newPhoto){
-
-        this.user.photo=this.form.newPhoto;
-        this.editProfile = false;
-        this.missionStore.completeMission(this.logged, 7);
-        this.form.newPhoto=""
-      }
+      this.form.newPhoto&&(this.user.photo=this.form.newPhoto,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPhoto="");
     },
     EditUser() {
-      if (this.form.newUsername.indexOf(" ") != -1) {
-        this.warning = "Nome de utilizador não pode conter espaços.";
-        this.error = "";
-      } else if (this.form.newUsername.length < 3) {
-        this.warning = "Nome de utilizador tem de ter no mínimo 3 caracteres.";
-        this.error = "";
-      }else{
-
-        if(this.form.newUsername){
-          if(!this.userStore.getUsers.find(user=>user.username==this.form.newUsername)){
-  
-            this.user.username = this.form.newUsername;
-            this.editProfile = false;
-            this.missionStore.completeMission(this.logged, 7);
-            this.form.newUsername=""
-          }else{
-            this.error = "Este username já existe!";
-            this.warning = "";
-          }
-        }
-      }
+      -1!=this.form.newUsername.indexOf(" ")?(this.warning="Nome de utilizador não pode conter espaços.",this.error=""):this.form.newUsername.length<3?(this.warning="Nome de utilizador tem de ter no mínimo 3 caracteres.",this.error=""):this.form.newUsername&&(this.userStore.getUsers.find(e=>e.username==this.form.newUsername)?(this.error="Este username já existe!",this.warning=""):(this.user.username=this.form.newUsername,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newUsername=""));
     },
     EditPass() {
-      if (this.form.newPassword.indexOf(" ") != -1) {
-        this.warning = "Palavra-passe não pode conter espaços.";
-        this.error = "";
-      }else if (this.form.newPassword.length < 8) {
-        this.warning = "Palavra-passe tem de ter no mínimo 8 caracteres.";
-        this.error = "";
-      } else {
-
-        if(this.form.newPassword && this.form.newPasswordConf){
-  
-          if(this.form.newPassword==this.form.newPasswordConf){
-    
-             this.user.password = this.form.newPassword;
-             this.editProfile = false;
-             this.missionStore.completeMission(this.logged, 7);
-             this.form.newPassword=this.form.newPasswordConf=""
-          }else{
-            this.error = "Confirme que a palavra-passe coincide.";
-            this.warning = "";
-          }
-        }
-      }
+      -1!=this.form.newPassword.indexOf(" ")?(this.warning="Palavra-passe não pode conter espaços.",this.error=""):this.form.newPassword.length<8?(this.warning="Palavra-passe tem de ter no mínimo 8 caracteres.",this.error=""):this.form.newPassword&&this.form.newPasswordConf&&(this.form.newPassword==this.form.newPasswordConf?(this.user.password=this.form.newPassword,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPassword=this.form.newPasswordConf=""):(this.error="Confirme que a palavra-passe coincide.",this.warning=""));
     },
     subscribe(activity) {
-      console.log(activity);
-      this.activityStore.updateUsers(this.logged, activity.id);
-      this.missionStore.completeMission(this.logged, 0);
+      console.log(activity),this.activityStore.updateUsers(this.logged,activity.id),this.missionStore.completeMission(this.logged,0);
     },
     unsubscribe(activity) {
-      activity.users = activity.users.filter((e) => e != this.logged);
+      activity.users=activity.users.filter(i=>i!=this.logged);
       // this.activitiesSub
     },
-    changeBtn(activity) {
-      let u = activity.users.find((user) => user == this.logged);
-      if (u) {
-        return true;
-      } else {
-        return false;
-      }
+    changeBtn(n) {
+      return!!n.users.find(n=>n==this.logged)
     },
     previewFiles(e) {
-      const files = e.target.files;
-      if (!files.length) return;
-
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      reader.onload = () => (this.form.newPhoto = reader.result);
-      console.log(this.user.photo);
+      e=e.target.files;if(e.length){const o=new FileReader;o.readAsDataURL(e[0]),o.onload=()=>this.form.newPhoto=o.result,console.log(this.user.photo)}
     },
   },
   // computed: {

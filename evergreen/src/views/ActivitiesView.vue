@@ -3,10 +3,9 @@
     <v-dialog v-model="suggestion">
       <div class="fieldP modal sugModal">
         <button class="btnRound btnP" @click="suggestion = false">
-          <img style="width: 15px" src="../assets/icons/icones/close.svg" />
+          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
         </button>
 
-        <!-- <h1 id="modTitle">Sugerir Atividade</h1> -->
         <form @submit.prevent="onSubmit">
           <br />
           <div id="sugCont">
@@ -129,33 +128,8 @@
     </v-dialog>
 
     <h1 class="title">
-      <img src="../assets/images/flowerP.svg" />Plano de Atividades
+      <img src="../assets/images/flowerP.svg" alt=""/>Plano de Atividades
     </h1>
-
-    <!-- <button class="btn-card btnP" @click="openFilter = true">Filtrar</button>
-    <v-dialog v-model="openFilter">
-      <div class="fieldP filterModal">
-        <button
-          class="btn-page btnP"
-          @click="
-            openFilter = false;
-            selectedThemes();
-          "
-        >
-          x
-        </button>
-        <v-checkbox
-          v-for="theme in themes"
-          v-model="themesPicked"
-          :label="theme.name"
-          :color="theme.color"
-          :value="theme.id"
-          density="compact"
-          hide-details
-        >
-        </v-checkbox>
-      </div>
-    </v-dialog> -->
 
     <v-menu>
       <template v-slot:activator="{ props }">
@@ -165,7 +139,6 @@
       </template>
 
       <v-list id="menu">
-        <!-- <v-list-item v-for="(theme, index) in themes" :key="index"> -->
         <v-checkbox
           v-for="theme in themes"
           v-model="themesPicked"
@@ -176,21 +149,8 @@
           hide-details
           >{{ FilterThemes }}
         </v-checkbox>
-        <!-- </v-list-item> -->
       </v-list>
     </v-menu>
-
-    <!-- <v-select
-    v-model="themesPicked"
-    :items="themeNames"
-    label="Select"
-    multiple
-  >
-      <v-list-item
-          value="title"
-          disabled
-        ></v-list-item>
-</v-select> -->
 
     <button class="btn-page btnP btns" @click="suggestion = true">
       Sugerir Atividades
@@ -212,6 +172,12 @@
             cover
           >
           </v-img>
+          <link
+            class="image"
+            rel="preload"
+            as="image"
+            :href="activity.photo"
+          />
 
           <div class="cardText">
             <v-card-title>

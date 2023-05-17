@@ -98,7 +98,7 @@
             style="margin-right: 500px; margin-top: 30px"
             width="25"
             height="25"
-            src="src/assets/logored.svg"
+            src="/src/assets/logored.svg"
             id="logo"
             alt=""
         /></RouterLink>
@@ -107,7 +107,7 @@
             style="margin-right: 250px; margin-top: 30px"
             width="25"
             height="25"
-            src="src/assets/logored.svg"
+            src="/src/assets/logored.svg"
             id="logo"
             alt=""
         /></RouterLink>
@@ -144,7 +144,7 @@
           <img
             class="logoutbtn"
             style="width: 30px; height: 25px"
-            src="src/assets/icons/icones/logout.svg"
+            src="/src/assets/icons/icones/logout.svg"
           />
         </button>
         <RouterLink v-else to="/Profile" class="navbtn">
@@ -153,15 +153,15 @@
       </nav>
       <nav v-if="isLogged && this.user.type == 'admin'">
         <button @click="dialogAdd = true" class="addbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/addUser.svg" />
         </button>
         <button @click="logOut" class="navbtn logoutbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
       <nav v-if="isLogged && this.user.type == 'security'">
         <button @click="logOut" class="navbtn logoutbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" />
         </button>
       </nav>
 
@@ -228,7 +228,7 @@
           <img
             class="logoutbtn"
             style="width: 30px; height: 25px"
-            src="src/assets/icons/icones/logout.svg"
+            src="/src/assets/icons/icones/logout.svg"
           />
         </button>
         <RouterLink v-else to="/Profile" class="drawerLink">
@@ -238,15 +238,15 @@
 
       <v-list v-if="isLogged && this.user.type == 'admin'">
         <button @click="dialogAdd = true" class="addbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/addUser.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/addUser.svg" />
         </button>
         <button @click="logOut" class="navbtn logoutbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" />
         </button>
       </v-list>
       <v-list v-if="isLogged && this.user.type == 'security'">
         <button @click="logOut" class="navbtn logoutbtn">
-          <img style="width: 30px" src="src/assets/icons/icones/logout.svg" />
+          <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" />
         </button>
       </v-list>
     </v-navigation-drawer>

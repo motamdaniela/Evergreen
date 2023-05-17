@@ -336,7 +336,7 @@
       </v-col>
       <v-col class="colSide" style="margin-top:4%;">
         <v-row id="ptsnBtn">
-          <p id="pontos"><img id="ptsImg" src="src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
+          <p id="pontos"><img id="ptsImg" src="/src/assets/icons/icones/coins.svg"/>{{ user.points }} pontos</p>
           <br>
         </v-row>
         <v-row id="editIcon">

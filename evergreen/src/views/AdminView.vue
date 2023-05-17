@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-center flex-row">
     <div class="carddiv">
-      <img class="icon" src="src/assets/images/faqYellow.svg" />
+      <img class="icon" src="/src/assets/images/faqYellow.svg" />
       <v-card class="cardY">
         <RouterLink to="/Users"
           ><h2 class="linkUsers"><span>Utilizadores</span></h2></RouterLink
@@ -10,7 +10,7 @@
     </div>
 
     <div class="carddiv">
-      <img class="icon" src="src/assets/images/faqPurple.svg" />
+      <img class="icon" src="/src/assets/images/faqPurple.svg" />
       <v-card class="cardP">
         <RouterLink to="/ActivitiesList"
           ><h2 class="linkActs"><span>Atividades</span></h2></RouterLink
@@ -19,7 +19,7 @@
     </div>
 
     <div class="carddiv">
-      <img class="icon" src="src/assets/images/faqRed.svg" />
+      <img class="icon" src="/src/assets/images/faqRed.svg" />
       <v-card class="cardR">
         <RouterLink to="/Occurences"
           ><h2 class="linkOcs"><span>Ocorrências</span></h2></RouterLink

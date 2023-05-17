@@ -17,19 +17,19 @@
           <!-- local -->
           <div class="tabs">
             <div>
-              <img src="../assets/images/icone_local.svg" class="img" /><br />
+              <img src="../assets/images/icone_local.svg" class="img" alt="" /><br />
               <label class="tabO" id="lblY">Local</label>
             </div>
             <div>
-              <img src="../assets/images/tipo_bw.svg" class="img" /><br />
+              <img src="../assets/images/tipo_bw.svg" class="img" alt=""/><br />
               <label class="tabO">Tipo</label>
             </div>
             <div>
-              <img src="../assets/images/descricao_bw.svg" class="img" /><br />
+              <img src="../assets/images/descricao_bw.svg" class="img" alt=""/><br />
               <label class="tabO">Descrição</label>
             </div>
             <div>
-              <img src="../assets/images/foto_bw.svg" class="img" /><br />
+              <img src="../assets/images/foto_bw.svg" class="img" alt=""/><br />
               <label class="tabO">Foto</label>
             </div>
           </div>
@@ -41,6 +41,7 @@
                 v-model="form.campus"
                 class="input"
                 @change="changeCamp"
+                name=""
                 required
               >
                 <option v-for="camp in campus">
@@ -55,6 +56,7 @@
                 v-model="form.school"
                 class="input"
                 @change="changeSchool"
+                name=""
                 required
               >
                 <option v-for="school in schools">{{ school.name }}</option>
@@ -67,6 +69,7 @@
                 v-model="form.building"
                 class="input"
                 @change="changeBuilding"
+                name=""
                 required
               >
                 <option v-for="building in buildings">
@@ -81,6 +84,7 @@
                 v-model="form.floor"
                 class="input"
                 @change="changeFloor"
+                name=""
                 required
               >
                 <option v-for="floor in floors">
@@ -91,7 +95,7 @@
 
             <div>
               <label class="semiTitle">Sala:</label><br />
-              <select v-model="form.classroom" class="input" required>
+              <select v-model="form.classroom" class="input" name="" required>
                 <option v-for="classroom in classrooms">
                   {{ classroom.id }}
                 </option>
@@ -144,6 +148,7 @@
               id="outro"
               placeholder="Outro"
               type="text"
+              name=""
               v-model="form.other"
               required
               disabled

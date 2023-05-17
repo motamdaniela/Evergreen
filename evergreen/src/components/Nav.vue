@@ -176,7 +176,7 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" location="right" temporary>
-      <v-list v-if="!isLogged">
+      <v-list v-if="!isLogged" role="">
         <RouterLink class="drawerLink" to="/"
           ><v-list-item title="Início"></v-list-item
         ></RouterLink>
@@ -195,7 +195,7 @@
           ><v-list-item title="Registar"></v-list-item
         ></RouterLink>
       </v-list>
-      <v-list v-if="isLogged && this.user.type == 'user'">
+      <v-list v-if="isLogged && this.user.type == 'user'" role="">
         <RouterLink class="drawerLink" to="/Home"
           ><v-list-item title="Página Principal"></v-list-item
         ></RouterLink>
@@ -234,11 +234,11 @@
           />
         </button>
         <RouterLink v-else to="/Profile" class="drawerLink" name="">
-          <v-list-item title="Perfil"></v-list-item>
+          <v-list-item title="Perfil" ></v-list-item>
         </RouterLink>
       </v-list>
 
-      <v-list v-if="isLogged && this.user.type == 'admin'">
+      <v-list v-if="isLogged && this.user.type == 'admin'" role="">
         <button @click="dialogAdd = true" class="addbtn">
           <img style="width: 30px" src="/src/assets/icons/icones/addUser.svg" alt=""/>
         </button>
@@ -246,7 +246,7 @@
           <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" alt=""/>
         </button>
       </v-list>
-      <v-list v-if="isLogged && this.user.type == 'security'">
+      <v-list v-if="isLogged && this.user.type == 'security'" role="">
         <button @click="logOut" class="navbtn logoutbtn">
           <img style="width: 30px" src="/src/assets/icons/icones/logout.svg" alt=""/>
         </button>

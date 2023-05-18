@@ -164,14 +164,15 @@
           max-width="400"
           v-if="+activity.end > +this.userObj.loginDate"
         >
-          <v-img
-            class="image"
-            :src="activity.photo"
+          <img
+            class="Sirv image "
+            :data-src="activity.photo"
             height="219"
             width="380"
+            alt=""
             cover
-          >
-          </v-img>
+          />
+          <!-- </v-img> -->
           <link
             class="image"
             rel="preload"
@@ -207,14 +208,15 @@
           </div>
         </v-card>
         <v-card class="mx-auto card gray" max-width="400" v-else>
-          <v-img
-            class="image imgGray"
-            :src="activity.photo"
+          <img
+            class="Sirv image imgGray"
+            :data-src="activity.photo"
             height="219"
             width="380"
+            alt=""
             cover
-          >
-          </v-img>
+          />
+          <!-- </img> -->
 
           <div class="cardText">
             <v-card-title>

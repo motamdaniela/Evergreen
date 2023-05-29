@@ -103,7 +103,7 @@ export const useTestStore = defineStore("userTest", {
               console.log('not ok')
               console.log("STORE - fetch ALL USERS error", response)
               // console.log(response)
-              throw Error(handleResponses(response.status));
+              // throw Error(handleResponses(response.status));
           }     
       },
 
@@ -123,6 +123,32 @@ export const useTestStore = defineStore("userTest", {
         return message;
     },
       //!
+
+      //! login action from database
+      async loginTest(username, password) { // payload = user (username + password)
+        const response = await fetch(`${API_URL}/users/login`, {
+            method: "POST",
+            headers: {
+                // "Content-Type": "application/json;charset=utf-8"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          // console.log("LOGIN SERVICE OK")
+          console.log(data)
+          if (data.accessToken)
+          localStorage.setItem('user', JSON.stringify(data));
+          return data;
+        } else {
+          console.log('please', response.ok);
+          console.log("an error");
+            // throw Error(handleResponses(response.status));
+        }
+    },
 
 
     // login action

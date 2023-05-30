@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 
+import { AuthService } from '@/services/auth.service';
+
+import API_URL from '../services/config.js'
+
 export const useUsersStore = defineStore("user", {
   state: () => ({
     users: useStorage("users", []),
@@ -61,6 +65,21 @@ export const useUsersStore = defineStore("user", {
 
   actions: {
     // login action
+    authHeader() {
+      // checks Local Storage for user item
+      let user = JSON.parse(localStorage.getItem('user'));
+  
+      // if there is a logged in user with accessToken (JWT)
+      if (user && user.accessToken) {
+          // return HTTP authorization header for Node.js Express back-end
+          return {
+              'Content-Type': 'application/json',
+              'x-access-token': user.accessToken
+          };
+      } else {
+          return { 'Content-Type': 'application/json' }; //otherwise, return an empty object
+      }
+  },
     login(email, password) {
       let curUser = this.users.find(
         (user) =>
@@ -142,54 +161,81 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    // sign up action
-    signUp(name, email, username, school, password, passConf) {
-      // checks if email has already been used
-      if (this.users.find((user) => user.email == email)) {
-        return "email";
-      } else if (this.users.find((user) => user.username == username)) {
-        return "username";
-      } else {
-        let today = new Date();
-        // checks if passwords match
-        if (password == passConf) {
-          let obj = {
-            type: "user",
-            email: email,
-            username: username,
-            name: name,
-            password: password,
-            school: school,
-            previousLoginDate: 0,
-            streak: 0,
-            received: false,
-            loginDate: +(
-              today.getFullYear() +
-              "" +
-              ((today.getMonth() + 1).toString().length != 2
-                ? "0" + (today.getMonth() + 1)
-                : today.getMonth() + 1) +
-              "" +
-              (today.getDate().toString().length != 2
-                ? "0" + today.getDate()
-                : today.getDate())
-            ),
-            photo:
-              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-            points: 0,
-            activities: 0,
-            occurences: 0,
-            rewards: [],
-            state: "active",
-            council: false,
-          };
-          this.users.push(obj);
-          this.logged = obj.email;
-        } else {
-          return "password";
-        }
-      }
+    // sign up w database connection^
+    //! its working mas faz 2 vezes i think
+    async signUp(name, email, username, school, password, passConf) {
+      const response = await fetch(`${API_URL}/users/signup`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          username: username,
+          school:school,
+          password:password,
+          passConf:passConf
+        })
+      });
+      if (response.ok) {
+        console.log(response.status);
+        const data = await response.json();
+        return data;
+    } else {
+      console.log(response.status)
+        // throw Error(handleResponses(response.status));
+    }
     },
+    // !
+    // sign up action
+    // signUp(name, email, username, school, password, passConf) {
+    //   // checks if email has already been used
+    //   if (this.users.find((user) => user.email == email)) {
+    //     return "email";
+    //   } else if (this.users.find((user) => user.username == username)) {
+    //     return "username";
+    //   } else {
+    //     let today = new Date();
+    //     // checks if passwords match
+    //     if (password == passConf) {
+    //       let obj = {
+    //         type: "user",
+    //         email: email,
+    //         username: username,
+    //         name: name,
+    //         password: password,
+    //         school: school,
+    //         previousLoginDate: 0,
+    //         streak: 0,
+    //         received: false,
+    //         loginDate: +(
+    //           today.getFullYear() +
+    //           "" +
+    //           ((today.getMonth() + 1).toString().length != 2
+    //             ? "0" + (today.getMonth() + 1)
+    //             : today.getMonth() + 1) +
+    //           "" +
+    //           (today.getDate().toString().length != 2
+    //             ? "0" + today.getDate()
+    //             : today.getDate())
+    //         ),
+    //         photo:
+    //           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    //         points: 0,
+    //         activities: 0,
+    //         occurences: 0,
+    //         rewards: [],
+    //         state: "active",
+    //         council: false,
+    //       };
+    //       this.users.push(obj);
+    //       this.logged = obj.email;
+    //     } else {
+    //       return "password";
+    //     }
+    //   }
+    // },
 
     newAdmin(type, name, email, username, password, passConf) {
       // checks if email has already been used

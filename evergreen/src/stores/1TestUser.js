@@ -127,28 +127,54 @@ export const useTestStore = defineStore("userTest", {
       //! login action from database
       async loginTest(username, password) { // payload = user (username + password)
         const response = await fetch(`${API_URL}/users/login`, {
-            method: "POST",
-            headers: {
-                // "Content-Type": "application/json;charset=utf-8"
+          method: "POST",
+          headers: {
+                "Content-Type": "application/json;charset=utf-8"
             },
             body: JSON.stringify({
                 username: username,
                 password: password
-            })
-        });
+              })
+            });
+            console.log(response.status);
         if (response.ok) {
           const data = await response.json();
-          // console.log("LOGIN SERVICE OK")
+          console.log("LOGIN SERVICE OK")
           console.log(data)
           if (data.accessToken)
           localStorage.setItem('user', JSON.stringify(data));
           return data;
         } else {
-          console.log('please', response.ok);
-          console.log("an error");
-            // throw Error(handleResponses(response.status));
+          console.log(response.status);
+          throw Error(handleResponses(response.status));
         }
     },
+
+    //! its working mas faz 2 vezes i think
+    async signUpTest(name, email, username, school, password, passConf) {
+      const response = await fetch(`${API_URL}/users/signup`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          username: username,
+          school:school,
+          password:password,
+          passConf:passConf
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+      console.log(response.status)
+        // throw Error(handleResponses(response.status));
+    }
+    },
+    // !
 
 
     // login action

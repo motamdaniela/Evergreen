@@ -150,13 +150,6 @@
           >{{ FilterThemes }}
         </v-checkbox>
       </v-list>
-      <!-- <ul id="menu">
-        <li v-for="theme in themes">
-          <input type="checkbox" v-model="themesPicked" :value="theme.id" :name="theme.name">
-          <label :for="theme.name">{{ theme.name }}</label>   
-        </li>
-      </ul>
-      {{ FilterThemes }} -->
     </v-menu>
 
     <button class="btn-page btnP btns" @click="suggestion = true">

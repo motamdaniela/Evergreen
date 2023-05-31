@@ -117,7 +117,7 @@ export default{
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       // console.log(this.password.indexOf(" "));
       if (this.password.indexOf(" ") != -1) {
         this.warning = "Palavra-passe não pode conter espaços.";
@@ -132,7 +132,7 @@ export default{
         this.warning = "Nome de utilizador tem de ter no mínimo 3 caracteres.";
         this.error = "";
       } else {
-        this.userStore.signUp(
+        let thisUser = await this.userStore.signUp(
           this.name,
           this.email,
           this.username,
@@ -140,7 +140,13 @@ export default{
           this.password,
           this.passConf
         );
-        console.log("user created i think")
+        if(thisUser.success == true){
+          await this.userStore.login(this.username, this.password)
+          let curUser = JSON.parse(sessionStorage.getItem('loggedUser'));
+          if(curUser.type == 'user'){
+            this.$router.push("/Home");
+      }
+        }
         // let user = this.testStore.getLogged;
         // let users = this.testStore.getUsers;
         // let signup = this.testStore.signUp(

@@ -332,7 +332,8 @@ export default {
       logged: this.userStore.getLogged,
       activitiesSub: [],
       activitiesSug: [],
-      user: this.userStore.getUsers.find((user) => user.email == this.logged),
+      // user: this.userStore.getUsers.find((user) => user.email == this.logged),
+      user: JSON.parse(sessionStorage.getItem('loggedUser')),
       userObj: this.userStore.getLoggedObj,
       open: false,
       loginReward: false,
@@ -343,45 +344,46 @@ export default {
     };
   },
   created() {
-    (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
-      (this.themes = this.activityStore.getThemes);
-    let today = new Date(),
-      yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    let yesterdayDate = +(
-      yesterday.getFullYear() +
-      "" +
-      ((yesterday.getMonth() + 1).toString().length < 2
-        ? "0" + (yesterday.getMonth() + 1)
-        : yesterday.getMonth() + 1) +
-      (yesterday.getDate().toString().length < 2
-        ? "0" + yesterday.getDate()
-        : yesterday.getDate())
-    );
-    0 == this.user.received &&
-      (console.log(1),
-      this.user.previousLoginDate == yesterdayDate
-        ? (1 == this.user.streak
-            ? (this.loginPoints = 1)
-            : 2 == this.user.streak
-            ? (this.loginPoints = 3)
-            : 3 == this.user.streak
-            ? (this.loginPoints = 5)
-            : 4 == this.user.streak
-            ? (this.loginPoints = 8)
-            : 5 == this.user.streak
-            ? (this.loginPoints = 10)
-            : 6 == this.user.streak
-            ? (this.loginPoints = 15)
-            : 7 == this.user.streak && (this.loginPoints = 20),
-          (this.loginClass = "login" + this.user.streak),
-          (this.loginReward = !0))
-        : this.user.previousLoginDate < this.user.loginDate &&
-          ((this.loginPoints = 1),
-          (this.user.streak = 1),
-          (this.loginClass = "login" + this.user.streak),
-          (this.loginReward = !0),
-          console.log(1)));
+    this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
+    // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
+    //   (this.themes = this.activityStore.getThemes);
+    // let today = new Date(),
+    //   yesterday = new Date(today);
+    // yesterday.setDate(yesterday.getDate() - 1);
+    // let yesterdayDate = +(
+    //   yesterday.getFullYear() +
+    //   "" +
+    //   ((yesterday.getMonth() + 1).toString().length < 2
+    //     ? "0" + (yesterday.getMonth() + 1)
+    //     : yesterday.getMonth() + 1) +
+    //   (yesterday.getDate().toString().length < 2
+    //     ? "0" + yesterday.getDate()
+    //     : yesterday.getDate())
+    // );
+    // 0 == this.user.received &&
+    //   (console.log(1),
+    //   this.user.previousLoginDate == yesterdayDate
+    //     ? (1 == this.user.streak
+    //         ? (this.loginPoints = 1)
+    //         : 2 == this.user.streak
+    //         ? (this.loginPoints = 3)
+    //         : 3 == this.user.streak
+    //         ? (this.loginPoints = 5)
+    //         : 4 == this.user.streak
+    //         ? (this.loginPoints = 8)
+    //         : 5 == this.user.streak
+    //         ? (this.loginPoints = 10)
+    //         : 6 == this.user.streak
+    //         ? (this.loginPoints = 15)
+    //         : 7 == this.user.streak && (this.loginPoints = 20),
+    //       (this.loginClass = "login" + this.user.streak),
+    //       (this.loginReward = !0))
+    //     : this.user.previousLoginDate < this.user.loginDate &&
+    //       ((this.loginPoints = 1),
+    //       (this.user.streak = 1),
+    //       (this.loginClass = "login" + this.user.streak),
+    //       (this.loginReward = !0),
+    //       console.log(1)));
   },
   updated() {
     let activities = this.activityStore.getActivities;

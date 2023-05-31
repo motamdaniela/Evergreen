@@ -67,74 +67,126 @@ export const useUsersStore = defineStore("user", {
     // login action
     authHeader() {
       // checks Local Storage for user item
-      let user = JSON.parse(localStorage.getItem('user'));
+      let accessToken = JSON.parse(sessionStorage.getItem('loggedUser'));
   
       // if there is a logged in user with accessToken (JWT)
-      if (user && user.accessToken) {
+      if (accessToken) {
           // return HTTP authorization header for Node.js Express back-end
           return {
               'Content-Type': 'application/json',
-              'x-access-token': user.accessToken
+              'x-access-token': accessToken
           };
       } else {
           return { 'Content-Type': 'application/json' }; //otherwise, return an empty object
       }
   },
-    login(email, password) {
-      let curUser = this.users.find(
-        (user) =>
-          (user.email == email && user.password == password) ||
-          (user.username == email && user.password == password)
-      );
-      // checks if email and password exist in the users list
-      if (curUser && curUser.state == "blocked") {
-        // alert('user bloqued')
-        return "userBlocked";
-      } else if (curUser && curUser.state == "active") {
-        let logged = this.users.find(
-          (user) => user.email == email || user.username == email
-        );
-        this.logged = logged.email;
-        // changes the login date
-        let today = new Date();
-        logged.previousLoginDate = +logged.loginDate;
-        logged.loginDate = +(
-          today.getFullYear() +
-          "" +
-          ((today.getMonth() + 1).toString().length < 2
-            ? "0" + (today.getMonth() + 1)
-            : today.getMonth() + 1) +
-          "" +
-          (today.getDate().toString().length < 2
-            ? "0" + today.getDate()
-            : today.getDate())
-        );
-        let yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-        let yesterdayDate = +(
-          yesterday.getFullYear() +
-          "" +
-          ((yesterday.getMonth() + 1).toString().length < 2
-            ? "0" + (yesterday.getMonth() + 1)
-            : yesterday.getMonth() + 1) +
-          "" +
-          (yesterday.getDate().toString().length < 2
-            ? "0" + yesterday.getDate()
-            : yesterday.getDate())
-        );
-        console.log(logged.previousLoginDate);
-        // checks when was the last time the user logged in
-        if (+logged.previousLoginDate == +yesterdayDate) {
-          logged.streak += 1;
-          logged.received = false;
-        } else if (+logged.previousLoginDate < +logged.loginDate) {
-          logged.streak = 1;
-          logged.received = false;
+
+    // login(email, password) {
+    //   let curUser = this.users.find(
+    //     (user) =>
+    //       (user.email == email && user.password == password) ||
+    //       (user.username == email && user.password == password)
+    //   );
+    //   // checks if email and password exist in the users list
+    //   if (curUser && curUser.state == "blocked") {
+    //     // alert('user bloqued')
+    //     return "userBlocked";
+    //   } else if (curUser && curUser.state == "active") {
+    //     let logged = this.users.find(
+    //       (user) => user.email == email || user.username == email
+    //     );
+    //     this.logged = logged.email;
+    //     // changes the login date
+    //     let today = new Date();
+    //     logged.previousLoginDate = +logged.loginDate;
+    //     logged.loginDate = +(
+    //       today.getFullYear() +
+    //       "" +
+    //       ((today.getMonth() + 1).toString().length < 2
+    //         ? "0" + (today.getMonth() + 1)
+    //         : today.getMonth() + 1) +
+    //       "" +
+    //       (today.getDate().toString().length < 2
+    //         ? "0" + today.getDate()
+    //         : today.getDate())
+    //     );
+    //     let yesterday = new Date(today);
+    //     yesterday.setDate(yesterday.getDate() - 1);
+    //     let yesterdayDate = +(
+    //       yesterday.getFullYear() +
+    //       "" +
+    //       ((yesterday.getMonth() + 1).toString().length < 2
+    //         ? "0" + (yesterday.getMonth() + 1)
+    //         : yesterday.getMonth() + 1) +
+    //       "" +
+    //       (yesterday.getDate().toString().length < 2
+    //         ? "0" + yesterday.getDate()
+    //         : yesterday.getDate())
+    //     );
+    //     console.log(logged.previousLoginDate);
+    //     // checks when was the last time the user logged in
+    //     if (+logged.previousLoginDate == +yesterdayDate) {
+    //       logged.streak += 1;
+    //       logged.received = false;
+    //     } else if (+logged.previousLoginDate < +logged.loginDate) {
+    //       logged.streak = 1;
+    //       logged.received = false;
+    //     }
+    //     return "active";
+    //   } else {
+    //     return "userWrong";
+    //   }
+    // },
+
+
+    //! pedido de login(n redireciona)
+    async login(username, password) {
+      console.log('its logging in')
+      //* fetch da resposta 
+      const response = await fetch(`${API_URL}/users/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify({
+          username: username,
+          password:password
+        })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        sessionStorage.setItem('loggedUser', JSON.stringify(data));
+        this.logged = data.email;
+        console.log('logged inn:', this.logged);
+        return data;
+    } else {
+      console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
+    },
+
+    //! get users
+    async fetchAllUsers(){
+      console.log('fetch users-start');
+      const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const response = await fetch(`${API_URL}/users`, {
+        method: "GET",
+        headers:{
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": curUser.accessToken
         }
-        return "active";
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // this.users = data.users;
+        console.log(data)
+        return data;
       } else {
-        return "userWrong";
-      }
+      // console.log(this.authHeader());
+      console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
+    console.log('fetch users-end');
     },
 
     // adds users
@@ -161,8 +213,7 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    // sign up w database connection^
-    //! its working mas faz 2 vezes i think
+    //? pedido de signup
     async signUp(name, email, username, school, password, passConf) {
       const response = await fetch(`${API_URL}/users/signup`, {
         method: "POST",
@@ -179,15 +230,15 @@ export const useUsersStore = defineStore("user", {
         })
       });
       if (response.ok) {
-        console.log(response.status);
         const data = await response.json();
+        console.log(response.status);
         return data;
     } else {
-      console.log(response.status)
-        // throw Error(handleResponses(response.status));
+      // console.log(response.status)
+        throw Error(AuthService.handleResponses(response.status));
     }
     },
-    // !
+
     // sign up action
     // signUp(name, email, username, school, password, passConf) {
     //   // checks if email has already been used

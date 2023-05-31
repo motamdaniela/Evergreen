@@ -4,9 +4,11 @@
 ```
 cd evergreen
 ```
+```
 npm install
+```
 ```
 npm run dev
 ```
 
-### and the project will be running locally, just follow the link to view it in action :)
+#### and the project will be running locally, just follow the link to view it in action :)

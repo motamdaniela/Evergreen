@@ -15,18 +15,18 @@ const vuetify = createVuetify({
   directives: directives,
 });
 app.use(vuetify), app.mount("#app");
-import { useUsersStore } from "@/stores/User";
+// import { useUsersStore } from "@/stores/User";
 import { useActivityStore } from "@/stores/Activity";
 import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useMissionStore } from "@/stores/Mission";
 import { useSchoolStore } from "@/stores/School";
-const userStore = useUsersStore(),
-  activityStore = useActivityStore(),
+// const userStore = useUsersStore(),
+const  activityStore = useActivityStore(),
   occurrenceStore = useOccurrenceStore(),
   missionStore = useMissionStore(),
   schoolStore = useSchoolStore();
-let predefinedUsers = json.predefinedUsers,
-  activities = json.activities,
+// let predefinedUsers = json.predefinedUsers,
+let  activities = json.activities,
   themes = json.themes,
   types = json.types,
   missions = json.missions,
@@ -35,13 +35,13 @@ let predefinedUsers = json.predefinedUsers,
   buildings = json.buildings,
   floors = json.floors,
   classrooms = json.classrooms,
-  typeM = json.typeM,
-  users = userStore.getUsers;
-predefinedUsers.forEach((user) => {
-  users.find((u) => u.email == user.email)
-    ? console.log("user has already been added")
-    : userStore.add(user);
-});
+  typeM = json.typeM;
+//   users = userStore.getUsers;
+// predefinedUsers.forEach((user) => {
+//   users.find((u) => u.email == user.email)
+//     ? console.log("user has already been added")
+//     : userStore.add(user);
+// });
 let act = activityStore.getActivities;
 activities.forEach((activity) => {
   act.find((a) => a.id == activity.id)
@@ -101,5 +101,5 @@ classrooms.forEach((classroom) => {
   cls.find((c) => c.id == classroom.id)
     ? console.log("classroom has already been added")
     : schoolStore.addClassroom(classroom);
-}),
-  missionStore.completeMission(userStore.getLogged, 0);
+});
+  // missionStore.completeMission(userStore.getLogged, 0);

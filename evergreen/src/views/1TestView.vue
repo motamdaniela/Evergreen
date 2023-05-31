@@ -13,7 +13,7 @@
           <td>{{user.username}}</td>
         </tr>
       </table>
-      <button @click="this.userStore.fetchAllUsers" class="btn-page">Show me</button>
+      <button @click="show" class="btn-page">Show me</button>
 
       <div id="usersTable"></div>
     </div>
@@ -33,18 +33,20 @@ export default{
   },
   data() {
     return {
-      users: this.userStore.fetchAllUsers,
+      users: '',
     };
   },
   methods: {
-    show(){
-      this.users = this.userStore.fetchAllUsers.users;
-      console.log(this.userStore.getUsers)
+    async show(){
+      let n = await this.userStore.fetchAllUsers()
+      console.log(n.users);
+      this.users = n.users;
+      // console.log(this.userStore.fetchAllUsers.users)
     }
   },
 
   updated () {
-    this.users = this.userStore.fetchAllUsers.users;
+    // this.users = this.userStore.fetchAllUsers().users;
   },
 
 };

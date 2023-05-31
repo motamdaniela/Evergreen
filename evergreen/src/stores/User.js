@@ -142,12 +142,14 @@ export const useUsersStore = defineStore("user", {
     //! pedido de login(n redireciona)
     async login(username, password) {
       console.log('its logging in')
-      //* fetch da resposta 
+      //* fetch da resposta ao pedido q queres  vpoe a rota q queres 
       const response = await fetch(`${API_URL}/users/login`, {
+        //* v o metodo, headers e body
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8"
         },
+        //* se for um post ou put e aqui q se metes os dados no body
         body: JSON.stringify({
           username: username,
           password:password
@@ -179,7 +181,7 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         // this.users = data.users;
-        console.log(data)
+        // console.log(data)
         return data;
       } else {
       // console.log(this.authHeader());

@@ -238,7 +238,8 @@ export const useUsersStore = defineStore("user", {
     },
 
     //? pedido de signup
-    async signUp(name, email, username, school, password, passConf) {
+    async signUp(name, email, username, school, password, confPassword) {
+      console.log('start sign up fetch');
       const response = await fetch(`${API_URL}/users/signup`, {
         method: "POST",
         headers: {
@@ -250,17 +251,19 @@ export const useUsersStore = defineStore("user", {
           username: username,
           school:school,
           password:password,
-          passConf:passConf
-        })
+          confPassword:confPassword
+        }),
       });
+      console.log(response.headers, response.body);
       if (response.ok) {
         const data = await response.json();
         console.log(response.status);
         return data;
     } else {
-      // console.log(response.status)
-        throw Error(AuthService.handleResponses(response.status));
+      console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
     }
+    console.log('end sign up fetch');
     },
 
     // sign up action

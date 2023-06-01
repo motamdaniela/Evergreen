@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
-import { useUsersStore } from "./user";
+import { useUsersStore } from "./User";
 
 import { AuthService } from '@/services/auth.service';
 

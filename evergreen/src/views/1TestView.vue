@@ -1,6 +1,7 @@
 <template>
     <div class="questionario">
-      <h1>Sign up</h1>
+      <h1>Logged user</h1>
+
 
       <h1>Lista de utilizadores</h1>
       <table>
@@ -39,8 +40,8 @@ export default{
   methods: {
     async show(){
       let n = await this.userStore.fetchAllUsers()
-      console.log(n.users);
-      this.users = n.users;
+      console.log(n);
+      // this.users = n.users;
       // console.log(this.userStore.fetchAllUsers.users)
     }
   },

@@ -72,7 +72,7 @@ export default {
       // console.log(this.email);
       let users = this.userStore.getUsers;
       let login = this.userStore.login(this.email, this.password);
-      let curUser = await JSON.parse(sessionStorage.getItem('loggedUser'));
+      let curUser = await (JSON.parse(sessionStorage.getItem('loggedUser'))).user;
       console.log(curUser);
       if(curUser.type == 'user'){
         this.$router.push("/Home");

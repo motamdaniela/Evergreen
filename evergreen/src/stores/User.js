@@ -81,6 +81,7 @@ export const useUsersStore = defineStore("user", {
       }
   },
 
+  //? PLEASE DEIXEM ESTE EM COMENTARIO
     // login(email, password) {
     //   let curUser = this.users.find(
     //     (user) =>
@@ -138,8 +139,7 @@ export const useUsersStore = defineStore("user", {
     //   }
     // },
 
-
-    //! pedido de login(n redireciona)
+    //? pedido de login
     async login(username, password) {
       console.log('its logging in')
       //* fetch da resposta ao pedido q queres  vpoe a rota q queres 
@@ -158,7 +158,7 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         sessionStorage.setItem('loggedUser', JSON.stringify(data));
-        this.logged = data.email;
+        this.logged = data.user.email;
         console.log('logged inn:', this.logged);
         return data;
     } else {
@@ -167,9 +167,8 @@ export const useUsersStore = defineStore("user", {
     }
     },
 
-    //! get users
+    //? get users
     async fetchAllUsers(){
-      console.log('fetch users-start');
       const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/users`, {
         method: "GET",
@@ -180,7 +179,8 @@ export const useUsersStore = defineStore("user", {
       });
       if (response.ok) {
         const data = await response.json();
-        // this.users = data.users;
+        this.users = data.users;
+        console.log('users na store:', this.users);
         // console.log(data)
         return data;
       } else {
@@ -188,7 +188,29 @@ export const useUsersStore = defineStore("user", {
       console.log(response.status)
         // throw Error(AuthService.handleResponses(response.status));
     }
-    console.log('fetch users-end');
+    },
+
+    //? get users
+    async fetchLoggedUser(){
+      const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const response = await fetch(`${API_URL}/users`, {
+        method: "GET",
+        headers:{
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": curUser.accessToken
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        this.users = data.users;
+        console.log('users na store:', this.users);
+        // console.log(data)
+        return data;
+      } else {
+      // console.log(this.authHeader());
+      console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
     },
 
     // adds users

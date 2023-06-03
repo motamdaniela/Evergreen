@@ -169,7 +169,7 @@ export const useUsersStore = defineStore("user", {
     }
     },
 
-    //!fecth logged user
+    //? fecth logged user
     async fetchLogged() {
       let accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/users/getLogged`, {

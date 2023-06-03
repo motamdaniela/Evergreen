@@ -349,12 +349,12 @@ export default {
     ToHide() {
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
-    getUser() {
-      (this.users = this.usersStore.getUsers),
-        (this.user = this.usersStore.getUsers.find(
-          (e) => e.email == this.usersStore.getLogged
-        ));
-    },
+    // getUser() {
+    //   (this.users = this.usersStore.getUsers),
+    //     (this.user = this.usersStore.getUsers.find(
+    //       (e) => e.email == this.usersStore.getLogged
+    //     ));
+    // },
     updateNotifs() {
       // let e = [],
       //   s = this.missionStore.getMissions;

@@ -53,16 +53,27 @@
           <div class="formContent">
             <div>
               <label class="semiTitle">Escola:</label><br />
-              <select v-model="form.school" class="input" name="" required>
-                <!-- @change="changeSchool" -->
+              <select
+                v-model="form.school"
+                class="input"
+                name=""
+                @change="changeSchool"
+                required
+              >
+                <!--  -->
                 <option v-for="school in schools">{{ school.name }}</option>
               </select>
             </div>
 
             <div>
               <label class="semiTitle">Bloco:</label><br />
-              <select v-model="form.building" class="input" name="" required>
-                <!-- @change="changeBuilding" -->
+              <select
+                v-model="form.building"
+                class="input"
+                name=""
+                @change="changeBuilding"
+                required
+              >
                 <option v-for="building in buildings">
                   {{ building.name }}
                 </option>
@@ -103,20 +114,20 @@
             <div class="typeRow" v-for="tp in types">
               <input
                 type="radio"
-                v-model="form.idType"
+                v-model="form.type"
                 class="rb"
                 name="type"
-                :value="tp.id"
+                :value="tp"
                 @:change="
                   {
                     {
-                      id(tp.id);
+                      id(tp);
                     }
                   }
                 "
                 required
               />
-              <label class="typeLbl">{{ tp.name }}</label>
+              <label class="typeLbl">{{ tp }}</label>
             </div>
             <input
               class="input"
@@ -221,19 +232,12 @@ export default {
   data() {
     return {
       form: {
-        id: 0,
-        date: "",
-        hour: "",
-        campus: "",
         school: "",
         building: "",
-        floor: "",
         classroom: "",
-        idType: 0,
+        type: "",
         description: "",
         photo: "",
-        user: "",
-        state: "",
         photo: "",
         other: "",
       },
@@ -243,49 +247,40 @@ export default {
       schools: [],
       buildings: [],
       classrooms: [],
-      types: this.occurrenceStore.getTypes,
-      schoolsBD: this.schoolStore.getAllSchools(),
+      types: [],
     };
   },
-  created() {
-    console.log(this.schoolsBD);
-  },
-  mounted() {
-    console.log(this.schoolsBD);
-    this.schoolsBD.forEach((school) => {
+  async created() {
+    console.log(await this.occurrenceStore.getAllOccurrences());
+    let schoolsBD = await this.schoolStore.getAllSchools();
+    schoolsBD.schools.forEach((school) => {
       this.schools.push(school);
+    });
+
+    let typesBD = await this.occurrenceStore.getAllTypes();
+    console.log(schoolsBD);
+    console.log(typesBD);
+    typesBD.types.forEach((type) => {
+      this.types.push(type);
     });
   },
   methods: {
-    onSubmit() {
-      // (this.form.id = this.occurrenceStore.getOccurrences.length),
-      //   (this.form.idType = document.querySelector(
-      //     'input[name="type"]:checked'
-      //   ).value);
-      // let o = new Date();
-      // (this.form.date =
-      //   o.getFullYear() + "-" + (o.getMonth() + 1) + "-" + o.getDate()),
-      //   (this.form.hour =
-      //     o.getHours() + ":" + o.getMinutes() + ":" + o.getSeconds()),
-      //   (this.form.user = this.userStore.getLogged),
-      //   (this.form.state = "pending"),
-      //   this.occurrenceStore.addOccurrence(this.form),
-      //   this.missionStore.completeMission(this.form.user, 2),
-      this.occurrenceStore.submit(
+    async onSubmit() {
+      await this.occurrenceStore.submit(
         this.form.school,
         this.form.building,
         this.form.classroom,
         this.form.type,
         this.form.description,
-        this.form.photo
+        this.form.photo,
+        this.form.other
       );
       location.reload();
     },
-    id(o) {
-      let e = document.querySelector('input[name="type"]:checked');
-      e.id = o;
+    id(type) {
+      let e = type;
       const s = document.querySelector("#outro");
-      6 == e.id
+      "Outro" == e
         ? s.removeAttribute("disabled", "")
         : s.setAttribute("disabled", "");
     },
@@ -295,46 +290,26 @@ export default {
       const s = new FileReader();
       s.readAsDataURL(e[0]), (s.onload = () => (this.form.photo = s.result));
     },
-    changeCamp() {
-      let o = this.campus.find((o) => o.name == this.form.campus);
-      (this.form.building = ""),
-        (this.form.floor = ""),
-        (this.form.classroom = ""),
-        console.log(o);
-      let e = [];
-      this.schoolStore.getSchools.forEach((s) => {
-        s.idCampus == o.id && (console.log(0), e.push(s));
-      }),
-        (this.schools = e);
-    },
     changeSchool() {
-      let o = this.schoolStore.getSchools.find(
-        (o) => o.name == this.form.school
-      );
-      (this.form.floor = ""), (this.form.classroom = "");
-      let e = [];
-      this.schoolStore.getBuildings.forEach((s) => {
-        s.idSchools.forEach((t) => {
-          t == o.id && e.push(s);
-        }),
-          (this.buildings = e);
+      this.buildings = [];
+      this.form.building = "";
+      let s = this.schools.find((school) => school.name == this.form.school);
+      s.buildings.forEach((building) => {
+        this.buildings.push(building);
       });
+      console.log(this.buildings);
     },
     changeBuilding() {
-      let o = this.schoolStore.getBuildings.find(
-          (o) => o.name == this.form.building
-        ),
-        e = this.schoolStore.getSchools.find((o) => o.name == this.form.school);
+      this.classrooms = [];
       this.form.classroom = "";
-      let s = [];
-      this.schoolStore.getFloors.forEach((t) => {
-        t.idBuildings.forEach((r) => {
-          t.idSchools.forEach((i) => {
-            r == o.id && i == e.id && s.push(t);
-          });
-        }),
-          (this.floors = s);
+      let s = this.schools.find((school) => school.name == this.form.school);
+      let b = s.buildings.find(
+        (building) => building.name == this.form.building
+      );
+      b.classrooms.forEach((classroom) => {
+        this.classrooms.push(classroom);
       });
+      console.log(this.classrooms);
     },
   },
 };

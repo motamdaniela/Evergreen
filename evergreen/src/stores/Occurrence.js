@@ -26,11 +26,13 @@ export const useOccurrenceStore = defineStore("occurrence", {
       this.types.push(e);
     },
 
-    async submit(school, building, classroom, type, description, photo) {
+    async submit(school, building, classroom, type, description, photo, other) {
+      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/occurrences`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${curUser}`,
         },
         body: JSON.stringify({
           school: school,
@@ -39,6 +41,7 @@ export const useOccurrenceStore = defineStore("occurrence", {
           type: type,
           description: description,
           photo: photo,
+          other: other,
         }),
       });
       if (response.ok) {
@@ -57,7 +60,7 @@ export const useOccurrenceStore = defineStore("occurrence", {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${curUser.accessToken}`,
+          "x-access-token": `Bearer ${curUser}`,
         },
       });
       if (response.ok) {
@@ -67,6 +70,25 @@ export const useOccurrenceStore = defineStore("occurrence", {
       } else {
         console.log("not ok");
         console.log("STORE - fetch ALL Occurrences error", response);
+      }
+    },
+
+    async getAllTypes() {
+      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/occurrences/types`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${curUser}`,
+        },
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.types = data;
+        return data;
+      } else {
+        console.log("not ok");
+        console.log("STORE - fetch ALL types error", response);
       }
     },
   },

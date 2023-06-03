@@ -54,7 +54,7 @@ export const useSchoolStore = defineStore("school", {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${curUser.accessToken}`,
+          "x-access-token": `Bearer ${curUser}`,
         },
       });
       console.log(response);
@@ -64,6 +64,7 @@ export const useSchoolStore = defineStore("school", {
         console.log(data);
         return data;
       } else {
+        console.log("vou me matar");
         console.log(response.status);
       }
     },

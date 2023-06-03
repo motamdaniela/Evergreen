@@ -341,6 +341,11 @@ export default {
         this.activities = filteredList;
       }
     },
+    async show(){
+      let a = await this.activityStore.fetchAllActivities()
+
+      this.activities = a.activities
+    }
   },
 };
 </script>

@@ -9,7 +9,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-import '@mdi/font/css/materialdesignicons.css'
+import "@mdi/font/css/materialdesignicons.css";
 import json from "/data.json";
 const vuetify = createVuetify({
   components: components,
@@ -22,12 +22,12 @@ import { useOccurrenceStore } from "@/stores/Occurrence";
 import { useMissionStore } from "@/stores/Mission";
 import { useSchoolStore } from "@/stores/School";
 // const userStore = useUsersStore(),
-const  activityStore = useActivityStore(),
+const activityStore = useActivityStore(),
   occurrenceStore = useOccurrenceStore(),
   missionStore = useMissionStore(),
   schoolStore = useSchoolStore();
 // let predefinedUsers = json.predefinedUsers,
-let  activities = json.activities,
+let activities = json.activities,
   themes = json.themes,
   types = json.types,
   missions = json.missions,
@@ -55,12 +55,12 @@ themes.forEach((theme) => {
     ? console.log("theme has already been added")
     : activityStore.addTheme(theme);
 });
-let tps = occurrenceStore.getTypes;
-types.forEach((type) => {
-  tps.find((t) => t.id == type.id)
-    ? console.log("type has already been added")
-    : occurrenceStore.addType(type);
-});
+// let tps = occurrenceStore.getTypes;
+// types.forEach((type) => {
+//   tps.find((t) => t.id == type.id)
+//     ? console.log("type has already been added")
+//     : occurrenceStore.addType(type);
+// });
 let mss = missionStore.getMissions;
 missions.forEach((mission) => {
   mss.find((m) => m.id == mission.id)
@@ -73,34 +73,34 @@ typeM.forEach((type) => {
     ? console.log("type has already been added")
     : missionStore.addType(type);
 });
-let cmp = schoolStore.getCampus;
-campus.forEach((camp) => {
-  cmp.find((c) => c.id == camp.id)
-    ? console.log("campus has already been added")
-    : schoolStore.addCampus(camp);
-});
-let sch = schoolStore.getSchools;
-schools.forEach((school) => {
-  sch.find((s) => s.id == school.id)
-    ? console.log("school has already been added")
-    : schoolStore.addSchool(school);
-});
-let bld = schoolStore.getBuildings;
-buildings.forEach((building) => {
-  bld.find((b) => b.id == building.id)
-    ? console.log("building has already been added")
-    : schoolStore.addBuilding(building);
-});
-let flo = schoolStore.getFloors;
-floors.forEach((floor) => {
-  flo.find((f) => f.id == floor.id)
-    ? console.log("floor has already been added")
-    : schoolStore.addFloor(floor);
-});
-let cls = schoolStore.getClassrooms;
-classrooms.forEach((classroom) => {
-  cls.find((c) => c.id == classroom.id)
-    ? console.log("classroom has already been added")
-    : schoolStore.addClassroom(classroom);
-});
-  // missionStore.completeMission(userStore.getLogged, 0);
+// let cmp = schoolStore.getCampus;
+// campus.forEach((camp) => {
+//   cmp.find((c) => c.id == camp.id)
+//     ? console.log("campus has already been added")
+//     : schoolStore.addCampus(camp);
+// });
+// let sch = schoolStore.getSchools;
+// schools.forEach((school) => {
+//   sch.find((s) => s.id == school.id)
+//     ? console.log("school has already been added")
+//     : schoolStore.addSchool(school);
+// });
+// let bld = schoolStore.getBuildings;
+// buildings.forEach((building) => {
+//   bld.find((b) => b.id == building.id)
+//     ? console.log("building has already been added")
+//     : schoolStore.addBuilding(building);
+// });
+// let flo = schoolStore.getFloors;
+// floors.forEach((floor) => {
+//   flo.find((f) => f.id == floor.id)
+//     ? console.log("floor has already been added")
+//     : schoolStore.addFloor(floor);
+// });
+// let cls = schoolStore.getClassrooms;
+// classrooms.forEach((classroom) => {
+//   cls.find((c) => c.id == classroom.id)
+//     ? console.log("classroom has already been added")
+//     : schoolStore.addClassroom(classroom);
+// });
+// missionStore.completeMission(userStore.getLogged, 0);

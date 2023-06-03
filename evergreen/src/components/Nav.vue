@@ -306,16 +306,13 @@ import { useUsersStore } from "@/stores/User";
 import { useMissionStore } from "@/stores/Mission";
 export default {
   setup() {
-    const e = useUsersStore();
+    const userStore = useUsersStore();
+
     return {
-      usersStore: e,
-      Logged: e.getLogged,
+      userStore,
+      Logged: userStore.getLogged,
       missionStore: useMissionStore(),
     };
-  },
-  updated () {
-    this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
-    console.log(this.user);
   },
   name: "App",
   data() {
@@ -324,7 +321,7 @@ export default {
       // user: this.usersStore.getUsers.find(
       //   (e) => e.email == this.usersStore.getLogged
       // ),
-      user: JSON.parse(sessionStorage.getItem('loggedUser')),
+      user: '',
       drawer: !1,
       group: null,
       collapse: !1,
@@ -344,7 +341,7 @@ export default {
   computed: {
     isLogged() {
       // return !!this.user
-      if(this.user){
+      if(sessionStorage.getItem('loggedUser')){
         return true;
       }
       // return !!this.usersStore.getLogged;
@@ -410,6 +407,22 @@ export default {
           (this.newAdmin.passConf = ""));
     },
   },
+
+  
+  async updated () {
+    if(this.user == undefined || this.user == ''){
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
+    }
+  },
+
+  async created () {
+    if(this.user == undefined || this.user == ''){
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
+    }
+  },
+
 };
 </script>
 

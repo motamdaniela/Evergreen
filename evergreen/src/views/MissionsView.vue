@@ -65,18 +65,16 @@ export default {
   data() {
     return {
       missions: this.missionStore.getMissions,
-      user: this.usersStore.getUsers.find(
-        (usersStor) => usersStor.email == this.usersStore.getLogged
-      ),
+      user: '',
       users: "",
       state: [],
-      logged: this.usersStore.getLogged,
+      logged: '',
     };
   },
   methods: {
     complete(users, id) {
       users.forEach((user) => {
-        if (user[0] == this.usersStore.getLogged && id != undefined) {
+        if (user[0] == this.logged && id != undefined) {
           this.state.push([id, user[2]]);
         }
       });
@@ -90,19 +88,19 @@ export default {
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+            user[2] == "Em progresso" && user[0] == this.logged
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
             (user) =>
-              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+              user[2] == "Concluída" && user[0] == this.logged
           ))
       ) {
         return "fieldY";
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+            user[2] == "Não começou" && user[0] == this.logged
         )
       ) {
         return "fieldR";
@@ -114,19 +112,19 @@ export default {
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+            user[2] == "Em progresso" && user[0] == this.logged
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
             (user) =>
-              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+              user[2] == "Concluída" && user[0] == this.logged
           ))
       ) {
         return "badgeY";
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+            user[2] == "Não começou" && user[0] == this.logged
         )
       ) {
         return "badgeR";
@@ -138,19 +136,19 @@ export default {
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+            user[2] == "Em progresso" && user[0] == this.logged
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
             (user) =>
-              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+              user[2] == "Concluída" && user[0] == this.logged
           ))
       ) {
         return "bgY";
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+            user[2] == "Não começou" && user[0] == this.logged
         )
       ) {
         return "bgR";
@@ -163,7 +161,7 @@ export default {
         !this.user.rewards.find((reward) => reward == missionReward) &&
         mission.users.find(
           (user) =>
-            user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+            user[2] == "Concluída" && user[0] == this.logged
         )
       ) {
         return "lockY";
@@ -177,19 +175,19 @@ export default {
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Em progresso" && user[0] == this.usersStore.getLogged
+            user[2] == "Em progresso" && user[0] == this.logged
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
             (user) =>
-              user[2] == "Concluída" && user[0] == this.usersStore.getLogged
+              user[2] == "Concluída" && user[0] == this.logged
           ))
       ) {
         return "btnMissionY";
       } else if (
         mission.users.find(
           (user) =>
-            user[2] == "Não começou" && user[0] == this.usersStore.getLogged
+            user[2] == "Não começou" && user[0] == this.logged
         )
       ) {
         return "btnMissionR";
@@ -201,6 +199,12 @@ export default {
         this.missionStore.completeMission(this.logged, 9);
       }
     },
+  },
+  async created () {
+    if(this.logged == undefined || this.logged == ''){
+        await this.usersStore.fetchLogged();
+        this.logged = this.usersStore.getLogged
+      };
   },
 };
 </script>

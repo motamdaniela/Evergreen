@@ -29,19 +29,11 @@ export default {
       users: [],
     };
   },
-  created() {
-    let users2 = this.userStore.getUsers;
-    let list = [];
-    users2.forEach((user) => {
-      if (user.type == "user") {
-        list.push(user);
-      }
-    });
-      this.users=list;
-    
-    // this.users.sort((a, b) => {
-    //   return b.points - a.points;
-    // });
+  async created() {
+    if(this.users == undefined || this.users == ''){
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getUsers
+    }
 
     this.users.sort((a,b)=> b.points - a.points || b.activities - a.activities || b.occurences - a.occurences);
     

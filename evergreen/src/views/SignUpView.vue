@@ -142,10 +142,14 @@ export default{
         );
         if(thisUser.success == true){
           await this.userStore.login(this.username, this.password)
-          let curUser = JSON.parse(sessionStorage.getItem('loggedUser'));
-          if(curUser.type == 'user'){
+          let logged = this.userStore.getLogged
+          if(logged.type == 'user'){
             this.$router.push("/Home");
-      }
+          }else if(logged.type == 'admin'){
+            this.$router.push("/Admin");
+          }else if(logged.type == 'security'){
+            this.$router.push("/Occurences");
+          }
         }
         // let user = this.testStore.getLogged;
         // let users = this.testStore.getUsers;

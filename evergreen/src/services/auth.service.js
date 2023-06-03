@@ -11,72 +11,42 @@ for HTTP requests & reponses:
 import API_URL from './config.js'
 
 export const AuthService = {
-    async login(user) { // payload = user (username + password)
-        const response = await fetch(`${API_URL}/auth/signin`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            },
-            body: JSON.stringify({
-                username: user.username,
-                password: user.password
-            })
-        });
-        if (response.ok) {
-            const data = await response.json();
-            // console.log("LOGIN SERVICE OK")
-            // console.log(data)
-            if (data.accessToken)
-                localStorage.setItem('user', JSON.stringify(data));
-            return data;
+    authHeader() {
+        // checks Local Storage for user item
+        let token = JSON.parse(localStorage.getItem('loggedUser'));
+    
+        // if there is a logged in user with accessToken (JWT)
+        if (token) {
+            // return HTTP authorization header for Node.js Express back-end
+            return {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            };
         } else {
-            throw Error(handleResponses(response.status));
+            return { 'Content-Type': 'application/json' }; //otherwise, return an empty object
         }
     },
 
-    async logout() {
-        localStorage.removeItem('user');
-    },
 
-    async register(user) {
-        const response = await fetch(`${API_URL}/auth/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            },
-            body: JSON.stringify({
-                username: user.username,
-                email: user.email,
-                password: user.password
-            })
-        });
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            throw Error(handleResponses(response.status));
+    handleResponses(code) {
+        let message = "";
+        switch (code) {
+            case 400:
+                message = "Username already exists.";
+                break;
+            case 401:
+                message = "Wrong credentials";
+                break;
+            case 404:
+                message = "User not found";
+                break;
+            default:
+                message = "Unkown message";
+                break;
         }
+        return message;
     }
-}
 
-
-function handleResponses(code) {
-    let message = "";
-    switch (code) {
-        case 400:
-            message = "Username already exists.";
-            break;
-        case 401:
-            message = "Wrong credentials";
-            break;
-        case 404:
-            message = "User not found";
-            break;
-        default:
-            message = "Unkown message";
-            break;
-    }
-    return message;
 }
 
 export default AuthService;

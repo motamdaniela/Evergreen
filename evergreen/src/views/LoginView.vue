@@ -73,11 +73,15 @@ export default {
       // console.log(this.email);
       let users = this.userStore.getUsers;
       let login = await this.userStore.login(this.email, this.password);
-      // let curUser = await (JSON.parse(sessionStorage.getItem('loggedUser'))).user;
-      console.log("LOGIN ON SUBMIT", this.userStore.getLogged);
-      // if(curUser.type == 'user'){
-      //   this.$router.push("/Home");
-      // }
+      await this.userStore.login(this.username, this.password)
+      let logged = this.userStore.getLogged
+      if(logged.type == 'user'){
+        this.$router.push("/Home");
+      }else if(logged.type == 'admin'){
+        this.$router.push("/Admin");
+      }else if(logged.type == 'security'){
+        this.$router.push("/Occurences");
+      }
 
       if (login == "userWrong") {
         this.error = "Credenciais erradas!";

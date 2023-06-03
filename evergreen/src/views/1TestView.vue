@@ -1,20 +1,22 @@
 <template>
     <div class="questionario">
-      <h1>Logged user</h1>
-
+      <h1 >Logged user</h1>
+      <h3>{{ this.logged.name }}</h3>
+      <p><b>{{ this.logged.username }}</b></p>
+      <p>{{ this.logged.type }}</p>
+      <p>{{ this.logged.school }}</p>
 
       <h1>Lista de utilizadores</h1>
       <table>
-        <th>
-          <td>Nome</td>
-          <td>username</td>
-        </th>
+        <tr>
+          <th>Nome</th>
+          <th>username</th>
+        </tr>
         <tr v-for="user in this.users">
           <td>{{user.name}}</td>
           <td>{{user.username}}</td>
         </tr>
       </table>
-      <button @click="show" class="btn-page">Show me</button>
 
       <div id="usersTable"></div>
     </div>
@@ -35,19 +37,35 @@ export default{
   data() {
     return {
       users: '',
+      logged: ''
     };
   },
   methods: {
     async show(){
-      let n = await this.userStore.fetchAllUsers()
-      console.log(n);
-      // this.users = n.users;
-      // console.log(this.userStore.fetchAllUsers.users)
+      // let token = JSON.parse(sessionStorage.getItem('loggedUser'))
+      await this.userStore.fetchLogged();
+      this.logged = this.userStore.getLogged
     }
   },
-
-  updated () {
-    // this.users = this.userStore.fetchAllUsers().users;
+  computed: {
+    async renderUsers() {
+      await this.userStore.fetchAllUsers();
+      return this.userStore.getUsers
+    },
+    async renderLogged() {
+      if(this.logged == undefined || this.logged == ''){
+        await this.userStore.fetchLogged();
+        this.logged = this.userStore.getLogged
+      }
+    }
+  },
+  async created () {
+    if(this.logged == undefined || this.logged == ''){
+      await this.userStore.fetchLogged();
+      this.logged = this.userStore.getLogged
+    }
+    await this.userStore.fetchAllUsers();
+    this.users = this.userStore.getUsers
   },
 
 };

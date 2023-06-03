@@ -20,9 +20,13 @@ export const useActivityStore = defineStore("activity", {
     getThemes() {
       return this.themes;
     },
-    getActivitySuggestions() {
-      const userStore = useUsersStore();
+    async getActivitySuggestions() {
+      const userStore = useUsersStore(); 
       let logged = userStore.getLogged;
+      if(this.logged == undefined || this.logged == ''){
+        await this.userStore.fetchLogged();
+        this.logged = this.userStore.getLogged
+      }
       let user = userStore.getUsers.find((user) => user.email == logged);
       let activities = this.getActivities;
       let activitiesSub = [];

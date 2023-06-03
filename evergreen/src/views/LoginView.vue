@@ -53,6 +53,7 @@
 import { useUsersStore } from "@/stores/User";
 import { useMissionStore } from "@/stores/Mission";
 
+
 export default {
   setup() {
     const userStore = useUsersStore();
@@ -71,12 +72,12 @@ export default {
     async onSubmit() {
       // console.log(this.email);
       let users = this.userStore.getUsers;
-      let login = this.userStore.login(this.email, this.password);
-      let curUser = await (JSON.parse(sessionStorage.getItem('loggedUser'))).user;
-      console.log(curUser);
-      if(curUser.type == 'user'){
-        this.$router.push("/Home");
-      }
+      let login = await this.userStore.login(this.email, this.password);
+      // let curUser = await (JSON.parse(sessionStorage.getItem('loggedUser'))).user;
+      console.log("LOGIN ON SUBMIT", this.userStore.getLogged);
+      // if(curUser.type == 'user'){
+      //   this.$router.push("/Home");
+      // }
 
       if (login == "userWrong") {
         this.error = "Credenciais erradas!";

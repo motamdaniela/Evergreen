@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 import { useUsersStore } from "./User";
 
-import { AuthService } from '@/services/auth.service';
+// import { AuthService } from '@/services/auth.service';
 
 import API_URL from '../services/config.js'
 
@@ -119,25 +119,22 @@ export const useActivityStore = defineStore("activity", {
     // ! get activities
     async fetchAllActivities() {
       console.log('fetch actvs-start');
-      const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/activities`, {
         method: "GET",
         headers:{
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": curUser.accessToken
+          "x-access-token": `Bearer ${accessToken}`
         }
       });
       if (response.ok) {
         const data = await response.json();
-        // this.users = data.users;
-        console.log(data)
+        this.activities = data.activities
+        // console.log('activities store:', this.getActivities)
         return data;
       } else {
-      // console.log(this.authHeader());
-      console.log(response.status)
-        // throw Error(AuthService.handleResponses(response.status));
-    }
-    console.log('fetch actvs-end');
+      console.log(response.status); 
+      }
     },
 
 

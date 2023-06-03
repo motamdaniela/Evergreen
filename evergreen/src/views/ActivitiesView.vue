@@ -162,7 +162,7 @@
           class="card"
           :class="'class' + activity.idTheme"
           max-width="400"
-          v-if="+activity.end > +this.userObj.loginDate"
+          v-if="+activity.end > +this.user.loginDate"
         >
           <img
             class="Sirv image "
@@ -272,7 +272,7 @@ export default {
   data() {
     return {
       activities: [],
-      user: this.userStore.getLogged,
+      user: '',
       userObj: "",
       open: false,
       openFilter: false,
@@ -292,11 +292,12 @@ export default {
       themesPicked: [],
     };
   },
-  created() {
+  async created() {
     this.activities = this.activityStore.getActivities;
-    this.userObj = this.userStore.getUsers.find(
-      (user) => user.email == this.user
-    );
+    if(this.user == undefined || this.user == ''){
+        await this.userStore.fetchLogged();
+        this.logged = this.userStore.getLogged
+      }
   },
   updated() {
     console.log(this.themesPicked);

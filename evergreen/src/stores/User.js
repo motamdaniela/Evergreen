@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 
+//* fzr import destas duas v
 import { AuthService } from '@/services/auth.service';
-
 import API_URL from '../services/config.js'
+
 
 export const useUsersStore = defineStore("user", {
   state: () => ({
-    users: useStorage("users", []),
-    logged: useSessionStorage("logged", ""),
+    // users: useStorage("users", []),
+    // logged: useStorage("logged",{}),
+    users: [],
+    logged: {}
   }),
 
   getters: {
@@ -141,7 +144,7 @@ export const useUsersStore = defineStore("user", {
 
     //? pedido de login
     async login(username, password) {
-      console.log('its logging in')
+      console.log('STORE its logging in')
       //* fetch da resposta ao pedido q queres  vpoe a rota q queres 
       const response = await fetch(`${API_URL}/users/login`, {
         //* v o metodo, headers e body
@@ -157,10 +160,30 @@ export const useUsersStore = defineStore("user", {
       });
       if (response.ok) {
         const data = await response.json();
-        sessionStorage.setItem('loggedUser', JSON.stringify(data));
-        this.logged = data.user.email;
-        console.log('logged inn:', this.logged);
+        sessionStorage.setItem('loggedUser', JSON.stringify(data.accessToken));
+        // this.logged = data.user.email;
+        this.logged = data.user;
+        console.log('STORE logged inn:', this.logged);
         return data;
+    } else {
+      console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
+    },
+
+    //!fecth logged user
+    async fetchLogged() {
+      let accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const response = await fetch(`${API_URL}/users/getLogged`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "x-access-token": `Bearer ${accessToken}`
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        this.logged = data.user;
     } else {
       console.log(response.status)
         // throw Error(AuthService.handleResponses(response.status));
@@ -169,12 +192,12 @@ export const useUsersStore = defineStore("user", {
 
     //? get users
     async fetchAllUsers(){
-      const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/users`, {
         method: "GET",
         headers:{
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": curUser.accessToken
+          "x-access-token": `Bearer ${accessToken}`
         }
       });
       if (response.ok) {
@@ -182,30 +205,7 @@ export const useUsersStore = defineStore("user", {
         this.users = data.users;
         console.log('users na store:', this.users);
         // console.log(data)
-        return data;
-      } else {
-      // console.log(this.authHeader());
-      console.log(response.status)
-        // throw Error(AuthService.handleResponses(response.status));
-    }
-    },
-
-    //? get users
-    async fetchLoggedUser(){
-      const curUser = JSON.parse(sessionStorage.getItem('loggedUser'))
-      const response = await fetch(`${API_URL}/users`, {
-        method: "GET",
-        headers:{
-          "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": curUser.accessToken
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        this.users = data.users;
-        console.log('users na store:', this.users);
-        // console.log(data)
-        return data;
+        // return data;
       } else {
       // console.log(this.authHeader());
       console.log(response.status)

@@ -329,7 +329,7 @@ export default {
       activities: this.activityStore.getActivities,
       themes: this.activityStore.getThemes,
       users: this.userStore.getTop3,
-      logged: this.userStore.getLogged,
+      logged: '',
       activitiesSub: [],
       activitiesSug: [],
       // user: this.userStore.getUsers.find((user) => user.email == this.logged),
@@ -343,7 +343,15 @@ export default {
       activitiesNow: [],
     };
   },
-  created() {
+  async created() {
+    if(this.logged == undefined || this.logged == ''){
+      await this.userStore.fetchLogged();
+      this.logged = this.userStore.getLogged
+    }
+    if(this.users == undefined || this.users == ''){
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getTop3
+    }
     this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);

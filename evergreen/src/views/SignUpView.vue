@@ -94,9 +94,9 @@
 <script>
 import { useUsersStore } from "@/stores/User";
 import { useSchoolStore } from "@/stores/School";
-import {onMounted} from "vue"
+import { onMounted } from "vue";
 
-export default{
+export default {
   setup() {
     const userStore = useUsersStore();
     const schoolStore = useSchoolStore();
@@ -111,10 +111,22 @@ export default{
       username: "",
       password: "",
       passConf: "",
-      schools: this.schoolStore.getSchools,
+      schools: [],
       error: "",
       warning: "",
     };
+  },
+  async created() {
+    let schoolsBD;
+    if (this.schoolStore.getSchools.length == 0) {
+      let bd = await this.schoolStore.getAllSchools();
+      schoolsBD = bd.schools;
+    } else {
+      schoolsBD = this.schoolStore.getSchools;
+    }
+    schoolsBD.forEach((school) => {
+      this.schools.push(school);
+    });
   },
   methods: {
     async onSubmit() {
@@ -140,12 +152,16 @@ export default{
           this.password,
           this.passConf
         );
-        if(thisUser.success == true){
-          await this.userStore.login(this.username, this.password)
-          let curUser = JSON.parse(sessionStorage.getItem('loggedUser'));
-          if(curUser.type == 'user'){
+        if (thisUser.success == true) {
+          await this.userStore.login(this.username, this.password);
+          let logged = this.userStore.getLogged;
+          if (logged.type == "user") {
             this.$router.push("/Home");
-      }
+          } else if (logged.type == "admin") {
+            this.$router.push("/Admin");
+          } else if (logged.type == "security") {
+            this.$router.push("/Occurences");
+          }
         }
         // let user = this.testStore.getLogged;
         // let users = this.testStore.getUsers;
@@ -173,7 +189,6 @@ export default{
       }
     },
   },
-
 };
 </script>
 

@@ -438,8 +438,19 @@ export default {
       filteredActivities:""
     };
   },
-  created() {
-    let users=this.userStore.getUsers;users.forEach(s=>{s.email==this.logged&&(this.user=s)});let list=[];users.forEach(s=>{"user"==s.type&&list.push(s)}),this.users=list,this.users.sort((s,e)=>e.points-s.points||e.activities-s.activities||e.occurences-s.occurences);
+  async created() {
+    if(this.user == undefined || this.user == ''){
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
+    };
+    let users=this.userStore.getUsers;
+    // users.forEach(s=>{
+    //   s.email==this.logged&&(this.user=s)
+    // });
+    let list=[];
+    users.forEach(s=>{
+      "user"==s.type&&list.push(s)
+    }),this.users=list,this.users.sort((s,e)=>e.points-s.points||e.activities-s.activities||e.occurences-s.occurences);
     
 
   },

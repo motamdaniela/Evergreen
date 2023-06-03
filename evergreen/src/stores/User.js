@@ -161,9 +161,7 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         sessionStorage.setItem('loggedUser', JSON.stringify(data.accessToken));
-        // this.logged = data.user.email;
         this.logged = data.user;
-        console.log('STORE logged inn:', this.logged);
         return data;
     } else {
       console.log(response.status)
@@ -171,7 +169,7 @@ export const useUsersStore = defineStore("user", {
     }
     },
 
-    //!fecth logged user
+    //? fecth logged user
     async fetchLogged() {
       let accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/users/getLogged`, {
@@ -203,12 +201,8 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         this.users = data.users;
-        console.log('users na store:', this.users);
-        // console.log(data)
-        // return data;
       } else {
-      // console.log(this.authHeader());
-      console.log(response.status)
+        console.log(response.status)
         // throw Error(AuthService.handleResponses(response.status));
     }
     },

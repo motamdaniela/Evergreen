@@ -7,8 +7,8 @@ import API_URL from "../services/config.js";
 
 export const useOccurrenceStore = defineStore("occurrence", {
   state: () => ({
-    occurrences: useStorage("occurrences", []),
-    types: useStorage("types", []),
+    occurrences: [],
+    types: [],
   }),
   getters: {
     getOccurrences() {
@@ -65,7 +65,7 @@ export const useOccurrenceStore = defineStore("occurrence", {
       });
       if (response.ok) {
         let data = await response.json();
-        this.occurrences = data;
+        this.occurrences = data.occurrences;
         return data;
       } else {
         console.log("not ok");
@@ -84,7 +84,7 @@ export const useOccurrenceStore = defineStore("occurrence", {
       });
       if (response.ok) {
         let data = await response.json();
-        this.types = data;
+        this.types = data.types;
         return data;
       } else {
         console.log("not ok");

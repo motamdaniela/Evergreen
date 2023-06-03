@@ -251,16 +251,24 @@ export default {
     };
   },
   async created() {
-    console.log(await this.occurrenceStore.getAllOccurrences());
-    let schoolsBD = await this.schoolStore.getAllSchools();
-    schoolsBD.schools.forEach((school) => {
+    let schoolsBD, typesBD;
+    if (this.schoolStore.getSchools.length == 0) {
+      let bd = await this.schoolStore.getAllSchools();
+      schoolsBD = bd.schools;
+    } else {
+      schoolsBD = this.schoolStore.getSchools;
+    }
+    schoolsBD.forEach((school) => {
       this.schools.push(school);
     });
 
-    let typesBD = await this.occurrenceStore.getAllTypes();
-    console.log(schoolsBD);
-    console.log(typesBD);
-    typesBD.types.forEach((type) => {
+    if (this.occurrenceStore.getTypes.length == 0) {
+      let bd = await this.occurrenceStore.getAllTypes();
+      typesBD = bd.types;
+    } else {
+      typesBD = this.occurrenceStore.getTypes;
+    }
+    typesBD.forEach((type) => {
       this.types.push(type);
     });
   },
@@ -297,7 +305,6 @@ export default {
       s.buildings.forEach((building) => {
         this.buildings.push(building);
       });
-      console.log(this.buildings);
     },
     changeBuilding() {
       this.classrooms = [];
@@ -309,7 +316,6 @@ export default {
       b.classrooms.forEach((classroom) => {
         this.classrooms.push(classroom);
       });
-      console.log(this.classrooms);
     },
   },
 };

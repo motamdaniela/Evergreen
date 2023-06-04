@@ -33,7 +33,7 @@ export const useMissionStore = defineStore("mission", {
 
     async getAllMissions() {
       const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
-      const response = await fetch(`${API_URL}/occurrences`, {
+      const response = await fetch(`${API_URL}/missions`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -42,11 +42,12 @@ export const useMissionStore = defineStore("mission", {
       });
       if (response.ok) {
         let data = await response.json();
-        this.occurrences = data.occurrences;
+        this.missions = data.missions;
+        console.log(this.missions);
         return data;
       } else {
         console.log("not ok");
-        console.log("STORE - fetch ALL Occurrences error", response);
+        console.log("STORE - fetch ALL Missions error", response);
       }
     },
 

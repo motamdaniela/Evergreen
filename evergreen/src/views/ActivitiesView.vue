@@ -289,6 +289,7 @@ export default {
       },
       themes: [],
       themesPicked: [],
+      getActivitiesDB: [],
     };
   },
   
@@ -297,9 +298,8 @@ export default {
   },
   
   async created() {
-    let actvs_db = await this.activityStore.fetchAllActivities();
-    this.activities = actvs_db.activities
-    console.log('view:' , this.activities)
+    this.getActivitiesDB = await this.activityStore.fetchAllActivities();
+    this.activities = this.getActivitiesDB.activities
     
     let thms_db = await this.themeStore.fetchAllThemes()
     this.themes = thms_db.themes
@@ -344,14 +344,12 @@ export default {
     //   return this.activityStore.getActivities
     // },
 
-    async FilterThemes() {
+    FilterThemes() {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
-        let actvs_db = await this.activityStore.fetchAllActivities();
-        this.activities = actvs_db.activities
+        this.activities = this.getActivitiesDB.activities
       } else {
-        let actvs_db = await this.activityStore.fetchAllActivities();
-        this.activities = actvs_db.activities
+        this.activities = this.getActivitiesDB.activities
         this.activities.forEach((activity) => {
             if (this.themesPicked.includes(activity.idTheme)) {
               filteredList.push(activity);

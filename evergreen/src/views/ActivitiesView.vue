@@ -91,7 +91,7 @@
           <h3>Metas:</h3>
           <p>{{ this.activity.description[2] }}</p>
         </div>
-        <div v-if="+this.activity.begin > +this.userObj.loginDate">
+        <div v-if="+this.activity.begin > +this.user.loginDate">
           <input
             v-if="!changeBtn(this.activity)"
             type="button"
@@ -112,8 +112,8 @@
         <div
           class="textRed"
           v-else-if="
-            +this.activity.begin <= +this.userObj.loginDate &&
-            +this.activity.end >= +this.userObj.loginDate
+            +this.activity.begin <= +this.user.loginDate &&
+            +this.activity.end >= +this.user.loginDate
           "
         >
           <span>
@@ -273,7 +273,6 @@ export default {
     return {
       activities: [],
       user: '',
-      userObj: "",
       open: false,
       openFilter: false,
       suggestion: false,
@@ -289,7 +288,6 @@ export default {
       },
       themes: [],
       themesPicked: [],
-      getActivitiesDB: [],
     };
   },
   
@@ -298,21 +296,24 @@ export default {
   },
   
   async created() {
-    this.getActivitiesDB = await this.activityStore.fetchAllActivities();
-    this.activities = this.getActivitiesDB.activities
+
+    if (this.activities == undefined || this.activities == ''){
+      await this.activityStore.fetchAllActivities();
+      this.activities = this.activityStore.getActivities
+    }
     
-    let thms_db = await this.themeStore.fetchAllThemes()
-    this.themes = thms_db.themes
-    console.log('viewthemes' , this.themes)
-    // this.themes.forEach((theme) => console.log('themes' , theme.name))
+    if (this.themes == undefined || this.themes == ''){
+      await this.themeStore.fetchAllThemes();
+      this.themes = this.themeStore.getThemes
+    }
 
     if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
-      this.logged = this.userStore.getLogged
-    }
+      this.user = this.userStore.getLogged
+      console.log('user', this.user)
+    };
 
-    },
-
+  },
 
   methods: {
     subscribe(activity) {
@@ -339,17 +340,14 @@ export default {
     },
   },
   computed: {
-    // async renderActivities(){
-    //   await this.activityStore.fetchAllActivities()
-    //   return this.activityStore.getActivities
-    // },
-
     FilterThemes() {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
-        this.activities = this.getActivitiesDB.activities
+        // this.activities = this.getActivitiesDB.activities
+        this.activities = this.activityStore.getActivities
       } else {
-        this.activities = this.getActivitiesDB.activities
+        // this.activities = this.getActivitiesDB.activities
+        this.activities = this.activityStore.getActivities
         this.activities.forEach((activity) => {
             if (this.themesPicked.includes(activity.idTheme)) {
               filteredList.push(activity);

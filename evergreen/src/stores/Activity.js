@@ -9,7 +9,6 @@ import API_URL from '../services/config.js'
 export const useActivityStore = defineStore("activity", {
   state: () => ({
     activities: useStorage("activities", []),
-    themes: useStorage("themes", []),
   }),
 
   getters: {
@@ -116,9 +115,8 @@ export const useActivityStore = defineStore("activity", {
 
   actions: {
 
-    // ! get activities
+    // * get activities
     async fetchAllActivities() {
-      console.log('fetch actvs-start');
       const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/activities`, {
         method: "GET",

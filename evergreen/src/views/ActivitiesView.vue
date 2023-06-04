@@ -322,14 +322,12 @@ export default {
         this.form.resources
       )
       location.reload();
-      // this.form.id = this.suggestionStore.getSuggestions.length;
-      // this.form.user = this.userStore.getLogged;
-      // this.suggestionStore.addSuggestions(this.form);
     },
-    subscribe(activity) {
-      console.log(activity.id);
-      this.activityStore.updateUsers(this.user, activity.id);
-      this.missionStore.completeMission(this.user, 0);
+    async subscribe(activity) {
+      await this.activityStore.subscribeActivity(activity)
+      // console.log(activity.id);
+      // this.activityStore.updateUsers(this.user, activity.id);
+      // this.missionStore.completeMission(this.user, 0);
     },
     unsubscribe(activity) {
       activity.users = activity.users.filter((e) => e != this.user);

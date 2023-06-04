@@ -132,6 +132,25 @@ export const useActivityStore = defineStore("activity", {
       }
     },
 
+    async subscribeActivity(activity) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const id = activity._id;
+      const response = await fetch(`${API_URL}/activities/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
 
     addActivity(obj) {
       this.activities.push(obj);

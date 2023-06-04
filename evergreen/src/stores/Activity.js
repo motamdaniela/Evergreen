@@ -16,9 +16,6 @@ export const useActivityStore = defineStore("activity", {
       return this.activities;
     },
 
-    getThemes() {
-      return this.themes;
-    },
     async getActivitySuggestions() {
       const userStore = useUsersStore(); 
       let logged = userStore.getLogged;

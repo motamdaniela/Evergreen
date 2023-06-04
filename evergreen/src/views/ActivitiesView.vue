@@ -278,13 +278,11 @@ export default {
       suggestion: false,
       isFilter: true,
       form: {
-        id: 0,
         theme: "",
         description: "",
         objectives: "",
         goals: "",
-        resources: "",
-        user: "",
+        resources: ""
       },
       themes: [],
       themesPicked: [],
@@ -310,12 +308,24 @@ export default {
     if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged
-      console.log('user', this.user)
     };
 
   },
 
   methods: {
+    async onSubmit() {
+      await this.suggestionStore.submit(
+        this.form.theme,
+        this.form.description,
+        this.form.objectives,
+        this.form.goals,
+        this.form.resources
+      )
+      location.reload();
+      // this.form.id = this.suggestionStore.getSuggestions.length;
+      // this.form.user = this.userStore.getLogged;
+      // this.suggestionStore.addSuggestions(this.form);
+    },
     subscribe(activity) {
       console.log(activity.id);
       this.activityStore.updateUsers(this.user, activity.id);
@@ -331,12 +341,6 @@ export default {
       } else {
         return false;
       }
-    },
-    onSubmit() {
-      this.form.id = this.suggestionStore.getSuggestions.length;
-      this.form.user = this.userStore.getLogged;
-      this.suggestionStore.addSuggestions(this.form);
-      location.reload();
     },
   },
   computed: {

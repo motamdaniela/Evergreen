@@ -82,7 +82,6 @@
   </div>
 
   <v-layout>
-    {{ getUser }}
     <v-app-bar
       class="appBar"
       color="transparent"
@@ -349,12 +348,10 @@ export default {
     ToHide() {
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
-    // getUser() {
-    //   (this.users = this.usersStore.getUsers),
-    //     (this.user = this.usersStore.getUsers.find(
-    //       (e) => e.email == this.usersStore.getLogged
-    //     ));
-    // },
+    async getUser() {
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
+    },
     updateNotifs() {
       // let e = [],
       //   s = this.missionStore.getMissions;
@@ -372,8 +369,9 @@ export default {
     },
   },
   methods: {
-    logOut() {
-      this.usersStore.logOut(), this.$router.push("/");
+   async logOut() {
+      await this.userStore.logOut();
+      this.$router.push("/");
     },
     onSubmit() {
       -1 != this.newAdmin.password.indexOf(" ")
@@ -409,15 +407,13 @@ export default {
   },
 
   
-  async updated () {
-    if(this.user == undefined || this.user == ''){
-      await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
-    }
-  },
+  // async updated () {
+  //     await this.userStore.fetchLogged();
+  //     this.user = this.userStore.getLogged
+  // },
 
   async created () {
-    if(this.user == undefined || this.user == ''){
+    if(sessionStorage.getItem('loggedUser')){
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged
     }

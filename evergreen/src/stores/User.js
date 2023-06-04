@@ -84,7 +84,7 @@ export const useUsersStore = defineStore("user", {
       }
   },
 
-  //? PLEASE DEIXEM ESTE EM COMENTARIO
+  //! PLEASE DEIXEM ESTE EM COMENTARIO
     // login(email, password) {
     //   let curUser = this.users.find(
     //     (user) =>
@@ -207,6 +207,51 @@ export const useUsersStore = defineStore("user", {
     }
     },
 
+    //? subscribe council
+    async subscribeCouncil(){
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const response = await fetch(`${API_URL}/users/council`, {
+        method: "PATCH",
+        headers:{
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // this.users = data.users;
+      } else {
+        console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
+    },
+
+    //? edit profile
+    async editProfile(photo, username, password, confPassword) {
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const id = this.logged._id
+      const response = await fetch(`${API_URL}/users/edit/${id}`, {
+        method: "PATCH",
+        headers:{
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`
+        },
+        body : JSON.stringify({
+          photo: photo,
+          username: username,
+          password: password,
+          confPassword: confPassword
+        })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // this.users = data.users;
+      } else {
+        console.log(response.status)
+        // throw Error(AuthService.handleResponses(response.status));
+    }
+    },
+
     // adds users
     add(obj) {
       obj.rank = this.getUsersUser.length + 1;
@@ -215,6 +260,7 @@ export const useUsersStore = defineStore("user", {
 
     logOut() {
       this.logged = "";
+      sessionStorage.removeItem('loggedUser');
     },
 
     edit(obj) {

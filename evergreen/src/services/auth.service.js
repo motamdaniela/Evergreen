@@ -1,13 +1,3 @@
-/*
-The service provides three important methods with the help of FETCH 
-for HTTP requests & reponses:
-    login(): POST {username, password} & save JWT to Local Storage
-    logout(): remove JWT from Local Storage
-    register(): POST {username, email, password} 
-*/
-
-// import axios from 'axios';
-// const API_URL = 'http://localhost:8080/api/';
 import API_URL from './config.js'
 
 export const AuthService = {

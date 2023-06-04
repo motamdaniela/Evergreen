@@ -60,7 +60,7 @@ export const useSchoolStore = defineStore("school", {
       console.log(response);
       if (response.ok) {
         let data = await response.json();
-        this.schools = data;
+        this.schools = data.schools;
         console.log(data);
         return data;
       } else {

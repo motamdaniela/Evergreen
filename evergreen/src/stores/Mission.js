@@ -1,13 +1,15 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
-import { useActivityStore } from "./activity";
-import { useUsersStore } from "./user";
-import { useOccurrenceStore } from "./occurrence";
+import { useActivityStore } from "./Activity";
+import { useUsersStore } from "./User";
+import { useOccurrenceStore } from "./Occurrence";
+
+import API_URL from "../services/config.js";
 
 export const useMissionStore = defineStore("mission", {
   state: () => ({
-    missions: useStorage("missions", []),
-    type: useStorage("type", []),
+    missions: [],
+    type: [],
   }),
 
   getters: {
@@ -27,6 +29,25 @@ export const useMissionStore = defineStore("mission", {
 
     addType(obj) {
       this.type.push(obj);
+    },
+
+    async getAllMissions() {
+      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/occurrences`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${curUser}`,
+        },
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.occurrences = data.occurrences;
+        return data;
+      } else {
+        console.log("not ok");
+        console.log("STORE - fetch ALL Occurrences error", response);
+      }
     },
 
     addUser(email) {

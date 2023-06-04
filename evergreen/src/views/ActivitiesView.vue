@@ -144,7 +144,7 @@
           v-model="themesPicked"
           :label="theme.name"
           :color="theme.color"
-          :value="theme.id"
+          :value="theme._id"
           density="compact"
           hide-details
           >{{ FilterThemes }}
@@ -254,6 +254,7 @@ import { RouterLink } from "vue-router";
 import { useActivityStore } from "@/stores/Activity";
 import { useUsersStore } from "@/stores/User";
 import { useMissionStore } from "@/stores/Mission";
+import { useThemesStore } from "@/stores/Theme";
 import { useSuggestionStore } from "@/stores/ActivitySuggestion";
 
 export default {
@@ -262,12 +263,11 @@ export default {
     const missionStore = useMissionStore();
     const userStore = useUsersStore();
     const suggestionStore = useSuggestionStore();
+    const themeStore = useThemesStore();
 
-    return { activityStore, missionStore, userStore, suggestionStore };
+    return { activityStore, missionStore, userStore, suggestionStore, themeStore };
   },
-  created() {
-    this.themes.forEach((theme) => this.themeNames.push(theme.name));
-  },
+
   name: "Activities",
   data() {
     return {
@@ -287,21 +287,32 @@ export default {
         resources: "",
         user: "",
       },
-      themes: this.activityStore.getThemes,
-      themeNames: [],
+      themes: [],
       themesPicked: [],
     };
   },
-  async created() {
-    this.activities = this.activityStore.getActivities;
-    if(this.user == undefined || this.user == ''){
-        await this.userStore.fetchLogged();
-        this.logged = this.userStore.getLogged
-      }
-  },
+  
   updated() {
-    console.log(this.themesPicked);
+    console.log('picked', this.themesPicked);
   },
+  
+  async created() {
+    let actvs = await this.activityStore.fetchAllActivities();
+    this.activities = actvs.activities
+    console.log('view:' , this.activities)
+    
+    let thms = await this.themeStore.fetchAllThemes()
+    this.themes = thms.themes
+    console.log('viewthemes' , this.themes)
+
+    if(this.user == undefined || this.user == ''){
+      await this.userStore.fetchLogged();
+      this.logged = this.userStore.getLogged
+    }
+
+    },
+
+
   methods: {
     subscribe(activity) {
       console.log(activity.id);
@@ -327,27 +338,30 @@ export default {
     },
   },
   computed: {
-    FilterThemes() {
+    // async renderActivities(){
+    //   await this.activityStore.fetchAllActivities()
+    //   return this.activityStore.getActivities
+    // },
+
+    async FilterThemes() {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
-        this.activities = this.activityStore.getActivities;
+        let actvs = await this.activityStore.fetchAllActivities();
+        this.activities = actvs.activities
       } else {
-        this.activityStore.getActivities.forEach((activity) => {
+        this.activities.forEach((activity) => {
           this.themesPicked.forEach((theme) => {
-            if (theme == activity.idTheme) {
+            if (theme._id == activity.idTheme) {
               filteredList.push(activity);
             }
           });
         });
+        console.log('filtered ', filteredList)
         this.activities = filteredList;
       }
     },
-    async show(){
-      let a = await this.activityStore.fetchAllActivities()
-
-      this.activities = a.activities
-    }
   },
+
 };
 </script>
 

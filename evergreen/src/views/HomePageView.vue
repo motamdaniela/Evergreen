@@ -292,7 +292,7 @@
     </div>
 
     <br /><br />
-    <div v-if="this.user.council">
+    <div v-if="this.user.council == true">
       <h1 class="padding title"><span>Já és membro do conselho!</span></h1>
       <button class="btn-page btnP" @click="SubConselho">Desistir</button>
     </div>
@@ -333,7 +333,7 @@ export default {
       activitiesSub: [],
       activitiesSug: [],
       // user: this.userStore.getUsers.find((user) => user.email == this.logged),
-      user: JSON.parse(sessionStorage.getItem('loggedUser')),
+      user: '',
       userObj: this.userStore.getLoggedObj,
       open: false,
       loginReward: false,
@@ -344,15 +344,15 @@ export default {
     };
   },
   async created() {
-    if(this.logged == undefined || this.logged == ''){
+    if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
-      this.logged = this.userStore.getLogged
+      this.user = this.userStore.getLogged
     }
     if(this.users == undefined || this.users == ''){
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getTop3
     }
-    this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
+    // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);
     // let today = new Date(),
@@ -460,13 +460,17 @@ export default {
     changeBtn(n) {
       return !!n.users.find((n) => n == this.logged);
     },
-    SubConselho() {
-      (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),
-        this.user.council
-          ? (this.user.council = !1)
-          : ((this.user.council = !0),
-            this.missionStore.completeMission(this.logged, 4)),
-        this.userStore.edit(JSON.stringify(this.user));
+    async SubConselho() {
+      await this.userStore.subscribeCouncil()
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
+      // FOR THE MISSION SUB CONSELHO
+      // (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),
+      //   this.user.council
+      //     ? (this.user.council = !1)
+      //     : ((this.user.council = !0),
+      //       this.missionStore.completeMission(this.logged, 4)),
+      //   this.userStore.edit(JSON.stringify(this.user));
     },
     scrollToTop() {
       window.scrollTo(0, 0);

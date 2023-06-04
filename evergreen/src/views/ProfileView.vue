@@ -96,8 +96,7 @@
 
 <!-- edit profile -->
 <v-dialog v-model="editProfile">
-    <div class="fieldPklight modal editModal">
-      <!-- <v-card elevation="0" color="#F9F9F9"> -->
+    <div class="fieldPklight modal-lg editModal">
         <!-- <v-card-actions> -->
           <button class="btnRound btnPk" @click="editProfile = false">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -107,64 +106,62 @@
         <!-- <v-card-text> -->
           <form @submit.prevent="onSubmit">
 
-            <label for="photo" class="semiTitle">Nova foto de perfil</label>
-            <br>
-            <img v-if="form.newPhoto==''" :src="user.photo" width="100">
-            <img v-else :src="form.newPhoto" width="100">
-            <br />
+            <div>
+            <div>
+              <label for="photo" class="semiTitle">Nova foto de perfil</label>
+              <br>
+              <img class="pfp" v-if="form.newPhoto==''" :src="user.photo" width="100">
+              <img class="pfp" v-else :src="form.newPhoto" width="100">
+              <br />
+            </div>
+            
             <input 
-              @change="previewFiles"
-              type="file"
-              name="picture"
-              accept="image/png, image/jpeg"
-              ref="myFiles"
-              required
-            />
-            <button class="btn-card btnG" type="submit" @click="EditPhoto">Guardar</button>
-          </form>
-          
-          <form @submit.prevent="onSubmit">
+            @change="previewFiles"
+            type="file"
+            name="picture"
+            accept="image/png, image/jpeg"
+            ref="myFiles"
+            /> 
 
-            <!-- <label class="semiTitle">Nome de utilizador atual</label>
-            <h3>@{{ user.username }}</h3>
-            <br /> -->
-            <label for="username" class="semiTitle">Novo nome de utilizador</label>
-            <br />
-            <input
-              class="input"
-              id="username"
-              v-model="form.newUsername"
-              type="text"
-              required
-            />
-            <button class="btn-card btnG" type="submit" @click="EditUser">Guardar</button>
-          </form>
-          
-          <form id="editPass" @submit.prevent="onSubmit">
+            <div>
+              <label for="username" class="semiTitle">Novo nome de utilizador</label>
+              <br />
+              <input
+                class="input"
+                id="username"
+                v-model="form.newUsername"
+                type="text"
+              />
+              <br />
+              <label for="pass" class="semiTitle">Nova palavra-passe</label>
+              <br />
+              <input
+                class="input"
+                id="pass"
+                v-model="form.newPassword"
+                type="password"
+              />
+              <br />
+              <label for="passC" v-if="this.form.newPassword" class="semiTitle">Confirmar palavra-passe</label>
+              <br />
+              <input
+                class="input"
+                id="passC"
+                v-model="form.newPasswordConf"
+                v-if="this.form.newPassword"
+                type="password"
+              />
+            </div>
+            </div>
 
-            <label for="pass" class="semiTitle">Nova palavra-passe</label>
-            <br />
-            <input
-              class="input"
-              id="pass"
-              v-model="form.newPassword"
-              type="password"
-              required
-            />
-            <br />
-            <label for="passC" class="semiTitle">Confirmar palavra-passe</label>
-            <br />
-            <input
-              class="input"
-              id="passC"
-              v-model="form.newPasswordConf"
-              type="password"
-              required
-            />
-            <button class="btn-card btnG" type="submit" @click="EditPass">Guardar</button>
             <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{
         error
       }}</v-alert>
+
+            <v-card-actions>
+              <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" type="submit" >Guardar</button>
+            </v-card-actions>
+
       <v-alert
         class="errorAlert"
         type="warning"
@@ -443,6 +440,8 @@ export default {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged
     };
+    this.form.newUsername = this.user.username
+
     let users=this.userStore.getUsers;
     // users.forEach(s=>{
     //   s.email==this.logged&&(this.user=s)
@@ -459,15 +458,26 @@ export default {
 
   },
   methods: {
-    EditPhoto() {
-      this.form.newPhoto&&(this.user.photo=this.form.newPhoto,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPhoto="");
+    async onSubmit(){
+      await this.userStore.editProfile(
+        this.form.newPhoto,
+        this.form.newUsername,
+        this.form.newPassword,
+        this.form.newPasswordConf
+      );
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged
     },
-    EditUser() {
-      -1!=this.form.newUsername.indexOf(" ")?(this.warning="Nome de utilizador não pode conter espaços.",this.error=""):this.form.newUsername.length<3?(this.warning="Nome de utilizador tem de ter no mínimo 3 caracteres.",this.error=""):this.form.newUsername&&(this.userStore.getUsers.find(e=>e.username==this.form.newUsername)?(this.error="Este username já existe!",this.warning=""):(this.user.username=this.form.newUsername,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newUsername=""));
-    },
-    EditPass() {
-      -1!=this.form.newPassword.indexOf(" ")?(this.warning="Palavra-passe não pode conter espaços.",this.error=""):this.form.newPassword.length<8?(this.warning="Palavra-passe tem de ter no mínimo 8 caracteres.",this.error=""):this.form.newPassword&&this.form.newPasswordConf&&(this.form.newPassword==this.form.newPasswordConf?(this.user.password=this.form.newPassword,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPassword=this.form.newPasswordConf=""):(this.error="Confirme que a palavra-passe coincide.",this.warning=""));
-    },
+
+    // EditPhoto() {
+    //   this.form.newPhoto&&(this.user.photo=this.form.newPhoto,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPhoto="");
+    // },
+    // EditUser() {
+    //   -1!=this.form.newUsername.indexOf(" ")?(this.warning="Nome de utilizador não pode conter espaços.",this.error=""):this.form.newUsername.length<3?(this.warning="Nome de utilizador tem de ter no mínimo 3 caracteres.",this.error=""):this.form.newUsername&&(this.userStore.getUsers.find(e=>e.username==this.form.newUsername)?(this.error="Este username já existe!",this.warning=""):(this.user.username=this.form.newUsername,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newUsername=""));
+    // },
+    // EditPass() {
+    //   -1!=this.form.newPassword.indexOf(" ")?(this.warning="Palavra-passe não pode conter espaços.",this.error=""):this.form.newPassword.length<8?(this.warning="Palavra-passe tem de ter no mínimo 8 caracteres.",this.error=""):this.form.newPassword&&this.form.newPasswordConf&&(this.form.newPassword==this.form.newPasswordConf?(this.user.password=this.form.newPassword,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPassword=this.form.newPasswordConf=""):(this.error="Confirme que a palavra-passe coincide.",this.warning=""));
+    // },
     subscribe(activity) {
       console.log(activity),this.activityStore.updateUsers(this.logged,activity.id),this.missionStore.completeMission(this.logged,0);
     },

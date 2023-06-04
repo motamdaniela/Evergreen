@@ -66,6 +66,12 @@ a {
   box-shadow: 3px 3px 0px #050b06;
 }
 
+.pfp{
+    border-radius: 50px;
+    border: 2px solid #09140b;
+    box-shadow: 2px 2px 0px #09140b;
+}
+
 .btn-page {
   border: 2px solid #050b06;
   padding: 10px;

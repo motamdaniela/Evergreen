@@ -85,11 +85,11 @@
           </div>
 
           <h3>Diagnóstico:</h3>
-          <p>{{ this.activity.desc1 }}</p>
+          <p>{{ this.activity.description[0] }}</p>
           <h3>Objetivos:</h3>
-          <p>{{ this.activity.desc2 }}</p>
+          <p>{{ this.activity.description[1] }}</p>
           <h3>Metas:</h3>
-          <p>{{ this.activity.desc3 }}</p>
+          <p>{{ this.activity.description[2] }}</p>
         </div>
         <div v-if="+this.activity.begin > +this.userObj.loginDate">
           <input
@@ -297,13 +297,14 @@ export default {
   },
   
   async created() {
-    let actvs = await this.activityStore.fetchAllActivities();
-    this.activities = actvs.activities
+    let actvs_db = await this.activityStore.fetchAllActivities();
+    this.activities = actvs_db.activities
     console.log('view:' , this.activities)
     
-    let thms = await this.themeStore.fetchAllThemes()
-    this.themes = thms.themes
+    let thms_db = await this.themeStore.fetchAllThemes()
+    this.themes = thms_db.themes
     console.log('viewthemes' , this.themes)
+    // this.themes.forEach((theme) => console.log('themes' , theme.name))
 
     if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
@@ -346,16 +347,16 @@ export default {
     async FilterThemes() {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
-        let actvs = await this.activityStore.fetchAllActivities();
-        this.activities = actvs.activities
+        let actvs_db = await this.activityStore.fetchAllActivities();
+        this.activities = actvs_db.activities
       } else {
+        let actvs_db = await this.activityStore.fetchAllActivities();
+        this.activities = actvs_db.activities
         this.activities.forEach((activity) => {
-          this.themesPicked.forEach((theme) => {
-            if (theme._id == activity.idTheme) {
+            if (this.themesPicked.includes(activity.idTheme)) {
               filteredList.push(activity);
             }
           });
-        });
         console.log('filtered ', filteredList)
         this.activities = filteredList;
       }

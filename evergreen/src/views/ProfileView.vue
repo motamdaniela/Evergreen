@@ -374,11 +374,11 @@
   <div>
     <h1 class="gradientGreen padding"><span>Crachás</span></h1>
     <br>
-    <!-- <div v-if="!this.user.rewards.length || this.user.rewards.length <= 0">
+    <div v-if="!this.user.rewards.length || this.user.rewards.length <= 0">
       <p>Ainda não tens nenhum crachá!</p>
       <p>Coleciona-os todos completando</p>
       <p><RouterLink to="/Missions">missões</RouterLink></p>
-    </div> -->
+    </div>
     <div class="badgesDiv">
       <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true; this.badge = badge"/>
     </div>

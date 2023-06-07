@@ -92,7 +92,7 @@
       v-if="ToHide"
     >
       <v-app-bar-title>
-        <RouterLink v-if="!isLogged" to="/"
+        <RouterLink v-if="!isLogged()" to="/"
           ><img
             style="margin-right: 500px; margin-top: 30px"
             width="25"
@@ -112,7 +112,7 @@
         /></RouterLink>
       </v-app-bar-title>
 
-      <nav class="longNav" v-if="!isLogged">
+      <nav class="longNav" v-if="!isLogged()">
         <RouterLink class="homeLink" to="/" name="">Início</RouterLink>
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink
@@ -127,7 +127,7 @@
           <RouterLink to="/signUp" name="">Registar</RouterLink>
         </button>
       </nav>
-      <nav class="longNav" v-if="isLogged && this.user.type == 'user'">
+      <nav class="longNav" v-if="isLogged() && this.user.type == 'user'">
         <RouterLink class="homeLink" to="/Home" name=""
           >Página principal</RouterLink
         >
@@ -165,7 +165,7 @@
           <img :src="this.user.photo" id="profilePhoto" alt="" />
         </RouterLink>
       </nav>
-      <nav v-if="isLogged && this.user.type == 'admin'">
+      <nav v-if="isLogged() && this.user.type == 'admin'">
         <button @click="dialogAdd = true" class="addbtn">
           <img
             style="width: 30px"
@@ -181,7 +181,7 @@
           />
         </button>
       </nav>
-      <nav v-if="isLogged && this.user.type == 'security'">
+      <nav v-if="isLogged() && this.user.type == 'security'">
         <button @click="logOut" class="navbtn logoutbtn">
           <img
             style="width: 30px"
@@ -192,7 +192,7 @@
       </nav>
 
       <v-app-bar-nav-icon
-        v-if="!isLogged || (isLogged && this.user.type == 'user')"
+        v-if="!isLogged() || (isLogged() && this.user.type == 'user')"
         id="ddmenu"
         @click.stop="drawer = !drawer"
       >
@@ -205,7 +205,7 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" location="right" temporary>
-      <v-list v-if="!isLogged" role="">
+      <v-list v-if="!isLogged()" role="">
         <RouterLink class="drawerLink" to="/"
           ><v-list-item title="Início"></v-list-item
         ></RouterLink>
@@ -224,7 +224,7 @@
           ><v-list-item title="Registar"></v-list-item
         ></RouterLink>
       </v-list>
-      <v-list v-if="isLogged && this.user.type == 'user'" role="">
+      <v-list v-if="isLogged() && this.user.type == 'user'" role="">
         <RouterLink class="drawerLink" to="/Home"
           ><v-list-item title="Página Principal"></v-list-item
         ></RouterLink>
@@ -267,7 +267,7 @@
         </RouterLink>
       </v-list>
 
-      <v-list v-if="isLogged && this.user.type == 'admin'" role="">
+      <v-list v-if="isLogged() && this.user.type == 'admin'" role="">
         <button @click="dialogAdd = true" class="addbtn">
           <img
             style="width: 30px"
@@ -283,7 +283,7 @@
           />
         </button>
       </v-list>
-      <v-list v-if="isLogged && this.user.type == 'security'" role="">
+      <v-list v-if="isLogged() && this.user.type == 'security'" role="">
         <button @click="logOut" class="navbtn logoutbtn">
           <img
             style="width: 30px"
@@ -338,13 +338,13 @@ export default {
     };
   },
   computed: {
-    isLogged() {
-      // return !!this.user
-      if(sessionStorage.getItem('loggedUser')){
-        return true;
-      }
+    // isLogged() {
+    //   // return !!this.user
+    //   if(sessionStorage.getItem('loggedUser')){
+    //     return true;
+    //   }
       // return !!this.usersStore.getLogged;
-    },
+    // },
     ToHide() {
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
@@ -404,6 +404,13 @@ export default {
           (this.newAdmin.password = ""),
           (this.newAdmin.passConf = ""));
     },
+    isLogged() {
+      if(sessionStorage.getItem('loggedUser')){
+        return true;
+      }else{
+        return false;
+      }
+    }
   },
 
   

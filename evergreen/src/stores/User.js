@@ -161,7 +161,7 @@ export const useUsersStore = defineStore("user", {
         const data = await response.json();
         sessionStorage.setItem("loggedUser", JSON.stringify(data.accessToken));
         this.logged = data.user;
-        return data;
+        return data.user;
       } else {
         console.log(response.status);
         // throw Error(AuthService.handleResponses(response.status));

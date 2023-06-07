@@ -154,7 +154,7 @@ export const useActivityStore = defineStore("activity", {
 
     // * get activities
     async fetchSubActivities() {
-      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser') != '')
       const response = await fetch(`${API_URL}/activities/subscribed`, {
         method: "GET",
         headers:{

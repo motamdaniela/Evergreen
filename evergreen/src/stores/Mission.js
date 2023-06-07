@@ -80,6 +80,10 @@ export const useMissionStore = defineStore("mission", {
         console.log(actList);
         this.missions.forEach((mission) => {
           if (mission.type == type) {
+            
+            //! eu adicionei este if pq o missions n tem users ent a nav n me estava a aparecer
+            if(mission.users){
+
             mission.users.forEach((user) => {
               if (user.user == logged && user.status < mission.max) {
                 if (user.status < mission.max) {
@@ -94,6 +98,11 @@ export const useMissionStore = defineStore("mission", {
                 // }
               }
             });
+
+          //!
+          }
+          //!
+
           }
         });
       } else if (type == 1) {
@@ -103,12 +112,24 @@ export const useMissionStore = defineStore("mission", {
         let actList = [];
 
         let activities = activityStore.getActivities;
+
+        
         activities.forEach((activity) => {
+          
+          //! o msm erro
+          if(activities.participated){
+
           activity.participated.forEach((user) => {
             if (user == logged) {
               actList.push(activity);
             }
           });
+
+          //!
+        }
+        //!
+
+
         });
 
         this.missions.forEach((mission) => {

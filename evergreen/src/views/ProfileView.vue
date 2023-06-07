@@ -420,8 +420,6 @@ export default {
       openBadge: false,
       newPassword: "",
       newUsername: "",
-      newColor: "",
-      newShape: "",
       activitiesSub: [],
       ocsDone: [],
       ocsPend: [],
@@ -450,29 +448,42 @@ export default {
     // });
 
     // if(this.users == undefined || this.users == ''){
+
+      // get the list of all users, activities and occurrences
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getUsers
 
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities
 
-      await this.occurrenceStore.getAllOccurrences();
+      this.occurences= await this.occurrenceStore.getAllOccurrences();
       this.occurences = this.occurrenceStore.getOccurrences
 
-      ;
       this.activitiesSub = await this.activityStore.fetchSubActivities();
-    // };
-    // let list=[];
-    // this.users.forEach((user)=>{
-    //   if(user.type == "user"){
-    //     list.push(user)
-    //   }
-    // })
-    // this.users=list
+
+      //filter the lists of user's pending and done occurrences
+      console.log(await this.occurrenceStore.getAllOccurrences())
+      this.occurences.forEach(oc =>{
+        if(oc.userID == this.user._id){
+          console.log(oc)
+          if(oc.status == 'pending'){
+            console.log('encontrou')
+          }
+          
+          switch(oc.status){
+            case "pending":
+              this.ocsPend.push(oc);
+            case "solved":
+              this.ocsDone.push(oc);
+          }
+        }
+      })
+      // console.log(this.user)
+      // console.log(this.ocsPend[0], this.ocsDone)
+
+
     this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
-    // console.log(this.users[0])
-    // console.log(this.user)
-    // console.log(this.users.indexOf(this.user))
+
     this.curUser = this.users.find(user => user.email == this.user.email)
     console.log(this.users.indexOf(this.curUser))
     
@@ -494,15 +505,6 @@ export default {
       this.user = this.userStore.getLogged
     },
 
-    // EditPhoto() {
-    //   this.form.newPhoto&&(this.user.photo=this.form.newPhoto,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPhoto="");
-    // },
-    // EditUser() {
-    //   -1!=this.form.newUsername.indexOf(" ")?(this.warning="Nome de utilizador não pode conter espaços.",this.error=""):this.form.newUsername.length<3?(this.warning="Nome de utilizador tem de ter no mínimo 3 caracteres.",this.error=""):this.form.newUsername&&(this.userStore.getUsers.find(e=>e.username==this.form.newUsername)?(this.error="Este username já existe!",this.warning=""):(this.user.username=this.form.newUsername,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newUsername=""));
-    // },
-    // EditPass() {
-    //   -1!=this.form.newPassword.indexOf(" ")?(this.warning="Palavra-passe não pode conter espaços.",this.error=""):this.form.newPassword.length<8?(this.warning="Palavra-passe tem de ter no mínimo 8 caracteres.",this.error=""):this.form.newPassword&&this.form.newPasswordConf&&(this.form.newPassword==this.form.newPasswordConf?(this.user.password=this.form.newPassword,this.editProfile=!1,this.missionStore.completeMission(this.logged,7),this.form.newPassword=this.form.newPasswordConf=""):(this.error="Confirme que a palavra-passe coincide.",this.warning=""));
-    // },
     subscribe(activity) {
       console.log(activity),this.activityStore.updateUsers(this.logged,activity.id),this.missionStore.completeMission(this.logged,0);
     },

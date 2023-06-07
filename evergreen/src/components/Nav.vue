@@ -117,7 +117,7 @@
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink
         >
-        <RouterLink class="faqLink" to="/faq" name="faq">F.A.Q.</RouterLink>
+        <RouterLink class="faqLink" to="/faq" name="">F.A.Q.</RouterLink>
         <button id="login" class="navbtn btnP">
           <RouterLink v-on:click="ToHide" to="/login" name=""
             >Entrar</RouterLink
@@ -153,12 +153,7 @@
           >Sobre Eco-Escolas</RouterLink
         >
         <RouterLink class="faqLink" to="/faq" name="">F.A.Q.</RouterLink>
-        <button
-          v-if="this.$route.name == 'Profile'"
-          @click="logOut"
-          alt=""
-          id="logOutBtn"
-        >
+        <button v-if="this.$route.name == 'Profile'" @click="logOut" alt="">
           <img
             class="logoutbtn"
             style="width: 30px; height: 25px"
@@ -325,7 +320,8 @@ export default {
       // user: this.usersStore.getUsers.find(
       //   (e) => e.email == this.usersStore.getLogged
       // ),
-      user: "",
+      previousLogged: undefined,
+      user: '',
       drawer: !1,
       group: null,
       collapse: !1,
@@ -348,14 +344,14 @@ export default {
     //   if(sessionStorage.getItem('loggedUser')){
     //     return true;
     //   }
-      // return !!this.usersStore.getLogged;
+    //   return !!this.usersStore.getLogged;
     // },
     ToHide() {
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
     async getUser() {
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged;
+      this.user = this.userStore.getLogged
     },
     updateNotifs() {
       // let e = [],
@@ -374,7 +370,7 @@ export default {
     },
   },
   methods: {
-    async logOut() {
+   async logOut() {
       await this.userStore.logOut();
       this.$router.push("/");
     },
@@ -410,26 +406,34 @@ export default {
           (this.newAdmin.passConf = ""));
     },
     isLogged() {
+      // let currentLogged = sessionStorage.getItem('loggedUser');
+      // if(this.previousLogged != currentLogged){
+      //   // location.reload();
+      // }
       if(sessionStorage.getItem('loggedUser')){
         return true;
       }else{
         return false;
       }
+      // return !!this.usersStore.getLogged;
     }
+    //? FZR UM IF CASO A ROTA MUDE
   },
 
-
+  
   // async updated () {
   //     await this.userStore.fetchLogged();
   //     this.user = this.userStore.getLogged
   // },
 
-  async created() {
-    if (sessionStorage.getItem("loggedUser")) {
+  async created () {
+    if(sessionStorage.getItem('loggedUser')){
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged;
+      this.user = this.userStore.getLogged
     }
+    console.log(this.isLogged())
   },
+
 };
 </script>
 

@@ -19,21 +19,9 @@ import ListOc from "../views/ListofOccurencesView.vue";
 import ListofActivities from "../views/ListofActivitiesView.vue";
 
 
-
-//! Teste
-import Test from "../views/1TestView.vue";
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
-    //! Para teste
-    {
-      path: "/Test",
-      name: "Test",
-      component: Test,
-    },
-
 
     {
       path: "/",

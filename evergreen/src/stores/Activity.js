@@ -144,7 +144,8 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
-        return data
+        console.log(data, 2);
+        return data.activity;
       } else {
         console.log(response.status);
         // throw Error(AuthService.handleResponses(response.status));

@@ -98,7 +98,7 @@
             class="btn-page btnG btnModal"
             id="sub"
             value="Inscrever"
-            @click="subscribe(this.activity), changeBtn(this.activity)"
+            @click="subscribe(this.activity)"
           />
           <input
             v-else
@@ -106,7 +106,7 @@
             class="btn-page btnR btnModal"
             id="unsub"
             value="Anular Inscrição"
-            @click="unsubscribe(this.activity), changeBtn(this.activity)"
+            @click="subscribe(this.activity)"
           />
         </div>
         <div
@@ -157,7 +157,7 @@
     </button>
 
     <div class="list">
-      <div class="grid-item" v-for="activity in activities">
+      <div class="grid-item" v-for="activity in this.activities">
         <v-card
           class="card"
           :class="'class' + activity.idTheme"
@@ -272,6 +272,7 @@ export default {
   data() {
     return {
       activities: [],
+      activity: {},
       user: '',
       open: false,
       openFilter: false,
@@ -289,10 +290,6 @@ export default {
     };
   },
   
-  updated() {
-    console.log('picked', this.themesPicked);
-  },
-  
   async created() {
 
     if (this.activities == undefined || this.activities == ''){
@@ -308,8 +305,7 @@ export default {
     if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged
-    };
-
+    }
   },
 
   methods: {
@@ -324,16 +320,10 @@ export default {
       location.reload();
     },
     async subscribe(activity) {
-      await this.activityStore.subscribeActivity(activity)
-      // console.log(activity.id);
-      // this.activityStore.updateUsers(this.user, activity.id);
-      // this.missionStore.completeMission(this.user, 0);
-    },
-    unsubscribe(activity) {
-      activity.users = activity.users.filter((e) => e != this.user);
+      this.activity = await this.activityStore.subscribeActivity(activity)
     },
     changeBtn(activity) {
-      let u = activity.users.find((user) => user == this.user);
+      let u = activity.users.find((user) => user.user == this.user._id);
       if (u) {
         return true;
       } else {

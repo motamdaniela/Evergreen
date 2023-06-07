@@ -1,9 +1,6 @@
 <template>
   <h1 class="title"><img src="../assets/images/flowerO.svg" />Missões</h1>
   <div v-for="mission in missions">
-    <p>{{ mission.title }}</p>
-  </div>
-  <!-- <div v-for="mission in missions">
     <fieldset :class="MissionsState(mission.reward, mission)">
       <div class="missionCard">
         <div class="badge" :class="BadgeState(mission.reward, mission)">
@@ -20,20 +17,23 @@
         </div>
         <div class="missionTxt">
           <h3>{{ mission.title }}</h3>
-          <p class="idk">{{ complete(mission.users, mission.id) }}</p>
+          <p class="idk">{{ complete(mission.users, mission._id) }}</p>
           <p>{{ mission.description }}</p>
           <br />
-          <p style="font-weight: 600" v-if="state[mission.id][0] == mission.id">
-            {{ state[mission.id][1] }}
+          <!-- <p
+            style="font-weight: 600"
+            v-if="state[missions.indexOf(mission)][0] == mission._id"
+          >
+            {{ state[missions.indexOf(mission)][1] }}
           </p>
-          <p v-else></p>
+          <p v-else></p> -->
         </div>
         <button
-          v-if="state[mission.id][1] != 'Concluída'"
+          v-if="state[missions.indexOf(mission)][1] != mission.max"
           @click="redirect(mission.redirect)"
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
-          :id="mission.id"
+          :id="mission._id"
         >
           <img class="btnContent" src="/src/assets/icons/icones/goarrow.svg" />
         </button>
@@ -44,7 +44,7 @@
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
           type="button"
-          :id="mission.id"
+          :id="mission._id"
           value="receber"
         >
           <img
@@ -54,7 +54,7 @@
         </button>
       </div>
     </fieldset>
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -78,8 +78,16 @@ export default {
       logged: "",
     };
   },
+
   async created() {
-    console.log("ola");
+    await this.usersStore.fetchAllUsers();
+    await this.usersStore.fetchLogged();
+    this.user = this.usersStore.getLoggedObj;
+
+    if (this.logged == undefined || this.logged == "") {
+      await this.usersStore.fetchLogged();
+      this.logged = this.usersStore.getLogged;
+    }
     let missionsBD;
     if (this.missionStore.getMissions.length == 0) {
       let bd = await this.missionStore.getAllMissions();
@@ -90,13 +98,12 @@ export default {
     missionsBD.forEach((mission) => {
       this.missions.push(mission);
     });
-    console.log(this.missions);
   },
   methods: {
     complete(users, id) {
       users.forEach((user) => {
-        if (user[0] == this.logged && id != undefined) {
-          this.state.push([id, user[2]]);
+        if (user.user == this.logged._id && id != undefined) {
+          this.state.push([id, user.status]);
         }
       });
     },
@@ -108,17 +115,17 @@ export default {
         return "fieldG";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Em progresso" && user[0] == this.logged
+          (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user[2] == "Concluída" && user[0] == this.logged
+            (user) => user.status == mission.max && user.user == this.logged._id
           ))
       ) {
         return "fieldY";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Não começou" && user[0] == this.logged
+          (user) => user.status == 0 && user.user == this.logged._id
         )
       ) {
         return "fieldR";
@@ -129,17 +136,17 @@ export default {
         return "badgeG";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Em progresso" && user[0] == this.logged
+          (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user[2] == "Concluída" && user[0] == this.logged
+            (user) => user.status == mission.max && user.user == this.logged._id
           ))
       ) {
         return "badgeY";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Não começou" && user[0] == this.logged
+          (user) => user.status == 0 && user.user == this.logged._id
         )
       ) {
         return "badgeR";
@@ -150,17 +157,17 @@ export default {
         return "bgG";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Em progresso" && user[0] == this.logged
+          (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user[2] == "Concluída" && user[0] == this.logged
+            (user) => user.status == mission.max && user.user == this.logged._id
           ))
       ) {
         return "bgY";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Não começou" && user[0] == this.logged
+          (user) => user.status == 0 && user.user == this.logged._id
         )
       ) {
         return "bgR";
@@ -172,7 +179,7 @@ export default {
       } else if (
         !this.user.rewards.find((reward) => reward == missionReward) &&
         mission.users.find(
-          (user) => user[2] == "Concluída" && user[0] == this.logged
+          (user) => user.status == mission.max && user.user == this.logged._id
         )
       ) {
         return "lockY";
@@ -185,17 +192,17 @@ export default {
         return "btnMissionG";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Em progresso" && user[0] == this.logged
+          (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.user.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user[2] == "Concluída" && user[0] == this.logged
+            (user) => user.status == mission.max && user.user == this.logged._id
           ))
       ) {
         return "btnMissionY";
       } else if (
         mission.users.find(
-          (user) => user[2] == "Não começou" && user[0] == this.logged
+          (user) => user.status == 0 && user.user == this.logged._id
         )
       ) {
         return "btnMissionR";
@@ -204,15 +211,9 @@ export default {
     addBadge(missionReward) {
       if (!this.user.rewards.find((reward) => reward == missionReward)) {
         this.user.rewards.push(missionReward);
-        this.missionStore.completeMission(this.logged, 9);
+        this.missionStore.completeMission(this.logged._id, 9);
       }
     },
-  },
-  async created() {
-    if (this.logged == undefined || this.logged == "") {
-      await this.usersStore.fetchLogged();
-      this.logged = this.usersStore.getLogged;
-    }
   },
 };
 </script>

@@ -9,7 +9,6 @@ import API_URL from '../services/config.js'
 export const useActivityStore = defineStore("activity", {
   state: () => ({
     activities: useStorage("activities", []),
-    themes: useStorage("themes", []),
   }),
 
   getters: {
@@ -17,9 +16,6 @@ export const useActivityStore = defineStore("activity", {
       return this.activities;
     },
 
-    getThemes() {
-      return this.themes;
-    },
     async getActivitySuggestions() {
       const userStore = useUsersStore(); 
       let logged = userStore.getLogged;
@@ -116,9 +112,8 @@ export const useActivityStore = defineStore("activity", {
 
   actions: {
 
-    // ! get activities
+    // * get activities
     async fetchAllActivities() {
-      console.log('fetch actvs-start');
       const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
       const response = await fetch(`${API_URL}/activities`, {
         method: "GET",
@@ -134,6 +129,25 @@ export const useActivityStore = defineStore("activity", {
         return data;
       } else {
       console.log(response.status); 
+      }
+    },
+
+    async subscribeActivity(activity) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const id = activity._id;
+      const response = await fetch(`${API_URL}/activities/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
       }
     },
 

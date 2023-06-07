@@ -61,18 +61,18 @@ themes.forEach((theme) => {
 //     ? console.log("type has already been added")
 //     : occurrenceStore.addType(type);
 // });
-let mss = missionStore.getMissions;
-missions.forEach((mission) => {
-  mss.find((m) => m.id == mission.id)
-    ? console.log("mission has already been added")
-    : missionStore.addMission(mission);
-});
-let tpm = missionStore.getTypes;
-typeM.forEach((type) => {
-  tpm.find((t) => t.id == type.id)
-    ? console.log("type has already been added")
-    : missionStore.addType(type);
-});
+// let mss = missionStore.getMissions;
+// missions.forEach((mission) => {
+//   mss.find((m) => m.id == mission.id)
+//     ? console.log("mission has already been added")
+//     : missionStore.addMission(mission);
+// });
+// let tpm = missionStore.getTypes;
+// typeM.forEach((type) => {
+//   tpm.find((t) => t.id == type.id)
+//     ? console.log("type has already been added")
+//     : missionStore.addType(type);
+// });
 // let cmp = schoolStore.getCampus;
 // campus.forEach((camp) => {
 //   cmp.find((c) => c.id == camp.id)

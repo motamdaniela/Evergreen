@@ -33,7 +33,7 @@ export const useMissionStore = defineStore("mission", {
 
     async getAllMissions() {
       const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
-      const response = await fetch(`${API_URL}/occurrences`, {
+      const response = await fetch(`${API_URL}/missions`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -42,11 +42,12 @@ export const useMissionStore = defineStore("mission", {
       });
       if (response.ok) {
         let data = await response.json();
-        this.occurrences = data.occurrences;
+        this.missions = data.missions;
+        console.log(this.missions);
         return data;
       } else {
         console.log("not ok");
-        console.log("STORE - fetch ALL Occurrences error", response);
+        console.log("STORE - fetch ALL Missions error", response);
       }
     },
 
@@ -68,6 +69,7 @@ export const useMissionStore = defineStore("mission", {
         let actList = [];
 
         let activities = activityStore.getActivities;
+        console.log(activities);
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
             if (user == logged) {
@@ -75,21 +77,21 @@ export const useMissionStore = defineStore("mission", {
             }
           });
         });
-
+        console.log(actList);
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
-              if (user[0] == logged && user[1] < mission.max) {
-                if (user[1] < mission.max) {
-                  user[1] = actList.length;
+              if (user.user == logged && user.status < mission.max) {
+                if (user.status < mission.max) {
+                  user.status = actList.length;
                 }
-                if (user[1] == 0) {
-                  user[2] = "Não começou";
-                } else if (user[1] == mission.max) {
-                  user[2] = "Concluída";
-                } else {
-                  user[2] = "Em progresso";
-                }
+                // if (user[1] == 0) {
+                //   user[2] = "Não começou";
+                // } else if (user[1] == mission.max) {
+                //   user[2] = "Concluída";
+                // } else {
+                //   user[2] = "Em progresso";
+                // }
               }
             });
           }

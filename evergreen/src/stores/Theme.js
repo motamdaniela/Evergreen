@@ -27,7 +27,6 @@ export const useThemesStore = defineStore("theme", {
       if (response.ok) {
         let data = await response.json();
         this.themes = data.themes;
-        // console.log('theme store', this.themes);
         return data;
       } else {
         console.log(response.status);

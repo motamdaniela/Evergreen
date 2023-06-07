@@ -324,7 +324,7 @@
         <RouterLink to="/Rank" id="positionIcon">
             <div id="divRank">
           <img id="rankIcon" src="../assets/images/aboutPurple.svg">
-            <p id="userPos">{{ this.users.indexOf(user) + 1 }}</p>
+            <p id="userPos">{{ this.users.indexOf(curUser) + 1 }}</p>
           </div>
           </RouterLink>
       </v-col>
@@ -430,9 +430,11 @@ export default {
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
       missions: this.missionStore.getMissions,
+      users: [],
       error:"",
       warning:"",
-      filteredActivities:""
+      filteredActivities:"",
+      curUser: ''
     };
   },
   async created() {
@@ -442,14 +444,28 @@ export default {
     };
     this.form.newUsername = this.user.username
 
-    let users=this.userStore.getUsers;
+    // let users=this.userStore.getUsers;
     // users.forEach(s=>{
     //   s.email==this.logged&&(this.user=s)
     // });
-    let list=[];
-    users.forEach(s=>{
-      "user"==s.type&&list.push(s)
-    }),this.users=list,this.users.sort((s,e)=>e.points-s.points||e.activities-s.activities||e.occurences-s.occurences);
+
+    // if(this.users == undefined || this.users == ''){
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getUsers
+    // };
+    // let list=[];
+    // this.users.forEach((user)=>{
+    //   if(user.type == "user"){
+    //     list.push(user)
+    //   }
+    // })
+    // this.users=list
+    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
+    // console.log(this.users[0])
+    // console.log(this.user)
+    // console.log(this.users.indexOf(this.user))
+    this.curUser = this.users.find(user => user.email == this.user.email)
+    console.log(this.users.indexOf(this.curUser))
     
 
   },

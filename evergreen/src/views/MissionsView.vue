@@ -111,9 +111,7 @@ export default {
       this.$router.push(n);
     },
     MissionsState(missionReward, mission) {
-      console.log(this.logged);
       if (this.user.rewards.find((reward) => reward == missionReward)) {
-        console.log("1");
         return "fieldG";
       } else if (
         mission.users.find(
@@ -124,14 +122,12 @@ export default {
             (user) => user.status == mission.max && user.user == this.logged._id
           ))
       ) {
-        console.log("2");
         return "fieldY";
       } else if (
         mission.users.find(
           (user) => user.status == 0 && user.user == this.logged._id
         )
       ) {
-        console.log("3");
         return "fieldR";
       }
     },

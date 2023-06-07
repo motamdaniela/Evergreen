@@ -69,6 +69,7 @@ export const useMissionStore = defineStore("mission", {
         let actList = [];
 
         let activities = activityStore.getActivities;
+        console.log(activities);
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
             if (user == logged) {
@@ -76,21 +77,21 @@ export const useMissionStore = defineStore("mission", {
             }
           });
         });
-
+        console.log(actList);
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
-              if (user[0] == logged && user[1] < mission.max) {
-                if (user[1] < mission.max) {
-                  user[1] = actList.length;
+              if (user.user == logged && user.status < mission.max) {
+                if (user.status < mission.max) {
+                  user.status = actList.length;
                 }
-                if (user[1] == 0) {
-                  user[2] = "Não começou";
-                } else if (user[1] == mission.max) {
-                  user[2] = "Concluída";
-                } else {
-                  user[2] = "Em progresso";
-                }
+                // if (user[1] == 0) {
+                //   user[2] = "Não começou";
+                // } else if (user[1] == mission.max) {
+                //   user[2] = "Concluída";
+                // } else {
+                //   user[2] = "Em progresso";
+                // }
               }
             });
           }

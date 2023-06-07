@@ -239,7 +239,7 @@
       </v-card-actions>
       <v-card-text style="height: 400px">
         <p v-if="activitiesSub.length <= 0">Ainda não estás inscrito em nenhuma atividade!</p>
-        <div v-for="activity in activitiesSub" class="fieldP profileList">
+        <div v-for="activity in this.activitiesSub" class="fieldP profileList">
           <img class="img" :src="activity.photo" />
           <div class="listText">
             <h2>{{ activity.title }}</h2>
@@ -374,11 +374,11 @@
   <div>
     <h1 class="gradientGreen padding"><span>Crachás</span></h1>
     <br>
-    <div v-if="this.user.rewards.length <= 0">
+    <!-- <div v-if="!this.user.rewards.length || this.user.rewards.length <= 0">
       <p>Ainda não tens nenhum crachá!</p>
       <p>Coleciona-os todos completando</p>
       <p><RouterLink to="/Missions">missões</RouterLink></p>
-    </div>
+    </div> -->
     <div class="badgesDiv">
       <img class="badge" v-for="badge in this.user.rewards" :src="badge" @click="openBadge=true; this.badge = badge"/>
     </div>
@@ -452,6 +452,15 @@ export default {
     // if(this.users == undefined || this.users == ''){
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getUsers
+
+      await this.activityStore.fetchAllActivities();
+      this.activities = this.activityStore.getActivities
+
+      await this.occurrenceStore.getAllOccurrences();
+      this.occurences = this.occurrenceStore.getOccurrences
+
+      ;
+      this.activitiesSub = await this.activityStore.fetchSubActivities();
     // };
     // let list=[];
     // this.users.forEach((user)=>{
@@ -470,8 +479,8 @@ export default {
 
   },
   updated() {
-    this.activities=this.activityStore.getActivities,this.activities.forEach(t=>{t.users.forEach(i=>{i==this.logged&&(this.activitiesSub.find(i=>i.id==t.id)||this.activitiesSub.push(t))})}),this.activitiesSub.forEach(i=>{i.users.find(i=>i==this.logged)||(i=this.activitiesSub.indexOf(i),this.activitiesSub.splice(i,1))}),this.ocsDone=[],this.ocsPend=[],this.occurences=this.occurrenceStore.getOccurrences;let userOcs=this.occurences.filter(i=>i.user==this.logged);userOcs.forEach(i=>{"pending"==i.state?this.ocsPend.push(i):"solved"==i.state&&this.ocsDone.push(i)}),this.filteredActivities=this.activities.filter(i=>i.coordinator==this.userStore.getLogged);
-
+    // this.activities=this.activityStore.getActivities,this.activities.forEach(t=>{t.users.forEach(i=>{i==this.logged&&(this.activitiesSub.find(i=>i.id==t.id)||this.activitiesSub.push(t))})}),this.activitiesSub.forEach(i=>{i.users.find(i=>i==this.logged)||(i=this.activitiesSub.indexOf(i),this.activitiesSub.splice(i,1))}),this.ocsDone=[],this.ocsPend=[],this.occurences=this.occurrenceStore.getOccurrences;let userOcs=this.occurences.filter(i=>i.user==this.logged);userOcs.forEach(i=>{"pending"==i.state?this.ocsPend.push(i):"solved"==i.state&&this.ocsDone.push(i)}),this.filteredActivities=this.activities.filter(i=>i.coordinator==this.userStore.getLogged);
+    // this.activitiesSub = this.activityStore.fetchSubActivities()
   },
   methods: {
     async onSubmit(){

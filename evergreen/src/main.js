@@ -17,44 +17,44 @@ const vuetify = createVuetify({
 });
 app.use(vuetify), app.mount("#app");
 // import { useUsersStore } from "@/stores/User";
-import { useActivityStore } from "@/stores/Activity";
-import { useOccurrenceStore } from "@/stores/Occurrence";
-import { useMissionStore } from "@/stores/Mission";
-import { useSchoolStore } from "@/stores/School";
+// import { useActivityStore } from "@/stores/Activity";
+// import { useOccurrenceStore } from "@/stores/Occurrence";
+// import { useMissionStore } from "@/stores/Mission";
+// import { useSchoolStore } from "@/stores/School";
 // const userStore = useUsersStore(),
-const activityStore = useActivityStore(),
-  occurrenceStore = useOccurrenceStore(),
-  missionStore = useMissionStore(),
-  schoolStore = useSchoolStore();
+// const activityStore = useActivityStore(),
+//   occurrenceStore = useOccurrenceStore(),
+//   missionStore = useMissionStore(),
+//   schoolStore = useSchoolStore();
 // let predefinedUsers = json.predefinedUsers,
-let activities = json.activities,
-  themes = json.themes,
-  types = json.types,
-  missions = json.missions,
-  campus = json.campus,
-  schools = json.schools,
-  buildings = json.buildings,
-  floors = json.floors,
-  classrooms = json.classrooms,
-  typeM = json.typeM;
+// let activities = json.activities,
+//   themes = json.themes,
+//   types = json.types,
+//   missions = json.missions,
+//   campus = json.campus,
+//   schools = json.schools,
+//   buildings = json.buildings,
+//   floors = json.floors,
+//   classrooms = json.classrooms,
+//   typeM = json.typeM;
 //   users = userStore.getUsers;
 // predefinedUsers.forEach((user) => {
 //   users.find((u) => u.email == user.email)
 //     ? console.log("user has already been added")
 //     : userStore.add(user);
 // });
-let act = activityStore.getActivities;
-activities.forEach((activity) => {
-  act.find((a) => a.id == activity.id)
-    ? console.log("activity has already been added")
-    : activityStore.addActivity(activity);
-});
-let tms = activityStore.getThemes;
-themes.forEach((theme) => {
-  tms.find((t) => t.id == theme.id)
-    ? console.log("theme has already been added")
-    : activityStore.addTheme(theme);
-});
+// let act = activityStore.getActivities;
+// activities.forEach((activity) => {
+//   act.find((a) => a.id == activity.id)
+//     ? console.log("activity has already been added")
+//     : activityStore.addActivity(activity);
+// });
+// let tms = activityStore.getThemes;
+// themes.forEach((theme) => {
+//   tms.find((t) => t.id == theme.id)
+//     ? console.log("theme has already been added")
+//     : activityStore.addTheme(theme);
+// });
 // let tps = occurrenceStore.getTypes;
 // types.forEach((type) => {
 //   tps.find((t) => t.id == type.id)

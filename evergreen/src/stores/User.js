@@ -7,8 +7,6 @@ import API_URL from "../services/config.js";
 
 export const useUsersStore = defineStore("user", {
   state: () => ({
-    // users: useStorage("users", []),
-    // logged: useStorage("logged",{}),
     users: [],
     logged: {},
   }),

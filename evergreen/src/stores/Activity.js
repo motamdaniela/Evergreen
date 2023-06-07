@@ -144,13 +144,31 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
-        return data
+        console.log(data, 2);
+        return data.activity;
       } else {
         console.log(response.status);
         // throw Error(AuthService.handleResponses(response.status));
       }
     },
 
+    // * get activities
+    async fetchSubActivities() {
+      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const response = await fetch(`${API_URL}/activities/subscribed`, {
+        method: "GET",
+        headers:{
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.activities;
+      } else {
+      console.log(response.status); 
+      }
+    },
 
     addActivity(obj) {
       this.activities.push(obj);
@@ -177,5 +195,6 @@ export const useActivityStore = defineStore("activity", {
         }
       });
     },
+
   },
 });

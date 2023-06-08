@@ -89,12 +89,12 @@ export default {
       this.logged = this.usersStore.getLogged;
     }
     let missionsBD;
-    if (this.missionStore.getMissions.length == 0) {
-      let bd = await this.missionStore.getAllMissions();
-      missionsBD = bd.missions;
-    } else {
-      missionsBD = this.missionStore.getMissions;
-    }
+    // if (this.missionStore.getMissions.length == 0) {
+    let bd = await this.missionStore.getAllMissions();
+    missionsBD = bd.missions;
+    // } else {
+    missionsBD = this.missionStore.getMissions;
+    // }
     missionsBD.forEach((mission) => {
       this.missions.push(mission);
     });

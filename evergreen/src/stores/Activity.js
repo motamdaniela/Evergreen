@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 import { useUsersStore } from "./User";
+import { useMissionStore } from "./Mission";
 
 // import { AuthService } from '@/services/auth.service';
 
-import API_URL from '../services/config.js'
+import API_URL from "../services/config.js";
 
 export const useActivityStore = defineStore("activity", {
   state: () => ({
@@ -17,11 +18,11 @@ export const useActivityStore = defineStore("activity", {
     },
 
     async getActivitySuggestions() {
-      const userStore = useUsersStore(); 
+      const userStore = useUsersStore();
       let logged = userStore.getLogged;
-      if(this.logged == undefined || this.logged == ''){
+      if (this.logged == undefined || this.logged == "") {
         await this.userStore.fetchLogged();
-        this.logged = this.userStore.getLogged
+        this.logged = this.userStore.getLogged;
       }
       let user = userStore.getUsers.find((user) => user.email == logged);
       let activities = this.getActivities;
@@ -111,24 +112,23 @@ export const useActivityStore = defineStore("activity", {
   },
 
   actions: {
-
     // * get activities
     async fetchAllActivities() {
-      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser'))
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/activities`, {
         method: "GET",
-        headers:{
+        headers: {
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${accessToken}`
-        }
+          "x-access-token": `Bearer ${accessToken}`,
+        },
       });
       if (response.ok) {
         const data = await response.json();
-        this.activities = data.activities
+        this.activities = data.activities;
         // console.log('activities store:', this.getActivities)
         return data;
       } else {
-      console.log(response.status); 
+        console.log(response.status);
       }
     },
 
@@ -145,6 +145,7 @@ export const useActivityStore = defineStore("activity", {
       if (response.ok) {
         const data = await response.json();
         console.log(data, 2);
+        // missionStore.completeMission(userStore.getLogged, 0);
         return data.activity;
       } else {
         console.log(response.status);
@@ -154,19 +155,21 @@ export const useActivityStore = defineStore("activity", {
 
     // * get activities
     async fetchSubActivities() {
-      const accessToken = JSON.parse(sessionStorage.getItem('loggedUser') != '')
+      const accessToken = JSON.parse(
+        sessionStorage.getItem("loggedUser") != ""
+      );
       const response = await fetch(`${API_URL}/activities/subscribed`, {
         method: "GET",
-        headers:{
+        headers: {
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${accessToken}`
-        }
+          "x-access-token": `Bearer ${accessToken}`,
+        },
       });
       if (response.ok) {
         const data = await response.json();
         return data.activities;
       } else {
-      console.log(response.status); 
+        console.log(response.status);
       }
     },
 
@@ -195,6 +198,5 @@ export const useActivityStore = defineStore("activity", {
         }
       });
     },
-
   },
 });

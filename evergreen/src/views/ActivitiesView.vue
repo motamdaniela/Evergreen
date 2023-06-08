@@ -3,7 +3,7 @@
     <v-dialog v-model="suggestion">
       <div class="fieldP modal sugModal">
         <button class="btnRound btnP" @click="suggestion = false">
-          <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+          <img style="width: 15px" src="../assets/icons/icones/close.svg" />
         </button>
 
         <form @submit.prevent="onSubmit">
@@ -128,7 +128,7 @@
     </v-dialog>
 
     <h1 class="title">
-      <img src="../assets/images/flowerP.svg" alt=""/>Plano de Atividades
+      <img src="../assets/images/flowerP.svg" alt="" />Plano de Atividades
     </h1>
 
     <v-menu>
@@ -165,7 +165,7 @@
           v-if="+activity.end > +this.user.loginDate"
         >
           <img
-            class="Sirv image "
+            class="Sirv image"
             :data-src="activity.photo"
             height="219"
             width="380"
@@ -173,12 +173,7 @@
             cover
           />
           <!-- </v-img> -->
-          <link
-            class="image"
-            rel="preload"
-            as="image"
-            :href="activity.photo"
-          />
+          <link class="image" rel="preload" as="image" :href="activity.photo" />
 
           <div class="cardText">
             <v-card-title>
@@ -265,7 +260,13 @@ export default {
     const suggestionStore = useSuggestionStore();
     const themeStore = useThemesStore();
 
-    return { activityStore, missionStore, userStore, suggestionStore, themeStore };
+    return {
+      activityStore,
+      missionStore,
+      userStore,
+      suggestionStore,
+      themeStore,
+    };
   },
 
   name: "Activities",
@@ -273,7 +274,7 @@ export default {
     return {
       activities: [],
       activity: {},
-      user: '',
+      user: "",
       open: false,
       openFilter: false,
       suggestion: false,
@@ -283,28 +284,27 @@ export default {
         description: "",
         objectives: "",
         goals: "",
-        resources: ""
+        resources: "",
       },
       themes: [],
       themesPicked: [],
     };
   },
-  
+
   async created() {
-
-    if (this.activities == undefined || this.activities == ''){
+    if (this.activities == undefined || this.activities == "") {
       await this.activityStore.fetchAllActivities();
-      this.activities = this.activityStore.getActivities
-    }
-    
-    if (this.themes == undefined || this.themes == ''){
-      await this.themeStore.fetchAllThemes();
-      this.themes = this.themeStore.getThemes
+      this.activities = this.activityStore.getActivities;
     }
 
-    if(this.user == undefined || this.user == ''){
+    if (this.themes == undefined || this.themes == "") {
+      await this.themeStore.fetchAllThemes();
+      this.themes = this.themeStore.getThemes;
+    }
+
+    if (this.user == undefined || this.user == "") {
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
+      this.user = this.userStore.getLogged;
     }
   },
 
@@ -316,11 +316,14 @@ export default {
         this.form.objectives,
         this.form.goals,
         this.form.resources
-      )
+      );
       location.reload();
     },
     async subscribe(activity) {
-      this.activity = await this.activityStore.subscribeActivity(activity)
+      this.activity = await this.activityStore.subscribeActivity(activity);
+      await this.activityStore.fetchAllActivities();
+      await this.missionStore.getAllMissions();
+      this.missionStore.completeMission(this.userStore.getLogged, 0);
     },
     changeBtn(activity) {
       let u = activity.users.find((user) => user.user == this.user._id);
@@ -336,21 +339,20 @@ export default {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
         // this.activities = this.getActivitiesDB.activities
-        this.activities = this.activityStore.getActivities
+        this.activities = this.activityStore.getActivities;
       } else {
         // this.activities = this.getActivitiesDB.activities
-        this.activities = this.activityStore.getActivities
+        this.activities = this.activityStore.getActivities;
         this.activities.forEach((activity) => {
-            if (this.themesPicked.includes(activity.idTheme)) {
-              filteredList.push(activity);
-            }
-          });
-        console.log('filtered ', filteredList)
+          if (this.themesPicked.includes(activity.idTheme)) {
+            filteredList.push(activity);
+          }
+        });
+        console.log("filtered ", filteredList);
         this.activities = filteredList;
       }
     },
   },
-
 };
 </script>
 

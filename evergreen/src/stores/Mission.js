@@ -43,7 +43,6 @@ export const useMissionStore = defineStore("mission", {
       if (response.ok) {
         let data = await response.json();
         this.missions = data.missions;
-        console.log(this.missions);
         return data;
       } else {
         console.log("not ok");
@@ -62,134 +61,86 @@ export const useMissionStore = defineStore("mission", {
     },
 
     completeMission(logged, type) {
+      // ? cada vez que quiserem chamar esta função, tem de fazer fetch das missões e tipo da cena que tão a mudar que neste caso é as atividades
       if (type == 0) {
-        // for missions type subscribe activity
+        // *for missions type subscribe activity
         const activityStore = useActivityStore();
 
         let actList = [];
 
         let activities = activityStore.getActivities;
-        console.log(activities);
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
-            if (user == logged) {
+            if (user.user == logged._id) {
               actList.push(activity);
             }
           });
         });
-        console.log(actList);
+
         this.missions.forEach((mission) => {
           if (mission.type == type) {
-            
-            //! eu adicionei este if pq o missions n tem users ent a nav n me estava a aparecer
-            if(mission.users){
-
             mission.users.forEach((user) => {
-              if (user.user == logged && user.status < mission.max) {
-                if (user.status < mission.max) {
-                  user.status = actList.length;
-                }
-                // if (user[1] == 0) {
-                //   user[2] = "Não começou";
-                // } else if (user[1] == mission.max) {
-                //   user[2] = "Concluída";
-                // } else {
-                //   user[2] = "Em progresso";
-                // }
+              if (user.user == logged._id && user.status < mission.max) {
+                user.status = actList.length;
               }
             });
-
-          //!
-          }
-          //!
-
           }
         });
       } else if (type == 1) {
-        // for missions type participate activity
+        // * for missions type participate activity
         const activityStore = useActivityStore();
 
         let actList = [];
 
         let activities = activityStore.getActivities;
 
-        
         activities.forEach((activity) => {
-          
-          //! o msm erro
-          if(activities.participated){
-
-          activity.participated.forEach((user) => {
-            if (user == logged) {
+          activity.users.forEach((user) => {
+            if (user.user == logged && user.status == "participated") {
               actList.push(activity);
             }
           });
-
-          //!
-        }
-        //!
-
-
         });
 
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
-              if (user[0] == logged && user[1] < mission.max) {
-                if (user[1] < mission.max) {
-                  user[1] = actList.length;
-                }
-                if (user[1] == 0) {
-                  user[2] = "Não começou";
-                } else if (user[1] == mission.max) {
-                  user[2] = "Concluída";
-                } else {
-                  user[2] = "Em progresso";
-                }
+              if (user.user == logged._id && user.status < mission.max) {
+                user.status = actList.length;
               }
             });
           }
         });
       } else if (type == 2) {
-        // for missions type 1st occurrence
+        // * for missions type 1st occurrence
         const occurrenceStore = useOccurrenceStore();
         if (
           occurrenceStore.getOccurrences.find(
-            (occurrence) => occurrence.user == logged
+            (occurrence) => occurrence.user == logged._id
           )
         ) {
           this.missions.forEach((mission) => {
             if (mission.type == type) {
               mission.users.forEach((user) => {
-                if (user[0] == logged && user[1] < mission.max) {
-                  user[1] = mission.max;
-                  user[2] = "Concluída";
+                if (user.user == logged._id && user.status < mission.max) {
+                  user.status = mission.max;
                 }
               });
             }
           });
         }
       } else if (type == 3) {
-        // for missions type win points
+        // * for missions type win points
         let pts;
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
-          if (user.email == logged) {
+          if (user._id == logged._id) {
             pts = user.points;
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
-                  if (u[0] == logged && u[1] < mission.max) {
-                    if (u[1] < mission.max) {
-                      u[1] = pts;
-                    }
-                    if (u[1] == 0) {
-                      u[2] = "Não começou";
-                    } else if (u[1] == mission.max) {
-                      u[2] = "Concluída";
-                    } else {
-                      u[2] = "Em progresso";
-                    }
+                  if (u.user == logged._id && u.status < mission.max) {
+                    u.status = pts;
                   }
                 });
               }
@@ -197,16 +148,15 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 4) {
-        // for missions type subscribe council
+        // * for missions type subscribe council
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
-          if (user.email == logged && user.council == true) {
+          if (user._id == logged._id && user.council == true) {
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
-                  if (u[0] == logged && u[1] < mission.max) {
-                    u[1] = mission.max;
-                    u[2] = "Concluída";
+                  if (u.user == logged._id && u.status < mission.max) {
+                    u.status = mission.max;
                   }
                 });
               }
@@ -216,26 +166,17 @@ export const useMissionStore = defineStore("mission", {
       } else if (type == 5) {
         // for missions type fill form
       } else if (type == 6) {
-        // for missions type login every day for a week
+        // * for missions type login every day for a week
         let num = 0;
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
-          if (user.email == logged) {
+          if (user._id == logged._id) {
             num = user.streak;
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
-                  if (u[0] == logged && u[1] < mission.max) {
-                    if (u[1] < mission.max) {
-                      u[1] = num;
-                    }
-                    if (u[1] == 0) {
-                      u[2] = "Não começou";
-                    } else if (u[1] == mission.max) {
-                      u[2] = "Concluída";
-                    } else {
-                      u[2] = "Em progresso";
-                    }
+                  if (u.user == logged._id && u.status < mission.max) {
+                    u.status = num;
                   }
                 });
               }
@@ -243,36 +184,30 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       } else if (type == 7) {
-        // for missions type edit profile
+        // * for missions type edit profile
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
-              if (user[0] == logged && user[1] < mission.max) {
-                user[1] = mission.max;
-                user[2] = "Concluída";
+              if (user.user == logged._id && user.status < mission.max) {
+                user.status = mission.max;
               }
             });
           }
         });
       } else if (type == 8) {
-        // for missions type get to x rank
+        // * for missions type get to x rank
         const userStore = useUsersStore();
         let top3 = userStore.getTop3;
         let index;
         userStore.getUsers.forEach((user) => {
           top3.forEach((top) => {
-            if (top.email == user.email && user.email == logged) {
+            if (top._id == user._id && user._id == logged._id) {
               index = top3.indexOf(top) + 1;
               this.missions.forEach((mission) => {
                 if (mission.type == type) {
                   mission.users.forEach((u) => {
-                    if (u[0] == logged) {
-                      u[1] = index;
-                      if (index > mission.max) {
-                        u[2] = "Em progresso";
-                      } else if (index == mission.max) {
-                        u[2] = "Concluída";
-                      }
+                    if (u.user == logged._id && u.status < mission.max) {
+                      u.status = index;
                     }
                   });
                 }
@@ -281,11 +216,11 @@ export const useMissionStore = defineStore("mission", {
           });
         });
       } else if (type == 9) {
-        // for missions type do all missions
+        // * for missions type do all missions
         let num = 0;
         this.missions.forEach((mission) => {
           mission.users.forEach((user) => {
-            if (user[0] == logged && user[1] == mission.max) {
+            if (user.user == logged._id && user.status == mission.max) {
               num += 1;
             }
           });
@@ -293,20 +228,9 @@ export const useMissionStore = defineStore("mission", {
 
         this.missions.forEach((mission) => {
           if (mission.type == type) {
-            mission.users.forEach((user) => {
-              if (user[0] == logged && user[1] < mission.max) {
-                if (user[1] < mission.max) {
-                  user[1] = num;
-                }
-                if (user[1] == 0) {
-                  user[2] = "Não começou";
-                } else if (user[1] == mission.max) {
-                  user[2] = "Concluída";
-                } else {
-                  user[2] = "Em progresso";
-                }
-              } else if (user[0] == logged && user[1] == mission.max) {
-                user[2] = "Concluída";
+            mission.users.forEach((u) => {
+              if (u.user == logged._id && u.status < mission.max) {
+                u.status = num;
               }
             });
           }
@@ -315,20 +239,3 @@ export const useMissionStore = defineStore("mission", {
     },
   },
 });
-
-// import Vue from "vue";
-// import Vuex from "vuex";
-
-// Vue.use(Vuex);
-
-// export const store = new Vuex.Store({
-//   state: {
-//     id: 0,
-//     title: "",
-//     description: "",
-//     reward: "",
-//     users: [['email',0,'state'],['email',0,'state']],
-//     max:1,
-//     redirect:'',
-//   },
-// });

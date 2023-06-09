@@ -61,8 +61,12 @@
   border-radius: 33px;
   background-color: #fdfaf9;
   border: 2px solid rgb(0, 0, 0);
-  margin-top: 50px;
   padding-left: 10px;
+  margin-bottom: 30px;
+}
+
+#outro{
+  margin-top: 50px;
 }
 
 .typeLbl {
@@ -87,7 +91,6 @@
   margin: 10px;
 }
 #allRb {
-  margin-top: 6%;
   display: grid;
   grid-template-columns: auto auto auto;
   margin-left: 10%;

@@ -452,7 +452,6 @@ export default {
       // get the list of all users, activities and occurrences
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getUsers
-      console.log('user:',this.user)
 
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities
@@ -463,7 +462,8 @@ export default {
       this.activitiesSub = await this.activityStore.fetchSubActivities();
 
       this.occurrences.forEach(oc =>{
-          switch(oc.status){
+        console.log(oc.status)
+          switch(oc.state){
             case "pending":
               this.ocsPend.push(oc);
             case "solved":

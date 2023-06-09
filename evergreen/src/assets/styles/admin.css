@@ -74,6 +74,13 @@
 
 .searchbar {
   width: 40%;
+  margin-left: 5%;
+  padding-left: 5%;
+}
+
+#searchicon{
+  width: 30px;
+  margin-left: 5px;
 }
 
 .cardY {

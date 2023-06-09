@@ -51,13 +51,18 @@
 
   <div class="searchbar">
       <input class="inputSmall" v-model="search" type="text" :v-bind="search ? isFilter = true : isFilter = false"/>
-      <button @click="isFilter ? isFilter = false : isFilter = true" >search</button>
+      <button @click="isFilter ? isFilter = false : isFilter = true" >
+      <img id="searchicon" src="../assets/icons/icones/search.svg"/></button>
   </div>
 
   <div v-for="user in filteredUsers">
     <div v-if="user.type != 'admin'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
-      <p>{{ user.name }}</p>
+      <div class="listText">
+            <h2>{{ user.name }}</h2>
+            <h4>{{ user.school }}</h4>
+            <p>{{ user.email }}</p>
+          </div>
       <div>
         <button class="btn-page btnPklight" @click="dialog = true; this.action = 'edit'; this.user = user">Editar</button>
         <button v-if="user.state == 'active'" class="btn-page btnY" @click="dialog = true; this.action = 'block'; this.user = user">Bloquear</button>
@@ -91,7 +96,7 @@ export default {
   },
   data() {
     return {
-      users: this.userStore.getUsers,
+      users: [],
       dialog: false,
       action: '',
       user: '',
@@ -131,6 +136,10 @@ export default {
                 return this.users
             }
           }
+  },
+  async created () {
+    await this.userStore.fetchAllUsers();
+    this.users = this.userStore.getUsers
   },
 };
 </script>

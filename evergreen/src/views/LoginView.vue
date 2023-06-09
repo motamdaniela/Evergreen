@@ -69,42 +69,23 @@ export default {
   },
   methods: {
     async onSubmit() {
-      // console.log(this.email);
-      let users = this.userStore.getUsers;
       let login = await this.userStore.login(this.email, this.password);
-      await this.userStore.login(this.username, this.password);
       let logged = this.userStore.getLogged;
-      if (logged.type == "user") {
-        this.$router.push("/Home");
-      } else if (logged.type == "admin") {
-        this.$router.push("/Admin");
-      } else if (logged.type == "security") {
-        this.$router.push("/Occurences");
-      }
 
-      if (login == "userWrong") {
+      if (login == 401) {
         this.error = "Credenciais erradas!";
-      } else if (login == "userBlocked") {
+      } else if (logged.state == "blocked") {
         this.error = "Este utilizador foi bloqueado!";
-      } else if (
-        users.find(
-          (u) => u.email == this.userStore.getLogged && u.type == "user"
-        )
-      ) {
-        // this.missionStore.addUser(this.email);
-        this.$router.push("/Home");
-      } else if (
-        users.find(
-          (u) => u.email == this.userStore.getLogged && u.type == "admin"
-        )
-      ) {
-        this.$router.push("/Admin");
-      } else if (
-        users.find(
-          (u) => u.email == this.userStore.getLogged && u.type == "security"
-        )
-      ) {
-        this.$router.push("/Occurences");
+      } else {
+        switch (logged.type) {
+          case 'admin':
+            this.$router.push("/Admin");
+          case 'security':
+            this.$router.push("/Occurences");
+          case 'user':
+            this.$router.push("/Home");
+        }
+        
       }
     },
   },

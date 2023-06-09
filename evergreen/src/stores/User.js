@@ -164,6 +164,7 @@ export const useUsersStore = defineStore("user", {
         return data.user;
       } else {
         console.log(response.status);
+        return response.status
         // throw Error(AuthService.handleResponses(response.status));
       }
     },

@@ -91,28 +91,27 @@
       inverse-scroll
       v-if="ToHide"
     >
-      <v-app-bar-title>
-        <RouterLink v-if="!isLogged()" to="/"
-          ><img
-            style="margin-right: 500px; margin-top: 30px"
-            width="25"
-            height="25"
-            src="/src/assets/logored.svg"
-            id="logo"
-            alt=""
-        /></RouterLink>
-        <RouterLink v-else to="/Home" name="homelink"
-          ><img
-            style="margin-right: 250px; margin-top: 30px"
-            width="25"
-            height="25"
-            src="/src/assets/logored.svg"
-            id="logo"
-            alt=""
-        /></RouterLink>
-      </v-app-bar-title>
-
-      <nav class="longNav" v-if="!isLogged()">
+    <v-app-bar-title>
+      <RouterLink v-if="!isLogged()" to="/"
+        ><img
+          style="margin-right: 500px; margin-top: 30px"
+          width="25"
+          height="25"
+          src="/src/assets/logored.svg"
+          id="logo"
+          alt=""
+      /></RouterLink>
+      <RouterLink v-else to="/Home" name="homelink"
+        ><img
+          style="margin-right: 250px; margin-top: 30px"
+          width="25"
+          height="25"
+          src="/src/assets/logored.svg"
+          id="logo"
+          alt=""
+      /></RouterLink>
+    </v-app-bar-title>
+    <nav class="longNav" v-if="!isLogged()">
         <RouterLink class="homeLink" to="/" name="">Início</RouterLink>
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink

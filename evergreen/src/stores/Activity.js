@@ -144,7 +144,7 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data, 2);
+        console.log(data);
         // missionStore.completeMission(userStore.getLogged, 0);
         return data.activity;
       } else {

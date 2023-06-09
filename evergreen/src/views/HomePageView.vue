@@ -115,7 +115,7 @@
             class="btn-page btnG btnModal"
             id="sub"
             value="Inscrever"
-            @click="subscribe(this.activity), changeBtn(this.activity)"
+            @click="subscribe(this.activity)"
           />
           <input
             v-else
@@ -123,7 +123,7 @@
             class="btn-page btnR btnModal"
             id="unsub"
             value="Anular Inscrição"
-            @click="unsubscribe(this.activity), changeBtn(this.activity)"
+            @click="subscribe(this.activity)"
           />
         </div>
         <div
@@ -143,10 +143,10 @@
       </div>
     </v-dialog>
 
-    <div v-if="activitiesSub.length > 0">
+    <div v-if="this.activitiesSub.length > 0">
       <!-- <v-sheet class="mx-auto" max-width="1500" > -->
       <v-slide-group class="group" show-arrows>
-        <slide-group-item v-for="activity in activitiesSub" class="items">
+        <slide-group-item v-for="activity in this.activitiesSub" class="items">
           <card class="card" max-width="400" id="card">
             <v-img
               class="image"
@@ -327,6 +327,7 @@ export default {
   data() {
     return {
       activities: this.activityStore.getActivities,
+      activity: {},
       themes: this.activityStore.getThemes,
       users: this.userStore.getTop3,
       logged: '',
@@ -352,6 +353,8 @@ export default {
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getTop3
     }
+    this.activitiesSub = await this.activityStore.fetchSubActivities();
+    console.log('atividades:',this.activitiesSub);
     // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);
@@ -394,19 +397,19 @@ export default {
     //       console.log(1)));
   },
   updated() {
-    let activities = this.activityStore.getActivities;
-    activities.forEach((s) => {
-      s.users.forEach((i) => {
-        i == this.logged &&
-          (this.activitiesSub.find((i) => i.id == s.id) ||
-            this.activitiesSub.push(s));
-      });
-    }),
-      this.activitiesSub.forEach((i) => {
-        i.users.find((i) => i == this.logged) ||
-          ((i = this.activitiesSub.indexOf(i)),
-          this.activitiesSub.splice(i, 1));
-      }),
+    // let activities = this.activityStore.getActivities;
+    // activities.forEach((s) => {
+    //   s.users.forEach((i) => {
+    //     i == this.logged &&
+    //       (this.activitiesSub.find((i) => i.id == s.id) ||
+    //         this.activitiesSub.push(s));
+    //   });
+    // }),
+      // this.activitiesSub.forEach((i) => {
+      //   i.users.find((i) => i == this.logged) ||
+      //     ((i = this.activitiesSub.indexOf(i)),
+      //     this.activitiesSub.splice(i, 1));
+      // }),
       (this.users = this.userStore.getTop3),
       this.missionStore.completeMission(this.logged, 1),
       this.missionStore.completeMission(this.logged, 2),
@@ -417,48 +420,60 @@ export default {
       this.missionStore.completeMission(this.logged, 9),
       console.log(),
       (this.activitiesSug = this.activityStore.getActivitySuggestions),
-      this.activitiesSub.forEach((t) => {
+      
+      this.activitiesSub.forEach((act) => {
+      if (
         this.closeActivities.length < 5 &&
-        +t.begin > this.user.loginDate &&
-        !this.closeActivities.find((i) => i.id == t.id)
-          ? (console.log(6), this.closeActivities.push(t))
-          : this.closeActivities.forEach((s) => {
-              +s.begin > +t.begin &&
-                +s.begin > this.user.loginDate &&
-                !this.closeActivities.find((i) => s.id == i.id) &&
-                (this.closeActivities.splice(
-                  this.closeActivities.indexOf(t),
-                  1
-                ),
-                this.closeActivities.push(s));
-            });
-      }),
-      this.activitiesSub.forEach((s) => {
-        +s.begin <= this.user.loginDate &&
-          +s.end >= this.user.loginDate &&
-          !this.activitiesNow.find((i) => i.id == s.id) &&
-          this.activitiesNow.push(s);
-      });
+        +act.begin > this.user.loginDate &&
+        !this.closeActivities.find((a) => a._id == act._id)
+      ) {
+        this.closeActivities.push(act);
+        
+      } else {
+        this.closeActivities.forEach((a) => {
+          if (
+            +a.begin > +act.begin &&
+            +a.begin > this.user.loginDate &&
+            !this.closeActivities.find((ac) => a._id == ac._id)
+          ) {
+            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+            this.closeActivities.push(a);
+          }
+        });
+      }
+    });
+    this.activitiesSub.forEach((act) => {
+      if (
+        +act.begin <= this.user.loginDate &&
+        +act.end >= this.user.loginDate &&
+        !this.activitiesNow.find((a) => a._id == act._id)
+      ) {
+        this.activitiesNow.push(act);
+      }
+    });
+      
   },
   methods: {
     receive() {
       (this.user.points += this.loginPoints),
         (this.loginReward = !1),
         (this.user.received = !0),
-        this.missionStore.completeMission(this.logged, 6),
+        this.missionStore.completeMission(this.logged),
         7 == this.user.streak && (this.user.streak = 0);
     },
-    subscribe(activity) {
-      console.log(activity),
-        this.activityStore.updateUsers(this.logged, activity.id),
-        this.missionStore.completeMission(this.logged, 0);
+    async subscribe(activity) {
+      this.activity = await this.activityStore.subscribeActivity(activity);
+      await this.activityStore.fetchAllActivities();
+      await this.missionStore.getAllMissions();
+      this.missionStore.completeMission(this.userStore.getLogged, 0);
     },
-    unsubscribe(activity) {
-      activity.users = activity.users.filter((i) => i != this.logged);
-      // this.activitiesSub
-    },
-    changeBtn(n) {
-      return !!n.users.find((n) => n == this.logged);
+    changeBtn(activity) {
+      let u = activity.users.find((user) => user.user == this.user._id);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
     },
     async SubConselho() {
       await this.userStore.subscribeCouncil()

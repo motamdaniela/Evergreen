@@ -1,4 +1,22 @@
 <template>
+  <v-dialog v-model="openOccur">
+      <div class="fieldG occModal">
+        <v-card elevation="0" color="#F9F9F9">
+          <v-card-actions>
+            <button class="btnRound btnG" @click="refresh()">
+              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+            </button>
+          </v-card-actions>
+          <div id="occCont">
+          <img class="occModalImg" src='../assets/images/correct.png'>
+          <br><br>
+          <h2>A ocorrência foi registada com sucesso!</h2>
+          </div>
+        </v-card>
+      </div>
+
+    </v-dialog>
+
   <div class="form">
     <form ref="form" @submit.prevent="onSubmit">
       <v-window show-arrows>
@@ -248,6 +266,7 @@ export default {
       buildings: [],
       classrooms: [],
       types: [],
+      openOccur: false,
     };
   },
   async created() {
@@ -258,7 +277,7 @@ export default {
     } else {
       schoolsBD = this.schoolStore.getSchools;
     }
-    schoolsBD.forEach((school) => {
+    schoolsBD.schools.forEach((school) => {
       this.schools.push(school);
     });
 
@@ -283,7 +302,7 @@ export default {
         this.form.photo,
         this.form.other
       );
-      location.reload();
+      this.openOccur = true
     },
     id(type) {
       let e = type;
@@ -317,6 +336,9 @@ export default {
         this.classrooms.push(classroom);
       });
     },
+    refresh() {
+      location.reload()
+    }
   },
 };
 </script>

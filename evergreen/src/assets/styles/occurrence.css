@@ -61,7 +61,7 @@
   border-radius: 33px;
   background-color: #fdfaf9;
   border: 2px solid rgb(0, 0, 0);
-  margin-bottom: 30px;
+  margin-top: 50px;
   padding-left: 10px;
 }
 
@@ -88,6 +88,10 @@
 }
 #allRb {
   margin-top: 6%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 #descriptionBox {
   width: 500px;

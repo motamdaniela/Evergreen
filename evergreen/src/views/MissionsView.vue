@@ -209,10 +209,8 @@ export default {
       }
     },
     addBadge(missionReward) {
-      if (!this.user.rewards.find((reward) => reward == missionReward)) {
-        this.user.rewards.push(missionReward);
-        this.missionStore.completeMission(this.logged._id, 9);
-      }
+      this.missionStore.receiveBadge(missionReward);
+      this.missionStore.completeMission(this.logged, 9);
     },
   },
 };

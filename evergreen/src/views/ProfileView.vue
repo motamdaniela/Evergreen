@@ -238,7 +238,7 @@
         </button>
       </v-card-actions>
       <v-card-text style="height: 400px">
-        <p v-if="activitiesSub.length <= 0">Ainda não estás inscrito em nenhuma atividade!</p>
+        <p v-if="this.activitiesSub.length <= 0">Ainda não estás inscrito em nenhuma atividade!</p>
         <div v-for="activity in this.activitiesSub" class="fieldP profileList">
           <img class="img" :src="activity.photo" />
           <div class="listText">
@@ -374,7 +374,7 @@
   <div>
     <h1 class="gradientGreen padding"><span>Crachás</span></h1>
     <br>
-    <div v-if="!this.user.rewards.length || this.user.rewards.length <= 0">
+    <div v-if="!this.user.rewards.length">
       <p>Ainda não tens nenhum crachá!</p>
       <p>Coleciona-os todos completando</p>
       <p><RouterLink to="/Missions">missões</RouterLink></p>
@@ -461,31 +461,24 @@ export default {
 
       this.activitiesSub = await this.activityStore.fetchSubActivities();
 
+      console.log(this.activitiesSub)
       //filter the lists of user's pending and done occurrences
-      console.log(await this.occurrenceStore.getAllOccurrences())
+      // console.log(await this.occurrenceStore.getAllOccurrences())
       this.occurences.forEach(oc =>{
-        if(oc.userID == this.user._id){
-          console.log(oc)
-          if(oc.status == 'pending'){
-            console.log('encontrou')
-          }
-          
           switch(oc.status){
             case "pending":
               this.ocsPend.push(oc);
             case "solved":
               this.ocsDone.push(oc);
           }
-        }
       })
       // console.log(this.user)
       // console.log(this.ocsPend[0], this.ocsDone)
 
 
-    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
+    // this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
 
-    this.curUser = this.users.find(user => user.email == this.user.email)
-    console.log(this.users.indexOf(this.curUser))
+    // this.curUser = this.users.find(user => user.email == this.user.email)
     
 
   },

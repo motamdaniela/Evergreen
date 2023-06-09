@@ -127,6 +127,24 @@
       </div>
     </v-dialog>
 
+    <v-dialog v-model="openActSug">
+      <div class="fieldG actSugModal">
+        <v-card elevation="0" color="#F9F9F9">
+          <v-card-actions>
+            <button class="btnRound btnG" @click="refresh()">
+              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+            </button>
+          </v-card-actions>
+          <div id="actSugCont">
+          <img class="actSugModalImg" src='../assets/images/correct.png'>
+          <br><br>
+          <h2>A sua sugestão foi registada com sucesso!</h2>
+          </div>
+        </v-card>
+      </div>
+
+    </v-dialog>
+
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" alt="" />Plano de Atividades
     </h1>
@@ -278,6 +296,7 @@ export default {
       open: false,
       openFilter: false,
       suggestion: false,
+      openActSug: false,
       isFilter: true,
       form: {
         theme: "",
@@ -317,7 +336,7 @@ export default {
         this.form.goals,
         this.form.resources
       );
-      location.reload();
+      this.openActSug = true
     },
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);
@@ -333,6 +352,9 @@ export default {
         return false;
       }
     },
+    refresh() {
+      location.reload();
+    }
   },
   computed: {
     FilterThemes() {

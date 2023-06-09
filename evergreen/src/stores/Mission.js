@@ -50,6 +50,28 @@ export const useMissionStore = defineStore("mission", {
       }
     },
 
+    async receiveBadge(badge) {
+      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/missions`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${curUser}`,
+        },
+        body: JSON.stringify({
+          badge: badge,
+        }),
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.missions = data.missions;
+        return data;
+      } else {
+        console.log("not ok");
+        console.log("STORE - fetch ALL Missions error", response);
+      }
+    },
+
     addUser(email) {
       const userStore = useUsersStore();
       let user = userStore.getLogged;
@@ -60,7 +82,30 @@ export const useMissionStore = defineStore("mission", {
       });
     },
 
-    completeMission(logged, type) {
+    async update(missions) {
+      console.log(missions);
+      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/missions/update`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${curUser}`,
+        },
+        body: JSON.stringify({
+          missions: missions,
+        }),
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.missions = data.missions;
+        return data;
+      } else {
+        console.log("not ok");
+        console.log("STORE - fetch ALL Missions error", response);
+      }
+    },
+
+    async completeMission(logged, type) {
       // ? cada vez que quiserem chamar esta função, tem de fazer fetch das missões e tipo da cena que tão a mudar que neste caso é as atividades
       if (type == 0) {
         // *for missions type subscribe activity
@@ -236,6 +281,8 @@ export const useMissionStore = defineStore("mission", {
           }
         });
       }
+      console.log(this.missions);
+      await this.update(this.missions);
     },
   },
 });

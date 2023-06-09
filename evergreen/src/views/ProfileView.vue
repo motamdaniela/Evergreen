@@ -438,7 +438,7 @@ export default {
   async created() {
     if(this.user == undefined || this.user == ''){
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
+      this.user = await this.userStore.getLogged
     };
     this.form.newUsername = this.user.username
 

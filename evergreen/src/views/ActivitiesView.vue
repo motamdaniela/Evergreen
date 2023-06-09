@@ -202,7 +202,7 @@
             </div>
           </div>
         </v-card>
-        <v-card class="mx-auto card gray" max-width="400" v-else>
+        <v-card class="card gray" max-width="400" v-else>
           <img
             class="Sirv image imgGray"
             :data-src="activity.photo"

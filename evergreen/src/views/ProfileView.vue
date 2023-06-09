@@ -32,7 +32,7 @@
           class="btn-page btnG btnModal"
           id="sub"
           value="Inscrever"
-          @click="subscribe(this.activity), changeBtn(this.activity)"
+          @click="subscribe(this.activity)"
         />
         <input
           v-else
@@ -40,7 +40,7 @@
           class="btn-page btnR btnModal"
           id="unsub"
           value="Anular Inscrição"
-          @click="unsubscribe(this.activity), changeBtn(this.activity)"
+          @click="subscribe(this.activity)"
         />
       </div>
     </v-dialog>
@@ -424,6 +424,7 @@ export default {
       ocsDone: [],
       ocsPend: [],
       activities: this.activityStore.getActivities,
+      activity: {},
       occurrences: [],
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
@@ -496,15 +497,19 @@ export default {
       this.user = this.userStore.getLogged
     },
 
-    subscribe(activity) {
-      console.log(activity),this.activityStore.updateUsers(this.logged,activity.id),this.missionStore.completeMission(this.logged,0);
+    async subscribe(activity) {
+      this.activity = await this.activityStore.subscribeActivity(activity);
+      await this.activityStore.fetchAllActivities();
+      await this.missionStore.getAllMissions();
+      this.missionStore.completeMission(this.userStore.getLogged, 0);
     },
-    unsubscribe(activity) {
-      activity.users=activity.users.filter(i=>i!=this.logged);
-      // this.activitiesSub
-    },
-    changeBtn(n) {
-      return!!n.users.find(n=>n==this.logged)
+    changeBtn(activity) {
+      let u = activity.users.find((user) => user.user == this.user._id);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
     },
     previewFiles(e) {
       e=e.target.files;if(e.length){const o=new FileReader;o.readAsDataURL(e[0]),o.onload=()=>this.form.newPhoto=o.result,console.log(this.user.photo)}

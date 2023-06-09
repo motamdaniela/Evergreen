@@ -142,6 +142,13 @@
   margin-left: 45%;
   margin-top: 20px;
 }
+@media screen and (max-width: 1300px) {
+  .list{
+    display: grid;
+    grid-template-columns: auto auto
+  }
+}
+
 
 @media screen and (max-width: 1000px) {
   .list {

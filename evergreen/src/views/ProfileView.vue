@@ -476,9 +476,9 @@ export default {
       // console.log(this.ocsPend[0], this.ocsDone)
 
 
-    // this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
+    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
 
-    // this.curUser = this.users.find(user => user.email == this.user.email)
+    this.curUser = this.users.find(user => user.email == this.user.email)
     
 
   },

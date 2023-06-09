@@ -55,12 +55,12 @@ export const useOccurrenceStore = defineStore("occurrence", {
     },
 
     async getAllOccurrences() {
-      const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/occurrences`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${curUser}`,
+          "x-access-token": `Bearer ${accessToken}`,
         },
       });
       if (response.ok) {

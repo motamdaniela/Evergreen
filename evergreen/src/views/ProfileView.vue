@@ -424,7 +424,7 @@ export default {
       ocsDone: [],
       ocsPend: [],
       activities: this.activityStore.getActivities,
-      occurences: this.occurrenceStore.getOccurrences,
+      occurrences: [],
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
       missions: this.missionStore.getMissions,
@@ -452,19 +452,17 @@ export default {
       // get the list of all users, activities and occurrences
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getUsers
+      console.log('user:',this.user)
 
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities
 
-      this.occurences= await this.occurrenceStore.getAllOccurrences();
-      this.occurences = this.occurrenceStore.getOccurrences
+      this.occurrences= await this.occurrenceStore.getAllOccurrences();
+      this.occurrences = this.occurrenceStore.getOccurrences
 
       this.activitiesSub = await this.activityStore.fetchSubActivities();
 
-      console.log(this.activitiesSub)
-      //filter the lists of user's pending and done occurrences
-      // console.log(await this.occurrenceStore.getAllOccurrences())
-      this.occurences.forEach(oc =>{
+      this.occurrences.forEach(oc =>{
           switch(oc.status){
             case "pending":
               this.ocsPend.push(oc);
@@ -476,9 +474,9 @@ export default {
       // console.log(this.ocsPend[0], this.ocsDone)
 
 
-    // this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
+    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
 
-    // this.curUser = this.users.find(user => user.email == this.user.email)
+    this.curUser = this.users.find(user => user.email == this.user.email)
     
 
   },

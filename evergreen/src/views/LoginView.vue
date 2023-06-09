@@ -53,7 +53,6 @@
 import { useUsersStore } from "@/stores/User";
 import { useMissionStore } from "@/stores/Mission";
 
-
 export default {
   setup() {
     const userStore = useUsersStore();
@@ -73,13 +72,13 @@ export default {
       // console.log(this.email);
       let users = this.userStore.getUsers;
       let login = await this.userStore.login(this.email, this.password);
-      await this.userStore.login(this.username, this.password)
-      let logged = this.userStore.getLogged
-      if(logged.type == 'user'){
+      await this.userStore.login(this.username, this.password);
+      let logged = this.userStore.getLogged;
+      if (logged.type == "user") {
         this.$router.push("/Home");
-      }else if(logged.type == 'admin'){
+      } else if (logged.type == "admin") {
         this.$router.push("/Admin");
-      }else if(logged.type == 'security'){
+      } else if (logged.type == "security") {
         this.$router.push("/Occurences");
       }
 
@@ -92,7 +91,7 @@ export default {
           (u) => u.email == this.userStore.getLogged && u.type == "user"
         )
       ) {
-        this.missionStore.addUser(this.email);
+        // this.missionStore.addUser(this.email);
         this.$router.push("/Home");
       } else if (
         users.find(

@@ -60,7 +60,7 @@
               </p>
               <br>
               <h3>Local:</h3>
-              <p>{{ this.oc.campus }}, {{ this.oc.school }}, Bloco {{ this.oc.building }}</p>
+              <p>{{ this.oc.school }}, Bloco {{ this.oc.building }}, {{ oc.classroom }}</p>
               <br>
               <h3>Hora:</h3>
               <p>{{ this.oc.hour }}</p>
@@ -273,7 +273,7 @@
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
-          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+          <h3>{{ oc.school }}, Bloco {{ oc.building }}, {{ oc.classroom }} </h3>
         </div>
           <button
             class="btn-card btnPk listBtn"
@@ -302,7 +302,7 @@
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
-          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+          <h3>{{ oc.school }}, Bloco {{ oc.building }}, {{ oc.classroom }} </h3>
           </div>
           <button
             class="btn-card btnY listBtn"

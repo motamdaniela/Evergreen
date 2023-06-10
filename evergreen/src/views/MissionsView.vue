@@ -88,6 +88,7 @@ export default {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
+    console.log(this.logged)
     let missionsBD;
     // if (this.missionStore.getMissions.length == 0) {
     let bd = await this.missionStore.getAllMissions();
@@ -111,7 +112,7 @@ export default {
       this.$router.push(n);
     },
     MissionsState(missionReward, mission) {
-      if (this.user.rewards.find((reward) => reward == missionReward)) {
+      if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "fieldG";
       } else if (
         mission.users.find(
@@ -132,7 +133,7 @@ export default {
       }
     },
     BadgeState(missionReward, mission) {
-      if (this.user.rewards.find((reward) => reward == missionReward)) {
+      if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
       } else if (
         mission.users.find(
@@ -153,7 +154,7 @@ export default {
       }
     },
     BgState(missionReward, mission) {
-      if (this.user.rewards.find((reward) => reward == missionReward)) {
+      if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
       } else if (
         mission.users.find(
@@ -174,10 +175,10 @@ export default {
       }
     },
     lockState(missionReward, mission) {
-      if (this.user.rewards.find((reward) => reward == missionReward)) {
+      if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "lockG";
       } else if (
-        !this.user.rewards.find((reward) => reward == missionReward) &&
+        !this.logged.rewards.find((reward) => reward == missionReward) &&
         mission.users.find(
           (user) => user.status == mission.max && user.user == this.logged._id
         )
@@ -188,13 +189,13 @@ export default {
       }
     },
     BtnState(missionReward, mission) {
-      if (this.user.rewards.find((reward) => reward == missionReward)) {
+      if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "btnMissionG";
       } else if (
         mission.users.find(
           (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
-        (!this.user.rewards.find((reward) => reward == missionReward) &&
+        (!this.logged.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
             (user) => user.status == mission.max && user.user == this.logged._id
           ))

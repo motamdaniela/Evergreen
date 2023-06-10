@@ -32,7 +32,7 @@
           class="btn-page btnG btnModal"
           id="sub"
           value="Inscrever"
-          @click="subscribe(this.activity), changeBtn(this.activity)"
+          @click="subscribe(this.activity)"
         />
         <input
           v-else
@@ -40,7 +40,7 @@
           class="btn-page btnR btnModal"
           id="unsub"
           value="Anular Inscrição"
-          @click="unsubscribe(this.activity), changeBtn(this.activity)"
+          @click="subscribe(this.activity)"
         />
       </div>
     </v-dialog>
@@ -60,7 +60,7 @@
               </p>
               <br>
               <h3>Local:</h3>
-              <p>{{ this.oc.campus }}, {{ this.oc.school }}, Bloco {{ this.oc.building }}</p>
+              <p>{{ this.oc.school }}, Bloco {{ this.oc.building }}, {{ oc.classroom }}</p>
               <br>
               <h3>Hora:</h3>
               <p>{{ this.oc.hour }}</p>
@@ -273,7 +273,7 @@
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
-          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+          <h3>{{ oc.school }}, Bloco {{ oc.building }}, {{ oc.classroom }} </h3>
         </div>
           <button
             class="btn-card btnPk listBtn"
@@ -302,7 +302,7 @@
           <p v-for="octype in types">
             <h2 v-if="oc.idType == octype.id" > {{ octype.name }}</h2>
           </p>
-          <h3>{{ oc.campus }}, {{ oc.school }}, Bloco {{ oc.building }} </h3>
+          <h3>{{ oc.school }}, Bloco {{ oc.building }}, {{ oc.classroom }} </h3>
           </div>
           <button
             class="btn-card btnY listBtn"
@@ -424,6 +424,7 @@ export default {
       ocsDone: [],
       ocsPend: [],
       activities: this.activityStore.getActivities,
+      activity: {},
       occurrences: [],
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
@@ -459,19 +460,14 @@ export default {
       this.occurrences= await this.occurrenceStore.getAllOccurrences();
       this.occurrences = this.occurrenceStore.getOccurrences
 
-      this.activitiesSub = await this.activityStore.fetchSubActivities();
-
-      this.occurrences.forEach(oc =>{
-        console.log(oc.status)
-          switch(oc.state){
-            case "pending":
-              this.ocsPend.push(oc);
-            case "solved":
-              this.ocsDone.push(oc);
-          }
-      })
-      // console.log(this.user)
-      // console.log(this.ocsPend[0], this.ocsDone)
+      this.occurrences.forEach((oc) =>{
+          if (oc.state == 'pending') {
+            this.ocsPend.push(oc)
+          } else if(oc.state == 'solved') {
+            this.ocsDone.push(oc)
+          }})
+        console.log(this.ocsDone, 'solved');
+        console.log(this.ocsPend, 'pending')
 
 
     this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
@@ -480,9 +476,11 @@ export default {
     
 
   },
-  updated() {
+  async updated() {
     // this.activities=this.activityStore.getActivities,this.activities.forEach(t=>{t.users.forEach(i=>{i==this.logged&&(this.activitiesSub.find(i=>i.id==t.id)||this.activitiesSub.push(t))})}),this.activitiesSub.forEach(i=>{i.users.find(i=>i==this.logged)||(i=this.activitiesSub.indexOf(i),this.activitiesSub.splice(i,1))}),this.ocsDone=[],this.ocsPend=[],this.occurences=this.occurrenceStore.getOccurrences;let userOcs=this.occurences.filter(i=>i.user==this.logged);userOcs.forEach(i=>{"pending"==i.state?this.ocsPend.push(i):"solved"==i.state&&this.ocsDone.push(i)}),this.filteredActivities=this.activities.filter(i=>i.coordinator==this.userStore.getLogged);
     // this.activitiesSub = this.activityStore.fetchSubActivities()
+    this.activitiesSub = await this.activityStore.fetchSubActivities();
+
   },
   methods: {
     async onSubmit(){
@@ -496,15 +494,19 @@ export default {
       this.user = this.userStore.getLogged
     },
 
-    subscribe(activity) {
-      console.log(activity),this.activityStore.updateUsers(this.logged,activity.id),this.missionStore.completeMission(this.logged,0);
+    async subscribe(activity) {
+      this.activity = await this.activityStore.subscribeActivity(activity);
+      await this.activityStore.fetchAllActivities();
+      await this.missionStore.getAllMissions();
+      this.missionStore.completeMission(this.userStore.getLogged, 0);
     },
-    unsubscribe(activity) {
-      activity.users=activity.users.filter(i=>i!=this.logged);
-      // this.activitiesSub
-    },
-    changeBtn(n) {
-      return!!n.users.find(n=>n==this.logged)
+    changeBtn(activity) {
+      let u = activity.users.find((user) => user.user == this.user._id);
+      if (u) {
+        return true;
+      } else {
+        return false;
+      }
     },
     previewFiles(e) {
       e=e.target.files;if(e.length){const o=new FileReader;o.readAsDataURL(e[0]),o.onload=()=>this.form.newPhoto=o.result,console.log(this.user.photo)}

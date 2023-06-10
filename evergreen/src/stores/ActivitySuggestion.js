@@ -17,10 +17,6 @@ export const useSuggestionStore = defineStore('suggestion',{
 
   actions: {
 
-    addSuggestions(obj){
-      this.suggestions.push(obj)
-    },
-
     async submit(theme, description, objectives, goals, resources){
       const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/activities/suggestion`, {
@@ -39,11 +35,9 @@ export const useSuggestionStore = defineStore('suggestion',{
       });
       if (response.ok) {
         const data = await response.json();
-        // this.occurrences = data;
         console.log(data);
         return data;
       } else {
-        console.log("not ok");
         console.log("STORE - create suggestion error", response);
       }
     }

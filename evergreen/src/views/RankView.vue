@@ -1,5 +1,10 @@
 <template>
-  <h1 style="font-family:gliker; margin-top:30px">Quadro de Líderes</h1>
+  <div id="backBtnDiv">
+    <button @click="$router.go(-1)">
+      <img id="backBtnRank" src="../assets/icons/icones/arrowback.svg" />
+    </button>
+    <h1>Quadro de Líderes</h1>
+  </div>
   <div v-for="user in users">
     <div class="board">
       <img :src=user.photo id="profilePic" />
@@ -44,4 +49,22 @@ export default {
 
 <style scoped>
 
+h1{
+  font-family:gliker;
+  margin-top:30px;
+}
+#backBtnDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#backBtnRank {
+  width: 50px;
+  z-index: 1;
+  margin-top: 60%;
+  margin-left: -100%;
+}
+#backBtnRank:hover{
+  content: url("src/assets/icons/iconesthicc/arrowback.svg");
+}
 </style>

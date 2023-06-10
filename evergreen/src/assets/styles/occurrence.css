@@ -95,6 +95,7 @@
   grid-template-columns: auto auto auto;
   margin-left: 10%;
   margin-right: 10%;
+  justify-content: space-evenly;
 }
 #descriptionBox {
   width: 500px;

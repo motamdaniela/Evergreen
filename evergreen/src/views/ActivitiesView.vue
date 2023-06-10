@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- modal suggestion -->
     <v-dialog v-model="suggestion">
       <div class="fieldP modal sugModal">
         <button class="btnRound btnP" @click="suggestion = false">
@@ -65,6 +66,25 @@
       </div>
     </v-dialog>
 
+    <!-- confirm suggestion sent -->
+    <v-dialog v-model="openActSug">
+      <div class="fieldG actSugModal">
+        <v-card elevation="0" color="#F9F9F9">
+          <v-card-actions>
+            <button class="btnRound btnG" @click="openActSug = false, suggestion = false">
+              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+            </button>
+          </v-card-actions>
+          <div id="actSugCont">
+          <img class="actSugModalImg" src='../assets/images/correct.png'>
+          <br><br>
+          <h2>A sua sugestão foi registada com sucesso!</h2>
+          </div>
+        </v-card>
+      </div>
+    </v-dialog>
+
+    <!-- each activity -->
     <v-dialog v-model="open" scrollable>
       <div class="fieldPklight modal actModal">
         <button class="btnRound btnPklight" @click="open = false">
@@ -127,28 +147,12 @@
       </div>
     </v-dialog>
 
-    <v-dialog v-model="openActSug">
-      <div class="fieldG actSugModal">
-        <v-card elevation="0" color="#F9F9F9">
-          <v-card-actions>
-            <button class="btnRound btnG" @click="refresh()">
-              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
-            </button>
-          </v-card-actions>
-          <div id="actSugCont">
-          <img class="actSugModalImg" src='../assets/images/correct.png'>
-          <br><br>
-          <h2>A sua sugestão foi registada com sucesso!</h2>
-          </div>
-        </v-card>
-      </div>
-
-    </v-dialog>
-
+    
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" alt="" />Plano de Atividades
     </h1>
 
+    <!-- filter -->
     <v-menu>
       <template v-slot:activator="{ props }">
         <button class="btn-page btnP btns" id="btnFiltrar" v-bind="props">
@@ -352,9 +356,6 @@ export default {
         return false;
       }
     },
-    refresh() {
-      location.reload();
-    }
   },
   computed: {
     FilterThemes() {

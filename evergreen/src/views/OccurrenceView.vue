@@ -277,7 +277,7 @@ export default {
     } else {
       schoolsBD = this.schoolStore.getSchools;
     }
-    schoolsBD.schools.forEach((school) => {
+    schoolsBD.forEach((school) => {
       this.schools.push(school);
     });
 

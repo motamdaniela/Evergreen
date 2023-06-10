@@ -82,8 +82,8 @@ export const useMissionStore = defineStore("mission", {
       });
     },
 
-    async update(missions) {
-      console.log(missions);
+    async update(missionsList) {
+      console.log(missionsList);
       const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/missions/update`, {
         method: "PATCH",
@@ -92,7 +92,7 @@ export const useMissionStore = defineStore("mission", {
           "x-access-token": `Bearer ${curUser}`,
         },
         body: JSON.stringify({
-          missions: missions,
+          missions: missionsList,
         }),
       });
       if (response.ok) {
@@ -113,6 +113,8 @@ export const useMissionStore = defineStore("mission", {
 
         let actList = [];
 
+        let missionsList = [];
+
         let activities = activityStore.getActivities;
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
@@ -127,10 +129,16 @@ export const useMissionStore = defineStore("mission", {
             mission.users.forEach((user) => {
               if (user.user == logged._id && user.status < mission.max) {
                 user.status = actList.length;
+                missionsList.push({
+                  id: mission._id,
+                  user: user.user,
+                  status: user.status,
+                });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 1) {
         // * for missions type participate activity
         const activityStore = useActivityStore();
@@ -138,6 +146,8 @@ export const useMissionStore = defineStore("mission", {
         let actList = [];
 
         let activities = activityStore.getActivities;
+
+        let missionsList = [];
 
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
@@ -152,13 +162,22 @@ export const useMissionStore = defineStore("mission", {
             mission.users.forEach((user) => {
               if (user.user == logged._id && user.status < mission.max) {
                 user.status = actList.length;
+                missionsList.push({
+                  id: mission._id,
+                  user: user.user,
+                  status: user.status,
+                });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 2) {
         // * for missions type 1st occurrence
         const occurrenceStore = useOccurrenceStore();
+
+        let missionsList = [];
+
         if (
           occurrenceStore.getOccurrences.find(
             (occurrence) => occurrence.user == logged._id
@@ -169,14 +188,22 @@ export const useMissionStore = defineStore("mission", {
               mission.users.forEach((user) => {
                 if (user.user == logged._id && user.status < mission.max) {
                   user.status = mission.max;
+                  missionsList.push({
+                    id: mission._id,
+                    user: user.user,
+                    status: user.status,
+                  });
                 }
               });
             }
           });
         }
+        await this.update(missionsList);
       } else if (type == 3) {
         // * for missions type win points
         let pts;
+
+        let missionsList = [];
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id) {
@@ -186,15 +213,23 @@ export const useMissionStore = defineStore("mission", {
                 mission.users.forEach((u) => {
                   if (u.user == logged._id && u.status < mission.max) {
                     u.status = pts;
+                    missionsList.push({
+                      id: mission._id,
+                      user: u.user,
+                      status: u.status,
+                    });
                   }
                 });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 4) {
         // * for missions type subscribe council
         const userStore = useUsersStore();
+
+        let missionsList = [];
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id && user.council == true) {
             this.missions.forEach((mission) => {
@@ -202,17 +237,25 @@ export const useMissionStore = defineStore("mission", {
                 mission.users.forEach((u) => {
                   if (u.user == logged._id && u.status < mission.max) {
                     u.status = mission.max;
+                    missionsList.push({
+                      id: mission._id,
+                      user: u.user,
+                      status: u.status,
+                    });
                   }
                 });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 5) {
         // for missions type fill form
       } else if (type == 6) {
         // * for missions type login every day for a week
         let num = 0;
+
+        let missionsList = [];
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id) {
@@ -222,28 +265,44 @@ export const useMissionStore = defineStore("mission", {
                 mission.users.forEach((u) => {
                   if (u.user == logged._id && u.status < mission.max) {
                     u.status = num;
+                    missionsList.push({
+                      id: mission._id,
+                      user: u.user,
+                      status: u.status,
+                    });
                   }
                 });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 7) {
         // * for missions type edit profile
+
+        let missionsList = [];
         this.missions.forEach((mission) => {
           if (mission.type == type) {
             mission.users.forEach((user) => {
               if (user.user == logged._id && user.status < mission.max) {
                 user.status = mission.max;
+                missionsList.push({
+                  id: mission._id,
+                  user: user.user,
+                  status: user.status,
+                });
               }
             });
           }
         });
+        await this.update(missionsList);
       } else if (type == 8) {
         // * for missions type get to x rank
         const userStore = useUsersStore();
         let top3 = userStore.getTop3;
         let index;
+
+        let missionsList = [];
         userStore.getUsers.forEach((user) => {
           top3.forEach((top) => {
             if (top._id == user._id && user._id == logged._id) {
@@ -253,6 +312,11 @@ export const useMissionStore = defineStore("mission", {
                   mission.users.forEach((u) => {
                     if (u.user == logged._id && u.status < mission.max) {
                       u.status = index;
+                      missionsList.push({
+                        id: mission._id,
+                        user: u.user,
+                        status: u.status,
+                      });
                     }
                   });
                 }
@@ -260,9 +324,12 @@ export const useMissionStore = defineStore("mission", {
             }
           });
         });
+        await this.update(missionsList);
       } else if (type == 9) {
         // * for missions type do all missions
         let num = 0;
+
+        let missionsList = [];
         this.missions.forEach((mission) => {
           mission.users.forEach((user) => {
             if (user.user == logged._id && user.status == mission.max) {
@@ -276,13 +343,17 @@ export const useMissionStore = defineStore("mission", {
             mission.users.forEach((u) => {
               if (u.user == logged._id && u.status < mission.max) {
                 u.status = num;
+                missionsList.push({
+                  id: mission._id,
+                  user: u.user,
+                  status: u.status,
+                });
               }
             });
           }
         });
+        await this.update(missionsList);
       }
-      console.log(this.missions);
-      await this.update(this.missions);
     },
   },
 });

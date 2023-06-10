@@ -411,15 +411,17 @@ export default {
       //     this.activitiesSub.splice(i, 1));
       // }),
       (this.users = this.userStore.getTop3),
-      this.missionStore.completeMission(this.logged, 1),
-      this.missionStore.completeMission(this.logged, 2),
-      this.missionStore.completeMission(this.logged, 3),
-      this.missionStore.completeMission(this.logged, 4),
-      this.missionStore.completeMission(this.logged, 5),
-      this.missionStore.completeMission(this.logged, 8),
-      this.missionStore.completeMission(this.logged, 9),
-      console.log(),
-      (this.activitiesSug = this.activityStore.getActivitySuggestions),
+      // this.missionStore.completeMission(this.logged, 1),
+      // this.missionStore.completeMission(this.logged, 2),
+      // this.missionStore.completeMission(this.logged, 3),
+      // this.missionStore.completeMission(this.logged, 4),
+      // this.missionStore.completeMission(this.logged, 5),
+      // this.missionStore.completeMission(this.logged, 8),
+      // this.missionStore.completeMission(this.logged, 9),
+      // console.log(),
+
+      this.activitiesSug = this.activityStore.getActivitySuggestions,
+      console.log('sugg home', this.activitiesSug)
       
       this.activitiesSub.forEach((act) => {
       if (

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 import { useUsersStore } from "./User";
-import { useMissionStore } from "./Mission";
+import { useMissionStore } from "./Mission"
 
 // import { AuthService } from '@/services/auth.service';
 
@@ -18,19 +18,22 @@ export const useActivityStore = defineStore("activity", {
     },
 
     async getActivitySuggestions() {
-      const userStore = useUsersStore();
+      const userStore = useUsersStore()
+
       let logged = userStore.getLogged;
-      if (this.logged == undefined || this.logged == "") {
-        await this.userStore.fetchLogged();
-        this.logged = this.userStore.getLogged;
-      }
-      let user = userStore.getUsers.find((user) => user.email == logged);
+      console.log(logged, 'hi');
+      // if (logged == undefined || logged == "") {
+      //   await userStore.fetchLogged();
+      //   logged = userStore.getLogged;
+      // }
+      // let user = userStore.getUsers.find((user) => user.email == logged.email);
+      // console.log(user);
       let activities = this.getActivities;
       let activitiesSub = [];
       activities.forEach((activity) => {
         activity.users.forEach((user) => {
           if (user == logged) {
-            if (!activitiesSub.find((act) => act.id == activity.id)) {
+            if (!activitiesSub.find((act) => act._id == activity._id)) {
               activitiesSub.push(activity);
             }
           }
@@ -60,13 +63,13 @@ export const useActivityStore = defineStore("activity", {
           }
         });
       });
-
+      // console.log(user.loginDate)
       themes.forEach((theme) => {
         activities.forEach((activity) => {
           if (
             activity.idTheme == theme &&
-            !activitiesSub.find((act) => act.id == activity.id) &&
-            activity.begin > user.loginDate
+            !activitiesSub.find((act) => act._id == activity._id) &&
+            activity.begin > logged.loginDate
           ) {
             if (acts.length < 3) {
               acts.push(activity);
@@ -77,7 +80,7 @@ export const useActivityStore = defineStore("activity", {
 
       acts.forEach((aTheme) => {
         activitiesSub.forEach((activity) => {
-          if (aTheme.id == activity.id) {
+          if (aTheme._id == activity._id) {
             acts.splice(acts.indexOf(activity), 1);
           }
         });
@@ -87,9 +90,9 @@ export const useActivityStore = defineStore("activity", {
         activities.forEach((activity) => {
           // acts.forEach((a) => {
           if (
-            !acts.find((act) => act.id == activity.id) &&
-            !activitiesSub.find((act) => act.id == activity.id) &&
-            activity.begin > user.loginDate
+            !acts.find((act) => act._id == activity._id) &&
+            !activitiesSub.find((act) => act._id == activity._id) &&
+            activity.begin > logged.loginDate
           ) {
             if (acts.length < 3) {
               acts.push(activity);
@@ -101,12 +104,13 @@ export const useActivityStore = defineStore("activity", {
 
       if (activitiesSub.length == 0) {
         activities.forEach((activity) => {
-          if (acts.length < 3 && activity.begin < user.loginDate) {
+          if (acts.length < 3 && activity.begin < logged.loginDate) {
             acts.push(activity);
           }
         });
       }
 
+      console.log('sugg store', acts)
       return acts;
     },
   },

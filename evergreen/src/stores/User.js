@@ -16,13 +16,6 @@ export const useUsersStore = defineStore("user", {
       return this.logged;
     },
 
-    // getLoggedObj() {
-    //   console.log(this.getLogged);
-    //   let user = this.users.find((user) => user.email == this.getLogged.email);
-    //   console.log(user);
-    //   return user;
-    // },
-
     getUsers() {
       return this.users;
     },

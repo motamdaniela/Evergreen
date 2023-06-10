@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useSessionStorage, useStorage } from "@vueuse/core";
 import { useUsersStore } from "./User";
-import { useMissionStore } from "./Mission"
+import { useMissionStore } from "./Mission";
 
 // import { AuthService } from '@/services/auth.service';
 
@@ -17,22 +17,16 @@ export const useActivityStore = defineStore("activity", {
       return this.activities;
     },
 
-    async getActivitySuggestions() {
-      const userStore = useUsersStore()
+    getActivitySuggestions() {
+      const userStore = useUsersStore();
 
       let logged = userStore.getLogged;
-      console.log(logged, 'hi');
-      // if (logged == undefined || logged == "") {
-      //   await userStore.fetchLogged();
-      //   logged = userStore.getLogged;
-      // }
-      // let user = userStore.getUsers.find((user) => user.email == logged.email);
-      // console.log(user);
       let activities = this.getActivities;
       let activitiesSub = [];
       activities.forEach((activity) => {
         activity.users.forEach((user) => {
-          if (user == logged) {
+          console.log(user.user == logged._id);
+          if (user.user == logged._id) {
             if (!activitiesSub.find((act) => act._id == activity._id)) {
               activitiesSub.push(activity);
             }
@@ -40,17 +34,18 @@ export const useActivityStore = defineStore("activity", {
         });
       });
       activitiesSub.forEach((act) => {
-        if (!act.users.find((user) => user == logged)) {
+        if (!act.users.find((user) => user.user == logged._id)) {
           let index = activitiesSub.indexOf(act);
           activitiesSub.splice(index, 1);
         }
       });
+
       let themes = [];
       let acts = [];
 
       activitiesSub.forEach((activity) => {
         activity.users.forEach((u) => {
-          if (u == user.email) {
+          if (u.user == logged._id) {
             if (themes.length > 0) {
               themes.forEach((theme) => {
                 if (!theme == activity.idTheme) {
@@ -110,7 +105,8 @@ export const useActivityStore = defineStore("activity", {
         });
       }
 
-      console.log('sugg store', acts)
+      console.log(acts);
+
       return acts;
     },
   },
@@ -159,7 +155,7 @@ export const useActivityStore = defineStore("activity", {
 
     // * get activities
     async fetchSubActivities() {
-      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"))
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/activities/subscribed`, {
         method: "GET",
         headers: {

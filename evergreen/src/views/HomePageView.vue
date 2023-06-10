@@ -219,7 +219,7 @@
       <span>Sugestões de atividades</span>
     </h1>
 
-    <div class="list listSug">
+    <div class="list listSug" v-if="activitiesSug.length > 0">
       <div class="grid-item itemR" v-for="activity in activitiesSug">
         <v-card class="mx-auto" max-width="400" id="cardR">
           <v-img
@@ -258,6 +258,9 @@
           </div>
         </v-card>
       </div>
+    </div>
+    <div v-else>
+      <p>Não há novas sugestões de atividades.</p>
     </div>
 
     <br /><br />
@@ -400,17 +403,19 @@ export default {
     // let activities = this.activityStore.getActivities;
     // activities.forEach((s) => {
     //   s.users.forEach((i) => {
-    //     i == this.logged &&
-    //       (this.activitiesSub.find((i) => i.id == s.id) ||
+    //     i.user == this.user._id &&
+    //       (this.activitiesSub.find((i) => i._id == s._id) ||
     //         this.activitiesSub.push(s));
+    //     console.log("b");
     //   });
     // }),
-      // this.activitiesSub.forEach((i) => {
-      //   i.users.find((i) => i == this.logged) ||
-      //     ((i = this.activitiesSub.indexOf(i)),
-      //     this.activitiesSub.splice(i, 1));
-      // }),
-      (this.users = this.userStore.getTop3),
+    //   this.activitiesSub.forEach((i) => {
+    //     i.users.find((i) => i.user == this.user._id) ||
+    //       ((i = this.activitiesSub.indexOf(i)),
+    //       this.activitiesSub.splice(i, 1));
+    //     console.log("a");
+    //   }),
+    (this.users = this.userStore.getTop3),
       // this.missionStore.completeMission(this.logged, 1),
       // this.missionStore.completeMission(this.logged, 2),
       // this.missionStore.completeMission(this.logged, 3),
@@ -419,30 +424,30 @@ export default {
       // this.missionStore.completeMission(this.logged, 8),
       // this.missionStore.completeMission(this.logged, 9),
       // console.log(),
+      console.log(this.activitiesSug);
+    (this.activitiesSug = this.activityStore.getActivitySuggestions),
+      console.log(this.activitiesSug);
 
-      this.activitiesSug = this.activityStore.getActivitySuggestions,
-      console.log('sugg home', this.activitiesSug)
-      
-      this.activitiesSub.forEach((act) => {
-        if (
-          this.closeActivities.length < 5 &&
-          +act.begin > this.user.loginDate &&
-          !this.closeActivities.find((a) => a._id == act._id)
-        ) {
-          this.closeActivities.push(act);
-        } else {
-          this.closeActivities.forEach((a) => {
-            if (
-              +a.begin > +act.begin &&
-              +a.begin > this.user.loginDate &&
-              !this.closeActivities.find((ac) => a._id == ac._id)
-            ) {
-              this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
-              this.closeActivities.push(a);
-            }
-          });
-        }
-      });
+    this.activitiesSub.forEach((act) => {
+      if (
+        this.closeActivities.length < 5 &&
+        +act.begin > this.user.loginDate &&
+        !this.closeActivities.find((a) => a._id == act._id)
+      ) {
+        this.closeActivities.push(act);
+      } else {
+        this.closeActivities.forEach((a) => {
+          if (
+            +a.begin > +act.begin &&
+            +a.begin > this.user.loginDate &&
+            !this.closeActivities.find((ac) => a._id == ac._id)
+          ) {
+            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+            this.closeActivities.push(a);
+          }
+        });
+      }
+    });
     this.activitiesSub.forEach((act) => {
       if (
         +act.begin <= this.user.loginDate &&

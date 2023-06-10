@@ -400,22 +400,22 @@ export default {
     //       console.log(1)));
   },
   async updated() {
-    // let activities = this.activityStore.getActivities;
-    // activities.forEach((s) => {
-    //   s.users.forEach((i) => {
-    //     i.user == this.user._id &&
-    //       (this.activitiesSub.find((i) => i._id == s._id) ||
-    //         this.activitiesSub.push(s));
-    //     console.log("b");
-    //   });
-    // }),
-    //   this.activitiesSub.forEach((i) => {
-    //     i.users.find((i) => i.user == this.user._id) ||
-    //       ((i = this.activitiesSub.indexOf(i)),
-    //       this.activitiesSub.splice(i, 1));
-    //     console.log("a");
-    //   }),
-    (this.users = this.userStore.getTop3),
+    let activities = this.activityStore.getActivities;
+    activities.forEach((s) => {
+      s.users.forEach((i) => {
+        i.user == this.user._id &&
+          (this.activitiesSub.find((i) => i._id == s._id) ||
+            this.activitiesSub.push(s));
+        console.log("b");
+      });
+    }),
+      this.activitiesSub.forEach((i) => {
+        i.users.find((i) => i.user == this.user._id) ||
+          ((i = this.activitiesSub.indexOf(i)),
+          this.activitiesSub.splice(i, 1));
+        console.log("a");
+      }),
+      (this.users = this.userStore.getTop3),
       // this.missionStore.completeMission(this.logged, 1),
       // this.missionStore.completeMission(this.logged, 2),
       // this.missionStore.completeMission(this.logged, 3),

@@ -138,7 +138,10 @@ export const useMissionStore = defineStore("mission", {
             });
           }
         });
-        await this.update(missionsList);
+        console.log(missionsList);
+        if (missionsList.length > 0) {
+          await this.update(missionsList);
+        }
       } else if (type == 1) {
         // * for missions type participate activity
         const activityStore = useActivityStore();

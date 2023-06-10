@@ -88,7 +88,6 @@ export default {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
-    console.log(this.logged)
     let missionsBD;
     // if (this.missionStore.getMissions.length == 0) {
     let bd = await this.missionStore.getAllMissions();
@@ -116,6 +115,12 @@ export default {
         return "fieldG";
       } else if (
         mission.users.find(
+          (user) => user.status == 0 && user.user == this.logged._id
+        )
+      ) {
+        return "fieldR";
+      } else if (
+        mission.users.find(
           (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
@@ -124,17 +129,17 @@ export default {
           ))
       ) {
         return "fieldY";
-      } else if (
-        mission.users.find(
-          (user) => user.status == 0 && user.user == this.logged._id
-        )
-      ) {
-        return "fieldR";
       }
     },
     BadgeState(missionReward, mission) {
       if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "badgeG";
+      } else if (
+        mission.users.find(
+          (user) => user.status == 0 && user.user == this.logged._id
+        )
+      ) {
+        return "badgeR";
       } else if (
         mission.users.find(
           (user) => user.status < mission.max && user.user == this.logged._id
@@ -145,17 +150,17 @@ export default {
           ))
       ) {
         return "badgeY";
-      } else if (
-        mission.users.find(
-          (user) => user.status == 0 && user.user == this.logged._id
-        )
-      ) {
-        return "badgeR";
       }
     },
     BgState(missionReward, mission) {
       if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "bgG";
+      } else if (
+        mission.users.find(
+          (user) => user.status == 0 && user.user == this.logged._id
+        )
+      ) {
+        return "bgR";
       } else if (
         mission.users.find(
           (user) => user.status < mission.max && user.user == this.logged._id
@@ -166,12 +171,6 @@ export default {
           ))
       ) {
         return "bgY";
-      } else if (
-        mission.users.find(
-          (user) => user.status == 0 && user.user == this.logged._id
-        )
-      ) {
-        return "bgR";
       }
     },
     lockState(missionReward, mission) {
@@ -193,6 +192,12 @@ export default {
         return "btnMissionG";
       } else if (
         mission.users.find(
+          (user) => user.status == 0 && user.user == this.logged._id
+        )
+      ) {
+        return "btnMissionR";
+      } else if (
+        mission.users.find(
           (user) => user.status < mission.max && user.user == this.logged._id
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
@@ -201,12 +206,6 @@ export default {
           ))
       ) {
         return "btnMissionY";
-      } else if (
-        mission.users.find(
-          (user) => user.status == 0 && user.user == this.logged._id
-        )
-      ) {
-        return "btnMissionR";
       }
     },
     addBadge(missionReward) {

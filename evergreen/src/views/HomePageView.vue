@@ -330,11 +330,11 @@ export default {
       activity: {},
       themes: this.activityStore.getThemes,
       users: this.userStore.getTop3,
-      logged: '',
+      logged: "",
       activitiesSub: [],
       activitiesSug: [],
       // user: this.userStore.getUsers.find((user) => user.email == this.logged),
-      user: '',
+      user: "",
       userObj: this.userStore.getLoggedObj,
       open: false,
       loginReward: false,
@@ -345,16 +345,16 @@ export default {
     };
   },
   async created() {
-    if(this.user == undefined || this.user == ''){
+    if (this.user == undefined || this.user == "") {
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
+      this.user = this.userStore.getLogged;
     }
-    if(this.users == undefined || this.users == ''){
+    if (this.users == undefined || this.users == "") {
       await this.userStore.fetchAllUsers();
-      this.users = this.userStore.getTop3
+      this.users = this.userStore.getTop3;
     }
     this.activitiesSub = await this.activityStore.fetchSubActivities();
-    console.log('atividades:',this.activitiesSub);
+    console.log("atividades:", this.activitiesSub);
     // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);
@@ -396,7 +396,7 @@ export default {
     //       (this.loginReward = !0),
     //       console.log(1)));
   },
-  updated() {
+  async updated() {
     // let activities = this.activityStore.getActivities;
     // activities.forEach((s) => {
     //   s.users.forEach((i) => {
@@ -424,26 +424,25 @@ export default {
       console.log('sugg home', this.activitiesSug)
       
       this.activitiesSub.forEach((act) => {
-      if (
-        this.closeActivities.length < 5 &&
-        +act.begin > this.user.loginDate &&
-        !this.closeActivities.find((a) => a._id == act._id)
-      ) {
-        this.closeActivities.push(act);
-        
-      } else {
-        this.closeActivities.forEach((a) => {
-          if (
-            +a.begin > +act.begin &&
-            +a.begin > this.user.loginDate &&
-            !this.closeActivities.find((ac) => a._id == ac._id)
-          ) {
-            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
-            this.closeActivities.push(a);
-          }
-        });
-      }
-    });
+        if (
+          this.closeActivities.length < 5 &&
+          +act.begin > this.user.loginDate &&
+          !this.closeActivities.find((a) => a._id == act._id)
+        ) {
+          this.closeActivities.push(act);
+        } else {
+          this.closeActivities.forEach((a) => {
+            if (
+              +a.begin > +act.begin &&
+              +a.begin > this.user.loginDate &&
+              !this.closeActivities.find((ac) => a._id == ac._id)
+            ) {
+              this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+              this.closeActivities.push(a);
+            }
+          });
+        }
+      });
     this.activitiesSub.forEach((act) => {
       if (
         +act.begin <= this.user.loginDate &&
@@ -453,7 +452,6 @@ export default {
         this.activitiesNow.push(act);
       }
     });
-      
   },
   methods: {
     receive() {
@@ -478,9 +476,9 @@ export default {
       }
     },
     async SubConselho() {
-      await this.userStore.subscribeCouncil()
+      await this.userStore.subscribeCouncil();
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
+      this.user = this.userStore.getLogged;
       // FOR THE MISSION SUB CONSELHO
       // (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),
       //   this.user.council

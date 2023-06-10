@@ -52,13 +52,10 @@
   box-shadow: 5px 5px 0px #e9a13b;
   border: 2px solid #050b06;
   padding: 20px;
-  /* padding-left: 20px;
-    padding-right: 20px; */
   border-radius: 30px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  text-align: left;
 }
 .boardPk {
   background-color: #fdf9f9;
@@ -76,11 +73,25 @@
   width: 40%;
   margin-left: 5%;
   padding-left: 5%;
+  display: flex;
+  flex-direction: row;
 }
 
 #searchicon{
-  width: 30px;
+  width: 20px;
   margin-left: 5px;
+  margin-bottom: 25px;
+}
+
+.textInfo{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+.btnGroup{
+  display: flex;
+  align-items: center;
 }
 
 .cardY {
@@ -91,6 +102,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
   width: 100%;
+  display: flex;
 }
 
 .cardPc {
@@ -208,4 +220,20 @@
 
 p {
   font-size: 91%;
+}
+
+@media screen and (max-width: 1000px) {
+  .btn-page{
+    width: 100px
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .btn-page{
+    width: 80px;
+    font-size: 8px;
+  }
+  p{
+    font-size: 9px;
+  }
 }

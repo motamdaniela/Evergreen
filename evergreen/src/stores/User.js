@@ -245,6 +245,64 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
+    async editUser(id, password, confPassword) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/adminEdit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          password: password,
+          confPassword: confPassword,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
+    async blockUser(id, state) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          state: state,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
+    async deleteUser(id) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
     // adds users
     add(obj) {
       obj.rank = this.getUsersUser.length + 1;

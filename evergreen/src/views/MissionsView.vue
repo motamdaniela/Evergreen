@@ -88,6 +88,7 @@ export default {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
+    console.log(this.logged)
     let missionsBD;
     // if (this.missionStore.getMissions.length == 0) {
     let bd = await this.missionStore.getAllMissions();

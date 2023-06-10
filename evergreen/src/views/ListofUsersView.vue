@@ -1,15 +1,15 @@
 <template>
 
 <div>
-    <v-dialog v-model="dialog">
-      <div class="fieldPklight modal">
+    <v-dialog class="dialog" v-model="dialog">
+      <div class="fieldPklight modal actModal">
       <v-card v-if="this.action != 'edit'" >
         <v-card-title>Aviso!</v-card-title>
         <v-card-text>
-          <p v-if="this.action == 'block'">Tem a certeza que pretende bloquear o utilizador
+          <p v-if="this.action == 'block' && this.user.state == 'active'">Tem a certeza que pretende bloquear o utilizador
             <b>{{ this.user.name }}</b> ?
           </p>
-          <p v-if="this.action == 'unblock'">Tem a certeza que pretende voltar a ativar o utilizador
+          <p v-else-if="this.action == 'block' && this.user.state == 'blocked'">Tem a certeza que pretende voltar a ativar o utilizador
             <b>{{ this.user.name }}</b> ?
           </p>
           <p v-if="this.action == 'delete'" >Tem a certeza que pretende eliminar o utilizador
@@ -19,7 +19,6 @@
         </v-card-text>
         <v-card-actions>
             <button v-if="this.action == 'block'" class="btn-page btnPk" @click="Block">Confirmar</button>
-            <button v-if="this.action == 'unblock'" class="btn-page btnPk" @click="Unblock">Confirmar</button>
             <button v-if="this.action == 'delete'" class="btn-page btnPk" @click="Delete">Confirmar</button>
             <button class="btn-page btnPklight" @click="dialog = false">Cancelar</button>
         </v-card-actions>
@@ -27,12 +26,20 @@
       
       <v-card v-else>
         <v-card-text>
-      <label for="pass" class="semiTitle">Nova palavra-passe</label>
-      <br />
-      <input class="input" id="pass" v-model="newPassword" type="password" />
+          <label for="pass" class="semiTitle">Nova palavra-passe</label>
+          <br />
+          <input class="input" id="pass" v-model="newPassword" type="password" />
+          <br/>
+          <label v-if="this.newPassword" for="passConf" class="semiTitle">Confirme a palavra-passe</label>
+          <br />
+          <input v-if="this.newPassword" class="input" id="passConf" v-model="newPasswordConf" type="password" />
+          <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">
+            {{error}}
+          </v-alert>
+
         </v-card-text>
         <v-card-actions>
-          <button class="btn-page btnPk" @click="Edit" >Guardar</button>
+          <button v-if="this.newPassword" class="btn-page btnPk" @click="Edit" >Guardar</button>
           <button class="btn-page btnPklight" @click="dialog = false">Cancelar</button>
         </v-card-actions>
       </v-card>
@@ -42,6 +49,7 @@
   </div>
 
 
+  <!-- page content -->
   <div>
         <h1 class="title">
           <img class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
@@ -58,25 +66,27 @@
   <div v-for="user in filteredUsers">
     <div v-if="user.type != 'admin'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
-      <div class="listText">
-            <h2>{{ user.name }}</h2>
-            <h4>{{ user.school }}</h4>
-            <p>{{ user.email }}</p>
-          </div>
-      <div>
+      <div class="textInfo">
+        <h3><b>{{ user.name }}</b></h3>
+        <p>{{ user.school }} • {{ user.email }}</p>
+      </div>
+      <div class="btnGroup">
         <button class="btn-page btnPklight" @click="dialog = true; this.action = 'edit'; this.user = user">Editar</button>
         <button v-if="user.state == 'active'" class="btn-page btnY" @click="dialog = true; this.action = 'block'; this.user = user">Bloquear</button>
-        <button v-if="user.state != 'active'" class="btn-page btnB" @click="dialog = true; this.action = 'unblock'; this.user = user">Ativar</button>
+        <button v-if="user.state != 'active'" class="btn-page btnB" @click="dialog = true; this.action = 'block'; this.user = user">Ativar</button>
         <button class="btn-page btnR" @click="dialog = true; this.action = 'delete'; this.user = user">Eliminar</button>
       </div>
 
     </div>
   </div>
-
+  <br/>
   <div v-for="user in filteredUsers" >
     <div v-if="user.type == 'admin'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
-      <p>{{ user.name }}</p>
+      <div class="textInfo">
+        <h3><b>{{ user.name }}</b></h3>
+        <p>{{ user.email }}</p>
+      </div>
       <div>
         <button class="btn-page btnPklight" @click="dialog = true; this.action = 'edit'; this.user = user">Editar</button>
         <button class="btn-page btnR" @click="dialog = true; this.action = 'delete'; this.user = user">Eliminar</button>
@@ -101,35 +111,42 @@ export default {
       action: '',
       user: '',
       newPassword: '',
+      newPasswordConf: '',
       search: '',
       isFilter: false,
+      error: ''
     };
   },
   methods: {
-    Edit() {
-      this.user.password = this.newPassword;
-      this.dialog = false;
-      this.userStore.edit(JSON.stringify(this.user))
+    async Edit() {
+      if(this.newPassword == this.newPasswordConf){
+        await this.userStore.editUser(this.user._id, this.newPassword, this.newPasswordConf)
+        this.dialog = false;
+      }else{
+        this.error = 'Confirme que a palavra-passe coincide!'
+      }
     },
-    Block() {
-      this.user.state = 'blocked';
+    async Block() {
+      if(this.user.state == 'active'){
+        await this.userStore.blockUser(this.user._id, 'blocked')
+      } else {
+        await this.userStore.blockUser(this.user._id, 'active')
+      }
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getUsers
       this.dialog = false;
-      this.userStore.edit(JSON.stringify(this.user))
     },
-    Unblock() {
-      this.user.state = 'active';
+    async Delete() {
+      await this.userStore.deleteUser(this.user._id);
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getUsers
       this.dialog = false;
-      this.userStore.edit(JSON.stringify(this.user))
-    },
-    Delete() {
-      this.dialog = false;
-      this.userStore.delete(JSON.stringify(this.user))
     },
   },
   computed: {
     filteredUsers() {
             if(this.isFilter) {
-                return this.users.filter(user => user.name.startsWith(this.search))
+                return this.users.filter(user => user.name.startsWith(this.search) || user.email.startsWith(this.search) || user.school.startsWith(this.search))
             }else if(this.search == ''){
               return this.users
             }else {

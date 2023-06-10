@@ -54,6 +54,13 @@ a {
   top: 5px;
 }
 
+.errorAlert {
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 3px 3px 0px #050b06;
+}
+
 .backbtn:hover {
   content: url("src/assets/icons/iconesthicc/arrowback.svg");
 }

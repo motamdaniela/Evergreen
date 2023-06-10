@@ -154,8 +154,8 @@
         <RouterLink class="faqLink" to="/faq" name="">F.A.Q.</RouterLink>
         <button v-if="this.$route.name == 'Profile'" @click="logOut" alt="">
           <img
-            class="logoutbtn"
-            style="width: 30px; height: 25px"
+            class="logoutbtn navbtn"
+            style="width: 20px; height: 25px"
             src="/src/assets/icons/icones/logout.svg"
             alt=""
           />

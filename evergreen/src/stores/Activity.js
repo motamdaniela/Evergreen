@@ -154,10 +154,10 @@ export const useActivityStore = defineStore("activity", {
     },
 
     // * verify participation
-    async verifyParticipation(activity, user) {
+    async verifyParticipation(activity) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
-      const actId = activity._id;
-      const userId = user.id
+      const actId = activity._id
+      // const userId = selUser.user;
       const response = await fetch(`${API_URL}/activities/${actId}/users/${userId}`, {
         method: "PATCH",
         headers: {
@@ -168,7 +168,6 @@ export const useActivityStore = defineStore("activity", {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        // missionStore.completeMission(userStore.getLogged, 0);
         return data.activity;
       } else {
         console.log(response.status)

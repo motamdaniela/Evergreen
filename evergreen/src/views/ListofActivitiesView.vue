@@ -31,7 +31,7 @@
       </div>
     </v-dialog>
 
-    <v-dialog v-model="listDialog" height="80%" width="60%" content-class="fieldP modal" scrollable>
+    <v-dialog v-model="listDialog" height="75%" width="60%" content-class="fieldP modal" scrollable>
         <div>
           <button class="btnRound btnP" @click="listDialog = false">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
@@ -40,14 +40,14 @@
         <v-card elevation="0" color="#F9F9F9">
           <p v-if="activityUsers.length == 0"> Não exitem inscrições!</p>
           <div v-for="user in activityUsers" >
-            <v-row class="boardP subList">
-              <img :src="user.photo" id="profilePic" />
-              <p class="semiTitle">{{ user.username }}</p>
-              <div>
+            <div class="boardP subList">
+              <div id="eachUser">
+                <img :src="user.photo" id="profilePic" />
+                <p class="semiTitle">{{ user.username }}</p>
+              </div>
                 <button v-if="datePassed"
                    class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
-              </div>
-            </v-row>
+            </div>
           </div>
         </v-card>
     </v-dialog>
@@ -117,58 +117,64 @@
         return {
           activities: [],
           users: this.userStore.getUsersUser,
-          userObj: "",
+          curUser: "",
           open: false,
           listDialog: false,
           isFilter: false,
-          listUsers: []
+          listUsers: [],
+          datePassed: false,
+          activity: {}
         };
       },
       async created () {
         this.activities = await this.activityStore.fetchCoordinatorActivities();
-        this.userObj = this.userStore.getUsers.find(
-          (user) => user.email == this.user
-        )
-
+        this.curUser = this.userStore.getLogged
+        console.log(this.curUser);
         if (this.users == undefined || this.users == "") {
           await this.userStore.fetchAllUsers();
           this.users = this.userStore.getUsersUser;
         }
 
+        if (this.curUser == undefined || this.curUser == "") {
+          await this.userStore.fetchLogged();
+          this.curUser = this.userStore.getLogged;
+        }
+
+      },
+
+      updated() {
+        if(this.activity.end < this.curUser.loginDate){
+          return this.datePassed = true
+        }else{
+          return this.datePassed = false;
+        }
       },
 
       methods: {
 
-        Participation(){
-          this.user.activities += 1;
-          this.user.points += 5;
+        async Participation(activity){
           // this.activityStore.updateParticipated(this.user.email, this.activity._id)
-
+          let selUser = this.activity.users.find((u) => u.user == this.user._id )
+          console.log(selUser, this.activity, 'verify')
+          this.activity = await this.activityStore.verifyParticipation(activity)
+          // this.user.activitiesCompleted += 1;
+          // this.user.points += 5;
         }, 
-
 
       },
 
       computed: {
-        datePassed(){
-          let date = new Date();
-          if(this.activity.end < date.getDate()){ 
-            return true
-          }else{
-            return false;
-          }
-        },
+
         activityUsers() {
           this.users.forEach((user) => {
-              console.log(user._id)
               this.activity.users.forEach((userSub) => {
                 if(user._id == userSub.user){
                   this.listUsers.push(user)
                 }
               })
             }) 
-          console.log(this.activity.users, this.activity.title)
-          console.log(this.listUsers, this.activity.title)
+          // console.log(this.activity.users, this.activity.title)
+          // console.log(this.listUsers, this.activity.title)
           return this.listUsers
         }
       },

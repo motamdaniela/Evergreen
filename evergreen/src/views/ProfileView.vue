@@ -154,9 +154,7 @@
             </div>
             </div>
 
-            <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{
-        error
-      }}</v-alert>
+            <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{ error }}</v-alert>
 
             <v-card-actions>
               <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" type="submit" >Guardar</button>
@@ -484,15 +482,25 @@ export default {
   },
   methods: {
     async onSubmit(){
-      await this.userStore.editProfile(
+      let edit = await this.userStore.editProfile(
         this.form.newPhoto,
         this.form.newUsername,
         this.form.newPassword,
         this.form.newPasswordConf
-      );
+        );
+      
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged
+
+      if (edit == 409) {
+        this.warning = 'Utilizador já existe!'
+      } else if (edit == 400) {
+        this.warning = 'Este campo não pode conter espaços'
+      } else if (edit == 403) {
+        this.warning = 'Passwords não correspondem'
+      }
     },
+
 
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);

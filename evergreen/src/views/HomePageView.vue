@@ -356,8 +356,7 @@ export default {
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getTop3;
     }
-    this.activitiesSub = await this.activityStore.fetchSubActivities();
-    console.log("atividades:", this.activitiesSub);
+    
     // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);
@@ -400,6 +399,9 @@ export default {
     //       console.log(1)));
   },
   async updated() {
+    this.activitiesSub = await this.activityStore.fetchSubActivities();
+    console.log("atividades:", this.activitiesSub);
+
     let activities = this.activityStore.getActivities;
     activities.forEach((s) => {
       s.users.forEach((i) => {
@@ -416,14 +418,7 @@ export default {
         console.log("a");
       }),
       (this.users = this.userStore.getTop3),
-      // this.missionStore.completeMission(this.logged, 1),
-      // this.missionStore.completeMission(this.logged, 2),
-      // this.missionStore.completeMission(this.logged, 3),
-      // this.missionStore.completeMission(this.logged, 4),
-      // this.missionStore.completeMission(this.logged, 5),
-      // this.missionStore.completeMission(this.logged, 8),
-      // this.missionStore.completeMission(this.logged, 9),
-      // console.log(),
+      
       console.log(this.activitiesSug);
     (this.activitiesSug = this.activityStore.getActivitySuggestions),
       console.log(this.activitiesSug);

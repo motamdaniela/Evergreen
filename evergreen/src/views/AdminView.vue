@@ -73,7 +73,7 @@ export default {
   },
   data() {
     return {
-      users: this.userStore.getUsers,
+      users: this.userStore.getUsersUser,
       councilUsers: [],
       myActivities: [],
       closeActivities: [],
@@ -82,6 +82,11 @@ export default {
     };
   },
   async created() {
+    if (this.users == undefined || this.users == "") {
+      await this.userStore.fetchAllUsers();
+      this.users = this.userStore.getUsersUser;
+    }
+    
     this.users.forEach((user) => {
       if (user.council) {
         this.councilUsers.push(user);

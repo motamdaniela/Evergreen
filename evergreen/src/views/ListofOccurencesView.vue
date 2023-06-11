@@ -34,7 +34,7 @@
     
       <div>
             <h1 class="title">
-              <img v-if="isLogged && this.user.type == 'admin'" class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
+              <img v-if="this.curUser.type == 'admin'" class="backbtn" onclick="history.back()" src="../assets/icons/icones/arrowback.svg">
               <span>Ocorrências</span>
             </h1>
         </div>
@@ -102,6 +102,7 @@
           users: this.userStore.getUsers ,
           types: this.ocStore.getTypes,
           typesPicked: [],
+          curUser: this.userStore.getLogged
         };
       },
       methods: {

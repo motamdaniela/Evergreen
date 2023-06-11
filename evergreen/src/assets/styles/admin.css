@@ -14,6 +14,10 @@
   margin-right: auto;
 }
 
+.subList{
+  margin: 10px;
+}
+
 .boardP {
   background-color: #fdf9f9;
   box-shadow: 5px 5px 0px #c2afea;
@@ -231,9 +235,21 @@ p {
   font-size: 91%;
 }
 
+@media screen and (max-width: 1300px) {
+  .listAct{
+    display: grid;
+    grid-template-columns: auto auto
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .btn-page{
     width: 100px
+  }
+  .listAct{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

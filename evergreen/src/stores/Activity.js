@@ -125,7 +125,7 @@ export const useActivityStore = defineStore("activity", {
       if (response.ok) {
         const data = await response.json();
         this.activities = data.activities;
-        // console.log('activities store:', this.getActivities)
+        console.log('activities store:', this.activities)
         return data;
       } else {
         console.log(response.status);
@@ -165,6 +165,25 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
+        return data.activities;
+      } else {
+        console.log(response.status);
+      }
+    },
+
+    async fetchCoordinatorActivities() {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/activities/coordinator`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        this.myActivities = data.activities
+        console.log(data)
         return data.activities;
       } else {
         console.log(response.status);

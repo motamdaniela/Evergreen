@@ -102,7 +102,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
   width: 100%;
-  display: flex;
+  /* display: flex; */
 }
 
 .cardPc {
@@ -152,6 +152,11 @@
   width: 30%;
 }
 
+.councilUs{
+  padding-left: 40px;
+  padding-bottom: 40px;
+}
+
 .icon {
   position: relative;
   width: 100px;
@@ -183,6 +188,10 @@
 .listAct {
   display: grid;
   grid-template-columns: auto auto auto;
+}
+
+.linkUsers{
+  justify-self: center;
 }
 
 .linkUsers:hover span {

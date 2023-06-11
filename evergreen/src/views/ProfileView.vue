@@ -470,8 +470,7 @@ export default {
 
     this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
 
-    this.curUser = this.users.find(user => user.email == this.user.email)
-    
+    this.curUser = this.users.find(user => user.email == this.user.email)    
 
   },
   async updated() {

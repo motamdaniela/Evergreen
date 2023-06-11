@@ -33,7 +33,7 @@
       <p class="semiTitle">Inscrições conselho Eco-Escolas</p>
       <v-card class="cardG">
         <p v-if="councilUsers.length <= 0">Ainda não existem inscrições!</p>
-        <div v-for="user in councilUsers">
+        <div class="councilUs" v-for="user in councilUsers">
           <v-row>
             <img :src="user.photo" id="profilePic" />
             <p>{{ user.name }}</p>
@@ -75,14 +75,13 @@ export default {
     return {
       users: this.userStore.getUsers,
       councilUsers: [],
-      activities: this.activityStore.getActivities,
       myActivities: [],
       closeActivities: [],
       logged: this.userStore.getLogged,
       user: "",
     };
   },
-  created() {
+  async created() {
     this.users.forEach((user) => {
       if (user.council) {
         this.councilUsers.push(user);
@@ -91,17 +90,11 @@ export default {
     });
 
     this.user = this.userStore.getUsers.find(
-      (user) => user.email == this.logged
+      (user) => user.email == this.logged.email
     );
 
-    this.activities.forEach((activity) => {
-      if (
-        activity.coordinator == this.logged &&
-        !this.myActivities.find((a) => a.id == activity.id)
-      ) {
-        this.myActivities.push(activity);
-      }
-    });
+    this.myActivities = await this.activityStore.fetchCoordinatorActivities()
+    console.log(this.myActivities, 'myActivities')
 
     let today = new Date();
     let todayDate = +(
@@ -120,15 +113,15 @@ export default {
       if (
         this.closeActivities.length < 5 &&
         +act.begin > +todayDate &&
-        !this.closeActivities.find((a) => a.id == act.id)
+        !this.closeActivities.find((a) => a._id == act._id)
       ) {
         this.closeActivities.push(act);
       } else {
         this.closeActivities.forEach((a) => {
           if (
-            +a.begin > +act.begin &&
+            +a.begin > +act.begin && 
             +a.begin > +todayDate &&
-            !this.closeActivities.find((ac) => a.id == ac.id)
+            !this.closeActivities.find((ac) => a._id == ac._id)
           ) {
             this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
             this.closeActivities.push(a);
@@ -137,7 +130,7 @@ export default {
       }
     });
 
-    console.log(this.closeActivities);
+    console.log(this.closeActivities, 'close activities');
   },
 };
 </script>

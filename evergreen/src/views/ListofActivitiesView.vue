@@ -3,7 +3,7 @@
 <v-dialog v-model="open">
       <div class="fieldP modal">
         <div>
-          <button class="btnRound btnP" @click="open = false">
+          <button class="btnRound btnP" @click="open = false,  this.listUsers = []">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
           </button>
           <div class="contentModal">
@@ -21,35 +21,35 @@
             </div>
           </div>
           <h3>Diagnostico:</h3>
-          <p>{{ this.activity.desc1 }}</p>
+          <p>{{ this.activity.description[0] }}</p>
           <h3>Objetivos:</h3>
-          <p>{{ this.activity.desc2 }}</p>
+          <p>{{ this.activity.description[1] }}</p>
           <h3>Metas:</h3>
-          <p>{{ this.activity.desc3 }}</p>
+          <p>{{ this.activity.description[2] }}</p>
           <button class="btn-page btnP btnModal" style="margin-top:20px" @click="listDialog = true">Inscrições</button>
         </div>
       </div>
     </v-dialog>
 
-    <v-dialog v-model="listDialog">
-      <div class="fieldP modal">
+    <v-dialog v-model="listDialog" height="80%" width="60%" content-class="fieldP modal" scrollable>
         <div>
           <button class="btnRound btnP" @click="listDialog = false">
             <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
           </button><br><br>
         </div>
-        <p v-if="activityUsers.length == 0"> Não exitem inscrições!</p>
-        <div v-for="user in activityUsers" >
-          <v-row class="boardP">
-            <img :src="user.photo" id="profilePic" />
-            <p class="semiTitle">{{ user.name }}</p>
-            <div>
-              <button v-if="datePassed"
-                 class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
-            </div>
-          </v-row>
-        </div>
-      </div>
+        <v-card elevation="0" color="#F9F9F9">
+          <p v-if="activityUsers.length == 0"> Não exitem inscrições!</p>
+          <div v-for="user in activityUsers" >
+            <v-row class="boardP subList">
+              <img :src="user.photo" id="profilePic" />
+              <p class="semiTitle">{{ user.username }}</p>
+              <div>
+                <button v-if="datePassed"
+                   class="btn-page btnP" @click="Participation" v-bind="this.user = user">Verificar</button>
+              </div>
+            </v-row>
+          </div>
+        </v-card>
     </v-dialog>
 
 
@@ -64,7 +64,7 @@
 </div>
 
 <div class="listAct" style="padding:30px;">
-      <div class="grid-item" v-for="activity in FilteredActivities">
+      <div class="grid-item" v-for="activity in activities">
         <v-card
           class="max-auto cardPc"
           max-width="400"
@@ -113,48 +113,43 @@
     
         return { userStore, activityStore };
       },
-      created () {
-        this.activities = this.activityStore.getActivities;
-        this.userObj = this.userStore.getUsers.find(
-          (user) => user.email == this.user
-        );;
-      },
       data() {
         return {
-          activities: this.activityStore.getActivities,
-          users: this.userStore.getUsers,
+          activities: [],
+          users: this.userStore.getUsersUser,
           userObj: "",
           open: false,
           listDialog: false,
           isFilter: false,
+          listUsers: []
         };
       },
+      async created () {
+        this.activities = await this.activityStore.fetchCoordinatorActivities();
+        this.userObj = this.userStore.getUsers.find(
+          (user) => user.email == this.user
+        )
+
+        if (this.users == undefined || this.users == "") {
+          await this.userStore.fetchAllUsers();
+          this.users = this.userStore.getUsersUser;
+        }
+
+      },
+
       methods: {
-        Edit() {
-          this.user.password = this.newPassword;
-          this.dialog = false;
-          this.userStore.edit(JSON.stringify(this.user))
-        },
+
         Participation(){
-          alert(this.user.email, this.activity.id)
           this.user.activities += 1;
           this.user.points += 5;
-          this.activityStore.updateParticipated(this.user.email, this.activity.id)
-        }
+          // this.activityStore.updateParticipated(this.user.email, this.activity._id)
+
+        }, 
+
+
       },
+
       computed: {
-        FilteredActivities() {
-                  return this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
-              },
-        activityUsers(){
-          let listUsers = [];
-            this.users.forEach(user => {
-              if(this.activity.users.find((sign) => sign == user.email)){
-                listUsers.push(user)
-              }
-            });
-          return listUsers
-        },
         datePassed(){
           let date = new Date();
           if(this.activity.end < date.getDate()){ 
@@ -162,6 +157,19 @@
           }else{
             return false;
           }
+        },
+        activityUsers() {
+          this.users.forEach((user) => {
+              console.log(user._id)
+              this.activity.users.forEach((userSub) => {
+                if(user._id == userSub.user){
+                  this.listUsers.push(user)
+                }
+              })
+            }) 
+          console.log(this.activity.users, this.activity.title)
+          console.log(this.listUsers, this.activity.title)
+          return this.listUsers
         }
       },
     };

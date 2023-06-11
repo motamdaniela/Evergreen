@@ -106,6 +106,7 @@ export const useMissionStore = defineStore("mission", {
     },
 
     async completeMission(logged, type) {
+      console.log(this.missions);
       // ? cada vez que quiserem chamar esta função, tem de fazer fetch das missões e tipo da cena que tão a mudar que neste caso é as atividades
       if (type == 0) {
         // *for missions type subscribe activity
@@ -233,8 +234,10 @@ export const useMissionStore = defineStore("mission", {
         const userStore = useUsersStore();
 
         let missionsList = [];
+        console.log(logged.council);
         userStore.getUsers.forEach((user) => {
-          if (user._id == logged._id && user.council == true) {
+          if (user._id == logged._id && logged.council == true) {
+            console.log("slay");
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
@@ -331,7 +334,7 @@ export const useMissionStore = defineStore("mission", {
       } else if (type == 9) {
         // * for missions type do all missions
         let num = 0;
-
+        console.log(this.missions);
         let missionsList = [];
         this.missions.forEach((mission) => {
           mission.users.forEach((user) => {

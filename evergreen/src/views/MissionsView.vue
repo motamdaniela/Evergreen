@@ -40,7 +40,14 @@
 
         <button
           v-else
-          @click="addBadge(mission.reward)"
+          @click="
+            addBadge(mission.reward),
+              BtnState(mission.reward, mission),
+              lockState(mission.reward, mission),
+              BgState(mission.reward, mission),
+              BadgeState(mission.reward, mission),
+              MissionsState(mission.reward, mission)
+          "
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
           type="button"
@@ -80,6 +87,7 @@ export default {
   },
 
   async created() {
+    // this.missionStore.$reset();
     await this.usersStore.fetchAllUsers();
     await this.usersStore.fetchLogged();
     this.user = this.usersStore.getLoggedObj;
@@ -88,16 +96,8 @@ export default {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
-    let missionsBD;
-    // if (this.missionStore.getMissions.length == 0) {
     let bd = await this.missionStore.getAllMissions();
-    missionsBD = bd.missions;
-    // } else {
-    missionsBD = this.missionStore.getMissions;
-    // }
-    missionsBD.forEach((mission) => {
-      this.missions.push(mission);
-    });
+    this.missions = bd.missions;
   },
   methods: {
     complete(users, id) {
@@ -208,9 +208,10 @@ export default {
         return "btnMissionY";
       }
     },
-    addBadge(missionReward) {
-      this.missionStore.receiveBadge(missionReward);
-      this.missionStore.completeMission(this.logged, 9);
+    async addBadge(missionReward) {
+      await this.missionStore.receiveBadge(missionReward);
+      await this.missionStore.getAllMissions();
+      await this.missionStore.completeMission(this.logged, 9);
     },
   },
 };

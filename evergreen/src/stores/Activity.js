@@ -25,7 +25,6 @@ export const useActivityStore = defineStore("activity", {
       let activitiesSub = [];
       activities.forEach((activity) => {
         activity.users.forEach((user) => {
-          console.log(user.user == logged._id);
           if (user.user == logged._id) {
             if (!activitiesSub.find((act) => act._id == activity._id)) {
               activitiesSub.push(activity);

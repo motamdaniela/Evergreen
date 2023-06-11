@@ -157,7 +157,7 @@ export const useUsersStore = defineStore("user", {
         return data.user;
       } else {
         console.log(response.status);
-        return response.status
+        return response.status;
         // throw Error(AuthService.handleResponses(response.status));
       }
     },
@@ -239,10 +239,10 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         // this.users = data.users;
-        return data.users
+        return data.users;
       } else {
         console.log(response.status);
-        return response.status
+        return response.status;
         // throw Error(AuthService.handleResponses(response.status));
       }
     },
@@ -299,6 +299,24 @@ export const useUsersStore = defineStore("user", {
       });
       if (response.ok) {
         const data = await response.json();
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
+    async receiveReward() {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/dailyReward`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
       } else {
         console.log(response.status);
         // throw Error(AuthService.handleResponses(response.status));

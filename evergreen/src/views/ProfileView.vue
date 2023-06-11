@@ -468,7 +468,7 @@ export default {
         console.log(this.ocsPend, 'pending')
 
 
-    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurences-a.occurences);
+    this.users.sort((a,b)=>b.points-a.points||b.activities-a.activities||b.occurrences-a.occurrences);
 
     this.curUser = this.users.find(user => user.email == this.user.email)    
 
@@ -498,6 +498,8 @@ export default {
       } else if (edit == 403) {
         this.warning = 'Passwords não correspondem'
       }
+
+      await this.missionStore.completeMission(this.user, 7);
     },
 
 

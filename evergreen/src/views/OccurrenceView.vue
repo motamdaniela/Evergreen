@@ -1,21 +1,20 @@
 <template>
   <v-dialog v-model="openOccur">
-      <div class="fieldG occModal">
-        <v-card elevation="0" color="#F9F9F9">
-          <v-card-actions>
-            <button class="btnRound btnG" @click="refresh()">
-              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
-            </button>
-          </v-card-actions>
-          <div id="occCont">
-          <img class="occModalImg" src='../assets/images/correct.png'>
-          <br><br>
+    <div class="fieldG occModal">
+      <v-card elevation="0" color="#F9F9F9">
+        <v-card-actions>
+          <button class="btnRound btnG" @click="refresh()">
+            <img style="width: 15px" src="../assets/icons/icones/close.svg" />
+          </button>
+        </v-card-actions>
+        <div id="occCont">
+          <img class="occModalImg" src="../assets/images/correct.png" />
+          <br /><br />
           <h2>A ocorrência foi registada com sucesso!</h2>
-          </div>
-        </v-card>
-      </div>
-
-    </v-dialog>
+        </div>
+      </v-card>
+    </div>
+  </v-dialog>
 
   <div class="form">
     <form ref="form" @submit.prevent="onSubmit">
@@ -267,9 +266,14 @@ export default {
       classrooms: [],
       types: [],
       openOccur: false,
+      logged: "",
     };
   },
   async created() {
+    if (this.logged == undefined || this.logged == "") {
+      await this.userStore.fetchLogged();
+      this.logged = this.userStore.getLogged;
+    }
     let schoolsBD, typesBD;
     if (this.schoolStore.getSchools.length == 0) {
       let bd = await this.schoolStore.getAllSchools();
@@ -293,6 +297,7 @@ export default {
   },
   methods: {
     async onSubmit() {
+      await this.occurrenceStore.getAllOccurrences();
       await this.occurrenceStore.submit(
         this.form.school,
         this.form.building,
@@ -302,7 +307,10 @@ export default {
         this.form.photo,
         this.form.other
       );
-      this.openOccur = true
+      await this.occurrenceStore.getAllOccurrences();
+      await this.missionStore.completeMission(this.logged, 2);
+      await this.missionStore.completeMission(this.logged, 9);
+      this.openOccur = true;
     },
     id(type) {
       let e = type;
@@ -337,8 +345,8 @@ export default {
       });
     },
     refresh() {
-      location.reload()
-    }
+      location.reload();
+    },
   },
 };
 </script>

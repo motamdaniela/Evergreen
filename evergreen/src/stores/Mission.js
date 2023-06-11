@@ -83,7 +83,6 @@ export const useMissionStore = defineStore("mission", {
     },
 
     async update(missionsList) {
-      console.log(missionsList);
       const curUser = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/missions/update`, {
         method: "PATCH",
@@ -106,7 +105,6 @@ export const useMissionStore = defineStore("mission", {
     },
 
     async completeMission(logged, type) {
-      console.log(this.missions);
       // ? cada vez que quiserem chamar esta função, tem de fazer fetch das missões e tipo da cena que tão a mudar que neste caso é as atividades
       if (type == 0) {
         // *for missions type subscribe activity
@@ -139,7 +137,6 @@ export const useMissionStore = defineStore("mission", {
             });
           }
         });
-        console.log(missionsList);
         if (missionsList.length > 0) {
           await this.update(missionsList);
         }
@@ -181,15 +178,16 @@ export const useMissionStore = defineStore("mission", {
         const occurrenceStore = useOccurrenceStore();
 
         let missionsList = [];
-
         if (
           occurrenceStore.getOccurrences.find(
-            (occurrence) => occurrence.user == logged._id
+            (occurrence) => occurrence.userID == logged._id
           )
         ) {
           this.missions.forEach((mission) => {
             if (mission.type == type) {
               mission.users.forEach((user) => {
+                console.log(user.user == logged._id);
+                console.log(logged._id);
                 if (user.user == logged._id && user.status < mission.max) {
                   user.status = mission.max;
                   missionsList.push({
@@ -307,34 +305,43 @@ export const useMissionStore = defineStore("mission", {
         const userStore = useUsersStore();
         let top3 = userStore.getTop3;
         let index;
-
+        console.log(top3);
         let missionsList = [];
-        userStore.getUsers.forEach((user) => {
-          top3.forEach((top) => {
-            if (top._id == user._id && user._id == logged._id) {
-              index = top3.indexOf(top) + 1;
-              this.missions.forEach((mission) => {
-                if (mission.type == type) {
-                  mission.users.forEach((u) => {
-                    if (u.user == logged._id && u.status < mission.max) {
-                      u.status = index;
-                      missionsList.push({
-                        id: mission._id,
-                        user: u.user,
-                        status: u.status,
-                      });
+        top3.forEach((top) => {
+          if (top._id == logged._id) {
+            console.log(top);
+            index = top3.indexOf(top) + 1;
+            console.log(index);
+            this.missions.forEach((mission) => {
+              if (mission.type == type) {
+                mission.users.forEach((u) => {
+                  if (u.user == logged._id) {
+                    if (
+                      mission.max == 3 &&
+                      (index == 3 || index == 2 || index == 1)
+                    ) {
+                      u.status = 3;
+                    } else if (mission.max == 2 && (index == 2 || index == 1)) {
+                      u.status = 2;
+                    } else if (mission.max == 1 && index == 1) {
+                      u.status = 1;
                     }
-                  });
-                }
-              });
-            }
-          });
+                    missionsList.push({
+                      id: mission._id,
+                      user: u.user,
+                      status: u.status,
+                    });
+                  }
+                });
+              }
+            });
+          }
         });
+        // });
         await this.update(missionsList);
       } else if (type == 9) {
         // * for missions type do all missions
         let num = 0;
-        console.log(this.missions);
         let missionsList = [];
         this.missions.forEach((mission) => {
           mission.users.forEach((user) => {

@@ -41,7 +41,7 @@
         <button
           v-else
           @click="
-            addBadge(mission.reward),
+            addBadge(mission.reward, mission),
               BtnState(mission.reward, mission),
               lockState(mission.reward, mission),
               BgState(mission.reward, mission),
@@ -125,7 +125,7 @@ export default {
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user.status == mission.max && user.user == this.logged._id
+            (user) => user.status >= mission.max && user.user == this.logged._id
           ))
       ) {
         return "fieldY";
@@ -146,7 +146,7 @@ export default {
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user.status == mission.max && user.user == this.logged._id
+            (user) => user.status >= mission.max && user.user == this.logged._id
           ))
       ) {
         return "badgeY";
@@ -167,7 +167,7 @@ export default {
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user.status == mission.max && user.user == this.logged._id
+            (user) => user.status >= mission.max && user.user == this.logged._id
           ))
       ) {
         return "bgY";
@@ -179,7 +179,7 @@ export default {
       } else if (
         !this.logged.rewards.find((reward) => reward == missionReward) &&
         mission.users.find(
-          (user) => user.status == mission.max && user.user == this.logged._id
+          (user) => user.status >= mission.max && user.user == this.logged._id
         )
       ) {
         return "lockY";
@@ -202,13 +202,13 @@ export default {
         ) ||
         (!this.logged.rewards.find((reward) => reward == missionReward) &&
           mission.users.find(
-            (user) => user.status == mission.max && user.user == this.logged._id
+            (user) => user.status >= mission.max && user.user == this.logged._id
           ))
       ) {
         return "btnMissionY";
       }
     },
-    async addBadge(missionReward) {
+    async addBadge(missionReward, mission) {
       await this.missionStore.receiveBadge(missionReward);
       await this.missionStore.getAllMissions();
       await this.missionStore.completeMission(this.logged, 9);

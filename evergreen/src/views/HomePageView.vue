@@ -340,13 +340,12 @@ export default {
       user: "",
       userObj: this.userStore.getLoggedObj,
       open: false,
-      loginReward: true,
+      loginReward: false,
       loginPoints: 0,
       loginClass: "",
       closeActivities: [],
       activitiesNow: [],
     };
-    loginPoints;
   },
   async created() {
     if (this.user == undefined || this.user == "") {
@@ -356,6 +355,14 @@ export default {
     if (this.users == undefined || this.users == "") {
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getTop3;
+    }
+
+    this.loginClass = "login" + this.user.streak;
+    if (
+      this.user.loginDate > this.user.previousLoginDate &&
+      this.user.received == false
+    ) {
+      this.loginReward = true;
     }
 
     // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
@@ -400,32 +407,29 @@ export default {
     //       console.log(1)));
   },
   async updated() {
-    // let activities = this.activityStore.getActivities;
-    // activities.forEach((s) => {
-    //   s.users.forEach((i) => {
-    //     i.user == this.user._id &&
-    //       (this.activitiesSub.find((i) => i._id == s._id) ||
-    //         this.activitiesSub.push(s));
-    //     console.log("b");
-    //   });
-    // }),
-    //   this.activitiesSub.forEach((i) => {
-    //     i.users.find((i) => i.user == this.user._id) ||
-    //       ((i = this.activitiesSub.indexOf(i)),
-    //       this.activitiesSub.splice(i, 1));
-    //     console.log("a");
-    //   }),
-    (this.users = this.userStore.getTop3),
-      // this.missionStore.completeMission(this.logged, 1),
-      // this.missionStore.completeMission(this.logged, 2),
-      // this.missionStore.completeMission(this.logged, 3),
-      // this.missionStore.completeMission(this.logged, 4),
-      // this.missionStore.completeMission(this.logged, 5),
-      // this.missionStore.completeMission(this.logged, 8),
-      // this.missionStore.completeMission(this.logged, 9),
+    let activities = this.activityStore.getActivities;
+    activities.forEach((s) => {
+      s.users.forEach((i) => {
+        i.user == this.user._id &&
+          (this.activitiesSub.find((i) => i._id == s._id) ||
+            this.activitiesSub.push(s));
+      });
+    }),
+      this.activitiesSub.forEach((i) => {
+        i.users.find((i) => i.user == this.user._id) ||
+          ((i = this.activitiesSub.indexOf(i)),
+          this.activitiesSub.splice(i, 1));
+      }),
+      (this.users = this.userStore.getTop3),
+      await this.missionStore.completeMission(this.user, 1),
+      await this.missionStore.completeMission(this.user, 2),
+      await this.missionStore.completeMission(this.user, 3),
+      await this.missionStore.completeMission(this.user, 4),
+      await this.missionStore.completeMission(this.user, 5),
+      await this.missionStore.completeMission(this.user, 8),
+      await this.missionStore.completeMission(this.user, 9),
       // console.log(),
-      console.log(this.activitiesSug);
-    (this.activitiesSug = this.activityStore.getActivitySuggestions),
+      (this.activitiesSug = this.activityStore.getActivitySuggestions),
       console.log(this.activitiesSug);
 
     this.activitiesSub.forEach((act) => {
@@ -457,14 +461,24 @@ export default {
         this.activitiesNow.push(act);
       }
     });
+    console.log(this.user);
   },
   methods: {
     async receive() {
-      (this.user.points += this.loginPoints),
-        (this.loginReward = !1),
-        (this.user.received = !0),
-        this.missionStore.completeMission(this.logged),
-        7 == this.user.streak && (this.user.streak = 0);
+      await this.userStore.receiveReward();
+      // await this.userStore.fetchAllUsers();
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged;
+      console.log(this.user);
+      await this.missionStore.completeMission(this.userStore, 6);
+      await this.missionStore.completeMission(this.user, 3);
+      await this.missionStore.completeMission(this.user, 9);
+      this.loginReward = false;
+      // (this.loginReward = false((this.user.points += this.loginPoints))),
+      //   (this.loginReward = !1),
+      //   (this.user.received = !0),
+      //   this.missionStore.completeMission(this.logged),
+      //   7 == this.user.streak && (this.user.streak = 0);
     },
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);
@@ -485,7 +499,6 @@ export default {
       await this.userStore.subscribeCouncil();
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
-      console.log("olat", this.user);
       await this.missionStore.completeMission(this.user, 4);
       // FOR THE MISSION SUB CONSELHO
       // (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),

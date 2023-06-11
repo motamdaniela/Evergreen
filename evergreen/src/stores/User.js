@@ -239,8 +239,10 @@ export const useUsersStore = defineStore("user", {
       if (response.ok) {
         const data = await response.json();
         // this.users = data.users;
+        return data.users
       } else {
         console.log(response.status);
+        return response.status
         // throw Error(AuthService.handleResponses(response.status));
       }
     },

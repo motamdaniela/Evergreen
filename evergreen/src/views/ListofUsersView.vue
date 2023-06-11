@@ -3,7 +3,7 @@
 <div>
     <v-dialog class="dialog" v-model="dialog">
       <div class="fieldPklight modal actModal">
-      <v-card v-if="this.action != 'edit'" >
+      <v-card elevation="0" color="#F9F9F9" v-if="this.action != 'edit'" >
         <v-card-title>Aviso!</v-card-title>
         <v-card-text>
           <p v-if="this.action == 'block' && this.user.state == 'active'">Tem a certeza que pretende bloquear o utilizador
@@ -24,7 +24,7 @@
         </v-card-actions>
       </v-card>
       
-      <v-card v-else>
+      <v-card elevation="0" color="#F9F9F9" v-else>
         <v-card-text>
           <label for="pass" class="semiTitle">Nova palavra-passe</label>
           <br />

@@ -357,8 +357,7 @@ export default {
       await this.userStore.fetchAllUsers();
       this.users = this.userStore.getTop3;
     }
-    this.activitiesSub = await this.activityStore.fetchSubActivities();
-    console.log("atividades:", this.activitiesSub);
+
     // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
     // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
     //   (this.themes = this.activityStore.getThemes);

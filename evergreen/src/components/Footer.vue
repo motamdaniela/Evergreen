@@ -4,7 +4,8 @@
       !(
         this.$route.name == 'login' ||
         this.$route.name == 'signUp' ||
-        this.$route.name == 'Occurrence'
+        this.$route.name == 'Occurrence' ||
+        this.$route.name == 'Admin'
       )
     "
   >

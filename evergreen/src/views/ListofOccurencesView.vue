@@ -2,7 +2,7 @@
 
         <v-dialog v-model="dialog">
           <div class="fieldPklight modal">
-          <v-card>
+          <v-card elevation="0" color="#F9F9F9">
             <v-card-actions>
                 <button class="btnRound btnPk" @click="dialog = false">
                     <img style=" width: 15px " src="../assets/icons/icones/close.svg"/>
@@ -51,8 +51,8 @@
         <v-checkbox
           v-for="tp in types"
           v-model="typesPicked"
-          :label="tp.name"
-          :value="tp.id"
+          :label="tp"
+          :value="tp"
           density="compact"
           hide-details
           >{{ FilterTypes }}
@@ -67,9 +67,9 @@
         <div class="boardR board" v-if="oc.state == 'pending'">
           <img :src="oc.photo" class="thumbnail" />
           <div>
-            <p v-for="octype in types">
-            <p v-if="oc.idType == octype.id" class="semiTitle"> {{ octype.name }}</p>
-          </p>
+            <!-- <p v-for="octype in types">
+            <p v-if="oc.type == octype" class="semiTitle"> {{ octype.name }}</p>
+          </p> -->
               <p class="semiTitle">{{ oc.type }}</p>
               <p>{{ oc.school }} {{ oc.building }}, Sala {{ oc.classroom }}</p>
               <p>{{ oc.date }} &nbsp {{ oc.hour }}</p>
@@ -105,6 +105,19 @@
           curUser: this.userStore.getLogged
         };
       },
+
+      async created() {
+        if (this.ocs == undefined || this.ocs == "") {
+          await this.ocStore.getAllOccurrences();
+          this.ocs = this.ocStore.getOccurrences;
+        }
+        if (this.types == undefined || this.types == "") {
+          await this.ocStore.getAllTypes();
+          this.types = this.ocStore.getTypes;
+        }
+
+      },
+
       methods: {
         Resolve() {
           this.oc.state = 'solved';
@@ -135,7 +148,7 @@
           } else {
             this.ocStore.getOccurrences.forEach((oc) => {
               this.typesPicked.forEach((tp) => {
-                if (tp == oc.idType) {
+                if (tp == oc.type) {
                   filteredList.push(oc);
                 }
               });

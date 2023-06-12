@@ -139,13 +139,12 @@
         }
         console.log(this.curUser);
 
+        this.activities = await this.activityStore.fetchCoordinatorActivities();
 
       },
 
       async updated() {
 
-        this.activities = await this.activityStore.fetchCoordinatorActivities();
-        
         if(this.activity.end < this.curUser.loginDate){
           return this.datePassed = true
         }else{
@@ -155,7 +154,7 @@
 
       methods: {
 
-        async Participation(activity){
+        async Participation(){
           let selUser = this.activity.users.find((u) => u.user == this.user._id )
           this.activity = await this.activityStore.verifyParticipation(this.activity,selUser)
           let index = this.listUsers.indexOf(selUser)

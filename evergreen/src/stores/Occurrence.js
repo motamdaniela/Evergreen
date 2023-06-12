@@ -9,6 +9,7 @@ export const useOccurrenceStore = defineStore("occurrence", {
   state: () => ({
     occurrences: [],
     types: [],
+    pending: []
   }),
   getters: {
     getOccurrences() {
@@ -17,6 +18,14 @@ export const useOccurrenceStore = defineStore("occurrence", {
     getTypes() {
       return this.types;
     },
+    getPending(){
+      // this.occurrences.forEach((oc) => {
+      //   if(oc.state == 'pending') {
+      //     this.pending.push(oc)
+      //   }
+      // })
+      return this.pending
+    }
   },
   actions: {
     addOccurrence(e) {
@@ -91,5 +100,52 @@ export const useOccurrenceStore = defineStore("occurrence", {
         console.log("STORE - fetch ALL types error", response);
       }
     },
+
+    async validation(oc, state) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const id = oc._id;
+      const response = await fetch(`${API_URL}/occurrences/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          state: state
+        })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('hi there');
+        console.log(data);
+        return data
+      } else {
+        console.log(response.status)
+      }
+    },
+
+    async fetchPending() {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/occurrences`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.occurrences = data.occurrences;
+        this.occurrences.forEach((oc) => {
+          if(oc.state == 'pending') {
+            this.pending.push(oc)
+          }
+        })
+        return this.pending
+      } else {
+        console.log("not ok");
+        console.log("STORE - fetch ALL Occurrences error", response);
+      }
+    }
   },
 });

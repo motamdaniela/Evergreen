@@ -21,12 +21,29 @@
                 </v-row>
             </v-card-text>
             <v-card-actions>
-                <button class="btn-page btnG" @click="Resolve">Resolver</button>
-                <button class="btn-page btnY" @click="Repeat">Repetida</button>
-                <button class="btn-page btnR" @click="Invalid">Inválida</button>
+                <button class="btn-page btnG" @click="this.resolved = true, ocValidation(), openVal = true" v-bind="this.oc = oc">Resolvida</button>
+                <button class="btn-page btnY" @click="this.repeated = true, ocValidation(), openVal = true" v-bind="this.oc = oc">Repetida</button>
+                <button class="btn-page btnR" @click="this.invalid = true, ocValidation(), openVal = true" v-bind="this.oc = oc">Inválida</button>
             </v-card-actions>
           </v-card>
         </div>
+        </v-dialog>
+
+        <v-dialog v-model="openVal">
+          <div class="fieldG occModal">
+            <v-card elevation="0" color="#F9F9F9">
+              <v-card-actions>
+                <button class="btnRound btnG" @click="refresh()">
+                  <img style="width: 15px" src="../assets/icons/icones/close.svg" />
+                </button>
+              </v-card-actions>
+              <div id="occCont">
+                <img class="occModalImg" src="../assets/images/correct.png" />
+                <br /><br />
+                <h2>Participação foi alterada com sucesso!</h2>
+              </div>
+            </v-card>
+          </div>
         </v-dialog>
     
 
@@ -64,7 +81,8 @@
       <p v-if="this.ocs.length <= 0">Não existe nenhuma ocorrência por resolver!</p>
     
       <div v-for="oc in ocs">
-        <div class="boardR board" v-if="oc.state == 'pending'">
+        <div class="boardR board" >
+          <!-- v-if="oc.state == 'pending'" -->
           <img :src="oc.photo" class="thumbnail" />
           <div>
             <!-- <p v-for="octype in types">
@@ -95,21 +113,26 @@
       },
       data() {
         return {
-          ocs: this.ocStore.getOccurrences ,
+          ocs: this.ocStore.getPending ,
           dialog: false,
-          // oc: '',
+          openVal: false,
           isFilter: false,
           users: this.userStore.getUsers ,
           types: this.ocStore.getTypes,
           typesPicked: [],
-          curUser: this.userStore.getLogged
+          curUser: "",
+          resolved: false,
+          repeated: false,
+          invalid: false,
+          state: '',
+          // ocPending: [],
         };
       },
 
       async created() {
         if (this.ocs == undefined || this.ocs == "") {
-          await this.ocStore.getAllOccurrences();
-          this.ocs = this.ocStore.getOccurrences;
+          await this.ocStore.fetchPending();
+          this.ocs = this.ocStore.getPending;
         }
         if (this.types == undefined || this.types == "") {
           await this.ocStore.getAllTypes();
@@ -117,41 +140,70 @@
         }
         if (this.curUser == undefined || this.curUser == "") {
           await this.userStore.fetchLogged();
-          this.user = this.userStore.getLogged;
+          this.curUser = this.userStore.getLogged;
         }
 
-
+        console.log(this.curUser, 'logged');
+        console.log(this.ocs.length);
+      },
+      async updated() {
+        // this.ocs this.ocStore.fetchPending()
+        // console.log(this.ocs.length, 'pending');
       },
 
       methods: {
-        Resolve() {
-          this.oc.state = 'solved';
-          this.dialog = false;
-          let user = this.users.find((user)=> user.email == this.oc.user)
-          user.points += 5;
-          user.occurences += 1;
-          this.ocStore.edit(JSON.stringify(this.oc))
-          this.userStore.edit(JSON.stringify(user))
 
+        async ocValidation() {       
+          if (this.resolved) {
+            this.state = 'solved'
+            this.resolved = false
+          } else if (this.repeated) {
+            this.state = 'repeat'
+            this.repeated = false
+          } else if (this.invalid) {
+            this.state = 'invalid'
+            this.invalid = false
+          }
+          console.log(this.state, this.oc);
+          this.oc = await this.ocStore.validation(this.oc, this.state)
         },
-        Repeat() {
-          this.oc.state = 'repeat';
-          this.dialog = false;
-          this.ocStore.edit(JSON.stringify(this.oc))
-        },
-        Invalid() {
-          this.oc.state = 'invalid';
-          this.dialog = false;
-          this.ocStore.edit(JSON.stringify(this.oc))
-        },
+
+        refresh() {
+          location.reload()
+        }
+
+
+        // Resolve() {
+        //   this.oc.state = 'solved';
+        //   this.dialog = false;
+        //   let user = this.users.find((user)=> user.email == this.oc.user)
+        //   user.points += 5;
+        //   user.occurences += 1;
+        //   this.ocStore.edit(JSON.stringify(this.oc))
+        //   this.userStore.edit(JSON.stringify(user))
+
+        // },
+        // Repeat() {
+        //   this.oc.state = 'repeat';
+        //   this.dialog = false;
+        //   this.ocStore.edit(JSON.stringify(this.oc))
+        // },
+        // Invalid() {
+        //   this.oc.state = 'invalid';
+        //   this.dialog = false;
+        //   this.ocStore.edit(JSON.stringify(this.oc))
+        // },
+
+
       },
       computed: {
+        
         FilterTypes() {
           let filteredList = [];
           if (this.typesPicked.length <= 0) {
-            this.ocs = this.ocStore.getOccurrences;
+            this.ocs = this.ocStore.getPending;
           } else {
-            this.ocStore.getOccurrences.forEach((oc) => {
+            this.ocStore.getPending.forEach((oc) => {
               this.typesPicked.forEach((tp) => {
                 if (tp == oc.type) {
                   filteredList.push(oc);
@@ -163,14 +215,14 @@
         },
   
         filteredUsers() {
-                if(this.isFilter) {
-                    return this.users.filter(user => user.name.startsWith(this.search))
-                }else if(this.search == ''){
-                  return this.users
-                }else {
-                    return this.users
-                }
-              }
+          if(this.isFilter) {
+              return this.users.filter(user => user.name.startsWith(this.search))
+          }else if(this.search == ''){
+            return this.users
+          }else {
+              return this.users
+          }
+        }
       },
     };
     </script>

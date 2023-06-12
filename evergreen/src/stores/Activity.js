@@ -154,11 +154,11 @@ export const useActivityStore = defineStore("activity", {
     },
 
     // * verify participation
-    async verifyParticipation(activity) {
+    async verifyParticipation(activity, selUser) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const actId = activity._id
-      // const userId = selUser.user;
-      const response = await fetch(`${API_URL}/activities/${actId}/users/${userId}`, {
+      const userId = selUser.user;
+      const response = await fetch(`${API_URL}/activities/participation/${actId}/users/${userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -167,7 +167,7 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         return data.activity;
       } else {
         console.log(response.status)
@@ -205,7 +205,7 @@ export const useActivityStore = defineStore("activity", {
       if (response.ok) {
         const data = await response.json();
         this.myActivities = data.activities
-        console.log(data)
+        // console.log(data)
         return data.activities;
       } else {
         console.log(response.status);

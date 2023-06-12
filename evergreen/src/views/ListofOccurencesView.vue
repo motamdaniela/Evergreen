@@ -115,6 +115,11 @@
           await this.ocStore.getAllTypes();
           this.types = this.ocStore.getTypes;
         }
+        if (this.curUser == undefined || this.curUser == "") {
+          await this.userStore.fetchLogged();
+          this.user = this.userStore.getLogged;
+        }
+
 
       },
 

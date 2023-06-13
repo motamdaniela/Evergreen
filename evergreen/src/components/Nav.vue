@@ -91,27 +91,27 @@
       inverse-scroll
       v-if="ToHide"
     >
-    <v-app-bar-title>
-      <RouterLink v-if="!isLogged()" to="/"
-        ><img
-          style="margin-right: 500px; margin-top: 30px"
-          width="25"
-          height="25"
-          src="/src/assets/logored.svg"
-          id="logo"
-          alt=""
-      /></RouterLink>
-      <RouterLink v-else to="/Home" name="homelink"
-        ><img
-          style="margin-right: 250px; margin-top: 30px"
-          width="25"
-          height="25"
-          src="/src/assets/logored.svg"
-          id="logo"
-          alt=""
-      /></RouterLink>
-    </v-app-bar-title>
-    <nav class="longNav" v-if="!isLogged()">
+      <v-app-bar-title>
+        <RouterLink v-if="!isLogged()" to="/"
+          ><img
+            style="margin-right: 500px; margin-top: 30px"
+            width="25"
+            height="25"
+            src="/src/assets/logored.svg"
+            id="logo"
+            alt=""
+        /></RouterLink>
+        <RouterLink v-else to="/Home" name="homelink"
+          ><img
+            style="margin-right: 250px; margin-top: 30px"
+            width="25"
+            height="25"
+            src="/src/assets/logored.svg"
+            id="logo"
+            alt=""
+        /></RouterLink>
+      </v-app-bar-title>
+      <nav class="longNav" v-if="!isLogged()">
         <RouterLink class="homeLink" to="/" name="">Início</RouterLink>
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink
@@ -141,7 +141,7 @@
         >
         <RouterLink class="missionsLink" to="/Missions" name=""
           >Missões<v-badge
-            v-if="updateNotifs"
+            v-if="this.notification == true"
             dot
             floating
             offset-y="-10"
@@ -239,13 +239,13 @@
         <RouterLink class="drawerLink" to="/Missions"
           ><v-list-item title="Missões"></v-list-item
           ><v-badge
-            v-if="updateNotifs"
+            v-if="this.notification == true"
             dot
             floating
             offset-y="-10"
             color="success"
-          ></v-badge
-        ></RouterLink>
+          ></v-badge>
+        </RouterLink>
         <RouterLink class="drawerLink" to="/sobre"
           ><v-list-item title="Sobre Eco-Escolas"></v-list-item
         ></RouterLink>
@@ -320,7 +320,7 @@ export default {
       //   (e) => e.email == this.usersStore.getLogged
       // ),
       previousLogged: undefined,
-      user: '',
+      user: "",
       drawer: !1,
       group: null,
       collapse: !1,
@@ -335,41 +335,39 @@ export default {
         passConf: "",
       },
       dialogAdd: !1,
+      notification: false,
+      missions: "",
     };
   },
+  async created() {
+    await this.missionStore.getAllMissions();
+    this.missions = this.missionStore.getMissions;
+    console.log(this.missions);
+    if (sessionStorage.getItem("loggedUser")) {
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged;
+    }
+    console.log(this.isLogged());
+  },
+  async updated() {
+    await this.missionStore.getAllMissions();
+    this.missions = this.missionStore.getMissions;
+    await this.userStore.fetchLogged();
+    this.user = this.userStore.getLogged;
+    console.log(this.missions);
+  },
+
   computed: {
-    // isLogged() {
-    //   // return !!this.user
-    //   if(sessionStorage.getItem('loggedUser')){
-    //     return true;
-    //   }
-    //   return !!this.usersStore.getLogged;
-    // },
     ToHide() {
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
     async getUser() {
       await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
-    },
-    updateNotifs() {
-      // let e = [],
-      //   s = this.missionStore.getMissions;
-      // return (
-      //   s.forEach((s) => {
-      //     s.users.forEach((t) => {
-      //       "Concluída" != t[2] ||
-      //         this.user.rewards.includes(s.reward) ||
-      //         t[0] != this.user.email ||
-      //         e.push(s);
-      //     });
-      //   }),
-      //   e.length > 0
-      // );
+      this.user = this.userStore.getLogged;
     },
   },
   methods: {
-   async logOut() {
+    async logOut() {
       await this.userStore.logOut();
       this.$router.push("/");
     },
@@ -409,30 +407,44 @@ export default {
       // if(this.previousLogged != currentLogged){
       //   // location.reload();
       // }
-      if(sessionStorage.getItem('loggedUser')){
+      if (sessionStorage.getItem("loggedUser")) {
         return true;
-      }else{
+      } else {
         return false;
       }
       // return !!this.usersStore.getLogged;
-    }
+    },
+    updateNotifs() {
+      let list = [];
+      // let missions = this.missionStore.getMissions;
+      console.log(this.missionStore.getMissions);
+      this.missionStore.getMissions.forEach((mission) => {
+        mission.users.forEach((user) => {
+          if (
+            user.user == this.user._id &&
+            user.status == mission.max &&
+            !this.user.rewards.find((reward) => reward == mission.reward)
+          ) {
+            list.push(mission);
+          }
+        });
+      });
+      console.log(list.length);
+      if (list.length > 0) {
+        this.notification = true;
+        return true;
+      } else {
+        this.notification = false;
+        return false;
+      }
+    },
     //? FZR UM IF CASO A ROTA MUDE
   },
 
-  
   // async updated () {
   //     await this.userStore.fetchLogged();
   //     this.user = this.userStore.getLogged
   // },
-
-  async created () {
-    if(sessionStorage.getItem('loggedUser')){
-      await this.userStore.fetchLogged();
-      this.user = this.userStore.getLogged
-    }
-    console.log(this.isLogged())
-  },
-
 };
 </script>
 

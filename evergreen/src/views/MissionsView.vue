@@ -90,7 +90,6 @@ export default {
     // this.missionStore.$reset();
     await this.usersStore.fetchAllUsers();
     await this.usersStore.fetchLogged();
-    this.user = this.usersStore.getLoggedObj;
 
     if (this.logged == undefined || this.logged == "") {
       await this.usersStore.fetchLogged();
@@ -212,6 +211,9 @@ export default {
       await this.missionStore.receiveBadge(missionReward);
       await this.missionStore.getAllMissions();
       await this.missionStore.completeMission(this.logged, 9);
+      await this.usersStore.fetchAllUsers();
+      await this.usersStore.fetchLogged();
+      this.logged = this.usersStore.getLogged;
     },
   },
 };

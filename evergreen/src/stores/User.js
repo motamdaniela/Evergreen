@@ -76,64 +76,6 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    //! PLEASE DEIXEM ESTE EM COMENTARIO
-    // login(email, password) {
-    //   let curUser = this.users.find(
-    //     (user) =>
-    //       (user.email == email && user.password == password) ||
-    //       (user.username == email && user.password == password)
-    //   );
-    //   // checks if email and password exist in the users list
-    //   if (curUser && curUser.state == "blocked") {
-    //     // alert('user bloqued')
-    //     return "userBlocked";
-    //   } else if (curUser && curUser.state == "active") {
-    //     let logged = this.users.find(
-    //       (user) => user.email == email || user.username == email
-    //     );
-    //     this.logged = logged.email;
-    //     // changes the login date
-    //     let today = new Date();
-    //     logged.previousLoginDate = +logged.loginDate;
-    //     logged.loginDate = +(
-    //       today.getFullYear() +
-    //       "" +
-    //       ((today.getMonth() + 1).toString().length < 2
-    //         ? "0" + (today.getMonth() + 1)
-    //         : today.getMonth() + 1) +
-    //       "" +
-    //       (today.getDate().toString().length < 2
-    //         ? "0" + today.getDate()
-    //         : today.getDate())
-    //     );
-    //     let yesterday = new Date(today);
-    //     yesterday.setDate(yesterday.getDate() - 1);
-    //     let yesterdayDate = +(
-    //       yesterday.getFullYear() +
-    //       "" +
-    //       ((yesterday.getMonth() + 1).toString().length < 2
-    //         ? "0" + (yesterday.getMonth() + 1)
-    //         : yesterday.getMonth() + 1) +
-    //       "" +
-    //       (yesterday.getDate().toString().length < 2
-    //         ? "0" + yesterday.getDate()
-    //         : yesterday.getDate())
-    //     );
-    //     console.log(logged.previousLoginDate);
-    //     // checks when was the last time the user logged in
-    //     if (+logged.previousLoginDate == +yesterdayDate) {
-    //       logged.streak += 1;
-    //       logged.received = false;
-    //     } else if (+logged.previousLoginDate < +logged.loginDate) {
-    //       logged.streak = 1;
-    //       logged.received = false;
-    //     }
-    //     return "active";
-    //   } else {
-    //     return "userWrong";
-    //   }
-    // },
-
     //? pedido de login
     async login(username, password) {
       console.log("STORE its logging in");
@@ -247,6 +189,7 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
+    // ? admin edit 
     async editUser(id, password, confPassword) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/users/adminEdit/${id}`, {
@@ -377,54 +320,45 @@ export const useUsersStore = defineStore("user", {
       console.log("end sign up fetch");
     },
 
-    // sign up action
-    // signUp(name, email, username, school, password, passConf) {
-    //   // checks if email has already been used
-    //   if (this.users.find((user) => user.email == email)) {
-    //     return "email";
-    //   } else if (this.users.find((user) => user.username == username)) {
-    //     return "username";
-    //   } else {
-    //     let today = new Date();
-    //     // checks if passwords match
-    //     if (password == passConf) {
-    //       let obj = {
-    //         type: "user",
-    //         email: email,
-    //         username: username,
-    //         name: name,
-    //         password: password,
-    //         school: school,
-    //         previousLoginDate: 0,
-    //         streak: 0,
-    //         received: false,
-    //         loginDate: +(
-    //           today.getFullYear() +
-    //           "" +
-    //           ((today.getMonth() + 1).toString().length != 2
-    //             ? "0" + (today.getMonth() + 1)
-    //             : today.getMonth() + 1) +
-    //           "" +
-    //           (today.getDate().toString().length != 2
-    //             ? "0" + today.getDate()
-    //             : today.getDate())
-    //         ),
-    //         photo:
-    //           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    //         points: 0,
-    //         activities: 0,
-    //         occurences: 0,
-    //         rewards: [],
-    //         state: "active",
-    //         council: false,
-    //       };
-    //       this.users.push(obj);
-    //       this.logged = obj.email;
-    //     } else {
-    //       return "password";
-    //     }
-    //   }
-    // },
+    // ? add points & activities done
+    async pointsAct(user) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      console.log(user, 'store');
+      const id = user._id
+      const response = await fetch(`${API_URL}/users/pointsAct/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        console.log(response);
+        console.log(response.status);
+      }
+    },
+
+    // ? add points & occurrences done
+    async pointsOc(selUser) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/pointsOc/${selUser}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('added');
+        return data;
+      } else {
+        console.log(response.status);
+      }
+    },
 
     newAdmin(type, name, email, username, password, passConf) {
       // checks if email has already been used

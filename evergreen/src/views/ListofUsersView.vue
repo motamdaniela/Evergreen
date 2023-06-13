@@ -59,8 +59,7 @@
 
   <div class="searchbar">
       <input class="inputSmall" v-model="search" type="text" :v-bind="search ? isFilter = true : isFilter = false"/>
-      <button @click="isFilter ? isFilter = false : isFilter = true" >
-      <img id="searchicon" src="../assets/icons/icones/search.svg"/></button>
+      <img id="searchicon" src="../assets/icons/icones/search.svg"/>
   </div>
 
   <div v-for="user in filteredUsers">

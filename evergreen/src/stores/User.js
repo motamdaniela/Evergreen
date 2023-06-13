@@ -76,64 +76,6 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    //! PLEASE DEIXEM ESTE EM COMENTARIO
-    // login(email, password) {
-    //   let curUser = this.users.find(
-    //     (user) =>
-    //       (user.email == email && user.password == password) ||
-    //       (user.username == email && user.password == password)
-    //   );
-    //   // checks if email and password exist in the users list
-    //   if (curUser && curUser.state == "blocked") {
-    //     // alert('user bloqued')
-    //     return "userBlocked";
-    //   } else if (curUser && curUser.state == "active") {
-    //     let logged = this.users.find(
-    //       (user) => user.email == email || user.username == email
-    //     );
-    //     this.logged = logged.email;
-    //     // changes the login date
-    //     let today = new Date();
-    //     logged.previousLoginDate = +logged.loginDate;
-    //     logged.loginDate = +(
-    //       today.getFullYear() +
-    //       "" +
-    //       ((today.getMonth() + 1).toString().length < 2
-    //         ? "0" + (today.getMonth() + 1)
-    //         : today.getMonth() + 1) +
-    //       "" +
-    //       (today.getDate().toString().length < 2
-    //         ? "0" + today.getDate()
-    //         : today.getDate())
-    //     );
-    //     let yesterday = new Date(today);
-    //     yesterday.setDate(yesterday.getDate() - 1);
-    //     let yesterdayDate = +(
-    //       yesterday.getFullYear() +
-    //       "" +
-    //       ((yesterday.getMonth() + 1).toString().length < 2
-    //         ? "0" + (yesterday.getMonth() + 1)
-    //         : yesterday.getMonth() + 1) +
-    //       "" +
-    //       (yesterday.getDate().toString().length < 2
-    //         ? "0" + yesterday.getDate()
-    //         : yesterday.getDate())
-    //     );
-    //     console.log(logged.previousLoginDate);
-    //     // checks when was the last time the user logged in
-    //     if (+logged.previousLoginDate == +yesterdayDate) {
-    //       logged.streak += 1;
-    //       logged.received = false;
-    //     } else if (+logged.previousLoginDate < +logged.loginDate) {
-    //       logged.streak = 1;
-    //       logged.received = false;
-    //     }
-    //     return "active";
-    //   } else {
-    //     return "userWrong";
-    //   }
-    // },
-
     //? pedido de login
     async login(username, password) {
       console.log("STORE its logging in");

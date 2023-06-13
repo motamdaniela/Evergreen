@@ -126,10 +126,8 @@
           activity: {}
         };
       },
-      async created () {
-        this.activities = await this.activityStore.fetchCoordinatorActivities();
-        this.curUser = this.userStore.getLogged
-        console.log(this.curUser);
+      async created () {   
+
         if (this.users == undefined || this.users == "") {
           await this.userStore.fetchAllUsers();
           this.users = this.userStore.getUsersUser;
@@ -139,10 +137,14 @@
           await this.userStore.fetchLogged();
           this.curUser = this.userStore.getLogged;
         }
+        console.log(this.curUser);
+
+        this.activities = await this.activityStore.fetchCoordinatorActivities();
 
       },
 
-      updated() {
+      async updated() {
+
         if(this.activity.end < this.curUser.loginDate){
           return this.datePassed = true
         }else{
@@ -152,27 +154,25 @@
 
       methods: {
 
-        async Participation(activity){
-          // this.activityStore.updateParticipated(this.user.email, this.activity._id)
+        async Participation(){
           let selUser = this.activity.users.find((u) => u.user == this.user._id )
-          console.log(selUser, this.activity, 'verify')
-          this.activity = await this.activityStore.verifyParticipation(activity)
-          // this.user.activitiesCompleted += 1;
-          // this.user.points += 5;
+          this.activity = await this.activityStore.verifyParticipation(this.activity,selUser)
+          let index = this.listUsers.indexOf(selUser)
+          this.listUsers.splice(index,1)
         }, 
-
       },
 
       computed: {
 
         activityUsers() {
+          this.listUsers = []
           this.users.forEach((user) => {
-              this.activity.users.forEach((userSub) => {
-                if(user._id == userSub.user){
-                  this.listUsers.push(user)
-                }
-              })
-            }) 
+            this.activity.users.forEach((userSub) => {
+              if(user._id == userSub.user && userSub.status == 'subscribed'){
+                this.listUsers.push(user)
+              }
+            })
+          }) 
           // console.log(this.activity.users, this.activity.title)
           // console.log(this.listUsers, this.activity.title)
           return this.listUsers

@@ -141,12 +141,13 @@
         >
         <RouterLink class="missionsLink" to="/Missions" name=""
           >Missões<v-badge
-            v-if="this.notification == true"
+            v-if="updateNotifs()"
             dot
             floating
             offset-y="-10"
             color="success"
           ></v-badge
+          ><v-badge v-else dot floating offset-y="-10" color="danger"></v-badge
         ></RouterLink>
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink
@@ -239,7 +240,7 @@
         <RouterLink class="drawerLink" to="/Missions"
           ><v-list-item title="Missões"></v-list-item
           ><v-badge
-            v-if="this.notification == true"
+            v-if="updateNotifs()"
             dot
             floating
             offset-y="-10"
@@ -414,29 +415,31 @@ export default {
       }
       // return !!this.usersStore.getLogged;
     },
-    updateNotifs() {
-      let list = [];
-      // let missions = this.missionStore.getMissions;
-      console.log(this.missionStore.getMissions);
-      this.missionStore.getMissions.forEach((mission) => {
-        mission.users.forEach((user) => {
-          if (
-            user.user == this.user._id &&
-            user.status == mission.max &&
-            !this.user.rewards.find((reward) => reward == mission.reward)
-          ) {
-            list.push(mission);
-          }
-        });
-      });
-      console.log(list.length);
-      if (list.length > 0) {
-        this.notification = true;
-        return true;
-      } else {
-        this.notification = false;
-        return false;
-      }
+    async updateNotifs() {
+      // await this.missionStore.getAllMissions();
+      // this.missions = this.missionStore.getMissions;
+      // await this.userStore.fetchLogged();
+      // this.user = this.userStore.getLogged;
+      // let list = [];
+      // this.missionStore.getMissions.forEach((mission) => {
+      //   mission.users.forEach((user) => {
+      //     if (
+      //       user.user == this.user._id &&
+      //       user.status == mission.max &&
+      //       !this.user.rewards.find((reward) => reward == mission.reward)
+      //     ) {
+      //       console.log(user);
+      //       list.push(mission);
+      //     }
+      //   });
+      // });
+      // if (list.length > 0) {
+      //   console.log("ok");
+      //   return true;
+      // } else {
+      //   console.log("okok");
+      //   return false;
+      // }
     },
     //? FZR UM IF CASO A ROTA MUDE
   },

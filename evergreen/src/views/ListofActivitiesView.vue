@@ -123,7 +123,8 @@
           isFilter: false,
           listUsers: [],
           datePassed: false,
-          activity: {}
+          activity: {},
+          user: ''
         };
       },
       async created () {   
@@ -159,6 +160,10 @@
           this.activity = await this.activityStore.verifyParticipation(this.activity,selUser)
           let index = this.listUsers.indexOf(selUser)
           this.listUsers.splice(index,1)
+          
+          this.user = this.users.find((u) => u._id == selUser.user)
+          console.log(this.user, 'view')
+          this.user = await this.userStore.pointsAct(this.user)
         }, 
       },
 

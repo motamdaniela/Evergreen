@@ -189,6 +189,7 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
+    // ? admin edit 
     async editUser(id, password, confPassword) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/users/adminEdit/${id}`, {
@@ -319,54 +320,45 @@ export const useUsersStore = defineStore("user", {
       console.log("end sign up fetch");
     },
 
-    // sign up action
-    // signUp(name, email, username, school, password, passConf) {
-    //   // checks if email has already been used
-    //   if (this.users.find((user) => user.email == email)) {
-    //     return "email";
-    //   } else if (this.users.find((user) => user.username == username)) {
-    //     return "username";
-    //   } else {
-    //     let today = new Date();
-    //     // checks if passwords match
-    //     if (password == passConf) {
-    //       let obj = {
-    //         type: "user",
-    //         email: email,
-    //         username: username,
-    //         name: name,
-    //         password: password,
-    //         school: school,
-    //         previousLoginDate: 0,
-    //         streak: 0,
-    //         received: false,
-    //         loginDate: +(
-    //           today.getFullYear() +
-    //           "" +
-    //           ((today.getMonth() + 1).toString().length != 2
-    //             ? "0" + (today.getMonth() + 1)
-    //             : today.getMonth() + 1) +
-    //           "" +
-    //           (today.getDate().toString().length != 2
-    //             ? "0" + today.getDate()
-    //             : today.getDate())
-    //         ),
-    //         photo:
-    //           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    //         points: 0,
-    //         activities: 0,
-    //         occurences: 0,
-    //         rewards: [],
-    //         state: "active",
-    //         council: false,
-    //       };
-    //       this.users.push(obj);
-    //       this.logged = obj.email;
-    //     } else {
-    //       return "password";
-    //     }
-    //   }
-    // },
+    // ? add points & activities done
+    async pointsAct(user) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      console.log(user, 'store');
+      const id = user._id
+      const response = await fetch(`${API_URL}/users/pointsAct/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        console.log(response);
+        console.log(response.status);
+      }
+    },
+
+    // ? add points & occurrences done
+    async pointsOc(selUser) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/pointsOc/${selUser}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('added');
+        return data;
+      } else {
+        console.log(response.status);
+      }
+    },
 
     newAdmin(type, name, email, username, password, passConf) {
       // checks if email has already been used

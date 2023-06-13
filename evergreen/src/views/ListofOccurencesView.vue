@@ -40,7 +40,7 @@
               <div id="occCont">
                 <img class="occModalImg" src="../assets/images/correct.png" />
                 <br /><br />
-                <h2>Participação foi alterada com sucesso!</h2>
+                <h2>Estado foi alterado com sucesso!</h2>
               </div>
             </v-card>
           </div>
@@ -93,7 +93,7 @@
               <p>{{ oc.date }} &nbsp {{ oc.hour }}</p>
           </div>
           <div>
-            <button class="btn-page btnR" @click="dialog = true; this.oc = oc">Ver mais</button>
+            <button class="btn-page btnR" @click="dialog = true; this.oc = oc; this.user = oc.userID">Ver mais</button>
           </div>
     
         </div>
@@ -125,7 +125,8 @@
           repeated: false,
           invalid: false,
           state: '',
-          // ocPending: [],
+          user: '',
+          selUser: ''
         };
       },
 
@@ -146,10 +147,6 @@
         console.log(this.curUser, 'logged');
         console.log(this.ocs.length);
       },
-      async updated() {
-        // this.ocs this.ocStore.fetchPending()
-        // console.log(this.ocs.length, 'pending');
-      },
 
       methods: {
 
@@ -157,6 +154,7 @@
           if (this.resolved) {
             this.state = 'solved'
             this.resolved = false
+            this.selUser = this.user
           } else if (this.repeated) {
             this.state = 'repeat'
             this.repeated = false
@@ -164,36 +162,15 @@
             this.state = 'invalid'
             this.invalid = false
           }
-          console.log(this.state, this.oc);
+          console.log(this.state, this.oc, this.selUser, 'view');
           this.oc = await this.ocStore.validation(this.oc, this.state)
+          this.selUser = await this.userStore.pointsOc(this.selUser)
+
         },
 
         refresh() {
           location.reload()
         }
-
-
-        // Resolve() {
-        //   this.oc.state = 'solved';
-        //   this.dialog = false;
-        //   let user = this.users.find((user)=> user.email == this.oc.user)
-        //   user.points += 5;
-        //   user.occurences += 1;
-        //   this.ocStore.edit(JSON.stringify(this.oc))
-        //   this.userStore.edit(JSON.stringify(user))
-
-        // },
-        // Repeat() {
-        //   this.oc.state = 'repeat';
-        //   this.dialog = false;
-        //   this.ocStore.edit(JSON.stringify(this.oc))
-        // },
-        // Invalid() {
-        //   this.oc.state = 'invalid';
-        //   this.dialog = false;
-        //   this.ocStore.edit(JSON.stringify(this.oc))
-        // },
-
 
       },
       computed: {
@@ -213,16 +190,7 @@
             this.ocs = filteredList;
           }
         },
-  
-        filteredUsers() {
-          if(this.isFilter) {
-              return this.users.filter(user => user.name.startsWith(this.search))
-          }else if(this.search == ''){
-            return this.users
-          }else {
-              return this.users
-          }
-        }
+
       },
     };
     </script>

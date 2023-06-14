@@ -162,13 +162,14 @@ export const useMissionStore = defineStore("mission", {
 
         let actList = [];
 
+        await activityStore.fetchAllActivities();
         let activities = activityStore.getActivities;
 
         let missionsList = [];
-
+        console.log(logged);
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
-            if (user.user == logged && user.status == "participated") {
+            if (user.user == logged._id && user.status == "participated") {
               actList.push(activity);
             }
           });

@@ -280,6 +280,8 @@ export const useMissionStore = defineStore("mission", {
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id) {
             num = user.streak;
+            console.log(user.streak);
+            console.log(num);
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
@@ -291,6 +293,7 @@ export const useMissionStore = defineStore("mission", {
                       status: u.status,
                     });
                   }
+                  console.log(num);
                 });
               }
             });

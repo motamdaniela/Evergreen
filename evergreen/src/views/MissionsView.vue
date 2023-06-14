@@ -20,13 +20,6 @@
           <p class="idk">{{ complete(mission.users, mission._id) }}</p>
           <p>{{ mission.description }}</p>
           <br />
-          <!-- <p
-            style="font-weight: 600"
-            v-if="state[missions.indexOf(mission)][0] == mission._id"
-          >
-            {{ state[missions.indexOf(mission)][1] }}
-          </p>
-          <p v-else></p> -->
         </div>
         <button
           v-if="state[missions.indexOf(mission)][1] < mission.max"
@@ -100,11 +93,15 @@ export default {
   },
   methods: {
     complete(users, id) {
+      console.log(id);
+      console.log(this.logged._id);
       users.forEach((user) => {
-        if (user.user == this.logged._id && id != undefined) {
+        if (user.user == this.logged._id) {
+          console.log("ok");
           this.state.push([id, user.status]);
         }
       });
+      console.log(this.state);
     },
     redirect(n) {
       this.$router.push(n);

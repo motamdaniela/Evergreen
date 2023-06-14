@@ -470,7 +470,7 @@ export default {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
       console.log(this.user);
-      await this.missionStore.completeMission(this.userStore, 6);
+      await this.missionStore.completeMission(this.user, 6);
       await this.missionStore.completeMission(this.user, 3);
       await this.missionStore.completeMission(this.user, 9);
       this.loginReward = false;

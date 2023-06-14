@@ -209,6 +209,7 @@ import { useActivityStore } from "@/stores/Activity";
 import { useMissionStore } from "@/stores/Mission";
 import { useSuggestionStore } from "@/stores/ActivitySuggestion";
 import { useOccurrenceStore } from "@/stores/Occurrence";
+import { ConsoleLogEntry } from "selenium-webdriver/bidi/logEntries";
 
 export default {
   setup() {
@@ -267,12 +268,12 @@ export default {
   },
   computed: {
     filteredUsers() {
+      console.log(this.users);
       if (this.isFilter) {
         return this.users.filter(
           (user) =>
             user.name.startsWith(this.search) ||
-            user.email.startsWith(this.search) ||
-            user.school.startsWith(this.search)
+            user.email.startsWith(this.search)
         );
       } else if (this.search == "") {
         return this.users;

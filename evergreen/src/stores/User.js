@@ -336,16 +336,15 @@ export const useUsersStore = defineStore("user", {
           confPassword: confPassword,
         }),
       });
-      console.log(response.headers, response.body);
       if (response.ok) {
         const data = await response.json();
         console.log(response.status);
         return data;
       } else {
         console.log(response.status);
+        return response;
         // throw Error(AuthService.handleResponses(response.status));
       }
-      console.log("end sign up fetch");
     },
 
     // ? add points & activities done

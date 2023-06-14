@@ -152,7 +152,20 @@ export default {
           this.password,
           this.passConf
         );
-        console.log(thisUser);
+        
+        if(thisUser.status == 409){
+          let msg = await thisUser.json();
+           msg = msg.msg;
+  
+           if(msg == 'Email already in use!'){
+            this.error = ''
+             this.error = "Email já está em uso!"
+           }else if(msg == 'Username already in use!'){
+            this.error = ''
+             this.error = "Nome de utilizador já está em uso!"
+           }
+        }
+        
         if (thisUser.success == true) {
           await this.userStore.login(this.username, this.password);
           let logged = this.userStore.getLogged;
@@ -164,29 +177,9 @@ export default {
             this.$router.push("/Occurences");
           }
         }
-        // let user = this.testStore.getLogged;
-        // let users = this.testStore.getUsers;
-        // let signup = this.testStore.signUp(
-        //   this.name,
-        //   this.email,
-        //   this.username,
-        //   this.school,
-        //   this.password,
-        //   this.passConf
-        // );
-        // if (users.find((u) => u.email == user && u.type == "user")) {
-        //   // this.missionStore.addUser(this.email);
-        //   this.$router.push("/Home");
-        // } else if (signup == "email") {
-        //   this.error = "Este email já existe!";
-        //   this.warning = "";
-        // } else if (signup == "username") {
-        //   this.error = "Este username já existe!";
-        //   this.warning = "";
-        // } else if (signup == "password") {
-        //   this.error = "Confirme que a palavra-passe coincide.";
-        //   this.warning = "";
-        // }
+        
+        
+
       }
     },
   },

@@ -124,7 +124,7 @@ export const useActivityStore = defineStore("activity", {
       if (response.ok) {
         const data = await response.json();
         this.activities = data.activities;
-        console.log('activities store:', this.activities)
+        console.log("activities store:", this.activities);
         return data;
       } else {
         console.log(response.status);
@@ -156,21 +156,24 @@ export const useActivityStore = defineStore("activity", {
     // * verify participation
     async verifyParticipation(activity, selUser) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
-      const actId = activity._id
+      const actId = activity._id;
       const userId = selUser.user;
-      const response = await fetch(`${API_URL}/activities/participation/${actId}/users/${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          "x-access-token": `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `${API_URL}/activities/participation/${actId}/users/${userId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "x-access-token": `Bearer ${accessToken}`,
+          },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         // console.log(data);
         return data.activity;
       } else {
-        console.log(response.status)
+        console.log(response.status);
       }
     },
 
@@ -204,11 +207,28 @@ export const useActivityStore = defineStore("activity", {
       });
       if (response.ok) {
         const data = await response.json();
-        this.myActivities = data.activities
+        this.myActivities = data.activities;
         // console.log(data)
         return data.activities;
       } else {
         console.log(response.status);
+      }
+    },
+
+    async delete(id) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/activities/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response;
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
       }
     },
 

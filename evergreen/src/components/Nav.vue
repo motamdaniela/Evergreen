@@ -68,7 +68,7 @@
               class="btn-page btnPk"
               id="addBtn"
               type="submit"
-              @click="onSubmit"
+              @click="createAdmin()"
             >
               Criar
             </button>
@@ -76,6 +76,13 @@
               Cancelar
             </button>
           </div>
+          <v-alert
+            class="errorAlert"
+            type="warning"
+            color="#E9A13B"
+            v-if="warning"
+            >{{ warning }}</v-alert
+          >
         </form>
       </div>
     </v-dialog>
@@ -316,10 +323,6 @@ export default {
   name: "App",
   data() {
     return {
-      // users: this.usersStore.getUsers,
-      // user: this.usersStore.getUsers.find(
-      //   (e) => e.email == this.usersStore.getLogged
-      // ),
       previousLogged: undefined,
       user: "",
       drawer: !1,
@@ -338,6 +341,7 @@ export default {
       dialogAdd: !1,
       notification: false,
       missions: "",
+      warning: "",
     };
   },
   async created() {
@@ -372,48 +376,37 @@ export default {
       await this.userStore.logOut();
       this.$router.push("/");
     },
-    onSubmit() {
-      -1 != this.newAdmin.password.indexOf(" ")
-        ? alert("Palavra-passe não pode conter espaços.")
-        : this.newAdmin.password.length < 8
-        ? alert("Palavra-passe tem de ter no mínimo 8 caracteres.")
-        : -1 != this.newAdmin.username.indexOf(" ")
-        ? alert("Nome de utilizador não pode conter espaços.")
-        : this.newAdmin.username.length < 3
-        ? alert("Nome de utilizador tem de ter no mínimo 3 caracteres.")
-        : this.newAdmin.type &&
-          this.newAdmin.name &&
-          this.newAdmin.email &&
-          this.newAdmin.username &&
-          this.newAdmin.password &&
-          this.newAdmin.passConf &&
-          ((this.dialogAdd = !1),
-          this.usersStore.newAdmin(
-            this.newAdmin.type,
-            this.newAdmin.name,
-            this.newAdmin.email,
-            this.newAdmin.username,
-            this.newAdmin.password,
-            this.newAdmin.passConf
-          ),
-          (this.newAdmin.type = ""),
-          (this.newAdmin.name = ""),
-          (this.newAdmin.email = ""),
-          (this.newAdmin.username = ""),
-          (this.newAdmin.password = ""),
-          (this.newAdmin.passConf = ""));
+    async createAdmin() {
+      let add = await this.userStore.createAdmin(
+        this.newAdmin.type,
+        this.newAdmin.name,
+        this.newAdmin.email,
+        this.newAdmin.username,
+        this.newAdmin.password,
+        this.newAdmin.passConf
+      );
+      console.log(add);
+
+      if (add.status != 201) {
+        let msg = await add.json();
+        this.warning = msg.msg;
+      } else {
+        this.dialogAdd = false;
+        this.newAdmin.type = "";
+        this.newAdmin.name = "";
+        this.newAdmin.email = "";
+        this.newAdmin.username = "";
+        this.newAdmin.password = "";
+        this.newAdmin.passConf = "";
+        this.warning = "";
+      }
     },
     isLogged() {
-      // let currentLogged = sessionStorage.getItem('loggedUser');
-      // if(this.previousLogged != currentLogged){
-      //   // location.reload();
-      // }
       if (sessionStorage.getItem("loggedUser")) {
         return true;
       } else {
         return false;
       }
-      // return !!this.usersStore.getLogged;
     },
     async updateNotifs() {
       // await this.missionStore.getAllMissions();

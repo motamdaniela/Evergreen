@@ -29,7 +29,7 @@
           <p v-else></p> -->
         </div>
         <button
-          v-if="state[missions.indexOf(mission)][1] != mission.max"
+          v-if="state[missions.indexOf(mission)][1] < mission.max"
           @click="redirect(mission.redirect)"
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
@@ -110,6 +110,7 @@ export default {
       this.$router.push(n);
     },
     MissionsState(missionReward, mission) {
+      console.log(mission.users.find((user) => user.user == this.logged._id));
       if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "fieldG";
       } else if (

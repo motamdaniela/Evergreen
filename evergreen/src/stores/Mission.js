@@ -103,6 +103,22 @@ export const useMissionStore = defineStore("mission", {
         console.log("STORE - fetch ALL Missions error", response);
       }
     },
+    async delete(id) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/missions/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response;
+      } else {
+        console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
 
     async completeMission(logged, type) {
       // ? cada vez que quiserem chamar esta função, tem de fazer fetch das missões e tipo da cena que tão a mudar que neste caso é as atividades

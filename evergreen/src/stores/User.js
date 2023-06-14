@@ -189,7 +189,7 @@ export const useUsersStore = defineStore("user", {
       }
     },
 
-    // ? admin edit 
+    // ? admin edit
     async editUser(id, password, confPassword) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
       const response = await fetch(`${API_URL}/users/adminEdit/${id}`, {
@@ -227,6 +227,7 @@ export const useUsersStore = defineStore("user", {
         const data = await response.json();
       } else {
         console.log(response.status);
+
         // throw Error(AuthService.handleResponses(response.status));
       }
     },
@@ -241,7 +242,7 @@ export const useUsersStore = defineStore("user", {
         },
       });
       if (response.ok) {
-        const data = await response.json();
+        const data = await response;
       } else {
         console.log(response.status);
         // throw Error(AuthService.handleResponses(response.status));
@@ -262,6 +263,33 @@ export const useUsersStore = defineStore("user", {
         return data;
       } else {
         console.log(response.status);
+        // throw Error(AuthService.handleResponses(response.status));
+      }
+    },
+
+    async createAdmin(type, name, email, username, password, confPassword) {
+      const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
+      const response = await fetch(`${API_URL}/users/createAdmin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "x-access-token": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          username: username,
+          type: type,
+          password: password,
+          confPassword: confPassword,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(response.status);
+        return response;
+      } else {
+        return response;
         // throw Error(AuthService.handleResponses(response.status));
       }
     },
@@ -323,8 +351,8 @@ export const useUsersStore = defineStore("user", {
     // ? add points & activities done
     async pointsAct(user) {
       const accessToken = JSON.parse(sessionStorage.getItem("loggedUser"));
-      console.log(user, 'store');
-      const id = user._id
+      console.log(user, "store");
+      const id = user._id;
       const response = await fetch(`${API_URL}/users/pointsAct/${id}`, {
         method: "PATCH",
         headers: {
@@ -353,7 +381,7 @@ export const useUsersStore = defineStore("user", {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log('added');
+        console.log("added");
         return data;
       } else {
         console.log(response.status);

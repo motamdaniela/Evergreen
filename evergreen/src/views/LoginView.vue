@@ -78,23 +78,16 @@ export default {
         this.error = "Este utilizador foi bloqueado!";
       } else {
         if(logged.type == 'admin'){
-          this.$router.push('/Admin');
+          await this.$router.push('/Admin');
+          location.reload();
         }else if(logged.type == 'security'){
-          this.$router.push('/Occurences');
+          await this.$router.push('/Occurences');
+          location.reload()
         }else if(logged.type == 'user'){
-          this.$router.push('/Home');
+          await this.$router.push('/Home');
+          location.reload()
         }
 
-
-        // switch (logged.type) {
-        //   case 'admin':
-        //     this.$router.push("/Admin");
-        //   case 'security':
-        //     this.$router.push("/Occurences");
-        //   case 'user':
-        //     this.$router.push("/Home");
-        // }
-        
       }
     },
   },

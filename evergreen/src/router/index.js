@@ -121,12 +121,6 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   if(to.path.startsWith("/login" || "/signUp")) {
-//     next("/");
-//   }else{
-//     next();
-//   }
-// })
+
 
 export default router;

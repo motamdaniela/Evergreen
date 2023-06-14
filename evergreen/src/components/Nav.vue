@@ -145,6 +145,7 @@
           <RouterLink to="/signUp" name="">Registar</RouterLink>
         </button>
       </nav>
+
       <nav class="longNav" v-if="isLogged() && this.user.type == 'user'">
         <RouterLink class="homeLink" to="/Home" name=""
           >Página principal</RouterLink
@@ -184,6 +185,7 @@
           <img :src="this.user.photo" id="profilePhoto" alt="" />
         </RouterLink>
       </nav>
+
       <nav v-if="isLogged() && this.user.type == 'admin'">
         <button @click="dialogAdd = true" class="addbtn">
           <img
@@ -243,6 +245,7 @@
           ><v-list-item title="Registar"></v-list-item
         ></RouterLink>
       </v-list>
+
       <v-list v-if="isLogged() && this.user.type == 'user'" role="">
         <RouterLink class="drawerLink" to="/Home"
           ><v-list-item title="Página Principal"></v-list-item
@@ -331,14 +334,10 @@ import { useMissionStore } from "@/stores/Mission";
 export default {
   setup() {
     const userStore = useUsersStore();
+    const missionStore = useMissionStore()
 
-    return {
-      userStore,
-      Logged: userStore.getLogged,
-      missionStore: useMissionStore(),
-    };
+    return { userStore, missionStore };
   },
-  name: "App",
   data() {
     return {
       previousLogged: undefined,
@@ -370,7 +369,6 @@ export default {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
     }
-    console.log(this.isLogged());
   },
   async updated() {
     await this.missionStore.getAllMissions();
@@ -392,7 +390,8 @@ export default {
   methods: {
     async logOut() {
       await this.userStore.logOut();
-      this.$router.push("/");
+      await this.$router.push("/");
+      location.reload();
     },
     async createAdmin() {
       let add = await this.userStore.createAdmin(

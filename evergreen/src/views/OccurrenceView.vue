@@ -17,7 +17,7 @@
   </v-dialog>
 
   <div class="form">
-    <form ref="form" @submit.prevent="submitForm">
+    <form ref="form" @submit.prevent="onSubmit">
       <v-window show-arrows>
         <template v-slot:prev="{ props }">
           <btn class="btn-page btnG" id="prevBtn" @click="props.onClick">

@@ -104,7 +104,7 @@
         <!-- </v-card-actions> -->
         
         <!-- <v-card-text> -->
-          <form @submit.prevent="submitForm">
+          <form @submit.prevent="onsubmit">
 
             <div>
             <div>
@@ -154,7 +154,7 @@
             <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{ error }}</v-alert>
 
             <v-card-actions>
-              <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" @click="submitForm()">Guardar</button>
+              <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" @click="submitForm(), editProfile=false">Guardar</button>
             </v-card-actions>
 
       <v-alert
@@ -306,7 +306,7 @@
       Ocorrências Pendentes
     </button>
   </div>
-  <button v-if="filteredActivities.length > 0" class="btn-page btnR">
+  <button v-if="coordActivities.length > 0" class="btn-page btnR">
     <RouterLink to="/ActivitiesList">
       Verificar presenças
     </RouterLink>
@@ -373,7 +373,7 @@ export default {
       users: [],
       error:"",
       warning:"",
-      filteredActivities:"",
+      coordActivities:"",
       curUser: '',
       filename: ''
     };
@@ -395,6 +395,8 @@ export default {
 
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities
+
+      this.coordActivities = await this.activityStore.fetchCoordinatorActivities();
 
       this.occurrences= await this.occurrenceStore.getAllOccurrences();
       this.occurrences = this.occurrenceStore.getOccurrences

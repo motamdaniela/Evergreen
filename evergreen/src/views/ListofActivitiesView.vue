@@ -105,13 +105,15 @@
     <script>
     import { useUsersStore } from "@/stores/User";
     import { useActivityStore } from "@/stores/Activity";
+    import { useMissionStore } from "@/stores/Mission";
     
     export default {
       setup() {
         const userStore = useUsersStore();
         const activityStore = useActivityStore();
+        const missionStore = useMissionStore();
     
-        return { userStore, activityStore };
+        return { userStore, activityStore, missionStore };
       },
       data() {
         return {
@@ -164,6 +166,8 @@
           this.user = this.users.find((u) => u._id == selUser.user)
           console.log(this.user, 'view')
           this.user = await this.userStore.pointsAct(this.user)
+
+          this.
         }, 
       },
 

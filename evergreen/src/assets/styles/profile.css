@@ -7,14 +7,16 @@
 }
 
 #ProfilePic {
-  width: 100%;
-  max-width: 250px;
-  min-width: 150px;
-  height: auto;
+  width: 250px;
+  height: 250px;
+  /* max-width: 250px;
+  min-width: 150px; */
+  /* height: auto; */
   border: 2px solid #050b06;
   border-radius: 1000px;
   box-shadow: 8px 8px 0px #c2afea;
   z-index: 0;
+  object-fit: cover;
 }
 /* .colSide{
   margin-left: -5%;
@@ -28,7 +30,7 @@
   box-shadow: 3px 3px 0px #050b06;
 }
 
-#editbtn{
+#editbtn {
   border-radius: 20px;
   border: 2px solid rgb(0, 0, 0);
   box-shadow: 3px 5px 0px #efc6cd;
@@ -46,7 +48,6 @@
 #editbtn:active {
   background-color: #f4d8dd;
 }
-
 
 #divRank {
   position: relative;
@@ -208,16 +209,15 @@ p {
     margin-left: -90px;
     margin-right: -90px;
   }
-  
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1000px) {
   v-dialog {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .contentModal{
+  .contentModal {
     font-size: 80%;
   }
   .imgModal {
@@ -226,35 +226,33 @@ p {
   }
   .row1 {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
   }
-  .row1>img{
+  .row1 > img {
     width: 50%;
   }
 
-  .profileList{
+  .profileList {
     margin-left: 0px;
     width: 100%;
   }
-  .img{
+  .img {
     width: 25%;
   }
-  .listBtn{
+  .listBtn {
     height: 50px;
   }
 
-  .editModal{
+  .editModal {
     width: 70%;
     font-size: 13px;
-    
   }
-  form>label{
+  form > label {
     font-size: 15px;
   }
-  .input{
+  .input {
     width: 80%;
   }
-  
 }
 
 @media screen and (max-width: 750px) {
@@ -264,16 +262,15 @@ p {
   #pontos {
     font-size: 9px;
   }
-  .btn-page{
+  .btn-page {
     font-size: 12px;
   }
-  .listText{
+  .listText {
     font-size: 15px;
   }
-  .ocTxt{
+  .ocTxt {
     font-size: 15px;
   }
-  
 }
 
 @media screen and (max-width: 550px) {
@@ -284,11 +281,10 @@ p {
     margin-left: 5px;
     margin-right: -10px;
   }
-  .listText{
+  .listText {
     font-size: 10px;
   }
-  .ocTxt{
+  .ocTxt {
     font-size: 10px;
   }
-  
 }

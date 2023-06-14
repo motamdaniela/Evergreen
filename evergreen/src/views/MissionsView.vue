@@ -17,12 +17,17 @@
         </div>
         <div class="missionTxt">
           <h3>{{ mission.title }}</h3>
-          <p class="idk">{{ complete(mission.users, mission._id) }}</p>
+          <!-- <p class="idk">{{ complete(mission.users, mission._id) }}</p> -->
           <p>{{ mission.description }}</p>
           <br />
         </div>
         <button
-          v-if="state[missions.indexOf(mission)][1] < mission.max"
+          v-if="
+            mission.users.find(
+              (user) =>
+                user.user == this.logged._id && user.status < mission.max
+            )
+          "
           @click="redirect(mission.redirect)"
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
@@ -92,22 +97,10 @@ export default {
     this.missions = bd.missions;
   },
   methods: {
-    complete(users, id) {
-      console.log(id);
-      console.log(this.logged._id);
-      users.forEach((user) => {
-        if (user.user == this.logged._id) {
-          console.log("ok");
-          this.state.push([id, user.status]);
-        }
-      });
-      console.log(this.state);
-    },
     redirect(n) {
       this.$router.push(n);
     },
     MissionsState(missionReward, mission) {
-      console.log(mission.users.find((user) => user.user == this.logged._id));
       if (this.logged.rewards.find((reward) => reward == missionReward)) {
         return "fieldG";
       } else if (

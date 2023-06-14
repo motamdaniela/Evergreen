@@ -108,7 +108,19 @@
             id="logo"
             alt=""
         /></RouterLink>
-        <RouterLink v-else to="/Home" name="homelink"
+        <RouterLink
+          v-else-if="isLogged() && this.user.type == 'user'"
+          to="/Home"
+          name="homelink"
+          ><img
+            style="margin-right: 250px; margin-top: 30px"
+            width="25"
+            height="25"
+            src="/src/assets/logored.svg"
+            id="logo"
+            alt=""
+        /></RouterLink>
+        <RouterLink v-else to="/Admin"
           ><img
             style="margin-right: 250px; margin-top: 30px"
             width="25"
@@ -274,7 +286,13 @@
         </RouterLink>
       </v-list>
 
-      <v-list v-if="isLogged() && this.user.type == 'admin'" role="">
+      <v-list
+        v-if="
+          isLogged() &&
+          (this.user.type == 'admin' || this.user.type == 'security')
+        "
+        role=""
+      >
         <button @click="dialogAdd = true" class="addbtn">
           <img
             style="width: 30px"

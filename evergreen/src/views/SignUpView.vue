@@ -152,6 +152,7 @@ export default {
           this.password,
           this.passConf
         );
+        console.log(thisUser);
         if (thisUser.success == true) {
           await this.userStore.login(this.username, this.password);
           let logged = this.userStore.getLogged;

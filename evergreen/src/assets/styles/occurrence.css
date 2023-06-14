@@ -65,6 +65,46 @@
   margin-bottom: 30px;
 }
 
+.pickPhoto{
+  width: 500px;
+  height: 200px;
+  border-radius: 33px;
+  background-color: #fdfaf9;
+  border: 2px solid rgb(0, 0, 0);
+  margin-bottom: 30px;
+  padding: 20px;
+  box-shadow: 10px 10px #c2afea;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.btnPhoto{
+  width: 30px;
+  height: 30px;
+  border: 2px solid #050b06;
+  box-shadow: 5px 5px #c2afea;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.btnPhoto:hover {
+  box-shadow: none;
+  position: relative;
+  left: 3px;
+  top: 5px;
+}
+.btnPhoto:active {
+  background-color: #d4c7f0;
+}
+
+#picked{
+  width: 30%;
+
+}
+
 #outro{
   margin-top: 50px;
 }

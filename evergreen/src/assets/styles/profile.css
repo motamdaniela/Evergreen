@@ -28,6 +28,26 @@
   box-shadow: 3px 3px 0px #050b06;
 }
 
+#editbtn{
+  border-radius: 20px;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 3px 5px 0px #efc6cd;
+  background-color: #f9e9eb;
+  margin-right: 10px;
+  padding: 0px 7px;
+  font-weight: 500;
+}
+#editbtn:hover {
+  box-shadow: none;
+  position: relative;
+  left: 3px;
+  top: 5px;
+}
+#editbtn:active {
+  background-color: #f4d8dd;
+}
+
+
 #divRank {
   position: relative;
   z-index: 1;

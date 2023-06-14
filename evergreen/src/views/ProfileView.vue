@@ -104,7 +104,7 @@
         <!-- </v-card-actions> -->
         
         <!-- <v-card-text> -->
-          <form @submit.prevent="onSubmit">
+          <form @submit.prevent="submitForm">
 
             <div>
             <div>
@@ -114,14 +114,11 @@
               <img class="pfp" v-else :src="form.newPhoto" width="100">
               <br />
             </div>
-            
-            <input 
-            @change="previewFiles"
-            type="file"
-            name="picture"
-            accept="image/png, image/jpeg"
-            ref="myFiles"
-            /> 
+            <div style="display: flex; flex-direction: row; margin-top: 10px; margin-bottom: 10px;">
+              <button id="editbtn" @click="openUploadWidget()" required>Escolhe um ficheiro</button> 
+              <br>
+              <p>{{ this.filename }}</p>
+            </div>
 
             <div>
               <label for="username" class="semiTitle">Novo nome de utilizador</label>
@@ -157,7 +154,7 @@
             <v-alert class="errorAlert" type="error" color="#E9674D" v-if="error">{{ error }}</v-alert>
 
             <v-card-actions>
-              <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" type="submit" >Guardar</button>
+              <button v-if="this.form.newUsername != this.user.username || this.form.newPhoto || this.form.newPassword" class="btn-card btnG" @click="submitForm()">Guardar</button>
             </v-card-actions>
 
       <v-alert
@@ -169,60 +166,6 @@
       >
           </form>
           
-          <!--  -->
-        <!-- </v-card-text> -->
-        <!-- <v-card-actions>
-          <button class="btn-page btnG" @click="Edit">Guardar</button>
-        </v-card-actions> -->
-        
-      <!-- </v-card> -->
-    </div>
-  </v-dialog>
-
-
-  <v-dialog v-model="dialog">
-    <div class="fieldPklight modal editModal">
-      <v-card elevation="0" color="#F9F9F9">
-        <v-card-actions>
-          <button class="btnRound btnPk" @click="dialog = false">
-            <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
-          </button>
-        </v-card-actions>
-        <v-card-text>
-          <label for="username" class="semiTitle">Novo username</label>
-          <br />
-          <input
-            class="input"
-            id="username"
-            v-model="newUsername"
-            type="text"
-          />
-          <br />
-          <label for="pass" class="semiTitle">Nova palavra-passe</label>
-          <br />
-          <input
-            class="input"
-            id="pass"
-            v-model="newPassword"
-            type="password"
-          />
-          <br />
-          <label for="photo" class="semiTitle">Nova foto de perfil</label>
-          <br>
-          <input
-            class="input"
-            @change="previewFiles"
-            type="file"
-            id="picture"
-            name="picture"
-            accept="image/png, image/jpeg"
-            ref="myFiles"
-          />
-        </v-card-text>
-        <v-card-actions>
-          <button class="btn-page btnG" @click="Edit">Guardar</button>
-        </v-card-actions>
-      </v-card>
     </div>
   </v-dialog>
 
@@ -426,12 +369,13 @@ export default {
       occurrences: [],
       logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
-      missions: this.missionStore.getMissions,
+      missions: '',
       users: [],
       error:"",
       warning:"",
       filteredActivities:"",
-      curUser: ''
+      curUser: '',
+      filename: ''
     };
   },
   async created() {
@@ -439,14 +383,11 @@ export default {
       await this.userStore.fetchLogged();
       this.user = await this.userStore.getLogged
     };
-    this.form.newUsername = this.user.username
 
-    // let users=this.userStore.getUsers;
-    // users.forEach(s=>{
-    //   s.email==this.logged&&(this.user=s)
-    // });
-
-    // if(this.users == undefined || this.users == ''){
+    if(this.missions == undefined || this.missions == ''){
+      await this.missionStore.getAllMissions();
+      this.missions = await this.missionStore.getMissions
+    };
 
       // get the list of all users, activities and occurrences
       await this.userStore.fetchAllUsers();
@@ -474,13 +415,11 @@ export default {
 
   },
   async updated() {
-    // this.activities=this.activityStore.getActivities,this.activities.forEach(t=>{t.users.forEach(i=>{i==this.logged&&(this.activitiesSub.find(i=>i.id==t.id)||this.activitiesSub.push(t))})}),this.activitiesSub.forEach(i=>{i.users.find(i=>i==this.logged)||(i=this.activitiesSub.indexOf(i),this.activitiesSub.splice(i,1))}),this.ocsDone=[],this.ocsPend=[],this.occurences=this.occurrenceStore.getOccurrences;let userOcs=this.occurences.filter(i=>i.user==this.logged);userOcs.forEach(i=>{"pending"==i.state?this.ocsPend.push(i):"solved"==i.state&&this.ocsDone.push(i)}),this.filteredActivities=this.activities.filter(i=>i.coordinator==this.userStore.getLogged);
-    // this.activitiesSub = this.activityStore.fetchSubActivities()
     this.activitiesSub = await this.activityStore.fetchSubActivities();
 
   },
   methods: {
-    async onSubmit(){
+    async submitForm(){
       let edit = await this.userStore.editProfile(
         this.form.newPhoto,
         this.form.newUsername,
@@ -502,6 +441,21 @@ export default {
       await this.missionStore.completeMission(this.user, 7);
     },
 
+    openUploadWidget() {
+      const widget = window.cloudinary.createUploadWidget(
+      {cloud_name: 'dklw8zd18', upload_preset: 'evergreen'},
+      (error, result) => {
+        console.log(error);
+        console.log(result);
+        if (result.info.url != undefined) {
+          this.form.newPhoto = result.info.url
+          this.filename = result.info.original_filename
+          console.log(this.form.newPhoto, 'my profile photo', this.filename, 'file');
+        }
+      }
+      )
+      widget.open()
+    },
 
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);
@@ -517,15 +471,9 @@ export default {
         return false;
       }
     },
-    previewFiles(e) {
-      e=e.target.files;if(e.length){const o=new FileReader;o.readAsDataURL(e[0]),o.onload=()=>this.form.newPhoto=o.result,console.log(this.user.photo)}
-    },
+    
   },
-  // computed: {
-  //   FilteredActivities() {
-  //                 this.filteredActivities= this.activities.filter((activity) => activity.coordinator == this.userStore.getLogged)
-  //             },
-  // },
+
 };
 </script>
 

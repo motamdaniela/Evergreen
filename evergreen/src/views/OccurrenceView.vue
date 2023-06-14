@@ -17,7 +17,7 @@
   </v-dialog>
 
   <div class="form">
-    <form ref="form" @submit.prevent="onSubmit">
+    <form ref="form" @submit.prevent="submitForm">
       <v-window show-arrows>
         <template v-slot:prev="{ props }">
           <btn class="btn-page btnG" id="prevBtn" @click="props.onClick">
@@ -215,18 +215,18 @@
 
           <label for="avatar" class="semiTitle">Adiciona uma foto:</label>
           <br /><br />
-          <input
-            @change="previewFiles"
-            type="file"
-            id="picture"
-            name="picture"
-            accept="image/png, image/jpeg"
-            ref="myFiles"
-            required
-          />
+          <div style="display: flex; justify-content: center;">
+            <div class="pickPhoto">
+              <div style="display: flex; flex-direction: row; justify-content: center;">
+                <p><b>Escolhe um ficheiro: </b> </p><br>
+                <button class="btnPhoto" @click="openUploadWidget()" required>+</button>  
+              </div>
+              <img :src="this.form.photo" id="picked">
+            </div>
+          </div>
 
           <br /><br />
-          <button type="submit" class="btn-page btnY">Submeter</button
+          <button @click="submitForm(), openOccur=true " class="btn-page btnY ">Submeter</button
           ><br /><br />
         </v-window-item>
       </v-window>
@@ -245,6 +245,7 @@ export default {
     userStore: useUsersStore(),
     schoolStore: useSchoolStore(),
     missionStore: useMissionStore(),
+
   }),
   data() {
     return {
@@ -294,9 +295,10 @@ export default {
     typesBD.forEach((type) => {
       this.types.push(type);
     });
+
   },
   methods: {
-    async onSubmit() {
+    async submitForm() {
       await this.occurrenceStore.getAllOccurrences();
       await this.occurrenceStore.submit(
         this.form.school,
@@ -310,7 +312,7 @@ export default {
       await this.occurrenceStore.getAllOccurrences();
       await this.missionStore.completeMission(this.logged, 2);
       await this.missionStore.completeMission(this.logged, 9);
-      this.openOccur = true;
+      
     },
     id(type) {
       let e = type;
@@ -318,12 +320,6 @@ export default {
       "Outro" == e
         ? s.removeAttribute("disabled", "")
         : s.setAttribute("disabled", "");
-    },
-    previewFiles(o) {
-      const e = o.target.files;
-      if (!e.length) return;
-      const s = new FileReader();
-      s.readAsDataURL(e[0]), (s.onload = () => (this.form.photo = s.result));
     },
     changeSchool() {
       this.buildings = [];
@@ -344,6 +340,23 @@ export default {
         this.classrooms.push(classroom);
       });
     },
+    
+    openUploadWidget() {
+      const widget = window.cloudinary.createUploadWidget(
+      {cloud_name: 'dklw8zd18', upload_preset: 'evergreen'},
+      (error, result) => {
+        console.log(error);
+        console.log(result.info.url);
+        if (result.info.url != undefined) {
+          this.form.photo = result.info.url
+          console.log(this.form.photo, 'my photoo');
+          console.log(result);
+        }
+      }
+      )
+      widget.open()
+    },
+
     refresh() {
       location.reload();
     },

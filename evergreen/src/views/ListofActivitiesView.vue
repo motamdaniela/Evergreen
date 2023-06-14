@@ -167,7 +167,6 @@
           console.log(this.user, 'view')
           this.user = await this.userStore.pointsAct(this.user)
 
-          this.
         }, 
       },
 

@@ -209,7 +209,6 @@ import { useActivityStore } from "@/stores/Activity";
 import { useMissionStore } from "@/stores/Mission";
 import { useSuggestionStore } from "@/stores/ActivitySuggestion";
 import { useOccurrenceStore } from "@/stores/Occurrence";
-import { ConsoleLogEntry } from "selenium-webdriver/bidi/logEntries";
 
 export default {
   setup() {

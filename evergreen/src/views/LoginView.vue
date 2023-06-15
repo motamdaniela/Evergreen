@@ -14,7 +14,7 @@
     <form @submit.prevent="onSubmit">
       <div id="loginContent">
         <img id="loginImg" src="../assets/logored.svg" />
-        <label for="email" class="semiTitle">E-mail / Nome de utilizador</label>
+        <label for="email" class="semiTitle">Nome de utilizador</label>
         <br />
         <input class="input" id="email" v-model="email" required />
         <br />

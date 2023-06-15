@@ -21,6 +21,11 @@
   margin-right: 15px;
 }
 
+.textRed {
+  text-align: center;
+  color: #e9674d;
+}
+
 .boardTop {
   background-color: #fdf9f9;
   border: 2px solid #09140b;

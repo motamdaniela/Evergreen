@@ -271,21 +271,22 @@ export const useMissionStore = defineStore("mission", {
         let num = 0;
 
         let missionsList = [];
+
         const userStore = useUsersStore();
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id) {
-            num = user.streak;
-            this.missions.forEach((mission) => {
-              if (mission.type == type) {
-                mission.users.forEach((u) => {
-                  if (u.user == logged._id && u.status < mission.max) {
-                    u.status = num;
-                    missionsList.push({
-                      id: mission._id,
-                      user: u.user,
-                      status: u.status,
-                    });
-                  }
+            num = logged.streak;
+          }
+        });
+        this.missions.forEach((mission) => {
+          if (mission.type == type) {
+            mission.users.forEach((u) => {
+              if (u.user == logged._id && u.status < mission.max) {
+                u.status = num;
+                missionsList.push({
+                  id: mission._id,
+                  user: u.user,
+                  status: u.status,
                 });
               }
             });

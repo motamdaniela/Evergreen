@@ -367,7 +367,6 @@ export default {
       activities: this.activityStore.getActivities,
       activity: {},
       occurrences: [],
-      logged: this.userStore.getLogged,
       types: this.occurrenceStore.getTypes,
       missions: '',
       users: [],
@@ -390,16 +389,36 @@ export default {
     };
 
       // get the list of all users, activities and occurrences
+     
+    this.users = this.userStore.getUsers
+    if(this.users == undefined || this.users == ''){
       await this.userStore.fetchAllUsers();
-      this.users = this.userStore.getUsers
+      this.users = await this.userStore.getLogged
+    };
 
-      await this.activityStore.fetchAllActivities();
-      this.activities = this.activityStore.getActivities
+    
+    if(this.activities == undefined || this.activities == ''){
+        await this.activityStore.fetchAllActivities();
+        this.activities = this.activityStore.getActivities
+      
+    };
 
+    this.coordActivities = this.activityStore.getMyActivities
+    if(this.coordActivities == undefined || this.coordActivities == ''){
       this.coordActivities = await this.activityStore.fetchCoordinatorActivities();
+    };
 
+    if(this.coordActivities == undefined || this.coordActivities == ''){
+      this.coordActivities = await this.activityStore.fetchCoordinatorActivities();
+    };
+
+    this.occurrences = this.occurrenceStore.getOccurrences
+    if(this.occurrences == undefined || this.occurrences == ''){
+      
       this.occurrences= await this.occurrenceStore.getAllOccurrences();
       this.occurrences = this.occurrenceStore.getOccurrences
+    };
+
 
       this.occurrences.forEach((oc) =>{
           if (oc.state == 'pending') {

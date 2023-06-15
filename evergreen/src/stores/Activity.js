@@ -10,11 +10,16 @@ import API_URL from "../services/config.js";
 export const useActivityStore = defineStore("activity", {
   state: () => ({
     activities: useStorage("activities", []),
+    myActivities: [],
   }),
 
   getters: {
     getActivities() {
       return this.activities;
+    },
+
+    getMyActivities() {
+      return this.myActivities;
     },
 
     getActivitySuggestions() {

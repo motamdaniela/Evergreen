@@ -336,7 +336,6 @@ export default {
       logged: "",
       activitiesSub: [],
       activitiesSug: [],
-      // user: this.userStore.getUsers.find((user) => user.email == this.logged),
       user: "",
       userObj: this.userStore.getLoggedObj,
       open: false,
@@ -422,8 +421,9 @@ export default {
     async receive() {
       await this.userStore.receiveReward();
       await this.userStore.fetchLogged();
+
       this.user = this.userStore.getLogged;
-      console.log(this.user);
+
       await this.missionStore.completeMission(this.user, 6);
       await this.missionStore.completeMission(this.user, 3);
       await this.missionStore.completeMission(this.user, 9);
@@ -434,7 +434,7 @@ export default {
       await this.activityStore.fetchAllActivities();
       await this.missionStore.getAllMissions();
       this.activitiesSub = await this.activityStore.fetchSubActivities();
-      await this.missionStore.completeMission(this.userStore.getLogged, 0);
+      await this.missionStore.completeMission(this.user, 0);
     },
     changeBtn(activity) {
       let u = activity.users.find((user) => user.user == this.user._id);
@@ -449,13 +449,7 @@ export default {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
       await this.missionStore.completeMission(this.user, 4);
-      // FOR THE MISSION SUB CONSELHO
-      // (this.user = this.userStore.getUsers.find((s) => s.email == this.logged)),
-      //   this.user.council
-      //     ? (this.user.council = !1)
-      //     : ((this.user.council = !0),
-      //       this.missionStore.completeMission(this.logged, 4)),
-      //   this.userStore.edit(JSON.stringify(this.user));
+      await this.missionStore.completeMission(this.user, 9);
     },
     scrollToTop() {
       window.scrollTo(0, 0);

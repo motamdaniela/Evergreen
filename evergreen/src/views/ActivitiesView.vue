@@ -71,14 +71,17 @@
       <div class="fieldG actSugModal">
         <v-card elevation="0" color="#F9F9F9">
           <v-card-actions>
-            <button class="btnRound btnG" @click="openActSug = false, suggestion = false">
-              <img style="width: 15px" src="../assets/icons/icones/close.svg"/>
+            <button
+              class="btnRound btnG"
+              @click="(openActSug = false), (suggestion = false)"
+            >
+              <img style="width: 15px" src="../assets/icons/icones/close.svg" />
             </button>
           </v-card-actions>
           <div id="actSugCont">
-          <img class="actSugModalImg" src='../assets/images/correct.png'>
-          <br><br>
-          <h2>A sua sugestão foi registada com sucesso!</h2>
+            <img class="actSugModalImg" src="../assets/images/correct.png" />
+            <br /><br />
+            <h2>A sua sugestão foi registada com sucesso!</h2>
           </div>
         </v-card>
       </div>
@@ -147,7 +150,6 @@
       </div>
     </v-dialog>
 
-    
     <h1 class="title">
       <img src="../assets/images/flowerP.svg" alt="" />Plano de Atividades
     </h1>
@@ -315,16 +317,19 @@ export default {
   },
 
   async created() {
+    this.activities = this.activityStore.getActivities;
     if (this.activities == undefined || this.activities == "") {
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities;
     }
 
+    this.themes = this.themeStore.getThemes;
     if (this.themes == undefined || this.themes == "") {
       await this.themeStore.fetchAllThemes();
       this.themes = this.themeStore.getThemes;
     }
 
+    this.user = this.userStore.getLogged;
     if (this.user == undefined || this.user == "") {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
@@ -340,11 +345,13 @@ export default {
         this.form.goals,
         this.form.resources
       );
-      this.openActSug = true
+      this.openActSug = true;
     },
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);
       await this.activityStore.fetchAllActivities();
+      this.activities = this.activityStore.getActivities;
+
       await this.missionStore.getAllMissions();
       this.missionStore.completeMission(this.userStore.getLogged, 0);
     },
@@ -361,10 +368,8 @@ export default {
     FilterThemes() {
       let filteredList = [];
       if (this.themesPicked.length <= 0) {
-        // this.activities = this.getActivitiesDB.activities
         this.activities = this.activityStore.getActivities;
       } else {
-        // this.activities = this.getActivitiesDB.activities
         this.activities = this.activityStore.getActivities;
         this.activities.forEach((activity) => {
           if (this.themesPicked.includes(activity.idTheme)) {

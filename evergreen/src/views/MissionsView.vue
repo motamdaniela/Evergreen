@@ -17,7 +17,6 @@
         </div>
         <div class="missionTxt">
           <h3>{{ mission.title }}</h3>
-          <!-- <p class="idk">{{ complete(mission.users, mission._id) }}</p> -->
           <p>{{ mission.description }}</p>
           <br />
         </div>
@@ -38,14 +37,7 @@
 
         <button
           v-else
-          @click="
-            addBadge(mission.reward, mission),
-              BtnState(mission.reward, mission),
-              lockState(mission.reward, mission),
-              BgState(mission.reward, mission),
-              BadgeState(mission.reward, mission),
-              MissionsState(mission.reward, mission)
-          "
+          @click="addBadge(mission.reward)"
           class="btn-page btnMission"
           :class="BtnState(mission.reward, mission)"
           type="button"
@@ -77,7 +69,6 @@ export default {
   data() {
     return {
       missions: [],
-      user: "",
       users: "",
       state: [],
       logged: "",
@@ -85,16 +76,23 @@ export default {
   },
 
   async created() {
-    // this.missionStore.$reset();
-    await this.usersStore.fetchAllUsers();
-    await this.usersStore.fetchLogged();
+    this.users = this.usersStore.getUsers;
+    if (this.users == undefined || this.users == "") {
+      await this.usersStore.fetchAllUsers();
+      this.users = this.usersStore.getUsers;
+    }
 
+    this.logged = this.usersStore.getLogged;
     if (this.logged == undefined || this.logged == "") {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
-    let bd = await this.missionStore.getAllMissions();
-    this.missions = bd.missions;
+
+    this.missions = this.missionStore.getMissions;
+    if (this.missions == undefined || this.missions == "") {
+      await this.missionStore.getAllMissions();
+      this.mission = this.missionStore.getMissions;
+    }
   },
   methods: {
     redirect(n) {
@@ -198,11 +196,17 @@ export default {
         return "btnMissionY";
       }
     },
-    async addBadge(missionReward, mission) {
+    async addBadge(missionReward) {
       await this.missionStore.receiveBadge(missionReward);
+
       await this.missionStore.getAllMissions();
+      this.mission = this.missionStore.getMissions;
+
       await this.missionStore.completeMission(this.logged, 9);
+
       await this.usersStore.fetchAllUsers();
+      this.users = this.usersStore.getUsers;
+
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     },

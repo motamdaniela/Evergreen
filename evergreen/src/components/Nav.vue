@@ -366,21 +366,28 @@ export default {
     };
   },
   async created() {
-    await this.missionStore.getAllMissions();
     this.missions = this.missionStore.getMissions;
-    console.log(this.missions);
+    if (this.missions == undefined || this.missions == "") {
+      await this.missionStore.getAllMissions();
+      this.mission = this.missionStore.getMissions;
+    }
     if (sessionStorage.getItem("loggedUser")) {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
     }
   },
   async updated() {
-    console.log("okok");
-    await this.missionStore.getAllMissions();
     this.missions = this.missionStore.getMissions;
-    await this.userStore.fetchLogged();
+    if (this.missions == undefined || this.missions == "") {
+      await this.missionStore.getAllMissions();
+      this.mission = this.missionStore.getMissions;
+    }
+
     this.user = this.userStore.getLogged;
-    console.log(this.missions);
+    if (this.user == undefined || this.user == "") {
+      await this.userStore.fetchLogged();
+      this.user = this.userStore.getLogged;
+    }
   },
 
   computed: {
@@ -435,7 +442,6 @@ export default {
         await this.missionStore.getAllMissions();
         this.mission = this.missionStore.getMissions;
       }
-      console.log(this.user.rewards.length);
 
       this.user = this.userStore.getLogged;
       if (this.user == undefined || this.user == "") {

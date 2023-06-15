@@ -78,14 +78,11 @@ export default {
         this.error = "Este utilizador foi bloqueado!";
       } else {
         if(logged.type == 'admin'){
-          await this.$router.push('/Admin');
-          location.reload();
+          window.location.href='/Admin'
         }else if(logged.type == 'security'){
-          await this.$router.push('/Occurences');
-          location.reload()
+          window.location.href='/Occurences'
         }else if(logged.type == 'user'){
-          await this.$router.push('/Home');
-          location.reload()
+          window.location.href='/Home'
         }
 
       }

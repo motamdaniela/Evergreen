@@ -430,7 +430,7 @@ export default {
       await this.missionStore.completeMission(this.user, 9),
       // console.log(),
       (this.activitiesSug = this.activityStore.getActivitySuggestions),
-      console.log(this.activitiesSug);
+      // console.log(this.activitiesSug);
 
     this.activitiesSub.forEach((act) => {
       if (
@@ -461,7 +461,7 @@ export default {
         this.activitiesNow.push(act);
       }
     });
-    console.log(this.user);
+    // console.log(this.user);
   },
   methods: {
     async receive() {

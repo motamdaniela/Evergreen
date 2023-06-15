@@ -162,11 +162,9 @@ export const useMissionStore = defineStore("mission", {
 
         let actList = [];
 
-        await activityStore.fetchAllActivities();
         let activities = activityStore.getActivities;
 
         let missionsList = [];
-        console.log(logged);
         activities.forEach((activity) => {
           activity.users.forEach((user) => {
             if (user.user == logged._id && user.status == "participated") {
@@ -203,8 +201,6 @@ export const useMissionStore = defineStore("mission", {
           this.missions.forEach((mission) => {
             if (mission.type == type) {
               mission.users.forEach((user) => {
-                console.log(user.user == logged._id);
-                console.log(logged._id);
                 if (user.user == logged._id && user.status < mission.max) {
                   user.status = mission.max;
                   missionsList.push({
@@ -249,10 +245,8 @@ export const useMissionStore = defineStore("mission", {
         const userStore = useUsersStore();
 
         let missionsList = [];
-        console.log(logged.council);
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id && logged.council == true) {
-            console.log("slay");
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
@@ -281,8 +275,6 @@ export const useMissionStore = defineStore("mission", {
         userStore.getUsers.forEach((user) => {
           if (user._id == logged._id) {
             num = user.streak;
-            console.log(user.streak);
-            console.log(num);
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {
@@ -294,7 +286,6 @@ export const useMissionStore = defineStore("mission", {
                       status: u.status,
                     });
                   }
-                  console.log(num);
                 });
               }
             });
@@ -325,13 +316,10 @@ export const useMissionStore = defineStore("mission", {
         const userStore = useUsersStore();
         let top3 = userStore.getTop3;
         let index;
-        console.log(top3);
         let missionsList = [];
         top3.forEach((top) => {
           if (top._id == logged._id) {
-            console.log(top);
             index = top3.indexOf(top) + 1;
-            console.log(index);
             this.missions.forEach((mission) => {
               if (mission.type == type) {
                 mission.users.forEach((u) => {

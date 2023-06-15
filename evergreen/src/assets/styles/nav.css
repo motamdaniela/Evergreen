@@ -5,7 +5,7 @@
   border-radius: 30px;
 }
 
-.longNav{
+.longNav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -108,7 +108,7 @@ form {
   flex-direction: column;
 }
 
-.drawerLink:hover{
+.drawerLink:hover {
   font-weight: bold;
 }
 
@@ -144,7 +144,7 @@ form {
   }
 }
 @media screen and (min-width: 800px) {
-  #ddmenu {
+  .ddmenu {
     display: none;
   }
 }

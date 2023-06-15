@@ -364,47 +364,6 @@ export default {
     ) {
       this.loginReward = true;
     }
-
-    // this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
-    // (this.user = this.userStore.getUsers.find((t) => t.email == this.logged)),
-    //   (this.themes = this.activityStore.getThemes);
-    // let today = new Date(),
-    //   yesterday = new Date(today);
-    // yesterday.setDate(yesterday.getDate() - 1);
-    // let yesterdayDate = +(
-    //   yesterday.getFullYear() +
-    //   "" +
-    //   ((yesterday.getMonth() + 1).toString().length < 2
-    //     ? "0" + (yesterday.getMonth() + 1)
-    //     : yesterday.getMonth() + 1) +
-    //   (yesterday.getDate().toString().length < 2
-    //     ? "0" + yesterday.getDate()
-    //     : yesterday.getDate())
-    // );
-    // 0 == this.user.received &&
-    //   (console.log(1),
-    //   this.user.previousLoginDate == yesterdayDate
-    //     ? (1 == this.user.streak
-    //         ? (this.loginPoints = 1)
-    //         : 2 == this.user.streak
-    //         ? (this.loginPoints = 3)
-    //         : 3 == this.user.streak
-    //         ? (this.loginPoints = 5)
-    //         : 4 == this.user.streak
-    //         ? (this.loginPoints = 8)
-    //         : 5 == this.user.streak
-    //         ? (this.loginPoints = 10)
-    //         : 6 == this.user.streak
-    //         ? (this.loginPoints = 15)
-    //         : 7 == this.user.streak && (this.loginPoints = 20),
-    //       (this.loginClass = "login" + this.user.streak),
-    //       (this.loginReward = !0))
-    //     : this.user.previousLoginDate < this.user.loginDate &&
-    //       ((this.loginPoints = 1),
-    //       (this.user.streak = 1),
-    //       (this.loginClass = "login" + this.user.streak),
-    //       (this.loginReward = !0),
-    //       console.log(1)));
   },
   async updated() {
     let activities = this.activityStore.getActivities;
@@ -428,30 +387,27 @@ export default {
       await this.missionStore.completeMission(this.user, 5),
       await this.missionStore.completeMission(this.user, 8),
       await this.missionStore.completeMission(this.user, 9),
-      // console.log(),
       (this.activitiesSug = this.activityStore.getActivitySuggestions),
-      console.log(this.activitiesSug);
-
-    this.activitiesSub.forEach((act) => {
-      if (
-        this.closeActivities.length < 5 &&
-        +act.begin > this.user.loginDate &&
-        !this.closeActivities.find((a) => a._id == act._id)
-      ) {
-        this.closeActivities.push(act);
-      } else {
-        this.closeActivities.forEach((a) => {
-          if (
-            +a.begin > +act.begin &&
-            +a.begin > this.user.loginDate &&
-            !this.closeActivities.find((ac) => a._id == ac._id)
-          ) {
-            this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
-            this.closeActivities.push(a);
-          }
-        });
-      }
-    });
+      this.activitiesSub.forEach((act) => {
+        if (
+          this.closeActivities.length < 5 &&
+          +act.begin > this.user.loginDate &&
+          !this.closeActivities.find((a) => a._id == act._id)
+        ) {
+          this.closeActivities.push(act);
+        } else {
+          this.closeActivities.forEach((a) => {
+            if (
+              +a.begin > +act.begin &&
+              +a.begin > this.user.loginDate &&
+              !this.closeActivities.find((ac) => a._id == ac._id)
+            ) {
+              this.closeActivities.splice(this.closeActivities.indexOf(act), 1);
+              this.closeActivities.push(a);
+            }
+          });
+        }
+      });
     this.activitiesSub.forEach((act) => {
       if (
         +act.begin <= this.user.loginDate &&
@@ -461,12 +417,10 @@ export default {
         this.activitiesNow.push(act);
       }
     });
-    console.log(this.user);
   },
   methods: {
     async receive() {
       await this.userStore.receiveReward();
-      // await this.userStore.fetchAllUsers();
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;
       console.log(this.user);
@@ -474,11 +428,6 @@ export default {
       await this.missionStore.completeMission(this.user, 3);
       await this.missionStore.completeMission(this.user, 9);
       this.loginReward = false;
-      // (this.loginReward = false((this.user.points += this.loginPoints))),
-      //   (this.loginReward = !1),
-      //   (this.user.received = !0),
-      //   this.missionStore.completeMission(this.logged),
-      //   7 == this.user.streak && (this.user.streak = 0);
     },
     async subscribe(activity) {
       this.activity = await this.activityStore.subscribeActivity(activity);

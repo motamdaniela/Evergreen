@@ -146,7 +146,11 @@
         </button>
       </nav>
 
-      <nav class="longNav" v-if="isLogged() && this.user.type == 'user'">
+      <nav
+        class="longNav"
+        :id="watchMe()"
+        v-if="isLogged() && this.user.type == 'user'"
+      >
         <RouterLink class="homeLink" to="/Home" name=""
           >Página principal</RouterLink
         >
@@ -161,13 +165,12 @@
         >
         <RouterLink class="missionsLink" to="/Missions" name=""
           >Missões<v-badge
-            v-if="updateNotifs()"
+            v-if="this.notification"
             dot
             floating
             offset-y="-10"
             color="success"
           ></v-badge
-          ><v-badge v-else dot floating offset-y="-10" color="danger"></v-badge
         ></RouterLink>
         <RouterLink class="aboutLink" to="/sobre" name=""
           >Sobre Eco-Escolas</RouterLink
@@ -214,7 +217,8 @@
 
       <v-app-bar-nav-icon
         v-if="!isLogged() || (isLogged() && this.user.type == 'user')"
-        id="ddmenu"
+        class="ddmenu"
+        :id="watchMe()"
         @click.stop="drawer = !drawer"
       >
         <img
@@ -262,7 +266,7 @@
         <RouterLink class="drawerLink" to="/Missions"
           ><v-list-item title="Missões"></v-list-item
           ><v-badge
-            v-if="updateNotifs()"
+            v-if="this.notification"
             dot
             floating
             offset-y="-10"
@@ -334,7 +338,7 @@ import { useMissionStore } from "@/stores/Mission";
 export default {
   setup() {
     const userStore = useUsersStore();
-    const missionStore = useMissionStore()
+    const missionStore = useMissionStore();
 
     return { userStore, missionStore };
   },
@@ -371,6 +375,7 @@ export default {
     }
   },
   async updated() {
+    console.log("okok");
     await this.missionStore.getAllMissions();
     this.missions = this.missionStore.getMissions;
     await this.userStore.fetchLogged();
@@ -425,39 +430,40 @@ export default {
         return false;
       }
     },
-    async updateNotifs() {
-      // await this.missionStore.getAllMissions();
-      // this.missions = this.missionStore.getMissions;
-      // await this.userStore.fetchLogged();
-      // this.user = this.userStore.getLogged;
-      // let list = [];
-      // this.missionStore.getMissions.forEach((mission) => {
-      //   mission.users.forEach((user) => {
-      //     if (
-      //       user.user == this.user._id &&
-      //       user.status == mission.max &&
-      //       !this.user.rewards.find((reward) => reward == mission.reward)
-      //     ) {
-      //       console.log(user);
-      //       list.push(mission);
-      //     }
-      //   });
-      // });
-      // if (list.length > 0) {
-      //   console.log("ok");
-      //   return true;
-      // } else {
-      //   console.log("okok");
-      //   return false;
-      // }
-    },
-    //? FZR UM IF CASO A ROTA MUDE
-  },
+    async watchMe() {
+      this.missions = this.missionStore.getMissions;
+      if (this.missions == undefined || this.missions == "") {
+        await this.missionStore.getAllMissions();
+        this.mission = this.missionStore.getMissions;
+      }
+      console.log(this.user.rewards.length);
 
-  // async updated () {
-  //     await this.userStore.fetchLogged();
-  //     this.user = this.userStore.getLogged
-  // },
+      this.user = this.userStore.getLogged;
+      if (this.user == undefined || this.user == "") {
+        await this.userStore.fetchLogged();
+        this.user = this.userStore.getLogged;
+      }
+      let arr = [];
+
+      this.missions.forEach((mission) => {
+        if (
+          mission.users.find(
+            (user) =>
+              user.user == this.user._id &&
+              user.status >= mission.max &&
+              !this.user.rewards.find((reward) => reward == mission.reward)
+          )
+        ) {
+          arr.push(mission);
+        }
+      });
+      if (arr.length > 0) {
+        this.notification = true;
+      } else {
+        this.notification = false;
+      }
+    },
+  },
 };
 </script>
 

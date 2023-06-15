@@ -396,7 +396,6 @@ export default {
     async logOut() {
       await this.userStore.logOut();
       await this.$router.push("/");
-      location.reload();
     },
     async createAdmin() {
       let add = await this.userStore.createAdmin(

@@ -102,11 +102,11 @@
           </div>
 
           <h3>Diagnóstico:</h3>
-          <p>{{ this.activity.desc1 }}</p>
+          <p>{{ this.activity.description[0] }}</p>
           <h3>Objetivos:</h3>
-          <p>{{ this.activity.desc2 }}</p>
+          <p>{{ this.activity.description[1] }}</p>
           <h3>Metas:</h3>
-          <p>{{ this.activity.desc3 }}</p>
+          <p>{{ this.activity.description[2] }}</p>
         </div>
         <div v-if="+this.activity.begin > +this.user.loginDate">
           <input
@@ -137,7 +137,7 @@
             inscrições/anulações de inscrição.</span
           >
         </div>
-        <div v-else>
+        <div v-else class="textRed">
           <span> Esta atividade já acabou.</span>
         </div>
       </div>

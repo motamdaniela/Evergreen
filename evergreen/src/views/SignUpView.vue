@@ -170,11 +170,11 @@ export default {
           await this.userStore.login(this.username, this.password);
           let logged = this.userStore.getLogged;
           if (logged.type == "user") {
-            this.$router.push("/Home");
+            window.location.href='/Home'
           } else if (logged.type == "admin") {
-            this.$router.push("/Admin");
+            window.location.href='/Admin'
           } else if (logged.type == "security") {
-            this.$router.push("/Occurences");
+            window.location.href='/Occurence'
           }
         }
         

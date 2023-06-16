@@ -113,7 +113,7 @@
   </div>
 
   <div v-for="user in filteredUsers">
-    <div v-if="user.type != 'admin'" class="boardY board">
+    <div v-if="user.type == 'user'" class="boardY board">
       <img :src="user.photo" id="profilePic" />
       <div class="textInfo">
         <h3>

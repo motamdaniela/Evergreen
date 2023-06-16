@@ -73,9 +73,14 @@ export default {
       let logged = this.userStore.getLogged;
 
       if (login == 401) {
+        this.error = ''
         this.error = "Credenciais erradas!";
       } else if (logged.state == "blocked") {
+        this.error = ''
         this.error = "Este utilizador foi bloqueado!";
+      } else if (login == 404) {
+        this.error = ''
+        this.error = "Este utilizador não existe!" 
       } else {
         if(logged.type == 'admin'){
           window.location.href='/Admin'

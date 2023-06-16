@@ -152,34 +152,31 @@ export default {
           this.password,
           this.passConf
         );
-        
-        if(thisUser.status == 409){
+
+        if (thisUser.status == 409) {
           let msg = await thisUser.json();
-           msg = msg.msg;
-  
-           if(msg == 'Email already in use!'){
-            this.error = ''
-             this.error = "Email já está em uso!"
-           }else if(msg == 'Username already in use!'){
-            this.error = ''
-             this.error = "Nome de utilizador já está em uso!"
-           }
+          msg = msg.msg;
+
+          if (msg == "Email already in use!") {
+            this.warning = "";
+            this.error = "Email já está em uso!";
+          } else if (msg == "Username already in use!") {
+            this.warning = "";
+            this.error = "Nome de utilizador já está em uso!";
+          }
         }
-        
+
         if (thisUser.success == true) {
           await this.userStore.login(this.username, this.password);
           let logged = this.userStore.getLogged;
           if (logged.type == "user") {
-            window.location.href='/Home'
+            window.location.href = "/Home";
           } else if (logged.type == "admin") {
-            window.location.href='/Admin'
+            window.location.href = "/Admin";
           } else if (logged.type == "security") {
-            window.location.href='/Occurence'
+            window.location.href = "/Occurence";
           }
         }
-        
-        
-
       }
     },
   },

@@ -317,19 +317,16 @@ export default {
   },
 
   async created() {
-    this.activities = this.activityStore.getActivities;
     if (this.activities == undefined || this.activities == "") {
       await this.activityStore.fetchAllActivities();
       this.activities = this.activityStore.getActivities;
     }
 
-    this.themes = this.themeStore.getThemes;
     if (this.themes == undefined || this.themes == "") {
       await this.themeStore.fetchAllThemes();
       this.themes = this.themeStore.getThemes;
     }
 
-    this.user = this.userStore.getLogged;
     if (this.user == undefined || this.user == "") {
       await this.userStore.fetchLogged();
       this.user = this.userStore.getLogged;

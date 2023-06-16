@@ -76,22 +76,19 @@ export default {
   },
 
   async created() {
-    this.users = this.usersStore.getUsers;
     if (this.users == undefined || this.users == "") {
       await this.usersStore.fetchAllUsers();
       this.users = this.usersStore.getUsers;
     }
 
-    this.logged = this.usersStore.getLogged;
     if (this.logged == undefined || this.logged == "") {
       await this.usersStore.fetchLogged();
       this.logged = this.usersStore.getLogged;
     }
 
-    this.missions = this.missionStore.getMissions;
     if (this.missions == undefined || this.missions == "") {
       await this.missionStore.getAllMissions();
-      this.mission = this.missionStore.getMissions;
+      this.missions = this.missionStore.getMissions;
     }
   },
   methods: {

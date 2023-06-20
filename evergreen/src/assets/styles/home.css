@@ -262,6 +262,7 @@
   border-radius: 50px;
   border: 2px solid #09140b;
   box-shadow: 2px 2px 0px #09140b;
+  object-fit: cover;
 }
 
 .firstPlace {

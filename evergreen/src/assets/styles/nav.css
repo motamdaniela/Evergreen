@@ -5,6 +5,10 @@
   border-radius: 30px;
 }
 
+#profilePhoto{
+  object-fit: cover;
+}
+
 .longNav {
   display: flex;
   flex-wrap: wrap;

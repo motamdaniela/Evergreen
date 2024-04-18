@@ -85,9 +85,10 @@ export default {
         if(logged.type == 'admin'){
           window.location.href='/Admin'
         }else if(logged.type == 'security'){
-          window.location.href='/Occurences'
+          // window.location.href='/Occurences'
+          await this.$router.push('/Home')
         }else if(logged.type == 'user'){
-          window.location.href='Evergreen/Home'
+          await this.$router.push('/Home')
         }
 
       }

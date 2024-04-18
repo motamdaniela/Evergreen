@@ -392,6 +392,7 @@ export default {
 
   computed: {
     ToHide() {
+      this.$forceUpdate();
       return "login" != this.$route.name && "signUp" != this.$route.name;
     },
     async getUser() {

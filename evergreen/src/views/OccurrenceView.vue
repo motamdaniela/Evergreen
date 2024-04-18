@@ -357,8 +357,8 @@ export default {
       widget.open()
     },
 
-    refresh() {
-      location.reload();
+    async refresh() {
+      await this.$router.push('/Home')
     },
   },
 };

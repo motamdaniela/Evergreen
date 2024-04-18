@@ -87,7 +87,7 @@ export default {
         }else if(logged.type == 'security'){
           window.location.href='/Occurences'
         }else if(logged.type == 'user'){
-          window.location.href='/Home'
+          window.location.href='Evergreen/Home'
         }
 
       }
